@@ -18,7 +18,7 @@ public class Head implements KeyListener, PropertyChangeListener {
 	
 	
 	/**
-	 * Moves a movable argument.
+	 * 
 	 * @param m a movable entity
 	 */
 	private void moveEntity(Movable m){
@@ -45,9 +45,7 @@ public class Head implements KeyListener, PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if(evt.getPropertyName().equals("death")){
-			
-		}
+		// TODO Auto-generated method stub
 		
 	}
 	

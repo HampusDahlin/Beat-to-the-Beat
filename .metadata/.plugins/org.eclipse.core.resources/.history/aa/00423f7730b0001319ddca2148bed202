@@ -45,9 +45,7 @@ public class Head implements KeyListener, PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if(evt.getPropertyName().equals("death")){
-			
-		}
+		// TODO Auto-generated method stub
 		
 	}
 	
