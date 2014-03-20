@@ -1,5 +1,9 @@
 package controller;
 
+import javax.swing.text.View;
+
+import actors.Actor;
+
 
 public class CharacterControl {
 	
@@ -18,7 +22,7 @@ public class CharacterControl {
 		
 	}
 	
-	public void removeCharacter(Actor actor){
+	public static void removeCharacter(Actor actor){
 		if(actor.isDead){
 			
 			panelWhereActorIs.remove(actor);

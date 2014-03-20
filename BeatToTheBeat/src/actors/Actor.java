@@ -28,8 +28,4 @@ public abstract class Actor {
 		return position;
 	}
 	
-	public void setPosition(Point newPosition){
-		position = newPosition;
-	}
-	
 }

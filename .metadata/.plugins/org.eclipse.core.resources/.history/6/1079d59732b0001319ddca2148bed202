@@ -1,0 +1,11 @@
+package support;
+
+/**
+ * 
+ * @author Hampus Dahlin
+ * @version 0.0.1
+ *
+ */
+public interface Movable {
+
+}

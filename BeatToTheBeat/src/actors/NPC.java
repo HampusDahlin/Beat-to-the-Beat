@@ -1,8 +1,11 @@
 package actors;
 
-public class NPC {
+import java.awt.Point;
+
+public class NPC extends Actor implements support.Movable{
 	int speed;
 	int dmg;
+	Point p;
 	
 	public void setSpeed(int newSpeed){
 		speed = newSpeed;
@@ -18,5 +21,10 @@ public class NPC {
 	
 	public int getDmg(){
 		return dmg;
+	}
+
+	@Override
+	public void setPosition(Point p) {
+		this.p = p;
 	}
 }
