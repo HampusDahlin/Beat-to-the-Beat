@@ -8,3 +8,4 @@ Members:
 Malin Thelin
 Hampus Dahlin
 Björn Hedström
+Pontus Eriksson
