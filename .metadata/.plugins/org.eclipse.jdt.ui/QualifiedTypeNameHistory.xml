@@ -4,4 +4,10 @@
 <fullyQualifiedTypeName name="java.beans.PropertyChangeListener"/>
 <fullyQualifiedTypeName name="controller.CharacterControl"/>
 <fullyQualifiedTypeName name="support.Movable"/>
+<fullyQualifiedTypeName name="musichandler.MusicFacade"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="javax.sound.sampled.AudioSystem"/>
+<fullyQualifiedTypeName name="javax.sound.sampled.AudioInputStream"/>
+<fullyQualifiedTypeName name="musichandler.TestAmplitude"/>
 </qualifiedTypeNameHistroy>

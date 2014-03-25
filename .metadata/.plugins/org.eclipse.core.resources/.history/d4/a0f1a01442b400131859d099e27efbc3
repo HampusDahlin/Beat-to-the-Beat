@@ -1,0 +1,19 @@
+package musichandler;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MusicFacade {
+	
+	public List timerGenerator(Song s){
+		List<Integer> timers = new ArrayList();
+		
+		
+		return timers;
+	}
+	
+	public void changeDist(){
+		
+	}
+	
+}

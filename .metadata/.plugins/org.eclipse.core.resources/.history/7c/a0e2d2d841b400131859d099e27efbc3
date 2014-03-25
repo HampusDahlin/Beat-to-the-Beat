@@ -1,0 +1,13 @@
+package musichandler;
+
+public class MusicFacade {
+	
+	public void timerGenerator(Song s){
+		
+	}
+	
+	public void changeDist(){
+		
+	}
+	
+}
