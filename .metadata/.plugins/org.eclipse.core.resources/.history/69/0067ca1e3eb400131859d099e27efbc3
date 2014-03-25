@@ -1,0 +1,8 @@
+package musichandler;
+
+public class MusicFacade {
+
+	public MusicFacade() {
+		super();
+	}
+}
