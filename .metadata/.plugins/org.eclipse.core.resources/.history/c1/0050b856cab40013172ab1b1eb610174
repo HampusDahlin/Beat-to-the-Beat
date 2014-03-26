@@ -1,0 +1,48 @@
+package musichandler;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+public class Song {
+
+	File f;
+	
+	AudioInputStream audioInputStream;
+	
+	public Song() {
+		throw new IllegalArgumentException("A song has to be linked to a file, please reffer to any of the "
+				+ "following constructors: Song(String)");
+	}
+	
+	public Song(String filename){
+		
+		f = new File(filename);
+		
+		try {
+			audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(f)));
+		} catch (FileNotFoundException e){
+			
+			e.printStackTrace();
+			
+		} catch (UnsupportedAudioFileException e){
+			
+			e.printStackTrace();
+			
+		} catch ( IOException e){
+			
+			e.printStackTrace();
+
+		}
+		
+		Integer channelAmpArray;
+
+	}
+	
+}

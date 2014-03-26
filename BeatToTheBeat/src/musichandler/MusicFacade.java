@@ -10,21 +10,32 @@ import java.util.List;
  */
 public class MusicFacade {
 	
+	List<Song> songlist;
+	
+	
 	/**
 	 * 
-	 * @param s
-	 * @return
 	 */
-	public List<Integer> timerGenerator(Song s){
-		List<Integer> timers = new ArrayList<Integer>();
-		
-		
-		return timers;
+	public MusicFacade() {
+		songlist = new ArrayList<Song>();
 	}
 	
 	
+	/**
+	 * 
+	 * @param filename
+	 */
+	public void addSong(String filename){
+		songlist.add(new Song(filename));
+	}
+	
 	
 	public void changeDist(){
+		
+	}
+	
+	
+	public void changeSpeed(){
 		
 	}
 	

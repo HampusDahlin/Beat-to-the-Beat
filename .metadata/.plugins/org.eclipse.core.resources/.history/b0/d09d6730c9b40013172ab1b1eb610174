@@ -1,0 +1,15 @@
+package musichandler;
+
+import java.io.File;
+
+public class Song {
+
+	File f;
+	
+
+	
+	public Song() {
+		// TODO Auto-generated constructor stub
+	}
+	
+}

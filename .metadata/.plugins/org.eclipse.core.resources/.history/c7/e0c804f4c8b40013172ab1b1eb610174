@@ -1,0 +1,13 @@
+package musichandler;
+
+public class Song {
+
+	File f;
+	
+
+	
+	public Song() {
+		// TODO Auto-generated constructor stub
+	}
+	
+}

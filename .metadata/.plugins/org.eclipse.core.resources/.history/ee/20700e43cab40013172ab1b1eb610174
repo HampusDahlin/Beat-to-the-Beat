@@ -1,0 +1,24 @@
+package musichandler;
+
+import java.io.File;
+
+public class Song {
+
+	File f;
+	
+
+	
+	public Song() {
+		throw new IllegalArgumentException("A song has to be linked to a file, please reffer to any of the "
+				+ "following constructors: Song(String)");
+	}
+	
+	public Song(String filename){
+		
+		f = new File(filename);
+		
+		Integer channelAmpArray;
+
+	}
+	
+}
