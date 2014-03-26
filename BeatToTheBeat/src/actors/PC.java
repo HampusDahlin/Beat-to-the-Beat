@@ -1,8 +1,8 @@
 package actors;
 
 public class PC extends Actor{
-	int cash;
-	int combo;
+	private int cash;
+	private int combo;
 	
 	public void setCombo(int newCombo){
 		combo = newCombo;
