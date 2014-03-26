@@ -24,9 +24,7 @@ public class CharacterControl {
 	
 	public static void removeCharacter(Actor actor){
 		if(actor.isDead()){
-			
 			panelWhereActorIs.remove(actor);
-			
 		}
 		
 	}
