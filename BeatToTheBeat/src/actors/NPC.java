@@ -3,9 +3,9 @@ package actors;
 import java.awt.Point;
 
 public class NPC extends Actor implements support.Movable{
-	int speed;
-	int dmg;
-	Point p;
+	private int speed;
+	private int dmg;
+	private Point p;
 	
 	public void setSpeed(int newSpeed){
 		speed = newSpeed;

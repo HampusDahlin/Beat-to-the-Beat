@@ -4,9 +4,9 @@ import java.awt.Image;
 import java.awt.Point;
 
 public abstract class Actor {
-	Image sprite;
-	int health;
-	Point position;
+	private Image sprite;
+	private int health;
+	private Point position;
 	
 	public void setSprite(Image newSprite){
 		sprite = newSprite;
