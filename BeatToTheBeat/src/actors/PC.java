@@ -1,5 +1,8 @@
 package actors;
 
+import java.awt.Image;
+import java.awt.Point;
+
 public class PC extends Actor{
 	private int cash;
 	private int combo;
@@ -18,6 +21,14 @@ public class PC extends Actor{
 	
 	public int getCash(){
 		return cash;
+	}
+	
+	public PC(Point position, Image sprite){
+		cash = 0;
+		combo = 0;
+		setHealth(100);
+		setPosition(position);
+		setSprite(sprite);
 	}
 	
 }

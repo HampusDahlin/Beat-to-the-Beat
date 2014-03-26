@@ -24,6 +24,10 @@ public abstract class Actor {
 		return health;
 	}
 	
+	public void setPosition(Point newPosition){
+		position = newPosition;
+	}
+	
 	public Point getPosition(){
 		return position;
 	}
