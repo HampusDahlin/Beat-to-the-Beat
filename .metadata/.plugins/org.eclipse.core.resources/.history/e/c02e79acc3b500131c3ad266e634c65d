@@ -71,7 +71,7 @@ public class Song {
 	
 	
 	public void pause(){
-		player.pause();
+		//TODO
 	}
 	
 	
