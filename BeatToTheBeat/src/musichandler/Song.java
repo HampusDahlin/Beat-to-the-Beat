@@ -23,6 +23,7 @@ public class Song {
 	private File f;
 	private AudioInputStream audioInputStream;
 	private Amplitude amplitude;
+	private Player player;
 	
 	
 	/**
@@ -57,13 +58,15 @@ public class Song {
 
 		}
 		
+		player = new Player(audioInputStream);
+		
 		amplitude = new Amplitude(audioInputStream);
 	}
 	
 	
 	
 	public void play(){
-		//TODO
+		
 	}
 	
 	

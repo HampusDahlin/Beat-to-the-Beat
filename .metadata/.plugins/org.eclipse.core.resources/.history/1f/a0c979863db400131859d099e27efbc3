@@ -1,8 +1,0 @@
-package musichandler;
-
-public class MusicFacade {
-
-	public public MusicFacade() {
-		// TODO Auto-generated constructor stub
-	}
-}

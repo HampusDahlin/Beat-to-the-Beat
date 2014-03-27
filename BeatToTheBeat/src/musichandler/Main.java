@@ -1,17 +1,46 @@
 package musichandler;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class Main {
 	
 
 	public static void main(String[] args){
-		MakeSound s = new MakeSound();
+		File f = new File("Kalimba.wav");
+		AudioInputStream ais = null;
 		
-		s.playSound("Kalimba.wav");
+		try {
+			ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(f)));
+			
+		} catch (FileNotFoundException e){
+			e.printStackTrace();
+			
+		} catch (UnsupportedAudioFileException e){
+			e.printStackTrace();
+			
+		} catch ( IOException e){
+			e.printStackTrace();
+
+		
+		}
+		
+		if(ais != null){
+			Player s = new Player(ais);
+			s.start();
+			
+		}else{
+			System.out.println("ais is null");
+		}
+
 		//play("Kalimba.wav");
 	}
 	
