@@ -19,12 +19,11 @@ public class PC extends Actor{
 		setDmg(1);
 	}
 	
-	public void attack(Actor defender){
-		if (canHit()) {
-			//animationstart
-			dealDmg(defender);
-		} else {
-			//timerstart
+	public void attack() {
+		try(canHit()){
+			dealDmg(canHit()[0]);
+		}catch(OutOfReachException ex){
+			//cooldown start
 		}
 	}
 	
