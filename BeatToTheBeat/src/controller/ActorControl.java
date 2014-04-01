@@ -73,7 +73,9 @@ public class ActorControl {
 	public List<NPC> canHit(int range) {
 		List<NPC> hittable = new ArrayList<NPC>();
 		for (NPC enemy : NPCList) {
-			if (player.getPosition().getX() - enemy.getPosition().getX() < range) {
+			if ((player.getPosition().getX() +
+					player.getSprite().getIconWidth()/2) -
+					enemy.getPosition().getX() < range) {
 				hittable.add(enemy);
 			}
 		}
@@ -86,7 +88,9 @@ public class ActorControl {
 	 * @param range How close NPC can be to player.
 	 */
 	public boolean canHitClose(int range) {
-		return player.getPosition().getX() - NPCList.get(0).getPosition().getX() < range;
+		return (player.getPosition().getX() +
+				player.getSprite().getIconWidth()/2) -
+				NPCList.get(0).getPosition().getX() < range;
 	}
 
 }
