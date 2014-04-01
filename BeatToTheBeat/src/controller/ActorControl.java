@@ -24,29 +24,33 @@ public class ActorControl {
 	// Move all NPCs and then try to attack.
 	public void moveActors() {
 		for (NPC enemy : NPCList) {
-			enemy.setPosition(new Point( (enemy.getPosition().x +
-					(player.getPosition().x - enemy.getPosition().x > 0 ? 1 : -1)
-					*enemy.getSpeed().x), 100));
+			enemy.setPosition(new Point( (int) (enemy.getPosition().getX() +
+					(player.getPosition().getX() - enemy.getPosition().getX() > 0 ? 1 : -1)
+					*enemy.getSpeed().getX()), 100));
 			
 		    enemy.attack();
 		}
 	}
 	
 	public void createActor() {
-		
+		NPCList.add(new NPC( new Point(
+				System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0),
+			null));
 	}
 	
 	public void removeActor(Actor actor) {
 		//panelWhereActorIs.remove(actor);
 	}
 	
+	/**
+	 * Removes first actor in actorList.
+	 */
 	public void removeActor() {
-		//remove first actor in list.
+		NPCList.remove(0);
 	}
 	
 	public void updateView(){
-		this.view.update();
+		//this.view.update();
 	}
-
 
 }
