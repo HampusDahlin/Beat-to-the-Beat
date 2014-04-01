@@ -1,8 +1,9 @@
 package actors;
 
-import java.awt.Image;
 import java.awt.List;
 import java.awt.Point;
+
+import javax.swing.Icon;
 
 import controller.ActorControl;
 
@@ -11,7 +12,7 @@ import controller.ActorControl;
  *
  */
 public abstract class Actor {
-	private Image sprite;
+	private Icon sprite;
 	private int health;
 	private Point position;
 	private int dmg;
@@ -44,14 +45,14 @@ public abstract class Actor {
 	/**
 	 * @param newSprite
 	 */
-	public void setSprite(Image newSprite){
+	public void setSprite(Icon newSprite){
 		sprite = newSprite;
 	}
 	
 	/**
 	 * @return sprite
 	 */
-	public Image getSprite(){
+	public Icon getSprite(){
 		return sprite;
 	}
 	
