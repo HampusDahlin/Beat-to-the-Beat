@@ -4,28 +4,36 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.Timer;
 
+import javax.swing.Icon;
+
 public class PC extends Actor{
 	private int cash;
 	private int combo;
 	private Timer cooldown = new Timer();
 	
-	public PC(Point position, Image sprite){
+	public PC(Point position, Icon sprite){
 		cash = 0;
 		combo = 0;
 		setHealth(100);
 		setPosition(position);
 		setSprite(sprite);
-		setSpeed(0);
+		setSpeed(new Point(0,0));
 		setDmg(1);
 	}
 	
 	public void attack() {
+		if (canHit(100 + getSprite().getIconHeight()/2 )) {
+			
+		}
+	}
+	
+	/*public void attack() {
 		try(canHit()){
 			dealDmg(canHit()[0]);
 		}catch(OutOfReachException ex){
 			//cooldown start
 		}
-	}
+	}*/
 	
 	public void death(){
 		
