@@ -13,8 +13,8 @@ import actors.PC;
 
 
 public class ActorControl {
-	List<NPC> NPCList;
-	PC player;
+	private List<NPC> NPCList;
+	private PC player;
 	
 	public ActorControl(){
 		NPCList = new ArrayList<NPC>();
@@ -55,6 +55,29 @@ public class ActorControl {
 	
 	public PC getPlayer() {
 		return player;
+	}
+	
+	/**
+	 * Returns the first enemy in NPCList.
+	 */
+	public NPC getFirstEnemy() {
+		return NPCList.get(0);
+	}
+	
+	/**
+	 * Checks which NPCs are within range of player.
+	 * @param range How close NPC can be to player.
+	 * @return List<NPC> with close enemies.
+	 */
+	public List<NPC> canHit(int range) {
+		List<NPC> hittable = new ArrayList<NPC>();
+		for (NPC enemy : NPCList) {
+			if (player.getPosition().getX() - enemy.getPosition().getX() < range) {
+				hittable.add(enemy);
+			}
+		}
+		
+		return hittable;
 	}
 
 }
