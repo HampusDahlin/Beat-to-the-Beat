@@ -3,7 +3,7 @@ package actors;
 import java.awt.Image;
 import java.awt.Point;
 
-import controller.CharacterControl;
+import controller.ActorControl;
 
 public class NPC extends Actor implements support.Movable{
 
@@ -22,6 +22,6 @@ public class NPC extends Actor implements support.Movable{
 	}
 	
 	public void death(){
-		CharacterControl.removeCharacter(this);
+		ActorControl.removeCharacter(this);
 	}
 }
