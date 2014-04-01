@@ -3,7 +3,7 @@ package actors;
 import java.awt.Image;
 import java.awt.Point;
 
-import controller.CharacterControl;
+import controller.ActorControl;
 
 /**
  * @author Björn Hedström
@@ -14,13 +14,13 @@ public abstract class Actor {
 	private int health;
 	private Point position;
 	private int dmg;
-	private int speed;
+	private Point speed;
 	
-	public void setSpeed(int newSpeed){
+	public void setSpeed(Point newSpeed){
 		speed = newSpeed;
 	}
 	
-	public int getSpeed(){
+	public Point getSpeed(){
 		return speed;
 	}
 	
