@@ -1,0 +1,14 @@
+package enviroment;
+
+import java.awt.Point;
+
+public class EnviroTest {
+	Background b;
+	
+	
+	public EnviroTest() {
+		b = new Background();
+		b.addLayer(new BackgroundLayer(new Point(0, 0), null));
+		b.addLayer(new BackgroundLayer(new Point(0, 0), null));
+	}
+}

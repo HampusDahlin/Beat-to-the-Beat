@@ -1,0 +1,52 @@
+package enviroment;
+
+import java.awt.Image;
+import java.awt.Point;
+import java.util.List;
+
+import support.Movable;
+
+/**
+ * 
+ * @author Hampus Dahlin
+ * @version 0.0.2
+ *
+ */
+public class BackgroundLayer implements Movable{
+	
+	private int speed;
+	private Image sprite;
+	private List<BackgroundObject> objects;
+	
+	public BackgroundLayer(int speed,Image sprite){
+		this.speed = speed;
+		this.sprite = sprite;
+	}
+	
+	public int getSpeed(){
+		return speed;
+	}
+	
+	public void setSpeed(int speed){
+		this.speed = speed;
+	}
+	
+	public Image getSprite(){
+		return sprite;
+	}
+	
+	public void addBackgroundObject(BackgroundObject object){
+		objects.add(object);
+	}
+	
+	public void removeBackgroundObject(int bgIndex){
+		objects.remove(bgIndex);
+	}
+
+	@Override
+	public void setPosition(Point p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
