@@ -73,6 +73,10 @@ public abstract class Actor {
 		return position;
 	}
 	
+	public boolean canHit(){
+		//TODO
+	}
+	
 	/**
 	 * @return true/false
 	 */
@@ -84,7 +88,7 @@ public abstract class Actor {
 		defender.setHealth(defender.getHealth() - this.getDmg());
 	}
 	
-	abstract public void attack();
+	abstract public void attack(Actor defender);
 	abstract public void death();
 	
 }
