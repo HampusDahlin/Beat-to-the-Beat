@@ -106,6 +106,7 @@ public abstract class Actor {
 						
 			}
 		}
+		return hittable;
 	}
 	
 	/**
