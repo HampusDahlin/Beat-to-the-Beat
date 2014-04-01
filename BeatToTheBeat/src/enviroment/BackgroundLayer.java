@@ -1,43 +1,103 @@
 package enviroment;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.util.List;
+
+import support.Movable;
 
 /**
  * 
  * @author Hampus Dahlin
- * @version 0.0.1 
+ * @version 0.0.2
  *
  */
-public class BackgroundLayer {
+public class BackgroundLayer implements Movable{
 	
-	private int speed;
-	private Image sprite;
+	private Point speed;
 	private List<BackgroundObject> objects;
+	private Point position;
 	
-	public BackgroundLayer(int speed,Image sprite){
-		this.speed = speed;
-		this.sprite = sprite;
+	/**
+	 * Default constructor, setting speed to 0 and the image to null.
+	 */
+	public BackgroundLayer() {
+		this(new Point(0,0), null);
 	}
 	
-	public int getSpeed(){
+	/**
+	 * Constructor setting a speed and image.
+	 * @param speed
+	 * @param sprite
+	 */
+	public BackgroundLayer(Point speed,Image sprite){
+		this.speed = speed;
+		position = new Point(0,0);
+	}
+
+	/**
+	 * 
+	 * @return speed
+	 */
+	public Point getSpeed(){
 		return speed;
 	}
 	
-	public void setSpeed(int speed){
+	/**
+	 * 
+	 * @param speed
+	 */
+	public void setSpeed(Point speed){
 		this.speed = speed;
 	}
 	
-	public Image getSprite(){
-		return sprite;
+	/**
+	 * 
+	 * @param bgobject
+	 */
+	public void addBackgroundObject(BackgroundObject bgObject){
+		objects.add(bgObject);
 	}
 	
-	public void addBackgroundObject(BackgroundObject object){
-		objects.add(object);
+	/**
+	 * Adds a new BackgroundObject with a supplied sprite and position.
+	 * @param sprite
+	 * @param position
+	 */
+	public void addBackgroundObject(Image sprite, Point position){
+		objects.add(new BackgroundObject(sprite, position));
 	}
 	
+	/**
+	 * Removes the BackgroundObject at a supplied index from the list.
+	 * @param bgIndex
+	 */
 	public void removeBackgroundObject(int bgIndex){
 		objects.remove(bgIndex);
+	}
+	
+	/**
+	 * 
+	 * @return position
+	 */
+	public Point getPosition(){
+		return this.position;
+	}
+	
+	/**
+	 * Moves the layer by adding the speed to the current position.
+	 */
+	public void moveLayer(){
+		this.setPosition(new Point((int)(position.getX()+speed.getX()), (int)(position.getY()+speed.getY())));
+	}
+	
+	/**
+	 * 
+	 * @param p
+	 */
+	@Override
+	public void setPosition(Point p) {
+		this.position = p;
 	}
 
 }

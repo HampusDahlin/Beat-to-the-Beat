@@ -1,0 +1,75 @@
+package enviroment;
+
+import java.awt.Image;
+import java.awt.Point;
+import java.util.List;
+
+import support.Movable;
+
+/**
+ * 
+ * @author Hampus Dahlin
+ * @version 0.0.2
+ *
+ */
+public class BackgroundLayer implements Movable{
+	
+	private Point speed;
+	private List<BackgroundObject> objects;
+	private Point position;
+	
+	/**
+	 * Default constructor, setting speed to 0 and the image to null.
+	 */
+	public BackgroundLayer() {
+		this(new Point(0,0), null);
+	}
+	
+	/**
+	 * Constructor setting a speed and image.
+	 * @param speed
+	 * @param sprite
+	 */
+	public BackgroundLayer(Point speed,Image sprite){
+		this.speed = speed;
+		position = new Point(0,0);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Point getSpeed(){
+		return speed;
+	}
+	
+	public void setSpeed(Point speed){
+		this.speed = speed;
+	}
+	
+	public void addBackgroundObject(BackgroundObject object){
+		objects.add(object);
+	}
+	
+	public void addBackgroundObject(Image sprite, Point position){
+		objects.add(new BackgroundObject(sprite, position));
+	}
+	
+	public void removeBackgroundObject(int bgIndex){
+		objects.remove(bgIndex);
+	}
+	
+	public Point getPosition(){
+		return this.position;
+	}
+	
+	public void moveLayer(){
+		this.setPosition(new Point((int)(position.getX()+speed.getX()), (int)(position.getY()+speed.getY())));
+	}
+	
+	@Override
+	public void setPosition(Point p) {
+		this.position = p;
+	}
+
+}

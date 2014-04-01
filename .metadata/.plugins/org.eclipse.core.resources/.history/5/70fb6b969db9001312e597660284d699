@@ -1,0 +1,90 @@
+package enviroment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 
+ * @author Hampus Dahlin
+ * @version 0.0.2
+ *
+ */
+public class Background {
+	
+	private List<BackgroundLayer> layers;
+	private int numberOfLayers;
+	
+	/**
+	 * 
+	 */
+	public Background(){
+		numberOfLayers = 0;
+		layers = new ArrayList<BackgroundLayer>();
+		
+	}
+	
+	/**
+	 * 
+	 * @param l
+	 */
+	public Background(BackgroundLayer l){
+		numberOfLayers = 1;
+		layers = new ArrayList<BackgroundLayer>();
+		addLayer(l);
+	}
+	
+	/**
+	 * 
+	 * @param l the list of layers to be added to the background during initialization
+	 */
+	public Background(List<BackgroundLayer> l){
+		numberOfLayers = l.size();
+		layers = new ArrayList<BackgroundLayer>();
+		layers.addAll(l);
+	}
+	
+	/**
+	 * 
+	 * @param layer the layer to be added
+	 */
+	public void addLayer(BackgroundLayer layer){
+		layers.add(layer);
+		numberOfLayers++;
+	}
+	
+	/**
+	 * 
+	 * @param layerIndex the index of the layer to be removed
+	 */
+	public void removeLayer(int layerIndex){
+		layers.remove(layerIndex);
+		numberOfLayers--;
+	}
+	
+	/**
+	 * 
+	 * @return the number of layers
+	 */
+	public int getNmbrOfLayers(){
+		return numberOfLayers;
+	}
+	
+	/**
+	 * 
+	 * @param layerIndex
+	 * @return the layer at index layerIndex
+	 */
+	public BackgroundLayer getLayer(int layerIndex){
+		return layers.get(layerIndex);
+	}
+	
+	/**
+	 * 
+	 */
+	public void moveLayers(){
+		for(BackgroundLayer bgl: layers){
+			bgl.moveLayer();
+		}
+	}
+	
+}

@@ -1,0 +1,54 @@
+package enviroment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 
+ * @author Hampus Dahlin
+ * @version 0.0.2
+ *
+ */
+public class Background {
+	
+	private List<BackgroundLayer> layers;
+	private int numberOfLayers;
+	
+	
+	public Background(){
+		numberOfLayers = 0;
+		layers = new ArrayList<BackgroundLayer>();
+		
+	}
+	
+	public Background(BackgroundLayer l){
+		numberOfLayers = 1;
+		layers = new ArrayList<BackgroundLayer>();
+		addLayer(l);
+	}
+	
+	public Background(List<BackgroundLayer> l){
+		numberOfLayers = l.size();
+		layers = new ArrayList<BackgroundLayer>();
+		layers.addAll(l);
+	}
+	
+	public void addLayer(BackgroundLayer layer){
+		layers.add(layer);
+		numberOfLayers++;
+	}
+	
+	public void removeLayer(int layerIndex){
+		layers.remove(layerIndex);
+		numberOfLayers--;
+	}
+	
+	public int getNmbrOfLayers(){
+		return numberOfLayers;
+	}
+	
+	public BackgroundLayer getLayer(int layerIndex){
+		return layers.get(layerIndex);
+	}
+
+}
