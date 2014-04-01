@@ -1,6 +1,7 @@
 package actors;
 
 import java.awt.Image;
+import java.awt.List;
 import java.awt.Point;
 
 import controller.ActorControl;
@@ -15,6 +16,15 @@ public abstract class Actor {
 	private Point position;
 	private int dmg;
 	private Point speed;
+	private int range;
+	
+	public void setRange(int newRange){
+		range = newRange;
+	}
+	
+	public int getRange(){
+		return range;
+	}
 	
 	public void setSpeed(Point newSpeed){
 		speed = newSpeed;
@@ -73,8 +83,29 @@ public abstract class Actor {
 		return position;
 	}
 	
-	public boolean canHit(){
-		//TODO
+	public List canHit(){
+		
+		List<Actor> hittable;
+		if(this instanceof PC){
+			for (NPC enemy : ActorControl.getNPCList()) {
+				if(position.getX()-range == 
+						enemy.getPosition().getX()+enemy.getSprite().getWidth(null)
+						|| position.getX()+range+sprite.getWidth(null) == 
+						enemy.getPosition().getX()){
+					
+					hittable.add(enemy);
+					
+				}
+			}
+		}else if(this instanceof NPC){
+			if(position.getX()+range == getPlayer().getPosition().getX()) ||
+				position.getX()-range == getPlayer().getPosition().getX()+getPlayer().getSprite()
+					.getWidth()){
+						
+						hittable.add(getPlayer());
+						
+			}
+		}
 	}
 	
 	/**
@@ -88,7 +119,7 @@ public abstract class Actor {
 		defender.setHealth(defender.getHealth() - this.getDmg());
 	}
 	
-	abstract public void attack(Actor defender);
+	abstract public void attack();
 	abstract public void death();
 	
 }
