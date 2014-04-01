@@ -52,5 +52,9 @@ public class ActorControl {
 	public void updateView(){
 		//this.view.update();
 	}
+	
+	public PC getPlayer() {
+		return player;
+	}
 
 }
