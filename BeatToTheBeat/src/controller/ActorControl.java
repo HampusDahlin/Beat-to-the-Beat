@@ -64,6 +64,7 @@ public class ActorControl {
 		return NPCList.get(0);
 	}
 	
+	// Possibly to be used with powerups etc later.
 	/**
 	 * Checks which NPCs are within range of player.
 	 * @param range How close NPC can be to player.
@@ -78,6 +79,14 @@ public class ActorControl {
 		}
 		
 		return hittable;
+	}
+	
+	/**
+	 * Checks if first NPC in list is within range.
+	 * @param range How close NPC can be to player.
+	 */
+	public boolean canHitClose(int range) {
+		return player.getPosition().getX() - NPCList.get(0).getPosition().getX() < range;
 	}
 
 }
