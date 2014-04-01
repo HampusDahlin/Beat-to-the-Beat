@@ -1,0 +1,15 @@
+### https://raw.github.com/github/gitignore/master/Global/Eclipse.gitignore
+
+# Local settings and plugin-shizzle.
+.metadata
+
+*.class
+
+# Thumbnails
+._*
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
