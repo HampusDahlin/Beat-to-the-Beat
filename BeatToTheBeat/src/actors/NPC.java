@@ -1,27 +1,16 @@
 package actors;
 
-import java.awt.Image;
 import java.awt.Point;
 
-import controller.ActorControl;
+import javax.swing.Icon;
 
 public class NPC extends Actor implements support.Movable{
 
 
-	public NPC(Point position, Image sprite){
+	public NPC(Point position, Icon sprite){
 		setHealth(1);
 		setPosition(position);
 		setSprite(sprite);
 	}
 	
-	public void attack(){
-		if(canHit()){
-			dealDmg(/*CharacterControls PC variabel*/);
-		}
-		death();
-	}
-	
-	public void death(){
-		ActorControl.removeCharacter(this);
-	}
 }
