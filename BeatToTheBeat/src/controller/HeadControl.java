@@ -129,7 +129,8 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 		try {
 				actorControl.moveActors();
 			} catch (GameOverException exc) {
-				exc.getMessage();
+				System.out.println("Du dog!");
+				System.exit(0);
 			} catch (RemoveActorException exc) {
 				actorControl.removeActor();
 			}
@@ -144,12 +145,12 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 			}else{
 				//skriver ut "sekunderna"
 				System.out.println(i);
-				time.stop();
-				timerOn=false;
+				//time.stop();
+				//timerOn=false;
 			}
 		}
-		time.start();
-		timerOn = true;
+		//time.start();
+		//timerOn = true;
 		
 		
 		

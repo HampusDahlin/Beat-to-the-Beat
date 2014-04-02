@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.text.View;
 
+import support.RemoveActorException;
 import actors.Actor;
 import actors.ActorFacade;
 import actors.NPC;
@@ -89,7 +90,11 @@ public class ActorControl {
 	}
 	
 	public void playerAttack() {
-		facade.playerAttack();
+		try {
+			facade.playerAttack();
+		} catch (RemoveActorException e) {
+			removeActor();
+		}
 	}
 
 }
