@@ -12,7 +12,9 @@ import javax.swing.Timer;
 
 import levels.BttBLevel;
 import enviroment.Background;
+import support.GameOverException;
 import support.Movable;
+import support.RemoveActorException;
 import actors.Actor;
 
 
@@ -20,7 +22,8 @@ import actors.Actor;
  * 
  * @author Hampus Dahlin
  * @revisedBy Pontus "Bondi" Eriksson
- * @version 0.0.2
+ * @revisedBy Malin "Johanna" Thelin
+ * @version 0.0.3
  *
  */
 public class HeadControl implements KeyListener, PropertyChangeListener, ActionListener {
@@ -72,6 +75,12 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 		if(e.getKeyCode()== KeyEvent.VK_SPACE){
 			System.out.println("hej");
 		}
+			
+		try {
+			actorControl.playerAttack();
+		} catch (RemoveActorException exc) {
+			actorControl.removeActor();
+		}
 		
 	}
 
@@ -96,7 +105,13 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		actorControl.moveActors();
+		try {
+				actorControl.moveActors();
+			} catch (GameOverException exc) {
+				exc.getMessage();
+			} catch (RemoveActorException exc) {
+				actorControl.removeActor();
+			}
 		
 		//Testkod
 		//vår "musikbeat"
