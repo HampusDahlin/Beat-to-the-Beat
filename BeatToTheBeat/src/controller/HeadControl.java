@@ -69,6 +69,9 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 	@Override
 	public void keyPressed(KeyEvent e) {
 		//attack
+		if(e.getKeyCode()== KeyEvent.VK_SPACE){
+			System.out.println("hej");
+		}
 		
 	}
 
