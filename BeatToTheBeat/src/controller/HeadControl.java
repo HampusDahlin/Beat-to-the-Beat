@@ -68,7 +68,6 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 			public void keyPressed(KeyEvent evt){
 				if(evt.getKeyCode() == KeyEvent.VK_SPACE){
 					actorControl.playerAttack();
-					System.out.println("halalalllaaalalalååå");
 				}
 			}
 		};
@@ -88,14 +87,6 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
-		System.out.println("hallåaåå");
-		
-		//attack
-		if(e.getKeyCode()== KeyEvent.VK_SPACE){
-			System.out.println("hej");
-		}
-			
 		try {
 			actorControl.playerAttack();
 		} catch (RemoveActorException exc) {
@@ -137,6 +128,10 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 		
 		//Testkod
 		//vår "musikbeat"
+		System.out.println(300 - actorControl.getFirstEnemy().getPosition().x);
+		
+		
+		/*
 		if(timerOn){
 			i++;
 			if(i == 4){
@@ -151,7 +146,7 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 		}
 		//time.start();
 		//timerOn = true;
-		
+		*/
 		
 		
 		if (spawnTimes[enemyNbr] == System.currentTimeMillis()) {
