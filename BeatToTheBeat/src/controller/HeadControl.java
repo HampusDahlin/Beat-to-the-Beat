@@ -151,9 +151,10 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 		}
 		//time.start();
 		//timerOn = true;
-
-		if (spawnTimes[enemyNbr] < System.currentTimeMillis()+100 &&
-				spawnTimes[enemyNbr] > System.currentTimeMillis()-100) {
+		
+		
+		
+		if (spawnTimes[enemyNbr] == System.currentTimeMillis()) {
 			actorControl.createActor();
 		}
 	}
