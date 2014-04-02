@@ -35,8 +35,14 @@ public class ActorFacade {
 	public void playerAttack() {
 		if (!player.onCooldown()) {
 			if (canHitClose(100 + player.getSprite().getIconHeight()/2 )) {
+				//Test-printing
+				System.out.println("TR�ff!");
+				
 				throw new RemoveActorException();
 			} else {
+				//Test-printing
+				System.out.println("MISS!");
+				
 				player.startCooldown();
 			}
 		}
