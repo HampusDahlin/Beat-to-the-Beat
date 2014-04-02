@@ -21,7 +21,7 @@ public class ActorFacade {
 		this.player = player;
 	}
 	
-	public void NPCattack() {
+	public void NPCAttack() {
 		if (canHitClose(player.getSprite().getIconWidth())) {
 			NPCList.get(0).dealDmg(player);
 			if (player.getHealth() <= 0) {

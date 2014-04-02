@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.text.View;
 
 import actors.Actor;
+import actors.ActorFacade;
 import actors.NPC;
 import actors.PC;
 
@@ -15,6 +16,7 @@ import actors.PC;
 public class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
+	private ActorFacade facade;
 	
 	public ActorControl(){
 		NPCList = new ArrayList<NPC>();
@@ -28,7 +30,7 @@ public class ActorControl {
 					(player.getPosition().getX() - enemy.getPosition().getX() > 0 ? 1 : -1)
 					*enemy.getSpeed().getX()), 100));
 			
-		    enemy.attack();
+		    facade.NPCAttack();
 		}
 	}
 	
@@ -91,6 +93,10 @@ public class ActorControl {
 		return (player.getPosition().getX() +
 				player.getSprite().getIconWidth()/2) -
 				NPCList.get(0).getPosition().getX() < range;
+	}
+	
+	public void playerAttack() {
+		facade.playerAttack();
 	}
 
 }
