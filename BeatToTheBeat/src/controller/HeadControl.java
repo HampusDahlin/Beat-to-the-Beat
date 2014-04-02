@@ -3,6 +3,7 @@ package controller;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
@@ -15,6 +16,7 @@ import enviroment.Background;
 import support.GameOverException;
 import support.Movable;
 import support.RemoveActorException;
+import test.TestGame;
 import actors.Actor;
 
 
@@ -35,12 +37,14 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 	private long[] spawnTimes;
 	private int enemyNbr;
 	private ActorControl actorControl;
+	private KeyListener keyListener;
 	
 	//kod för test
 	private boolean timerOn = false;
 	private int i = 0;
 	
-	public HeadControl() {
+	//TestGame är som en view här
+	public HeadControl(TestGame game) {
 		actorControl = new ActorControl();
 		
 		long[] spawn1 = {5000, 10000};
@@ -51,12 +55,25 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 		spawnTimes = level1.getSpawnTimes();
 		enemyNbr = 0;
 		
+		
+		//testkod
 		time = new Timer(1000, this);
 		System.out.println("Game started!");
 		System.out.print("Hit button in: ");
 		startTime = System.currentTimeMillis();
 		time.start();
 		timerOn = true;
+		
+		this.keyListener = new KeyAdapter(){
+			public void keyPressed(KeyEvent evt){
+				if(evt.getKeyCode() == KeyEvent.VK_SPACE){
+					actorControl.playerAttack();
+					System.out.println("halalalllaaalalalååå");
+				}
+			}
+		};
+		
+		game.addKeyListener(keyListener);
 	}
 	
 	
@@ -71,6 +88,9 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
+		System.out.println("hallåaåå");
+		
 		//attack
 		if(e.getKeyCode()== KeyEvent.VK_SPACE){
 			System.out.println("hej");
@@ -93,13 +113,14 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println("hallå");
 		
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals("death")){
-			actorControl.removeActor((Actor)evt.getNewValue());
+			//actorControl.removeActor((Actor)evt.getNewValue());
 		}
 		
 	}
