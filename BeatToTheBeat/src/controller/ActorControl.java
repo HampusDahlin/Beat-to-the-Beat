@@ -21,6 +21,7 @@ public class ActorControl {
 	public ActorControl(){
 		NPCList = new ArrayList<NPC>();
 		player = new PC(new Point(500, 100), null);
+		facade = new ActorFacade(NPCList, player);
 	}
 	
 	// Move all NPCs and then try to attack.
@@ -83,16 +84,6 @@ public class ActorControl {
 		}
 		
 		return hittable;
-	}
-	
-	/**
-	 * Checks if first NPC in list is within range.
-	 * @param range How close NPC can be to player.
-	 */
-	public boolean canHitClose(int range) {
-		return (player.getPosition().getX() +
-				player.getSprite().getIconWidth()/2) -
-				NPCList.get(0).getPosition().getX() < range;
 	}
 	
 	public void playerAttack() {
