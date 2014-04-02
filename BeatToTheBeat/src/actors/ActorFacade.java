@@ -73,7 +73,7 @@ public class ActorFacade {
 		 * @param range How close NPC can be to player.
 		 */
 		public boolean canHitClose(int range) {
-			return player.getPosition().getX()  -
+			return NPCList.isEmpty() ? false : player.getPosition().getX()  -
 					NPCList.get(0).getPosition().getX() <= range;
 			/*
 			return (player.getPosition().getX() +

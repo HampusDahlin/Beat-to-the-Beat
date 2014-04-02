@@ -14,10 +14,10 @@ public class BttBLevel implements ILevel {
 	private final String fileName;
 	private final String songName;
 	private final Background background;
-	private final long spawnTimes[]; //Array containing the spawntimes for NPCs.
+	private final long[] spawnTimes; //Array containing the spawntimes for NPCs.
 	
 	//Loading from saved file.
-	public BttBLevel(String fileName, String songName, Background background, long spawnTimes[]) {
+	public BttBLevel(String fileName, String songName, Background background, long[] spawnTimes) {
 		this.fileName = fileName;
 		this.songName = songName;
 		this.background = background;

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.text.View;
 
+import support.OutOfEnemiesException;
 import support.RemoveActorException;
 import actors.Actor;
 import actors.ActorFacade;
@@ -21,7 +22,6 @@ public class ActorControl {
 	
 	public ActorControl(){
 		NPCList = new ArrayList<NPC>();
-		createActor();
 		player = new PC(new Point(500, 100), null);
 		facade = new ActorFacade(NPCList, player);
 	}
@@ -52,7 +52,9 @@ public class ActorControl {
 	 */
 	public void removeActor() {
 		NPCList.remove(0);
-		createActor();
+		if (NPCList.isEmpty()) {
+			throw new OutOfEnemiesException();
+		}
 	}
 	
 	public void updateView(){
@@ -67,7 +69,11 @@ public class ActorControl {
 	 * Returns the first enemy in NPCList.
 	 */
 	public NPC getFirstEnemy() {
-		return NPCList.get(0);
+		try {
+			return NPCList.get(0);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 	
 	// Possibly to be used with powerups etc later.

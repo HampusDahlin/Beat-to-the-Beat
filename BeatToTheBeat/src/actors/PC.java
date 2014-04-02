@@ -18,7 +18,7 @@ public class PC extends Actor implements ActionListener {
 	public PC(Point position, Icon sprite) {
 		cash = 0;
 		combo = 0;
-		setHealth(5);
+		setHealth(1);
 		setPosition(position);
 		setSprite(sprite);
 		setSpeed(new Point(0,0));
@@ -26,7 +26,7 @@ public class PC extends Actor implements ActionListener {
 		MISSTIME = 1000; //ms
 		cooldown = new Timer(MISSTIME, this);
 		cooldown.setInitialDelay(MISSTIME);
-		cooldown.setRepeats(true);
+		cooldown.setRepeats(false);
 	}
 	
 	/*public void attack() {
@@ -71,7 +71,7 @@ public class PC extends Actor implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		//timer stops
+		//noRepeat so cooldown stops 
 	}
 
 }

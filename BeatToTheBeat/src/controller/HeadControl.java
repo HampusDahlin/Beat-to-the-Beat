@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -15,9 +14,9 @@ import levels.BttBLevel;
 import enviroment.Background;
 import support.GameOverException;
 import support.Movable;
+import support.OutOfEnemiesException;
 import support.RemoveActorException;
 import test.TestGame;
-import actors.Actor;
 
 
 /**
@@ -25,7 +24,7 @@ import actors.Actor;
  * @author Hampus Dahlin
  * @revisedBy Pontus "Bondi" Eriksson
  * @revisedBy Malin "Johanna" Thelin
- * @version 0.0.3
+ * @version 0.0.4
  *
  */
 public class HeadControl implements KeyListener, PropertyChangeListener, ActionListener {
@@ -39,16 +38,12 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 	private ActorControl actorControl;
 	private KeyListener keyListener;
 	
-	//kod för test
-	private boolean timerOn = false;
-	private int i = 0;
-	
 	//TestGame är som en view här
 	public HeadControl(TestGame game) {
 		actorControl = new ActorControl();
 		
-		long[] spawn1 = {5000, 10000};
-		long[] spawn2 = {4000, 8000};
+		long[] spawn1 = {5000, 12000};
+		long[] spawn2 = {4000, 10000};
 		
 		level1 = new BttBLevel("file1", "song1", new Background(), spawn1);
 		level2 = new BttBLevel("file2", "song2", new Background(), spawn2);
@@ -62,13 +57,17 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 		System.out.print("Hit button in: ");
 		startTime = System.currentTimeMillis();
 		time.start();
-		timerOn = true;
 		
 		this.keyListener = new KeyAdapter(){
 			public void keyPressed(KeyEvent evt){
 				if(evt.getKeyCode() == KeyEvent.VK_SPACE){
-					actorControl.playerAttack();
-					System.out.println("halalalllaaalalalååå");
+					try {
+						actorControl.playerAttack();
+					} catch (OutOfEnemiesException e) {
+						if (enemyNbr == spawnTimes.length) {
+							endGame();
+						}
+					}
 				}
 			}
 		};
@@ -132,11 +131,25 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 				System.out.println("Du dog!");
 				System.exit(0);
 			} catch (RemoveActorException exc) {
-				actorControl.removeActor();
+				try {
+					actorControl.removeActor();
+				} catch (OutOfEnemiesException except) {
+					if (enemyNbr == spawnTimes.length) {
+						endGame();
+					}
+				}
 			}
+		
 		
 		//Testkod
 		//vår "musikbeat"
+		if (actorControl.getFirstEnemy()!=null) {
+			System.out.println(300-actorControl.getFirstEnemy().getPosition().x);
+		} else {
+			System.out.println("Nästa spawn om: "+ (spawnTimes[enemyNbr] - (System.currentTimeMillis()-startTime)));
+		}
+		
+		/*
 		if(timerOn){
 			i++;
 			if(i == 4){
@@ -151,16 +164,20 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 		}
 		//time.start();
 		//timerOn = true;
+		*/
 		
 		
-		
-		if (spawnTimes[enemyNbr] == System.currentTimeMillis()) {
+		if (enemyNbr != spawnTimes.length && spawnTimes[enemyNbr] < System.currentTimeMillis()-startTime+100 &&
+				spawnTimes[enemyNbr] > System.currentTimeMillis()-startTime-100) {
 			actorControl.createActor();
+			System.out.println("Enemy spawned.");
+			enemyNbr++;
 		}
 	}
 	
 	public void endGame() {
-		
+		System.out.println("You cleared the whole level! G_G");
+		System.exit(0);
 	}
 	
 }
