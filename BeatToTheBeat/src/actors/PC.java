@@ -1,10 +1,11 @@
 package actors;
 
-import java.awt.Image;
 import java.awt.Point;
 import java.util.Timer;
 
 import javax.swing.Icon;
+
+import support.GameOverException;
 
 public class PC extends Actor{
 	private int cash;
@@ -21,12 +22,6 @@ public class PC extends Actor{
 		setDmg(1);
 	}
 	
-	public void attack() {
-		if (canHit(100 + getSprite().getIconHeight()/2 )) {
-			
-		}
-	}
-	
 	/*public void attack() {
 		try(canHit()){
 			dealDmg(canHit()[0]);
@@ -36,7 +31,7 @@ public class PC extends Actor{
 	}*/
 	
 	public void death(){
-		
+		throw new GameOverException();
 	}
 	
 	public void setCombo(int newCombo){
@@ -53,6 +48,10 @@ public class PC extends Actor{
 	
 	public int getCash(){
 		return cash;
+	}
+	
+	public void resetCooldown() {
+		cooldown.cancel();
 	}
 
 }

@@ -1,14 +1,12 @@
 package actors;
 
-import java.awt.List;
 import java.awt.Point;
 
 import javax.swing.Icon;
 
-import controller.ActorControl;
-
 /**
  * @author Björn Hedström
+ * @revisedBy Pontus "Bondi" Eriksson
  *
  */
 public abstract class Actor {
@@ -67,6 +65,8 @@ public abstract class Actor {
 		return position;
 	}
 	
+	//probably won't be used
+	/*
 	public List canHit(){
 		
 		List<Actor> hittable;
@@ -92,6 +92,7 @@ public abstract class Actor {
 		}
 		return hittable;
 	}
+	*/
 	
 	public boolean isDead(){
 		return getHealth() < 0;
@@ -101,7 +102,8 @@ public abstract class Actor {
 		defender.setHealth(defender.getHealth() - this.getDmg());
 	}
 	
-	abstract public void attack();
-	abstract public void death();
+	//attack and death moved to ActorFacade until further notice
+	//abstract public void attack();
+	//abstract public void death();
 	
 }
