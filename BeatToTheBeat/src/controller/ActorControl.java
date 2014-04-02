@@ -20,6 +20,7 @@ public class ActorControl {
 	
 	public ActorControl(){
 		NPCList = new ArrayList<NPC>();
+		createActor();
 		player = new PC(new Point(500, 100), null);
 		facade = new ActorFacade(NPCList, player);
 	}
@@ -50,6 +51,7 @@ public class ActorControl {
 	 */
 	public void removeActor() {
 		NPCList.remove(0);
+		createActor();
 	}
 	
 	public void updateView(){
