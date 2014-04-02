@@ -30,7 +30,7 @@ public class PC extends Actor{
 		}
 	}*/
 	
-	public void death(){
+	public void death() {
 		throw new GameOverException();
 	}
 	

@@ -34,6 +34,8 @@ public class ActorFacade {
 	public void playerAttack() {
 		if (canHitClose(100 + player.getSprite().getIconHeight()/2 )) {
 			throw new RemoveActorException();
+		} else {
+			//start cooldown
 		}
 	}
 
