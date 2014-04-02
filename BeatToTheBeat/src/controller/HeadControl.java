@@ -28,7 +28,7 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 	private BttBLevel level1;
 	private BttBLevel level2;
 	private long startTime;
-	private Timer time = new Timer(1000,this);
+	private Timer time;
 	private long[] spawnTimes;
 	private int enemyNbr;
 	private ActorControl actorControl;
@@ -48,7 +48,7 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 		spawnTimes = level1.getSpawnTimes();
 		enemyNbr = 0;
 		
-		time = new Timer(1, this);
+		time = new Timer(1000, this);
 		System.out.println("Game started!");
 		System.out.print("Hit button in: ");
 		startTime = System.currentTimeMillis();
@@ -95,16 +95,23 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 	public void actionPerformed(ActionEvent e) {
 		actorControl.moveActors();
 		
-		//testkod
+		//Testkod
+		//vår "musikbeat"
 		if(timerOn){
 			i++;
-			//skriver ut "sekunderna"
-			System.out.println(i);
-			time.stop();
-			timerOn=false;
+			if(i == 4){
+				System.out.println("SLÅ!");
+				i=0;
+			}else{
+				//skriver ut "sekunderna"
+				System.out.println(i);
+				time.stop();
+				timerOn=false;
+			}
 		}
-			time.start();
-			timerOn = true;
+		time.start();
+		timerOn = true;
+		
 		
 		
 		if (spawnTimes[enemyNbr] == System.currentTimeMillis()) {
