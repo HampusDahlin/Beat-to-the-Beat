@@ -35,8 +35,8 @@ public class ActorControl {
 	}
 	
 	public void createActor() {
-		NPCList.add(new NPC( new Point(
-				System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0),
+		NPCList.add(new NPC( new Point(-100, 100),
+				//System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0),
 			null));
 	}
 	

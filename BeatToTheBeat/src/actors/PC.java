@@ -18,7 +18,7 @@ public class PC extends Actor implements ActionListener {
 	public PC(Point position, Icon sprite) {
 		cash = 0;
 		combo = 0;
-		setHealth(100);
+		setHealth(1);
 		setPosition(position);
 		setSprite(sprite);
 		setSpeed(new Point(0,0));

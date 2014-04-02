@@ -21,8 +21,9 @@ public class ActorFacade {
 	}
 	
 	public void NPCAttack() {
-		if (canHitClose(player.getSprite().getIconWidth())) {
+		if (canHitClose(100)) { //player.getSprite().getIconWidth())) {
 			NPCList.get(0).dealDmg(player);
+			System.out.println("TRÄFFAd! ouch!");
 			if (player.getHealth() <= 0) {
 				player.death();
 			} else {
@@ -34,9 +35,9 @@ public class ActorFacade {
 	
 	public void playerAttack() {
 		if (!player.onCooldown()) {
-			if (canHitClose(100 + player.getSprite().getIconHeight()/2 )) {
+			if (canHitClose(200)) { //+ player.getSprite().getIconHeight()/2 )) {
 				//Test-printing
-				System.out.println("TRï¿½ff!");
+				System.out.println("TRÄff!");
 				
 				throw new RemoveActorException();
 			} else {
@@ -72,8 +73,12 @@ public class ActorFacade {
 		 * @param range How close NPC can be to player.
 		 */
 		public boolean canHitClose(int range) {
+			return player.getPosition().getX()  -
+					NPCList.get(0).getPosition().getX() <= range;
+			/*
 			return (player.getPosition().getX() +
 					player.getSprite().getIconWidth()/2) -
 					NPCList.get(0).getPosition().getX() < range;
+			*/
 		}
 }
