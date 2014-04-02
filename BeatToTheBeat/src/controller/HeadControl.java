@@ -30,7 +30,7 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 	private BttBLevel level1;
 	private BttBLevel level2;
 	private long startTime;
-	private Timer time = new Timer(1000,this);
+	private Timer time;
 	private long[] spawnTimes;
 	private int enemyNbr;
 	private ActorControl actorControl;
@@ -107,16 +107,23 @@ public class HeadControl implements KeyListener, PropertyChangeListener, ActionL
 				actorControl.removeActor();
 			}
 		
-		//testkod
+		//Testkod
+		//vår "musikbeat"
 		if(timerOn){
 			i++;
-			//skriver ut "sekunderna"
-			System.out.println(i);
-			time.stop();
-			timerOn=false;
+			if(i == 4){
+				System.out.println("SLÅ!");
+				i=0;
+			}else{
+				//skriver ut "sekunderna"
+				System.out.println(i);
+				time.stop();
+				timerOn=false;
+			}
 		}
-			time.start();
-			timerOn = true;
+		time.start();
+		timerOn = true;
+		
 		
 		
 		if (spawnTimes[enemyNbr] == System.currentTimeMillis()) {
