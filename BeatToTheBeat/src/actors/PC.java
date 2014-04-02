@@ -1,18 +1,21 @@
 package actors;
 
 import java.awt.Point;
-import java.util.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.Timer;
 import javax.swing.Icon;
 
 import support.GameOverException;
 
-public class PC extends Actor{
+public class PC extends Actor implements ActionListener {
+	private final int MISSTIME;
 	private int cash;
 	private int combo;
-	private Timer cooldown = new Timer();
+	private Timer cooldown;
 	
-	public PC(Point position, Icon sprite){
+	public PC(Point position, Icon sprite) {
 		cash = 0;
 		combo = 0;
 		setHealth(100);
@@ -20,6 +23,10 @@ public class PC extends Actor{
 		setSprite(sprite);
 		setSpeed(new Point(0,0));
 		setDmg(1);
+		MISSTIME = 1000; //ms
+		cooldown = new Timer(MISSTIME, this);
+		cooldown.setInitialDelay(MISSTIME);
+		cooldown.setRepeats(true);
 	}
 	
 	/*public void attack() {
@@ -50,8 +57,21 @@ public class PC extends Actor{
 		return cash;
 	}
 	
+	public void startCooldown() {
+		cooldown.start();
+		cooldown.restart();
+	}
+	
 	public void resetCooldown() {
-		cooldown.cancel();
+		cooldown.stop();
+	}
+	
+	public boolean onCooldown() {
+		return cooldown.isRunning();
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		//timer stops
 	}
 
 }

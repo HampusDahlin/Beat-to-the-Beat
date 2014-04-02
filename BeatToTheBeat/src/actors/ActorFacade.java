@@ -1,6 +1,5 @@
 package actors;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,16 +25,20 @@ public class ActorFacade {
 			NPCList.get(0).dealDmg(player);
 			if (player.getHealth() <= 0) {
 				player.death();
+			} else {
+				player.resetCooldown();
 			}
 			throw new RemoveActorException();
 		}
 	}
 	
 	public void playerAttack() {
-		if (canHitClose(100 + player.getSprite().getIconHeight()/2 )) {
-			throw new RemoveActorException();
-		} else {
-			//start cooldown
+		if (!player.onCooldown()) {
+			if (canHitClose(100 + player.getSprite().getIconHeight()/2 )) {
+				throw new RemoveActorException();
+			} else {
+				player.startCooldown();
+			}
 		}
 	}
 
