@@ -1,8 +1,10 @@
 package musichandler;
 
+import javax.swing.JFrame;
+
 import ddf.minim.*;
 
-public class MinimHandler {
+public class MinimHandler extends JFrame {
 	Minim minim;
 	AudioPlayer player;
 	AudioInput input;
@@ -11,11 +13,19 @@ public class MinimHandler {
 		//size(100, 100);
 
 		minim = new Minim(this);
-		player = minim.loadFile("song.mp3");
-		input = minim.getLineIn();
+		player = minim.loadFile("Jubel.wav");
+		// this loads mysong.wav from the data folder
+		player.play();
+		
+		//input = minim.getLineIn();
 	}
 
 	void draw() {
 		// do what you do
+	}
+	
+	public static void main(String[] args) {
+		MinimHandler test = new MinimHandler();
+		test.setup();
 	}
 }
