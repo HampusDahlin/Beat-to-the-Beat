@@ -18,15 +18,25 @@ public class MinimHandler extends JFrame implements ActionListener {
 	AudioInput input;
 	Timer timer;
 	boolean one;
-	long lastOnset;
 	int beatNr;
 	BeatDetect detective;
+	final int BUFFERSIZE;
+	boolean mode;
 	
 	public MinimHandler() {
+		mode = false; // true for sound-energy, false for frequency-energy
+		BUFFERSIZE = 512;
 		one = false;
-		detective = new BeatDetect();
-
 		setup();
+		
+		if (mode) {
+			detective = new BeatDetect();
+		} else {
+			detective = new BeatDetect(BUFFERSIZE, player.sampleRate());
+		}
+		
+		detective.setSensitivity(300);
+
 		timer = new Timer(1, this);
 		timer.start();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,10 +44,10 @@ public class MinimHandler extends JFrame implements ActionListener {
 	}
 
 	void setup() {
-		this.setSize(512, 200);
+		this.setSize(BUFFERSIZE, 200);
 
 		minim = new Minim(this);
-		player = minim.loadFile("Jubel.wav", 512);
+		player = minim.loadFile("Jubel.wav", BUFFERSIZE);
 		// this loads mysong.wav from the data folder
 		player.play();
 		
@@ -92,11 +102,22 @@ public class MinimHandler extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		// getting the buffer for current time in song
 		detective.detect(player.mix);
-		if (detective.isOnset() && System.currentTimeMillis()-lastOnset > 300) {
+		
+		if (detective.isOnset()) { // always false in freq.mode
 			System.out.println("BEAT: " + beatNr);
 			beatNr++;
-			lastOnset = System.currentTimeMillis();
+		} else if (!mode) {
+			if (detective.isHat()) {
+				System.out.println("HAT!");
+			}
+			if (detective.isKick()) {
+				System.out.println("KICK!");
+			}
+			if (detective.isSnare()) {
+				System.out.println("SNARE!");
+			}
 		}
 
 		repaint();
