@@ -18,13 +18,12 @@ public class MinimHandler extends JFrame implements ActionListener {
 	AudioInput input;
 	Timer timer;
 	boolean one;
-	boolean two;
+	long lastOnset;
 	int beatNr;
 	BeatDetect detective;
 	
 	public MinimHandler() {
 		one = false;
-		two = false;
 		detective = new BeatDetect();
 
 		setup();
@@ -94,13 +93,12 @@ public class MinimHandler extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		detective.detect(player.mix);
-		if (detective.isOnset() && !two) {
+		if (detective.isOnset() && System.currentTimeMillis()-lastOnset > 300) {
 			System.out.println("BEAT: " + beatNr);
 			beatNr++;
-			two = true;
-		} else {
-			two = false;
+			lastOnset = System.currentTimeMillis();
 		}
+
 		repaint();
 	}
 }
