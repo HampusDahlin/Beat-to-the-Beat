@@ -1,5 +1,6 @@
 package musichandler;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javax.swing.JFrame;
@@ -27,12 +28,21 @@ public class MinimHandler extends JFrame {
 	}
 	
 	public String sketchPath(String fileName) {
-		return "";
+		return "sketchPath: " + fileName;
 	}
 	
-	
 	public InputStream createInput(String fileName) {
-		
+		System.out.println("creating inputStream from file: " + fileName);
+		InputStream is;
+		try {
+			is = new FileInputStream(fileName);
+			System.out.println("Success!");
+			return is;
+		} catch (Exception e) {
+			System.out.println("Failed! Exception: " + e);
+			is = null;
+		}
+		return is;
 	}
 	
 	public static void main(String[] args) {
