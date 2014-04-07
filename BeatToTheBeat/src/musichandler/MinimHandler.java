@@ -22,11 +22,13 @@ public class MinimHandler extends JFrame implements ActionListener {
 	BeatDetect detective;
 	final int BUFFERSIZE;
 	boolean mode;
+	String songName;
 	
 	public MinimHandler() {
 		mode = false; // true for sound-energy, false for frequency-energy
 		BUFFERSIZE = 512;
 		one = false;
+		songName = "Jubel.wav";
 		setup();
 		
 		if (mode) {
@@ -47,8 +49,8 @@ public class MinimHandler extends JFrame implements ActionListener {
 		this.setSize(BUFFERSIZE, 200);
 
 		minim = new Minim(this);
-		player = minim.loadFile("Jubel.wav", BUFFERSIZE);
-		// this loads mysong.wav from the data folder
+		player = minim.loadFile(songName, BUFFERSIZE);
+		// this loads song from the data folder
 		player.play();
 		
 		input = minim.getLineIn();
