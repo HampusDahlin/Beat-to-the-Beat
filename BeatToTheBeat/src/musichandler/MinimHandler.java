@@ -1,5 +1,7 @@
 package musichandler;
 
+import java.io.InputStream;
+
 import javax.swing.JFrame;
 
 import ddf.minim.*;
@@ -22,6 +24,15 @@ public class MinimHandler extends JFrame {
 
 	void draw() {
 		// do what you do
+	}
+	
+	public String sketchPath(String fileName) {
+		return "";
+	}
+	
+	
+	public InputStream createInput(String fileName) {
+		
 	}
 	
 	public static void main(String[] args) {
