@@ -3,6 +3,7 @@ package controller;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.text.View;
@@ -19,6 +20,7 @@ public class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
 	private ActorFacade facade;
+	private List<Long> NPCspawntimers;
 	
 	public ActorControl(){
 		NPCList = new ArrayList<NPC>();
@@ -100,6 +102,24 @@ public class ActorControl {
 			facade.playerAttack();
 		} catch (RemoveActorException e) {
 			removeActor();
+		}
+	}
+	
+	public List<Double> createNPCspawntimers(Double[] beattimers) {
+		List<Double> spawn = Arrays.asList(beattimers);
+		
+		for(int i = 0; i < beattimers.length; i++) {
+			if(spawn.get(i) != null) {
+				Double beattime = spawn.get(i);
+				Double distance = JFrame.getWidth() - 
+					(player.getPosition()).getX() + player.getSprite().getIconWidth(); 
+				
+				beattime = beattime - distance/(((NPCList.get(i)).getSpeed()).getX());
+			} else {
+				throw new ArrayStoreException();
+			}
+			
+			return spawn;
 		}
 	}
 
