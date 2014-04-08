@@ -8,12 +8,13 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import ddf.minim.*;
 import ddf.minim.analysis.BeatDetect;
 
-public class MinimHandler extends JFrame implements ActionListener {
+public class MinimHandler extends JPanel implements ActionListener {
 	Minim minim;
 	AudioPlayer player;
 	AudioInput input;
@@ -28,7 +29,7 @@ public class MinimHandler extends JFrame implements ActionListener {
 	int ballSize;
 	
 	public MinimHandler() {
-		mode = true; // true for sound-energy, false for frequency-energy
+		mode = false; // true for sound-energy, false for frequency-energy
 		visMode = true; // true for frequency, false for "ball" (only works in sound-energy so far)
 		BUFFERSIZE = 512;
 		one = false;
@@ -45,8 +46,8 @@ public class MinimHandler extends JFrame implements ActionListener {
 
 		timer = new Timer(1, this);
 		timer.start();
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
+		/*this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);*/
 	}
 
 	void setup() {
@@ -109,7 +110,12 @@ public class MinimHandler extends JFrame implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
+		JFrame frame = new JFrame();
 		MinimHandler test = new MinimHandler();
+		frame.setSize(test.getSize().width, test.getSize().height+50);
+		frame.add(test);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
