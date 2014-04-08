@@ -1,5 +1,6 @@
 package musichandler;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,12 +24,15 @@ public class MinimHandler extends JFrame implements ActionListener {
 	final int BUFFERSIZE;
 	boolean mode;
 	String songName;
+	boolean visMode;
+	int ballSize;
 	
 	public MinimHandler() {
-		mode = false; // true for sound-energy, false for frequency-energy
+		mode = true; // true for sound-energy, false for frequency-energy
+		visMode = true; // true for frequency, false for "ball" (only works in sound-energy so far)
 		BUFFERSIZE = 512;
 		one = false;
-		songName = "Jubel.wav";
+		songName = "songs\\Jubel.wav";
 		setup();
 		
 		if (mode) {
@@ -46,7 +50,11 @@ public class MinimHandler extends JFrame implements ActionListener {
 	}
 
 	void setup() {
-		this.setSize(BUFFERSIZE, 200);
+		if (visMode) {
+			this.setSize(BUFFERSIZE, 200);
+		} else {
+			this.setSize(300, 300);
+		}
 
 		minim = new Minim(this);
 		player = minim.loadFile(songName, BUFFERSIZE);
@@ -63,21 +71,22 @@ public class MinimHandler extends JFrame implements ActionListener {
 	}
 	
 	public void paint(Graphics g) {
-		if (one) {
-			g.clearRect(0, 0, this.getWidth(), this.getHeight());
-			one = false;
+		g.clearRect(0, 0, this.getWidth(), this.getHeight());
+		
+		if (visMode) {
+			// we draw the waveform by connecting neighbor values with a line
+			// we multiply each of the values by 50 
+			// because the values in the buffers are normalized
+			// this means that they have values between -1 and 1. 
+			// If we don't scale them up our waveform 
+			// will look more or less like a straight line.
+			for(int i = 0; i < player.bufferSize() - 1; i++) {
+				g.drawLine(i, (int) (50 + player.left.get(i)*50), i+1, (int) (50 + player.left.get(i+1)*50));
+				g.drawLine(i, (int) (150 + player.right.get(i)*50), i+1, (int) (150 + player.right.get(i+1)*50));
+			}
 		} else {
-			one = true;
-		}
-		// we draw the waveform by connecting neighbor values with a line
-		// we multiply each of the values by 50 
-		// because the values in the buffers are normalized
-		// this means that they have values between -1 and 1. 
-		// If we don't scale them up our waveform 
-		// will look more or less like a straight line.
-		for(int i = 0; i < player.bufferSize() - 1; i++) {
-			g.drawLine(i, (int) (50 + player.left.get(i)*50), i+1, (int) (50 + player.left.get(i+1)*50));
-			g.drawLine(i, (int) (150 + player.right.get(i)*50), i+1, (int) (150 + player.right.get(i+1)*50));
+			g.setColor(Color.BLACK);
+			g.fillOval(150-(ballSize/2), 150-(ballSize/2), ballSize, ballSize);
 		}
 	}
 	
@@ -110,6 +119,7 @@ public class MinimHandler extends JFrame implements ActionListener {
 		if (detective.isOnset()) { // always false in freq.mode
 			System.out.println("BEAT: " + beatNr);
 			beatNr++;
+			ballSize = 200;
 		} else if (!mode) {
 			if (detective.isHat()) {
 				System.out.println("HAT!");
@@ -120,8 +130,16 @@ public class MinimHandler extends JFrame implements ActionListener {
 			if (detective.isSnare()) {
 				System.out.println("SNARE!");
 			}
+		} else if (one) {
+			ballSize--;
 		}
 
-		repaint();
+		if (one) {
+			repaint();
+			one = false;
+		} else {
+			one = true;
+		}
+		
 	}
 }
