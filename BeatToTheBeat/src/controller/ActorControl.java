@@ -105,16 +105,17 @@ public class ActorControl {
 		}
 	}
 	
-	public List<Double> createNPCspawntimers(Double[] beattimers) {
-		List<Double> spawn = Arrays.asList(beattimers);
-		
-		for(int i = 0; i < beattimers.length; i++) {
-			if(spawn.get(i) != null) {
-				Double beattime = spawn.get(i);
-				Double distance = JFrame.getWidth() - 
+	public ArrayList<Long> createNPCspawntimers(ArrayList<Long> beattimers) {
+		ArrayList<Long> spawn = new ArrayList<Long>();
+		for(int i = 0; i < beattimers.size(); i++) {
+			if(beattimers.get(i) != null) {
+				Long beattime = beattimers.get(i);
+				Long distance = JFrame.getWidth() - 
 					(player.getPosition()).getX() + player.getSprite().getIconWidth(); 
 				
-				beattime = beattime - distance/(((NPCList.get(i)).getSpeed()).getX());
+				beattime = 
+						(long)(beattime - (distance/(((NPCList.get(i)).getSpeed()).getX()))*1000);
+				spawn.add(beattime);
 			} else {
 				throw new ArrayStoreException();
 			}
