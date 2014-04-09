@@ -85,8 +85,20 @@ public class Analyzer implements ActionListener {
 		// getting the buffer for current time in song
 		detective.detect(player.mix);
 		currentTime++;
+		System.out.println(currentTime);
 		if (detective.isOnset()) {
 			addToBeatList(currentTime);
-		} 		
+		} else if(beatList != null && beatList.size() != 0) {
+			if(currentTime - beatList.get(beatList.size()-1) > 3000) {
+				player.pause();
+				beatCheck.stop();
+			}
+		}
+	}
+	
+	public String difficulty() {
+		return "EASY";
+		//TODO
 	}
 }
+
