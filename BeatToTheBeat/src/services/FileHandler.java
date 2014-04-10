@@ -7,12 +7,16 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class FileHandler {
+/**
+ * 
+ * @author Hampus Dahlin
+ * 
+ *
+ */
+public class FileHandler implements IFileHandler<String>{
 	
 	private FileWriter fw;
-	private Scanner fr;
 	private String defaultSaveLocation;
 	
 	public FileHandler() {
@@ -20,9 +24,7 @@ public class FileHandler {
 	}
 	
 	/**
-	 * 
-	 * @param filename the name of the file to load from
-	 * @return String containing rows of content separated by a |
+	 * {@inheritDoc}
 	 */
 	public List<String> load(String filename){
 		List<String> list = new ArrayList<String>();
@@ -31,7 +33,6 @@ public class FileHandler {
 		try {
 			list.addAll(Files.readAllLines(f.toPath(), StandardCharsets.UTF_8));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -40,8 +41,7 @@ public class FileHandler {
 	}
 	
 	/**
-	 * 
-	 * @param toWrite the text to write
+	 * {@inheritDoc}
 	 */
 	public void save(String toWrite){
 		try {
@@ -50,15 +50,12 @@ public class FileHandler {
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	/**
-	 * 
-	 * @param filename the name of the file to write to
-	 * @param toWrite the text to write
+	 * {@inheritDoc}
 	 */
 	public void saveAs(String filename, String toWrite){
 		
@@ -68,11 +65,13 @@ public class FileHandler {
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setDefaultSaveLocation(String saveLoc){
 		defaultSaveLocation = saveLoc;
 	}
