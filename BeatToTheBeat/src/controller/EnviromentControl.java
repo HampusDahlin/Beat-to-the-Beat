@@ -13,7 +13,7 @@ public class EnviromentControl {
 	
 	public void moveBackground(){
 		if(this.background.getNmbrOfLayers() < 2){
-			int tmpSpeed = this.background.getLayer(0).getSpeed();
+			int tmpSpeed = this.background.getLayer(0).getSpeed().x;
 		}
 	}
 
