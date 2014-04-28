@@ -26,14 +26,14 @@ public class MinimHandler extends JPanel implements ActionListener {
 	boolean mode;
 	String songName;
 	boolean visMode;
-	int ballSize;
+	double ballSize;
 	
 	public MinimHandler() {
 		mode = false; // true for sound-energy, false for frequency-energy
-		visMode = true; // true for frequency, false for "ball" (only works in sound-energy so far)
+		visMode = false; // true for frequency, false for "ball" (only works in sound-energy so far)
 		BUFFERSIZE = 512;
 		one = false;
-		songName = "songs\\Jubel.wav";
+		songName = "songs\\Jubel.mp3";
 		setup();
 		
 		if (mode) {
@@ -60,7 +60,7 @@ public class MinimHandler extends JPanel implements ActionListener {
 		minim = new Minim(this);
 		player = minim.loadFile(songName, BUFFERSIZE);
 		// this loads song from the data folder
-		player.play();
+		player.play(5000);
 		
 		input = minim.getLineIn();
 	}
@@ -87,7 +87,7 @@ public class MinimHandler extends JPanel implements ActionListener {
 			}
 		} else {
 			g.setColor(Color.BLACK);
-			g.fillOval(150-(ballSize/2), 150-(ballSize/2), ballSize, ballSize);
+			g.fillOval(150-((int)ballSize/2), 150-((int)ballSize/2), (int)ballSize, (int)ballSize);
 		}
 	}
 	
@@ -122,14 +122,22 @@ public class MinimHandler extends JPanel implements ActionListener {
 		// getting the buffer for current time in song
 		detective.detect(player.mix);
 		
+		//for (int i = 0; i < 27; i++) {
+			if (detective.isRange(0, 4, 3)) {
+				System.out.println("BEAT: " + beatNr);
+				beatNr++;
+				ballSize = 200;
+			} else {
+				ballSize *= 0.997;
+			}
+		//}
+		
+		/*
 		if (detective.isOnset()) { // always false in freq.mode
 			System.out.println("BEAT: " + beatNr);
 			beatNr++;
 			ballSize = 200;
 		} else if (!mode) {
-			if (detective.isHat()) {
-				System.out.println("HAT!");
-			}
 			if (detective.isKick()) {
 				System.out.println("KICK!");
 			}
@@ -139,13 +147,13 @@ public class MinimHandler extends JPanel implements ActionListener {
 		} else if (one) {
 			ballSize--;
 		}
-
 		if (one) {
 			repaint();
 			one = false;
 		} else {
 			one = true;
 		}
-		
+		*/
+		repaint();
 	}
 }
