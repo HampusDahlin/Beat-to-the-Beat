@@ -27,17 +27,21 @@ public class Analyzer implements ActionListener {
 	private String songName;
 	private Long currentTime; //in milliseconds 
 	private ArrayList<Long> beatList;
-
+	private int sensitivity;
+	private Song song;
 	
-	public Analyzer(String songname) {
+	public Analyzer(Song song, int sensitivity) {
+		this.song = song;
+		
+		this.sensitivity = sensitivity;
 		beatList = new ArrayList<Long>();
 		BUFFERSIZE = 512;
-		songName = "songs\\" + songname;
+		songName = "songs\\" + song.getFilename();
 		setup();
 		detective = new BeatDetect();
-		detective.setSensitivity(300);
+		detective.setSensitivity(sensitivity);
 		currentTime = new Long(0);
-		beatCheck = new Timer(1, this);
+		beatCheck = new Timer(20, this);
 		beatCheck.start();
 	}
 
@@ -48,10 +52,13 @@ public class Analyzer implements ActionListener {
 	public void setup() {
 		minim = new Minim(this);
 		player = minim.loadFile(songName, BUFFERSIZE);
-		// this loads song from the data folder
-		player.play();
-		
+		// this loads song from the data folder	
 		input = minim.getLineIn();
+	}
+	
+	public void start() {
+		player.mute();
+		player.play();
 	}
 		
 	public String sketchPath(String fileName) {
@@ -85,20 +92,29 @@ public class Analyzer implements ActionListener {
 		// getting the buffer for current time in song
 		detective.detect(player.mix);
 		currentTime++;
-		System.out.println(currentTime);
+		
 		if (detective.isOnset()) {
 			addToBeatList(currentTime);
-		} else if(beatList != null && beatList.size() != 0) {
-			if(currentTime - beatList.get(beatList.size()-1) > 3000) {
-				player.pause();
-				beatCheck.stop();
-			}
+		} else if(beatList != null && beatList.size() != 0 &&
+				currentTime - beatList.get(beatList.size() - 1) > 3000) {
+					player.pause();
+					beatCheck.stop();
 		}
 	}
-	
+	//can only give a resonable difficulty scale if called after analyzis is complete.
 	public String difficulty() {
-		return "EASY";
-		//TODO
+		double averageBeatsPerSecond = beatNr / (currentTime / 1000);
+		
+		if(beatList.size() > 1) {
+			Long highestTimeBetweenBeats = beatList.get(1) - beatList.get(0);
+			Long lowestTimeBetweenBeats = highestTimeBetweenBeats;
+			for(int i = 1; i < beatList.size(); i++) {
+				if(highestTimeBetweenBeats < (beatList.get(i + 1) - beatList.get(i))) {
+					highestTimeBetweenBeats = beatList.get(i + 1) - beatList.get(i);
+				} else if(lowestTimeBetweenBeats > (beatList.get(i + 1) - beatList.get(i))) {
+					lowestTimeBetweenBeats = beatList.get(i + 1) - beatList.get(i);
+				}
+			}
+		} 
 	}
 }
-
