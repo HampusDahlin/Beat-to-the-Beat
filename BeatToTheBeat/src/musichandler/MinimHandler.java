@@ -27,13 +27,20 @@ public class MinimHandler extends JPanel implements ActionListener {
 	String songName;
 	boolean visMode;
 	double ballSize;
+	Genre genres[];
+	Genre activeGenre;
 	
 	public MinimHandler() {
+		genres = new Genre[3];
+		
+		genres[0] = new Genre("Happy Hardcore", 0, 5, 3, 200);
+		
+		activeGenre = genres[0];
+		songName = "songs\\Jubel.mp3";
 		mode = false; // true for sound-energy, false for frequency-energy
 		visMode = false; // true for frequency, false for "ball" (only works in sound-energy so far)
 		BUFFERSIZE = 512;
 		one = false;
-		songName = "songs\\Jubel.mp3";
 		setup();
 		
 		if (mode) {
@@ -42,7 +49,7 @@ public class MinimHandler extends JPanel implements ActionListener {
 			detective = new BeatDetect(BUFFERSIZE, player.sampleRate());
 		}
 		
-		detective.setSensitivity(300);
+		detective.setSensitivity(activeGenre.getSense());
 
 		timer = new Timer(1, this);
 		timer.start();
@@ -122,15 +129,13 @@ public class MinimHandler extends JPanel implements ActionListener {
 		// getting the buffer for current time in song
 		detective.detect(player.mix);
 		
-		//for (int i = 0; i < 27; i++) {
-			if (detective.isRange(0, 4, 3)) {
-				System.out.println("BEAT: " + beatNr);
-				beatNr++;
-				ballSize = 200;
-			} else {
-				ballSize *= 0.997;
-			}
-		//}
+		if (detective.isRange(activeGenre.getLow(), activeGenre.getHigh(), activeGenre.getThreshold())) {
+			System.out.println("BEAT: " + beatNr);
+			beatNr++;
+			ballSize = 200;
+		} else {
+			ballSize *= 0.997;
+		}
 		
 		/*
 		if (detective.isOnset()) { // always false in freq.mode
