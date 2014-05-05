@@ -27,10 +27,16 @@ public class HeadControl implements PropertyChangeListener, ActionListener {
 	private long[] spawnTimes;
 	private int enemyNbr;
 	private ActorControl actorControl;
+	private EnviromentControl enviromentControl;
+	private MusicControl musicControl;
+	private UIControl uIControl;
 	private Timer time;
 	
 	public HeadControl() {
 		actorControl = new ActorControl();
+		enviromentControl = new EnviromentControl();
+		musicControl = new MusicControl();
+		uIControl = new UIControl();
 	}
 	
 	public void startGame() {
@@ -46,7 +52,8 @@ public class HeadControl implements PropertyChangeListener, ActionListener {
 		
 	}
 
-	// vad är detta för? ***************************'
+	// vad är detta för?
+	// Det är för hantering av propertychanges, derp...
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals("death")){

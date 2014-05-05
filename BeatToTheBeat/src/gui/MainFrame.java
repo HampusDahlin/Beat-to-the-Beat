@@ -4,9 +4,16 @@ import javax.swing.JFrame;
 
 import controller.HeadControl;
 
+
+/**
+ * 
+ * @author Hampus Dahlin
+ *
+ */
 public class MainFrame extends JFrame{
 	
-	public HeadControl hc;
+	private HeadControl hc;
+	public static MainFrame mf;
 	
 	public MainFrame() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -15,5 +22,13 @@ public class MainFrame extends JFrame{
 		
 		
 		this.setVisible(true);
+	}
+	
+	public static void main(String[] args){
+		mf = new MainFrame();
+	}
+	
+	public HeadControl getHeadControl(){
+		return hc;
 	}
 }

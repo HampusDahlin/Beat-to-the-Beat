@@ -9,13 +9,4 @@ public class MusicControl {
 	public MusicControl() {
 		music = new MusicFacade();
 	}
-	
-	public void generateTimers(){
-		//TODO
-	}
-	
-	public void changeDist(){
-		//TODO
-	}
-	
 }
