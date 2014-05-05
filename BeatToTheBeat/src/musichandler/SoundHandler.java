@@ -2,10 +2,11 @@ package musichandler;
 
 import support.NoAnalyzerException;
 
-public class SoundHandler {
+public class SoundHandler{
 	private Song song;
 	private MusicPlayer player;
 	private Analyzer analyzer;
+
 	
 	public SoundHandler(Song song, boolean toAnalyze, int sensitivity) {
 		this.song = song;
@@ -21,7 +22,11 @@ public class SoundHandler {
 	
 	public void pause() {
 		pauseMusicPlayer();
-		pauseAnalyzer();
+		try {
+			pauseAnalyzer();
+		} catch (NoAnalyzerException ex) {
+			System.out.println(ex);
+		}
 	}
 	
 	public void start() {
@@ -34,7 +39,7 @@ public class SoundHandler {
 	}
 	
 	public void startAnalyzer() throws NoAnalyzerException {
-		if(analyzer != null) {
+		if (analyzer != null) {
 			analyzer.start();
 		} else {
 			throw new NoAnalyzerException("Analyzer missing"); 
@@ -45,11 +50,11 @@ public class SoundHandler {
 		player.start();
 	}
 	
-	public void pauseAnalyzer() {
-		try {
-			analyzer.wait();
-		}catch (InterruptedException ex) {
-			System.out.println(ex);
+	public void pauseAnalyzer() throws NoAnalyzerException {
+		if (analyzer != null) {	
+			analyzer.stopAnalyzer();
+		} else {
+			throw new NoAnalyzerException("Analyzer missing");
 		}
 	}
 	
@@ -57,4 +62,11 @@ public class SoundHandler {
 		player.stop();
 	}
 	
+	public Analyzer getAnalyzer() {
+		return analyzer;
+	}
+	
+	public MusicPlayer getMusicPlayer() {
+		return player;
+	}
 }
