@@ -8,10 +8,10 @@ public class SoundHandler{
 	private Analyzer analyzer;
 
 	
-	public SoundHandler(Song song, boolean toAnalyze, int sensitivity) {
+	public SoundHandler(Song song, boolean toAnalyze) {
 		this.song = song;
 		if(toAnalyze) {
-			analyzer = new Analyzer(song, sensitivity);
+			analyzer = new Analyzer(song, song.getGenre().getSense());
 		}
 		player = new MusicPlayer(song);
 	}

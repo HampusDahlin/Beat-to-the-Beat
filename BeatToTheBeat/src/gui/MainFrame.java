@@ -13,7 +13,6 @@ import controller.HeadControl;
 public class MainFrame extends JFrame{
 	
 	private HeadControl hc;
-	public static MainFrame mf;
 	
 	public MainFrame() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -22,10 +21,6 @@ public class MainFrame extends JFrame{
 		
 		
 		this.setVisible(true);
-	}
-	
-	public static void main(String[] args){
-		mf = new MainFrame();
 	}
 	
 	public HeadControl getHeadControl(){
