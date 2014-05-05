@@ -34,6 +34,8 @@ public class MinimHandler extends JPanel implements ActionListener {
 		genres = new Genre[3];
 		
 		genres[0] = new Genre("Happy Hardcore", 0, 5, 3, 200);
+		genres[1] = new Genre("Rap", 0, 5, 3, 200);
+		genres[2] = new Genre("Rock", 0, 5, 3, 200);
 		
 		activeGenre = genres[0];
 		songName = "songs\\Jubel.mp3";
