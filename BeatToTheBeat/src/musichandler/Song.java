@@ -6,12 +6,18 @@ import java.util.ArrayList;
 public class Song implements Serializable {
 	
 	private ArrayList<Long> beatList;
-	private String filename;
+	private String fileName;
 	private String difficulty;
 	private int threshold;
+	private String artist;
+	private String songName;
+	private Genre genre;
 	
-	public Song(String filename) {
-		this.filename = filename;
+	public Song(String fileName, String songName, String artist, Genre genre) {
+		this.fileName = "songs\\" + fileName;
+		this.songName = songName;
+		this.artist = artist;
+		this.genre = genre;
 	}
 	
 	public ArrayList<Long> getBeatList() {
@@ -23,11 +29,11 @@ public class Song implements Serializable {
 	}
 	
 	public String getFilename() {
-		return filename;
+		return fileName;
 	}
 	
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	
 	public String getDifficulty() {
@@ -56,5 +62,17 @@ public class Song implements Serializable {
 		} 
 		
 		return true;
+	}
+
+	public Genre getGenre() {
+		return genre;
+	}
+	
+	public String getSongName() {
+		return songName;
+	}
+	
+	public String getArtist() {
+		return artist;
 	}
 }

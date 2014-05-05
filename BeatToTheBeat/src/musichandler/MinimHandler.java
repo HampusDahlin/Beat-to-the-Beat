@@ -24,21 +24,23 @@ public class MinimHandler extends JPanel implements ActionListener {
 	BeatDetect detective;
 	final int BUFFERSIZE;
 	boolean mode;
-	String songName;
 	boolean visMode;
 	double ballSize;
 	Genre genres[];
-	Genre activeGenre;
+	Song songs[];
+	Song activeSong;
 	
 	public MinimHandler() {
 		genres = new Genre[3];
-		
-		genres[0] = new Genre("Happy Hardcore", 0, 5, 3, 200);
+		genres[0] = new Genre("Happy Hardcore", 0, 10, 5, 200);
 		genres[1] = new Genre("Rap", 0, 5, 3, 200);
 		genres[2] = new Genre("Rock", 0, 5, 3, 200);
 		
-		activeGenre = genres[0];
-		songName = "songs\\Jubel.mp3";
+		songs = new Song[3];
+		songs[0] = new Song("Eminem - Till I Collapse.mp3", "Till I Collapse", "Eminem", genres[2]);
+		songs[1] = new Song("Rotterdam Termination Source - Poing.mp3", "Poing", "Rotterdam Terminator Source", genres[0]);
+		
+		activeSong = songs[1];
 		mode = false; // true for sound-energy, false for frequency-energy
 		visMode = false; // true for frequency, false for "ball" (only works in sound-energy so far)
 		BUFFERSIZE = 512;
@@ -51,7 +53,7 @@ public class MinimHandler extends JPanel implements ActionListener {
 			detective = new BeatDetect(BUFFERSIZE, player.sampleRate());
 		}
 		
-		detective.setSensitivity(activeGenre.getSense());
+		detective.setSensitivity(activeSong.getGenre().getSense());
 
 		timer = new Timer(1, this);
 		timer.start();
@@ -67,7 +69,7 @@ public class MinimHandler extends JPanel implements ActionListener {
 		}
 
 		minim = new Minim(this);
-		player = minim.loadFile(songName, BUFFERSIZE);
+		player = minim.loadFile(activeSong.getFilename(), BUFFERSIZE);
 		// this loads song from the data folder
 		player.play(5000);
 		
@@ -131,7 +133,7 @@ public class MinimHandler extends JPanel implements ActionListener {
 		// getting the buffer for current time in song
 		detective.detect(player.mix);
 		
-		if (detective.isRange(activeGenre.getLow(), activeGenre.getHigh(), activeGenre.getThreshold())) {
+		if (detective.isRange(activeSong.getGenre().getLow(), activeSong.getGenre().getHigh(), activeSong.getGenre().getThreshold())) {
 			System.out.println("BEAT: " + beatNr);
 			beatNr++;
 			ballSize = 200;
