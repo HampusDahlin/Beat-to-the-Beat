@@ -110,4 +110,7 @@ public class MusicFacade {
 		//TODO
 	}
 	
+	public float[][] getWave() {
+		return sh.getWave();
+	}
 }

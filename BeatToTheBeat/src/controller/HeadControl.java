@@ -40,9 +40,7 @@ public class HeadControl implements ActionListener {
 	
 	public void startGame(int songIndex) {
 		startTime = System.currentTimeMillis();
-		
 		time.start();
-		
 		int amntOfSongs = 10;//tillfällig! bara för att if satsen skall se vettig ut. kan finnas i en annan klass senare?
 		if(songIndex >=0 && songIndex <= amntOfSongs)//hur många låtar vi nu än kommer att ha
 		{
@@ -64,7 +62,7 @@ public class HeadControl implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
-		enviromentControl.updateBackground();
+		enviromentControl.updateBackground(musicControl.getWave());
 		
 		
 		//Spawns a new enemy if there is a beat in the music.
