@@ -40,8 +40,8 @@ public class EnviromentControl {
 	 * Updates the background and returns it.
 	 * @return
 	 */
-	public JPanel getNextBackground(float[][] bajskorv){
-		updateBackground(bajskorv);
+	public JPanel getNextBackground(float[][] bajskorv, boolean beat){
+		updateBackground(bajskorv, beat);
 		return getBackground();
 	}
 	
@@ -56,9 +56,9 @@ public class EnviromentControl {
 	/**
 	 * Updates the background.
 	 */
-	public void updateBackground(float[][] bajskorv){
+	public void updateBackground(float[][] bajskorv, boolean beat){
 		if(this.background != null){
-			this.background.updateBackground(bajskorv);
+			this.background.updateBackground(bajskorv, beat);
 		}
 	}
 
