@@ -14,7 +14,8 @@ public class EnviromentControl {
 	/**
 	 * Default, empty constructor.
 	 */
-	public EnviromentControl(){
+	public EnviromentControl() {
+		
 	}
 	
 	/**
@@ -24,7 +25,7 @@ public class EnviromentControl {
 	public EnviromentControl(Background background){
 		this.setBackground(background);
 	}
-	
+
 	/**
 	 * Sets the background to a supplied Background.
 	 * @param background

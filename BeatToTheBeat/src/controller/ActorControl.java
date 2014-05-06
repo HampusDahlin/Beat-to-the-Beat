@@ -3,12 +3,8 @@ package controller;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.text.View;
-
-import support.OutOfEnemiesException;
 import support.RemoveActorException;
 import actors.Actor;
 import actors.ActorFacade;
@@ -34,7 +30,7 @@ public class ActorControl {
 	
 	public void createActor() {
 		NPCList.add(new NPC( new Point(-100, 100),
-				//System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0),
+				//System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0), //random which side
 			null));
 	}
 	
@@ -59,25 +55,6 @@ public class ActorControl {
 		} catch (IndexOutOfBoundsException e) {
 			return null;
 		}
-	}
-	
-	// Possibly to be used with powerups etc later.
-	/**
-	 * Checks which NPCs are within range of player.
-	 * @param range How close NPC can be to player.
-	 * @return List<NPC> with close enemies.
-	 */
-	public List<NPC> canHit(int range) {
-		List<NPC> hittable = new ArrayList<NPC>();
-		for (NPC enemy : NPCList) {
-			if ((player.getPosition().getX() +
-					player.getSprite().getIconWidth()/2) -
-					enemy.getPosition().getX() < range) {
-				hittable.add(enemy);
-			}
-		}
-		
-		return hittable;
 	}
 	
 	public void playerAttack() {

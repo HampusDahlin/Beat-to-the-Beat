@@ -65,35 +65,6 @@ public abstract class Actor {
 		return position;
 	}
 	
-	//probably won't be used
-	/*
-	public List canHit(){
-		
-		List<Actor> hittable;
-		if(this instanceof PC){
-			for (NPC enemy : ActorControl.getNPCList()) {
-				if(position.getX()-range == 
-						enemy.getPosition().getX()+enemy.getSprite().getWidth(null)
-						|| position.getX()+range+sprite.getWidth(null) == 
-						enemy.getPosition().getX()){
-					
-					hittable.add(enemy);
-					
-				}
-			}
-		}else if(this instanceof NPC){
-			if(position.getX()+range == getPlayer().getPosition().getX()) ||
-				position.getX()-range == getPlayer().getPosition().getX()+getPlayer().getSprite()
-					.getWidth()){
-						
-						hittable.add(getPlayer());
-						
-			}
-		}
-		return hittable;
-	}
-	*/
-	
 	public boolean isDead(){
 		return getHealth() < 0;
 	}

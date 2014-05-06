@@ -29,20 +29,16 @@ public class PC extends Actor implements ActionListener {
 		cooldown.setRepeats(false);
 	}
 	
-	/*public void attack() {
-		try(canHit()){
-			dealDmg(canHit()[0]);
-		}catch(OutOfReachException ex){
-			//cooldown start
-		}
-	}*/
-	
 	public void death() {
 		throw new GameOverException();
 	}
 	
-	public void setCombo(int newCombo){
-		combo = newCombo;
+	public void incCombo() {
+		combo++;
+	}
+	
+	public void resetCombo() {
+		combo = 0;
 	}
 	
 	public int getCombo(){

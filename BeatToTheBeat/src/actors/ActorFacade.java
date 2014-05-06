@@ -1,7 +1,6 @@
 package actors;
 
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.List;
 
 import support.RemoveActorException;
@@ -10,7 +9,6 @@ import support.RemoveActorException;
 * Puts some logic in actor-package instead of controller.
 * @author Pontus "Bondi" Eriksson
 * @group 14
-* @date 02-04-14
 */ 
 public class ActorFacade {
 	private List<NPC> NPCList;
@@ -22,7 +20,7 @@ public class ActorFacade {
 	}
 	
 	public void NPCAttack() {
-		if (canHitClose(100)) { //player.getSprite().getIconWidth())) {
+		if (canHitClose(100)) { //take damage and remove enemy
 			NPCList.get(0).dealDmg(player);
 			System.out.println("TRÄFFAd! ouch!");
 			if (player.getHealth() <= 0) {
@@ -39,6 +37,7 @@ public class ActorFacade {
 			if (canHitClose(200)) { //+ player.getSprite().getIconHeight()/2 )) {
 				//Test-printing
 				System.out.println("TRÄff!");
+				player.incCombo();
 				
 				throw new RemoveActorException();
 			} else {
@@ -46,50 +45,50 @@ public class ActorFacade {
 				System.out.println("MISS!");
 				
 				player.startCooldown();
+				player.resetCombo();
 			}
 		}
 	}
 
 	// Possibly to be used with powerups etc later.
-		/**
-		 * Checks which NPCs are within range of player.
-		 * @param range How close NPC can be to player.
-		 * @return List<NPC> with close enemies.
-		 */
-		public List<NPC> canHit(int range) {
-			List<NPC> hittable = new ArrayList<NPC>();
-			for (NPC enemy : NPCList) {
-				if ((player.getPosition().getX() +
-						player.getSprite().getIconWidth()/2) -
-						enemy.getPosition().getX() < range) {
-					hittable.add(enemy);
-				}
-			}
-			
-			return hittable;
-		}
-		
-		/**
-		 * Checks if first NPC in list is within range.
-		 * @param range How close NPC can be to player.
-		 */
-		public boolean canHitClose(int range) {
-			return NPCList.isEmpty() ? false : player.getPosition().getX()  -
-					NPCList.get(0).getPosition().getX() <= range;
-			/*
-			return (player.getPosition().getX() +
+	/**
+	 * Checks which NPCs are within range of player.
+	 * @param range How close NPC can be to player.
+	 * @return List<NPC> with close enemies.
+	 */
+	/*
+	public List<NPC> canHit(int range) {
+		List<NPC> hittable = new ArrayList<NPC>();
+		for (NPC enemy : NPCList) {
+			if ((player.getPosition().getX() +
 					player.getSprite().getIconWidth()/2) -
-					NPCList.get(0).getPosition().getX() < range;
-			*/
-		}
-		
-		public void moveActors() {
-			for (NPC enemy : NPCList) {
-				enemy.setPosition(new Point( (int) (enemy.getPosition().getX() +
-						(player.getPosition().getX() - enemy.getPosition().getX() > 0 ? 1 : -1)
-						*enemy.getSpeed().getX()), 100));
-				
-				NPCAttack();
+					enemy.getPosition().getX() < range) {
+				hittable.add(enemy);
 			}
 		}
+
+		return hittable;
+	}
+	*/
+
+	/**
+	 * Checks if first NPC in list is within range.
+	 * @param range How close NPC can be to player.
+	 */
+	public boolean canHitClose(int range) {
+		return !NPCList.isEmpty() &&
+				player.getPosition().getX() -
+				(NPCList.get(0).getPosition().getX() +
+						(NPCList.get(0).getSprite().getIconWidth()/2)) <= range;
+	}
+
+	public void moveActors() {
+		for (NPC enemy : NPCList) {
+			enemy.setPosition(new Point( (int) (enemy.getPosition().getX() +
+					(player.getPosition().getX() - enemy.getPosition().getX() > 0 ? 1 : -1)
+					*enemy.getSpeed().getX()), 100));
+
+			NPCAttack();
+		}
+	}
 }

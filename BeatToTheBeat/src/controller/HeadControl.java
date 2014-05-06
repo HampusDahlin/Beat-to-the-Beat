@@ -21,7 +21,7 @@ import support.RemoveActorException;
  * @version 0.0.5
  *
  */
-public class HeadControl implements PropertyChangeListener, ActionListener {
+public class HeadControl implements ActionListener {
 	
 	private long startTime;
 	private long[] spawnTimes;
@@ -49,14 +49,6 @@ public class HeadControl implements PropertyChangeListener, ActionListener {
 	 * @param m a movable entity
 	 */
 	private void moveEntity(Movable m){
-		
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		if(evt.getPropertyName().equals("death")){
-			//actorControl.removeActor((Actor)evt.getNewValue());
-		}
 		
 	}
 	
