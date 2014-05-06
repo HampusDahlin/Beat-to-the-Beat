@@ -1,5 +1,6 @@
 package actors;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,5 +81,15 @@ public class ActorFacade {
 					player.getSprite().getIconWidth()/2) -
 					NPCList.get(0).getPosition().getX() < range;
 			*/
+		}
+		
+		public void moveActors() {
+			for (NPC enemy : NPCList) {
+				enemy.setPosition(new Point( (int) (enemy.getPosition().getX() +
+						(player.getPosition().getX() - enemy.getPosition().getX() > 0 ? 1 : -1)
+						*enemy.getSpeed().getX()), 100));
+				
+				NPCAttack();
+			}
 		}
 }

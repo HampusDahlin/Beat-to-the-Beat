@@ -17,9 +17,8 @@ public class MusicControl {
 	
 	/**
 	 * Checks if there is a beat at the current time in the song.
-	 * @return
 	 */
-	public boolean hasBeat(){
-		return music.hasBeat();
+	public boolean isBeat(){
+		return music.isBeat();
 	}
 }

@@ -17,7 +17,7 @@ import support.RemoveActorException;
  * 
  * @author Hampus Dahlin
  * @revisedBy Pontus "Bondi" Eriksson
- * @revisedBy Malin "Johanna" Thelin
+ * @revisedBy Malin "Nilhet" Thelin
  * @version 0.0.5
  *
  */
@@ -66,7 +66,7 @@ public class HeadControl implements PropertyChangeListener, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		//Spawns a new enemy if there is a beat in the music.
-		if(musicControl.hasBeat()){
+		if (musicControl.isBeat()) {
 			actorControl.createActor();
 		}
 		

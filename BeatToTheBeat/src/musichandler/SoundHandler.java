@@ -1,61 +1,53 @@
 package musichandler;
 
-import support.NoAnalyzerException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SoundHandler{
-	private Song song;
+import javax.swing.Timer;
+
+
+public class SoundHandler implements ActionListener {
 	private MusicPlayer player;
 	private Analyzer analyzer;
-
+	private Timer timer;
 	
 	public SoundHandler(Song song, boolean toAnalyze) {
-		this.song = song;
-		if(toAnalyze) {
+		if (toAnalyze) {
 			analyzer = new Analyzer(song, song.getGenre().getSense());
 		}
 		player = new MusicPlayer(song);
 	}
 	
-	public Song getSong(){
-		return song;
-	}
-	
 	public void pause() {
-		pauseMusicPlayer();
-		try {
-			pauseAnalyzer();
-		} catch (NoAnalyzerException ex) {
-			System.out.println(ex);
+		player.stop();
+		if (!analyzer.equals(null)) {
+			analyzer.pauseAnalyzer();
 		}
 	}
 	
 	public void start() {
-		player.start();
-		try {
-			startAnalyzer();
-		} catch (NoAnalyzerException ex) {
-			System.out.println(ex);
-		}
-	}
-	
-	public void startAnalyzer() throws NoAnalyzerException {
-		if (analyzer != null) {
+		if (!analyzer.equals(null)) {
+			timer = new Timer(5000, this);
+			timer.setInitialDelay(5000);
+			timer.setRepeats(false);
+			timer.start();
 			analyzer.start();
 		} else {
-			throw new NoAnalyzerException("Analyzer missing"); 
+			player.start();
 		}
 	}
 	
-	public void startMusicPlayer() {
+	public boolean isBeat() {
+		return !analyzer.equals(null) && analyzer.isBeat();
+	}
+
+	public void actionPerformed(ActionEvent e) {
 		player.start();
 	}
 	
-	public void pauseAnalyzer() throws NoAnalyzerException {
-		if (analyzer != null) {	
-			analyzer.stopAnalyzer();
-		} else {
-			throw new NoAnalyzerException("Analyzer missing");
-		}
+	/*
+	public void startMusicPlayer() {
+		player.start();
 	}
 	
 	public void pauseMusicPlayer() {
@@ -69,4 +61,5 @@ public class SoundHandler{
 	public MusicPlayer getMusicPlayer() {
 		return player;
 	}
+	*/
 }

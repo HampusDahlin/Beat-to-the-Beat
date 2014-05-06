@@ -19,7 +19,7 @@ public class Song implements Serializable {
 		this.artist = artist;
 		this.genre = genre;
 	}
-	
+
 	public ArrayList<Long> getBeatList() {
 		return beatList;
 	}

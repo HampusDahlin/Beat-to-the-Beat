@@ -37,7 +37,7 @@ public class MusicFacade {
 	 * @param fileName
 	 */
 	public void addSong(String fileName, String songName, String artist, Genre genre) {
-		songList.add(new Song(fileName, fileName, fileName, genre));
+		songList.add(new Song(fileName, songName, artist, genre));
 	}
 	
 	public void addSong(String fileName, String songName, String artist, String genre) {
@@ -84,18 +84,13 @@ public class MusicFacade {
 	 * Changes the current song to the previous in the list.
 	 */
 	public void previous(){
-		if(currentSong > 0){
+		if (currentSong > 0) {
 			currentSong--;
 		}
 	}
 	
-	/**
-	 * Checks if there is a beat at the current time in the song.
-	 * @return
-	 */
-	public boolean hasBeat(){
-		//TODO
-		return false;
+	public boolean isBeat() {
+		return sh.isBeat();
 	}
 	
 	

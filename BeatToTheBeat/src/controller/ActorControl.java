@@ -20,7 +20,6 @@ public class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
 	private ActorFacade facade;
-	private List<Long> NPCspawntimers;
 	
 	public ActorControl(){
 		NPCList = new ArrayList<NPC>();
@@ -30,13 +29,7 @@ public class ActorControl {
 	
 	// Move all NPCs and then try to attack.
 	public void moveActors() {
-		for (NPC enemy : NPCList) {
-			enemy.setPosition(new Point( (int) (enemy.getPosition().getX() +
-					(player.getPosition().getX() - enemy.getPosition().getX() > 0 ? 1 : -1)
-					*enemy.getSpeed().getX()), 100));
-			
-		    facade.NPCAttack();
-		}
+		facade.moveActors();
 	}
 	
 	public void createActor() {
@@ -46,6 +39,7 @@ public class ActorControl {
 	}
 	
 	public void removeActor(Actor actor) {
+		NPCList.remove(actor);
 		//panelWhereActorIs.remove(actor);
 	}
 	
@@ -53,18 +47,7 @@ public class ActorControl {
 	 * Removes first actor in actorList.
 	 */
 	public void removeActor() {
-		NPCList.remove(0);
-		if (NPCList.isEmpty()) {
-			throw new OutOfEnemiesException();
-		}
-	}
-	
-	public void updateView(){
-		//this.view.update();
-	}
-	
-	public PC getPlayer() {
-		return player;
+		removeActor(NPCList.get(0));
 	}
 	
 	/**
@@ -102,25 +85,6 @@ public class ActorControl {
 			facade.playerAttack();
 		} catch (RemoveActorException e) {
 			removeActor();
-		}
-	}
-	
-	public ArrayList<Long> createNPCspawntimers(ArrayList<Long> beattimers) {
-		ArrayList<Long> spawn = new ArrayList<Long>();
-		for(int i = 0; i < beattimers.size(); i++) {
-			if(beattimers.get(i) != null) {
-				Long beattime = beattimers.get(i);
-				Long distance = JFrame.getWidth() - 
-					(player.getPosition()).getX() + player.getSprite().getIconWidth(); 
-				
-				beattime = 
-						(long)(beattime - (distance/(((NPCList.get(i)).getSpeed()).getX()))*1000);
-				spawn.add(beattime);
-			} else {
-				throw new ArrayStoreException();
-			}
-			
-			return spawn;
 		}
 	}
 
