@@ -54,4 +54,11 @@ public class Analyzer {
 		return detective.isRange(genre.getLow(), genre.getHigh(), genre.getThreshold());
 	}
 	
+	public float[][] getWave() {
+		float[][] temp = new float[2][BUFFERSIZE];
+		temp[0] = player.left.toArray();
+		temp[1] = player.right.toArray();
+		return temp;
+	}
+	
 }
