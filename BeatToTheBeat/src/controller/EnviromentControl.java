@@ -1,6 +1,7 @@
 package controller;
 
-import enviroment.Background;
+import enviroment.IBackground;
+import enviroment.StaticBackground;
 
 /**
  * 
@@ -9,7 +10,7 @@ import enviroment.Background;
  */
 public class EnviromentControl {
 	
-	private Background background;
+	private IBackground background;
 	
 	/**
 	 * Default, empty constructor.
@@ -22,7 +23,7 @@ public class EnviromentControl {
 	 * Constructor setting background to a supplied Background.
 	 * @param background
 	 */
-	public EnviromentControl(Background background){
+	public EnviromentControl(IBackground background){
 		this.setBackground(background);
 	}
 
@@ -30,16 +31,16 @@ public class EnviromentControl {
 	 * Sets the background to a supplied Background.
 	 * @param background
 	 */
-	public void setBackground(Background background){
+	public void setBackground(IBackground background){
 		this.background=background;
 	}
 	
 	/**
-	 * Moves the background.
+	 * Updates the background.
 	 */
-	public void moveBackground(){
+	public void updateBackground(){
 		if(this.background != null){
-			//DO SOMETHING!!! OH PLEASE THINK OF THE CHILDREN!!!
+			this.background.update();
 		}
 	}
 
