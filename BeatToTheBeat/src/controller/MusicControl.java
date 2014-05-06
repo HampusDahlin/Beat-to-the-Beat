@@ -1,6 +1,5 @@
 package controller;
 
-import musichandler.Analyzer;
 import musichandler.MusicFacade;
 
 /**
@@ -10,7 +9,7 @@ import musichandler.MusicFacade;
  */
 public class MusicControl {
 	
-	MusicFacade music;
+	private MusicFacade music;
 	
 	public MusicControl() {
 		music = new MusicFacade();
@@ -33,5 +32,9 @@ public class MusicControl {
 	
 	public void pause() {
 		music.pause();
+	}
+	
+	public float[][] getWave() {
+		return music.getWave();
 	}
 }
