@@ -1,5 +1,6 @@
 package controller;
 
+import musichandler.Analyzer;
 import musichandler.MusicFacade;
 
 /**
@@ -22,12 +23,8 @@ public class MusicControl {
 		return music.isBeat();
 	}
 	
-	public void next() {
-		music.next();
-	}
-	
-	public void previous() {
-		music.previous();
+	public void setSong(int index) {
+		
 	}
 	
 	public void play() {
