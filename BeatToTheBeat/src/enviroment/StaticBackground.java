@@ -9,7 +9,7 @@ import java.util.List;
  * @version 0.0.2
  *
  */
-public class Background {
+public class StaticBackground implements IBackground{
 	
 	private List<BackgroundLayer> layers;
 	private int numberOfLayers;
@@ -17,9 +17,13 @@ public class Background {
 	/**
 	 * Default constructor for Background
 	 */
-	public Background(){
+	public StaticBackground(){
 		numberOfLayers = 0;
 		layers = new ArrayList<BackgroundLayer>();
+		
+	}
+	
+	public void update(){
 		
 	}
 	
