@@ -16,7 +16,7 @@ import support.RemoveActorException;
  * @author Hampus Dahlin
  * @revisedBy Pontus "Bondi" Eriksson
  * @revisedBy Malin "Nilhet" Thelin
- * @version 0.0.5
+ * @version 0.0.6
  *
  */
 public class HeadControl implements ActionListener {
@@ -34,12 +34,21 @@ public class HeadControl implements ActionListener {
 		actorControl = new ActorControl();
 		enviromentControl = new EnviromentControl();
 		musicControl = new MusicControl();
+		time = new Timer(10, this);
 		//uIControl = new UIControl();
 	}
 	
-	public void startGame() {
+	public void startGame(int songIndex) {
 		startTime = System.currentTimeMillis();
+		
 		time.start();
+		
+		int amntOfSongs = 10;//tillfällig! bara för att if satsen skall se vettig ut. kan finnas i en annan klass senare?
+		if(songIndex >=0 && songIndex <= amntOfSongs)//hur många låtar vi nu än kommer att ha
+		{
+			musicControl.setSong(songIndex);
+			musicControl.play();
+		}	
 	}
 	
 	/**
@@ -54,6 +63,9 @@ public class HeadControl implements ActionListener {
 	 * {@inheritDoc}
 	 */
 	public void actionPerformed(ActionEvent e) {
+		
+		enviromentControl.updateBackground();
+		
 		
 		//Spawns a new enemy if there is a beat in the music.
 		if (musicControl.isBeat()) {
@@ -97,5 +109,6 @@ public class HeadControl implements ActionListener {
 		System.out.println("You cleared the whole level! G_G");
 		System.exit(0);
 	}
+	
 	
 }
