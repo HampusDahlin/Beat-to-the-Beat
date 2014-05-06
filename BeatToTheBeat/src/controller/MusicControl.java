@@ -21,4 +21,20 @@ public class MusicControl {
 	public boolean isBeat(){
 		return music.isBeat();
 	}
+	
+	public void next() {
+		music.next();
+	}
+	
+	public void previous() {
+		music.previous();
+	}
+	
+	public void play() {
+		music.play();
+	}
+	
+	public void pause() {
+		music.pause();
+	}
 }

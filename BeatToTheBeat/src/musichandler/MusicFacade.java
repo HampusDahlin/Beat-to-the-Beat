@@ -52,13 +52,20 @@ public class MusicFacade {
 	
 	
 	/**
-	 * Plays the current song.
+	 * Plays the current song with analyzing.
 	 */
 	public void play(){
 		sh = new SoundHandler(songList.get(currentSong), true);
 		sh.start();
 	}
 	
+	/**
+	 * Plays the current song without analyzing.
+	 */
+	public void playOnly() {
+		sh = new SoundHandler(songList.get(currentSong), false);
+		sh.start();
+	}
 	
 	/**
 	 * Pauses the current song.

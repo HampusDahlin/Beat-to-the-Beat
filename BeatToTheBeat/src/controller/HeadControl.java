@@ -2,8 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 import javax.swing.Timer;
 
@@ -36,7 +34,7 @@ public class HeadControl implements ActionListener {
 		actorControl = new ActorControl();
 		enviromentControl = new EnviromentControl();
 		musicControl = new MusicControl();
-		uIControl = new UIControl();
+		//uIControl = new UIControl();
 	}
 	
 	public void startGame() {

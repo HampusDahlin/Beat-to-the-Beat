@@ -1,17 +1,13 @@
 package musichandler;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Song implements Serializable {
 	
-	private ArrayList<Long> beatList;
-	private String fileName;
-	private String difficulty;
-	private int threshold;
-	private String artist;
-	private String songName;
-	private Genre genre;
+	private final String fileName;
+	private final String artist;
+	private final String songName;
+	private final Genre genre;
 	
 	public Song(String fileName, String songName, String artist, Genre genre) {
 		this.fileName = "songs\\" + fileName;
@@ -19,39 +15,11 @@ public class Song implements Serializable {
 		this.artist = artist;
 		this.genre = genre;
 	}
-
-	public ArrayList<Long> getBeatList() {
-		return beatList;
-	}
-	
-	public void setBeatList(ArrayList<Long> beatList) {
-		this.beatList = beatList;
-	}
 	
 	public String getFilename() {
 		return fileName;
 	}
 	
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	
-	public String getDifficulty() {
-		return difficulty;
-	}
-	
-	public void setDifficulty(String difficulty) {
-		this.difficulty = difficulty;
-	}
-	
-	public int getThreshold() {
-		return threshold;
-	}
-	
-	public void setThreshold(int threshold) {
-		this.threshold = threshold;
-	}
-
 	public boolean equals(Object other) {
 		if(this == other) {
 			return true;
