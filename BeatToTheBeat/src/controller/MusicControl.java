@@ -34,6 +34,9 @@ public class MusicControl {
 		music.pause();
 	}
 	
+	/**
+	 * Returns a 2xBUFFERSIZE float-matrix containing information for drawing a soundwave.
+	 */
 	public float[][] getWave() {
 		return music.getWave();
 	}
