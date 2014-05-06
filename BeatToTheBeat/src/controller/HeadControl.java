@@ -3,7 +3,6 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import support.GameOverException;
@@ -22,7 +21,6 @@ import support.RemoveActorException;
  */
 public class HeadControl implements ActionListener {
 	
-	private JFrame mainFrame;
 	private long startTime;
 	private long[] spawnTimes;
 	private int enemyNbr;
@@ -33,11 +31,6 @@ public class HeadControl implements ActionListener {
 	private Timer time;
 	
 	public HeadControl() {
-		mainFrame = new JFrame();
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setSize(100, 100);		
-		mainFrame.setVisible(true);
-		
 		actorControl = new ActorControl();
 		enviromentControl = new EnviromentControl();
 		musicControl = new MusicControl();
