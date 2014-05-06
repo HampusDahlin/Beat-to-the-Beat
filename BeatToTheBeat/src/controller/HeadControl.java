@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import support.GameOverException;
@@ -30,12 +31,12 @@ public class HeadControl implements ActionListener {
 	private UIControl uIControl;
 	private Timer time;
 	
-	public HeadControl() {
+	public HeadControl(JFrame mainFrame) {
 		actorControl = new ActorControl();
 		enviromentControl = new EnviromentControl();
 		musicControl = new MusicControl();
 		time = new Timer(10, this);
-		//uIControl = new UIControl();
+		uIControl = new UIControl(mainFrame);
 	}
 	
 	public void startGame(int songIndex) {

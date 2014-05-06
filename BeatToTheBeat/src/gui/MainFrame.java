@@ -17,8 +17,7 @@ public class MainFrame extends JFrame{
 	public MainFrame() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(100, 100);
-		hc = new HeadControl();
-		
+		hc = new HeadControl(this);
 		
 		this.setVisible(true);
 	}
