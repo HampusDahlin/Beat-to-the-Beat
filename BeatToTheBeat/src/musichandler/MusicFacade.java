@@ -89,6 +89,15 @@ public class MusicFacade {
 		}
 	}
 	
+	/**
+	 * Checks if there is a beat at the current time in the song.
+	 * @return
+	 */
+	public boolean hasBeat(){
+		//TODO
+		return false;
+	}
+	
 	
 	public void changeDist(){
 		//TODO

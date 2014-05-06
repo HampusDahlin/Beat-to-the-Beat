@@ -52,8 +52,6 @@ public class HeadControl implements PropertyChangeListener, ActionListener {
 		
 	}
 
-	// vad är detta för?
-	// Det är för hantering av propertychanges, derp...
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals("death")){
@@ -62,7 +60,17 @@ public class HeadControl implements PropertyChangeListener, ActionListener {
 		
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void actionPerformed(ActionEvent e) {
+		
+		//Spawns a new enemy if there is a beat in the music.
+		if(musicControl.hasBeat()){
+			actorControl.createActor();
+		}
+		
+		//Moves the actors along their path.
 		try {
 				actorControl.moveActors();
 			} catch (GameOverException exc) {
