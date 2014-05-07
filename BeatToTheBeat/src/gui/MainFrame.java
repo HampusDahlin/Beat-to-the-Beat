@@ -19,7 +19,7 @@ public class MainFrame extends JFrame{
 		this.setSize(100, 100);
 		hc = new HeadControl(this);
 		
-		this.setVisible(true);
+		//this.setVisible(true);
 	}
 	
 	public HeadControl getHeadControl(){

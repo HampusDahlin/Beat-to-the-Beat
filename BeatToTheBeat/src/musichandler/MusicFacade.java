@@ -113,4 +113,8 @@ public class MusicFacade {
 	public float[][] getWave() {
 		return sh.getWave();
 	}
+	
+	public List<Song> getSongList() {
+		return songList;
+	}
 }

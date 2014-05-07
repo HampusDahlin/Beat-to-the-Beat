@@ -30,6 +30,7 @@ public class HeadControl implements ActionListener {
 	private MusicControl musicControl;
 	private UIControl uIControl;
 	private Timer time;
+	private ChooseSong songPanel;
 	
 	public HeadControl(JFrame mainFrame) {
 		actorControl = new ActorControl();
@@ -37,6 +38,9 @@ public class HeadControl implements ActionListener {
 		musicControl = new MusicControl();
 		time = new Timer(10, this);
 		uIControl = new UIControl(mainFrame);
+		songPanel = new ChooseSong(musicControl.getSongList());
+		mainFrame.add(songPanel);
+		mainFrame.setVisible(true);
 	}
 	
 	public void startGame(int songIndex) {

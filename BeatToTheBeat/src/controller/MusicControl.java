@@ -1,6 +1,9 @@
 package controller;
 
+import java.util.List;
+
 import musichandler.MusicFacade;
+import musichandler.Song;
 
 /**
  * 
@@ -39,5 +42,9 @@ public class MusicControl {
 	 */
 	public float[][] getWave() {
 		return music.getWave();
+	}
+	
+	public List<Song> getSongList() {
+		return music.getSongList();
 	}
 }
