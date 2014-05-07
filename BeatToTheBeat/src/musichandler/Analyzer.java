@@ -11,7 +11,6 @@ import ddf.minim.analysis.BeatDetect;
 public class Analyzer {
 	private Minim minim;
 	private AudioPlayer player;
-	private AudioInput input; //what for?
 	private BeatDetect detective;
 	private final int BUFFERSIZE;
 	private Genre genre;
@@ -21,7 +20,6 @@ public class Analyzer {
 		BUFFERSIZE = 512;
 		minim = new Minim(this);
 		player = minim.loadFile(song.getFilename(), BUFFERSIZE);// this loads song from the data folder	
-		input = minim.getLineIn();
 		detective = new BeatDetect();
 		detective.setSensitivity(genre.getSense());
 	}

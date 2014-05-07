@@ -1,19 +1,18 @@
 package musichandler;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
+
 public class MusicPlayer {
 	private Song song;
-	private java.applet.AudioClip  clip;
+	private AudioPlayer player;
+	private Minim minim;
+	private final int BUFFERSIZE = 512;
 
 	public MusicPlayer(Song song) {
 		this.song = song;
-		try {
-			clip =
-			java.applet.Applet.newAudioClip(
-			new java.net.URL("file:songs\\" + song.getFilename()));
-			
-		} catch (java.net.MalformedURLException murle) {
-			System.out.println(murle);
-		}
+		minim = new Minim(this);
+		player = minim.loadFile(song.getFilename(), BUFFERSIZE);// this loads song from the data folder
 	}
 	
 	public Song getSong() {
@@ -21,10 +20,10 @@ public class MusicPlayer {
 	}
 	
 	public void stop() {
-		clip.stop();
+		player.pause();
 	}
 	
 	public void start() {
-		clip.play();
+		player.play();
 	}
 }
