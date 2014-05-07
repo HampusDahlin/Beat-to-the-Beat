@@ -10,12 +10,15 @@ public class CardPanel extends JPanel {
 	
 	public CardPanel() {
 		this.setLayout(new CardLayout());
-		Options o = new Options(this);
-		MainMenu m = new MainMenu(this);
-		m.setVisible(true);
-		o.setVisible(true);
-		this.add(m);
-		this.add(o);
+		Options options = new Options(this);
+		MainMenu menu = new MainMenu(this);
+		SongSelection song = new SongSelection(this);
+		song.setVisible(true);
+		menu.setVisible(true);
+		options.setVisible(true);
+		this.add(menu);
+		this.add(options);
+		this.add(song);
 	}
 	
 	public void exit() {
@@ -23,7 +26,7 @@ public class CardPanel extends JPanel {
 	}
 	
 	public void back() {
-		((CardLayout)this.getLayout()).previous(this);
+		((CardLayout)this.getLayout()).first(this);
 	}
 	
 	public void goToOptions() {
@@ -31,7 +34,7 @@ public class CardPanel extends JPanel {
 	}
 	
 	public void playSong() {
-		
+		((CardLayout)this.getLayout()).last(this);
 	}
 
 }

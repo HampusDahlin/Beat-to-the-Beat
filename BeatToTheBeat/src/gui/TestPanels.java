@@ -17,7 +17,6 @@ public class TestPanels extends JFrame {
 		this.setResizable(false);
 		CardPanel cp = new CardPanel();
 		this.add(cp);
-		
 		this.revalidate();
 		this.repaint();
 	}
