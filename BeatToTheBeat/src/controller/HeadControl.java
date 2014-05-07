@@ -94,6 +94,8 @@ public class HeadControl implements ActionListener {
 			System.out.println("Enemy spawned.");
 			enemyNbr++;
 		}
+		
+		uiControl.update(actorControl.getNPCList());
 	}
 	
 	public void endGame() {

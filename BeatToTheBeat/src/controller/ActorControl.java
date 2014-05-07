@@ -64,5 +64,9 @@ public class ActorControl {
 			removeActor();
 		}
 	}
+	
+	public List<NPC> getNPCList() {
+		return NPCList;
+	}
 
 }
