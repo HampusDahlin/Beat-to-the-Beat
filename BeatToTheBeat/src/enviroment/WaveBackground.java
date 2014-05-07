@@ -27,7 +27,7 @@ public class WaveBackground extends JPanel{
 	 */
 	public void updateBackground(float[][] soundwave, boolean beat) {
 		
-		//Switches the color of the graphical representation of the soundwave if there is a beat.
+		//If there is a beat, switch the color of the graphical representation of the soundwave.
 		if(beat){
 			g.setColor((g.getColor() == Color.CYAN) ? Color.RED : Color.CYAN);
 		}

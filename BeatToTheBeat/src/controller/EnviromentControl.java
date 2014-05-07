@@ -29,7 +29,7 @@ public class EnviromentControl {
 	}
 
 	/**
-	 * Sets the background to a supplied Background.
+	 * Sets the background to a supplied WaveBackground.
 	 * @param background
 	 */
 	public void setBackground(WaveBackground background){
