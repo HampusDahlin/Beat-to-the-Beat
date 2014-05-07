@@ -17,7 +17,9 @@ public class ComboBoost extends Powerup {
 	//doubles the combo if the combo has altered from the last doubling tick.
 	public void effect() {
 		if(previousCombo != getOwner().getCombo()) {
-			getOwner().setCombo(getOwner().getCombo()*2);
+			for (int i = 0; i<getOwner().getCombo(); i++) {
+				getOwner().incCombo();
+			}
 			previousCombo = getOwner().getCombo();
 		}
 	}

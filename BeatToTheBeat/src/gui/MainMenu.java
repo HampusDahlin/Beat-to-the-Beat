@@ -27,7 +27,7 @@ public class MainMenu extends javax.swing.JPanel {
    public void paintComponent(Graphics g) {
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File("C:\\Users\\edge\\Downloads\\speaker.png"));
+			image = ImageIO.read(new File("images\\speaker.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
