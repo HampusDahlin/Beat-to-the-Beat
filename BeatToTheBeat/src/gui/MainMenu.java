@@ -13,12 +13,12 @@ import javax.swing.ImageIcon;
 *
 * @author Björn Hedström
 */
-public class MainMeny extends javax.swing.JPanel {
+public class MainMenu extends javax.swing.JPanel {
 
    /**
     * Creates new form MainMeny
     */
-   public MainMeny() {
+   public MainMenu() {
        initComponents();
        repaint();
    }
