@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.CardLayout;
 
 /**
 *
@@ -13,6 +14,10 @@ public class Options extends javax.swing.JPanel {
    public Options() {
        initComponents();
    }
+   
+   private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+	   ((CardLayout)this.getLayout()).previous(this);
+   } 
 
    /**
     * This method is called from within the constructor to initialize the form.
@@ -28,7 +33,7 @@ public class Options extends javax.swing.JPanel {
        volumeSlider = new javax.swing.JSlider();
        maxVolume = new javax.swing.JLabel();
        miniVolume = new javax.swing.JLabel();
-       jButton1 = new javax.swing.JButton();
+       backButton = new javax.swing.JButton();
        volumeLabel = new javax.swing.JLabel();
 
        setBackground(new java.awt.Color(255, 255, 255));
@@ -49,7 +54,7 @@ public class Options extends javax.swing.JPanel {
 
        miniVolume.setText("0");
 
-       jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("back.png"))); // NOI18N
+       backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\back.png"))); // NOI18N
 
        volumeLabel.setText("Volume");
 
@@ -75,7 +80,7 @@ public class Options extends javax.swing.JPanel {
                        .addComponent(disableBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                    .addGroup(layout.createSequentialGroup()
                        .addGap(329, 329, 329)
-                       .addComponent(jButton1)))
+                       .addComponent(backButton)))
                .addGap(286, 286, 286))
        );
        layout.setVerticalGroup(
@@ -93,15 +98,16 @@ public class Options extends javax.swing.JPanel {
                .addGap(56, 56, 56)
                .addComponent(disableBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addGap(76, 76, 76)
-               .addComponent(jButton1)
+               .addComponent(backButton)
                .addContainerGap(95, Short.MAX_VALUE))
        );
    }// </editor-fold>                        
 
+   
 
    // Variables declaration - do not modify                     
    private java.awt.Checkbox disableBackground;
-   private javax.swing.JButton jButton1;
+   private javax.swing.JButton backButton;
    private javax.swing.JLabel maxVolume;
    private javax.swing.JLabel miniVolume;
    private javax.swing.JLabel titleLabel;

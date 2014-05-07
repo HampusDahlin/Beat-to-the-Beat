@@ -16,11 +16,11 @@ import javax.swing.ImageIcon;
 public class MainMenu extends javax.swing.JPanel {
 
    /**
-    * Creates new form MainMeny
+    * Creates new form MainMenu
     */
    public MainMenu() {
        initComponents();
-       repaint();
+     //  repaint();
    }
    
    public void paintComponent(Graphics g) {
@@ -46,7 +46,7 @@ public class MainMenu extends javax.swing.JPanel {
    private void initComponents() {
 
        logo = new javax.swing.JLabel();
-       jButton1 = new javax.swing.JButton();
+       playSongButton = new javax.swing.JButton();
        optionsButton = new javax.swing.JButton();
        exitButton = new javax.swing.JButton();
 
@@ -54,21 +54,21 @@ public class MainMenu extends javax.swing.JPanel {
        setMaximumSize(new java.awt.Dimension(915, 600));
        setMinimumSize(new java.awt.Dimension(915, 600));
 
-       logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("beat3.PNG"))); // NOI18N
+       logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\beat3.PNG"))); // NOI18N
 
-       jButton1.setBackground(new java.awt.Color(204, 204, 204));
-       jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("playSong.png"))); // NOI18N
-       jButton1.addActionListener(new java.awt.event.ActionListener() {
+       playSongButton.setBackground(new java.awt.Color(204, 204, 204));
+       playSongButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\playSong.png"))); // NOI18N
+       playSongButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton1ActionPerformed(evt);
+               playSongButtonActionPerformed(evt);
            }
        });
 
        optionsButton.setBackground(new java.awt.Color(204, 204, 204));
-       optionsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("options.png"))); // NOI18N
+       optionsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\options.png"))); // NOI18N
 
        exitButton.setBackground(new java.awt.Color(204, 204, 204));
-       exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("exit.png"))); // NOI18N
+       exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\exit.png"))); // NOI18N
        exitButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
                exitButtonActionPerformed(evt);
@@ -84,7 +84,7 @@ public class MainMenu extends javax.swing.JPanel {
                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                    .addComponent(exitButton)
                    .addComponent(optionsButton)
-                   .addComponent(jButton1)
+                   .addComponent(playSongButton)
                    .addComponent(logo))
                .addGap(329, 329, 329))
        );
@@ -94,7 +94,7 @@ public class MainMenu extends javax.swing.JPanel {
                .addGap(35, 35, 35)
                .addComponent(logo)
                .addGap(93, 93, 93)
-               .addComponent(jButton1)
+               .addComponent(playSongButton)
                .addGap(18, 18, 18)
                .addComponent(optionsButton)
                .addGap(18, 18, 18)
@@ -103,7 +103,7 @@ public class MainMenu extends javax.swing.JPanel {
        );
    }// </editor-fold>                        
 
-   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+   private void playSongButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
        // TODO add your handling code here:
    }                                        
 
@@ -114,7 +114,7 @@ public class MainMenu extends javax.swing.JPanel {
 
    // Variables declaration - do not modify                     
    private javax.swing.JButton exitButton;
-   private javax.swing.JButton jButton1;
+   private javax.swing.JButton playSongButton;
    private javax.swing.JLabel logo;
    private javax.swing.JButton optionsButton;
    // End of variables declaration                   
