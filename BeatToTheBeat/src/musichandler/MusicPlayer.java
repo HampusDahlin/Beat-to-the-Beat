@@ -26,4 +26,16 @@ public class MusicPlayer {
 	public void start() {
 		player.play();
 	}
+	
+	public void setVolume(float vol) {
+		player.setVolume(vol);
+	}
+	
+	/**
+	 * Sets volume in %, I.E. with an int 0-100.
+	 * @param vol Volume, needs to be >=0 && <=100.
+	 */
+	public void setVolume(int vol) {
+		setVolume((float)vol/100);
+	}
 }
