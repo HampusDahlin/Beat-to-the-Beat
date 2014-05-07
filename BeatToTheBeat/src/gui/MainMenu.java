@@ -20,7 +20,7 @@ public class MainMenu extends javax.swing.JPanel {
     */
    public MainMenu() {
        initComponents();
-     //  repaint();
+       repaint();
    }
    
    public void paintComponent(Graphics g) {
@@ -44,7 +44,7 @@ public class MainMenu extends javax.swing.JPanel {
    @SuppressWarnings("unchecked")
    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
    private void initComponents() {
-
+	   System.out.println("!");
        logo = new javax.swing.JLabel();
        playSongButton = new javax.swing.JButton();
        optionsButton = new javax.swing.JButton();
@@ -101,6 +101,7 @@ public class MainMenu extends javax.swing.JPanel {
                .addComponent(exitButton)
                .addContainerGap(72, Short.MAX_VALUE))
        );
+       
    }// </editor-fold>                        
 
    private void playSongButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         

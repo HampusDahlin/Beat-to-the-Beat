@@ -15,12 +15,10 @@ public class TestPanels extends JFrame {
 		this.setVisible(true);
 		this.setSize(914, 600);
 		this.setResizable(false);
-		//CardPanel c = new CardPanel();
-		//this.add(c);
-		//CardPanel cp = new CardPanel();
 		MainMenu m = new MainMenu();
 		this.add(m);
-		m.setVisible(true);
+		this.revalidate();
+		this.repaint();
 	}
 
 }
