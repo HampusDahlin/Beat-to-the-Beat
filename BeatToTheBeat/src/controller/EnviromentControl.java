@@ -37,7 +37,7 @@ public class EnviromentControl {
 	}
 	
 	/**
-	 * Updates the background and returns it.
+	 * Updates the background, then returns it.
 	 * @return
 	 */
 	public JPanel getNextBackground(float[][] bajskorv, boolean beat){
@@ -47,18 +47,20 @@ public class EnviromentControl {
 	
 	/**
 	 * Returns the current background.
-	 * @return
+	 * @return 
 	 */
 	public JPanel getBackground(){
 		return background;
 	}
-	
+
 	/**
-	 * Updates the background.
+	 * 
+	 * @param soundWave, the float-data of the soundwave.
+	 * @param beat, true if there is a beat, false otherwise.
 	 */
-	public void updateBackground(float[][] bajskorv, boolean beat){
+	public void updateBackground(float[][] soundWave, boolean beat){
 		if(this.background != null){
-			this.background.updateBackground(bajskorv, beat);
+			this.background.updateBackground(soundWave, beat);
 		}
 	}
 
