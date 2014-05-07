@@ -15,8 +15,9 @@ public class TestPanels extends JFrame {
 		this.setVisible(true);
 		this.setSize(914, 600);
 		this.setResizable(false);
-		MainMenu m = new MainMenu();
-		this.add(m);
+		CardPanel cp = new CardPanel();
+		this.add(cp);
+		
 		this.revalidate();
 		this.repaint();
 	}
