@@ -63,9 +63,7 @@ public class HeadControl implements ActionListener {
 		try {
 			beat = musicControl.isBeat();
 		} catch (GameOverException exc) {
-			if (exc.getMessage() == "win") {
-				//låten avklarad
-			}
+			//låten avklarad
 		}
 		
 		enviromentControl.updateBackground(musicControl.getWave(), beat);
