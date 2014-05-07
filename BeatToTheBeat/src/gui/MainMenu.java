@@ -18,7 +18,8 @@ public class MainMenu extends javax.swing.JPanel {
    /**
     * Creates new form MainMenu
     */
-   public MainMenu() {
+   public MainMenu(CardPanel cp) {
+	   this.cp = cp;
        initComponents();
        repaint();
    }
@@ -28,7 +29,6 @@ public class MainMenu extends javax.swing.JPanel {
 		try {
 			image = ImageIO.read(new File("C:\\Users\\edge\\Downloads\\speaker.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		   g.drawImage(image, 0, 0, null);
@@ -44,7 +44,6 @@ public class MainMenu extends javax.swing.JPanel {
    @SuppressWarnings("unchecked")
    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
    private void initComponents() {
-	   System.out.println("!");
        logo = new javax.swing.JLabel();
        playSongButton = new javax.swing.JButton();
        optionsButton = new javax.swing.JButton();
@@ -66,7 +65,12 @@ public class MainMenu extends javax.swing.JPanel {
 
        optionsButton.setBackground(new java.awt.Color(204, 204, 204));
        optionsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\options.png"))); // NOI18N
-
+       optionsButton.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               optionsButtonActionPerformed(evt);
+           }
+       });
+       
        exitButton.setBackground(new java.awt.Color(204, 204, 204));
        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\exit.png"))); // NOI18N
        exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -101,12 +105,16 @@ public class MainMenu extends javax.swing.JPanel {
                .addComponent(exitButton)
                .addContainerGap(72, Short.MAX_VALUE))
        );
-       
+        
    }// </editor-fold>                        
 
    private void playSongButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
        // TODO add your handling code here:
-   }                                        
+   }  
+   
+   private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	   cp.goToOptions();
+   }
 
    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
 	   System.exit(0);
@@ -118,5 +126,6 @@ public class MainMenu extends javax.swing.JPanel {
    private javax.swing.JButton playSongButton;
    private javax.swing.JLabel logo;
    private javax.swing.JButton optionsButton;
+   private CardPanel cp;
    // End of variables declaration                   
 }

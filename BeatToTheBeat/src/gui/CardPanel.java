@@ -10,24 +10,28 @@ public class CardPanel extends JPanel {
 	
 	public CardPanel() {
 		this.setLayout(new CardLayout());
-		//Options o = new Options();
+		Options o = new Options(this);
 		MainMenu m = new MainMenu(this);
 		m.setVisible(true);
-		//o.setVisible(false);
+		o.setVisible(true);
 		this.add(m);
-		//this.add(o);
+		this.add(o);
 	}
 	
 	public void exit() {
 		System.exit(0);
 	}
 	
+	public void back() {
+		((CardLayout)this.getLayout()).previous(this);
+	}
+	
 	public void goToOptions() {
-		
+		((CardLayout)this.getLayout()).next(this);
 	}
 	
 	public void playSong() {
-		((CardLayout)this.getLayout()).next(this);
+		
 	}
 
 }
