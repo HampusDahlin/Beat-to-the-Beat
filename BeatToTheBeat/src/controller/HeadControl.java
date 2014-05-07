@@ -8,7 +8,6 @@ import javax.swing.Timer;
 
 import support.GameOverException;
 import support.Movable;
-import support.OutOfEnemiesException;
 import support.RemoveActorException;
 
 
@@ -76,13 +75,7 @@ public class HeadControl implements ActionListener {
 				System.out.println("Du dog!");
 				System.exit(0);
 			} catch (RemoveActorException exc) {
-				try {
-					actorControl.removeActor();
-				} catch (OutOfEnemiesException except) {
-					if (enemyNbr == spawnTimes.length) {
-						endGame();
-					}
-				}
+				actorControl.removeActor();
 			}
 		
 		
