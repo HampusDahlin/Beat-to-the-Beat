@@ -53,13 +53,7 @@ public class HeadControl implements ActionListener {
 		}	
 	}
 	
-	/**
-	 * Moves a movable argument.
-	 * @param m a movable entity
-	 */
-	private void moveEntity(Movable m){
-		
-	}
+	
 	
 	/**
 	 * {@inheritDoc}
@@ -92,6 +86,7 @@ public class HeadControl implements ActionListener {
 		} else {
 			System.out.println("Nästa spawn om: "+ (spawnTimes[enemyNbr] - (System.currentTimeMillis()-startTime)));
 		}
+		
 		
 		if (enemyNbr != spawnTimes.length && spawnTimes[enemyNbr] < System.currentTimeMillis()-startTime+100 &&
 				spawnTimes[enemyNbr] > System.currentTimeMillis()-startTime-100) {
