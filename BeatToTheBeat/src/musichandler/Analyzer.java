@@ -4,6 +4,7 @@ package musichandler;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+import support.GameOverException;
 import ddf.minim.*;
 import ddf.minim.analysis.BeatDetect;
 
@@ -48,7 +49,13 @@ public class Analyzer {
 		player.pause();
 	}
 	
+	/**
+	 * Returns if beat or not, throws GameOverException with string "win" if song is over.
+	 */
 	public boolean isBeat() {
+		if (!player.isPlaying()) {
+			throw new GameOverException("win");
+		}
 		// getting the buffer for current time in song
 		detective.detect(player.mix);
 		return detective.isRange(genre.getLow(), genre.getHigh(), genre.getThreshold());
