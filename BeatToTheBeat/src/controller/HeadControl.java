@@ -30,6 +30,8 @@ public class HeadControl implements ActionListener {
 	private UIControl uIControl;
 	private Timer time;
 	private ChooseSong songPanel;
+	private GamePanel gamePanel;
+	private JFrame mainFrame;
 	
 	public HeadControl(JFrame mainFrame) {
 		actorControl = new ActorControl();
@@ -51,6 +53,9 @@ public class HeadControl implements ActionListener {
 			musicControl.setSong(songIndex);
 			musicControl.play();
 		}	
+		//osäkert vart detta skall göras.. 
+		mainFrame.remove(songPanel);
+		mainFrame.add(gamePanel);
 	}
 	
 	
@@ -72,11 +77,17 @@ public class HeadControl implements ActionListener {
 		try {
 				actorControl.moveActors();
 			} catch (GameOverException exc) {
-				System.out.println("Du dog!");
-				System.exit(0);
+				endGame();
 			} catch (RemoveActorException exc) {
 				actorControl.removeActor();
 			}
+		
+		//see if there's still a beat
+		try {
+			musicControl.isBeat();
+		}catch(GameOverException exc){
+			endGame();
+		}
 		
 		
 		//Testkod
@@ -97,8 +108,14 @@ public class HeadControl implements ActionListener {
 	}
 	
 	public void endGame() {
-		System.out.println("You cleared the whole level! G_G");
-		System.exit(0);
+		
+		time.stop();
+		
+		//typ pseudoeu-kod
+		mainFrame.remove(gamePanel);
+		mainFrame.add(resultPanel);
+		
+		
 	}
 	
 	
