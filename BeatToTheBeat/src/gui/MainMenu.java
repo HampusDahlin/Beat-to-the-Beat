@@ -18,8 +18,7 @@ public class MainMenu extends javax.swing.JPanel {
    /**
     * Creates new form MainMenu
     */
-   public MainMenu(CardPanel cp) {
-	   this.cp = cp;
+   public MainMenu() {
        initComponents();
        repaint();
    }
@@ -27,7 +26,7 @@ public class MainMenu extends javax.swing.JPanel {
    public void paintComponent(Graphics g) {
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File("images\\speaker.png"));
+			image = ImageIO.read(new File("C:\\Users\\edge\\Downloads\\speaker.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -109,11 +108,11 @@ public class MainMenu extends javax.swing.JPanel {
    }// </editor-fold>                        
 
    private void playSongButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-       // TODO add your handling code here:
+	   ((CardPanel)this.getParent()).playSong();
    }  
    
    private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	   cp.goToOptions();
+	   ((CardPanel)this.getParent()).goToOptions();
    }
 
    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -126,6 +125,5 @@ public class MainMenu extends javax.swing.JPanel {
    private javax.swing.JButton playSongButton;
    private javax.swing.JLabel logo;
    private javax.swing.JButton optionsButton;
-   private CardPanel cp;
    // End of variables declaration                   
 }

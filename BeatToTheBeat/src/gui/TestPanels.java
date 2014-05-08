@@ -4,6 +4,10 @@ import java.awt.CardLayout;
 
 import javax.swing.JFrame;
 
+import musichandler.Genre;
+import musichandler.Song;
+import musichandler.SoundHandler;
+
 public class TestPanels extends JFrame {
 	
 	public static void main(String[] args) {
@@ -19,6 +23,7 @@ public class TestPanels extends JFrame {
 		this.add(cp);
 		this.revalidate();
 		this.repaint();
+	
 	}
 
 }

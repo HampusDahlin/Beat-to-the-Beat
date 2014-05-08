@@ -10,9 +10,9 @@ public class CardPanel extends JPanel {
 	
 	public CardPanel() {
 		this.setLayout(new CardLayout());
-		Options options = new Options(this);
-		MainMenu menu = new MainMenu(this);
-		SongSelection song = new SongSelection(this);
+		Options options = new Options();
+		MainMenu menu = new MainMenu();
+		SongSelection song = new SongSelection();
 		song.setVisible(true);
 		menu.setVisible(true);
 		options.setVisible(true);

@@ -18,8 +18,7 @@ public class Options extends javax.swing.JPanel {
    /**
     * Creates new form Options
     */
-   public Options(CardPanel cp) {
-	   this.cp = cp;
+   public Options() {
        initComponents();
        repaint();
    }
@@ -36,7 +35,7 @@ public class Options extends javax.swing.JPanel {
    }
    
    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-	   cp.back();
+	   ((CardPanel)this.getParent()).back();
    }                             
                                        
 
@@ -147,6 +146,5 @@ public class Options extends javax.swing.JPanel {
    private javax.swing.JLabel titleLabel;
    private javax.swing.JLabel volumeLabel;
    private javax.swing.JSlider volumeSlider;
-   private CardPanel cp;
    // End of variables declaration                   
 }

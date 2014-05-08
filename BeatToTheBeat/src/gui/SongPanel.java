@@ -1,5 +1,7 @@
 package gui;
 
+import javax.swing.JLabel;
+
 /**
 *
 * @author Björn Hedström
@@ -66,8 +68,19 @@ public class SongPanel extends javax.swing.JPanel {
                .addComponent(artistLabel)
                .addContainerGap())
        );
-   }// </editor-fold>                        
-
+   }// </editor-fold>   
+   
+   public JLabel getArtistLabel() {
+	   return artistLabel;
+   }
+   
+   public JLabel getGenreLabel() {
+	   return genreLabel;
+   }
+   
+   public JLabel getSongNameLabel() {
+	   return songNameLabel;
+   }
 
    // Variables declaration - do not modify                     
    private javax.swing.JLabel artistLabel;
