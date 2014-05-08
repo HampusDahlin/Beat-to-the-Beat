@@ -1,5 +1,11 @@
 package gui;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 
 /**
@@ -11,8 +17,20 @@ public class SongPanel extends javax.swing.JPanel {
    /**
     * Creates new form SongPanel
     */
-   public SongPanel() {
+   public SongPanel(String bgFileName) {
+	   this.bgFileName = bgFileName;
        initComponents();
+       repaint();
+   }
+   
+   public void paintComponent(Graphics g) {
+	   BufferedImage image = null;
+	   try {
+		   image = ImageIO.read(new File("C:\\Users\\edge\\Downloads\\" + bgFileName));
+	   } catch (IOException e) {
+		   e.printStackTrace();
+	   }
+	   g.drawImage(image, 0, 0, null);
    }
 
    /**
@@ -32,16 +50,17 @@ public class SongPanel extends javax.swing.JPanel {
        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
        setMaximumSize(new java.awt.Dimension(250, 60));
        setMinimumSize(new java.awt.Dimension(250, 60));
+       setPreferredSize(new java.awt.Dimension(250, 60));
 
-       songNameLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+       songNameLabel.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
        songNameLabel.setForeground(new java.awt.Color(255, 51, 51));
-       songNameLabel.setOpaque(true);
+       songNameLabel.setOpaque(false);
 
        genreLabel.setForeground(new java.awt.Color(255, 51, 51));
-       genreLabel.setOpaque(true);
-
+       genreLabel.setOpaque(false);
+       
        artistLabel.setForeground(new java.awt.Color(255, 51, 51));
-       artistLabel.setOpaque(true);
+       artistLabel.setOpaque(false);
 
        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
        this.setLayout(layout);
@@ -88,5 +107,6 @@ public class SongPanel extends javax.swing.JPanel {
    private javax.swing.JLabel artistLabel;
    private javax.swing.JLabel genreLabel;
    private javax.swing.JLabel songNameLabel;
+   private String bgFileName;
    // End of variables declaration                   
 }
