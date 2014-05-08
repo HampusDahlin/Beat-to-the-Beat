@@ -19,11 +19,8 @@ public class MusicControl {
 		music = new MusicFacade();
 	}
 	
-	/**
-	 * Checks if there is a beat at the current time in the song.
-	 */
-	public boolean isBeat(){
-		return music.isBeat();
+	public void analyzeSong(){
+		music.analyze();
 	}
 	
 	public void setSong(int index) {

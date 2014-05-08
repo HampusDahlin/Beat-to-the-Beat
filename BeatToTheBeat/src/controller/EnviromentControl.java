@@ -70,8 +70,8 @@ public class EnviromentControl implements PropertyChangeListener{
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent arg0) {
-		// TODO Auto-generated method stub
+	public void propertyChange(PropertyChangeEvent e) {
+		// TODO Add code for handling events from the Analyzer.
 		
 	}
 

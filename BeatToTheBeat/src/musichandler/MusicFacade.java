@@ -99,8 +99,8 @@ public class MusicFacade {
 		}
 	}
 	
-	public boolean isBeat() {
-		return sh.isBeat();
+	public void analyze(){
+		sh.analyze();
 	}
 	
 	public Analyzer getAnalyzer(){

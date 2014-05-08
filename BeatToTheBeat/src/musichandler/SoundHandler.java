@@ -37,8 +37,8 @@ public class SoundHandler implements ActionListener {
 		}
 	}
 	
-	public boolean isBeat() {
-		return !analyzer.equals(null) && analyzer.isBeat();
+	public void analyze(){
+		analyzer.analyze();
 	}
 	
 	public Analyzer getAnalyzer(){

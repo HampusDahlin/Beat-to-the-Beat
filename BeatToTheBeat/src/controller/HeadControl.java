@@ -6,10 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import enviroment.WaveBackground;
 import support.GameOverException;
-import support.Movable;
 import support.RemoveActorException;
+import enviroment.WaveBackground;
 
 
 /**
@@ -65,20 +64,14 @@ public class HeadControl implements ActionListener {
 	 * {@inheritDoc}
 	 */
 	public void actionPerformed(ActionEvent e) {
-		boolean beat;
 		try {
-			beat = musicControl.isBeat();
+			musicControl.analyzeSong();
 		} catch (GameOverException exc) {
-			//låten avklarad
+			System.out.println("Song Finished");
+			endGame();
 		}
 		
-		enviromentControl.updateBackground(musicControl.getWave(), beat);
-		
-		
-		//Spawns a new enemy if there is a beat in the music.
-		if (beat) {
-			actorControl.createActor();
-		}
+		//TODO Spawn a new enemy if there is a beat in the music.
 		
 		//Moves the actors along their path.
 		try {
@@ -88,14 +81,6 @@ public class HeadControl implements ActionListener {
 			} catch (RemoveActorException exc) {
 				actorControl.removeActor();
 			}
-		
-		//see if there's still a beat
-		try {
-			musicControl.isBeat();
-		}catch(GameOverException exc){
-			endGame();
-		}
-		
 		
 		//Testkod
 		//vår "musikbeat"
@@ -120,7 +105,7 @@ public class HeadControl implements ActionListener {
 		
 		time.stop();
 		
-		//typ pseudoeu-kod
+		//typ pseudo-kod
 		mainFrame.remove(gamePanel);
 		mainFrame.add(resultPanel);
 		
