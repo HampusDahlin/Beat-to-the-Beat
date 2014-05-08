@@ -2,22 +2,22 @@ package musichandler;
 
 import java.io.Serializable;
 
-public class Song implements Serializable {
+public final class Song implements Serializable {
 	
-	private final String fileName;
-	private final String artist;
-	private final String songName;
-	private final Genre genre;
+	private final String FILENAME;
+	private final String ARTIST;
+	private final String SONGNAME;
+	private final Genre GENRE;
 	
 	public Song(String fileName, String songName, String artist, Genre genre) {
-		this.fileName = "songs\\" + fileName;
-		this.songName = songName;
-		this.artist = artist;
-		this.genre = genre;
+		this.FILENAME = "songs\\" + fileName;
+		this.SONGNAME = songName;
+		this.ARTIST = artist;
+		this.GENRE = genre;
 	}
 	
 	public String getFilename() {
-		return fileName;
+		return FILENAME;
 	}
 	
 	public boolean equals(Object other) {
@@ -33,14 +33,14 @@ public class Song implements Serializable {
 	}
 
 	public Genre getGenre() {
-		return genre;
+		return GENRE;
 	}
 	
 	public String getSongName() {
-		return songName;
+		return SONGNAME;
 	}
 	
 	public String getArtist() {
-		return artist;
+		return ARTIST;
 	}
 }
