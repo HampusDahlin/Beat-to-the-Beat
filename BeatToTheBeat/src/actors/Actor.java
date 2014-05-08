@@ -11,16 +11,16 @@ import javax.swing.Icon;
  *
  */
 public abstract class Actor {
-	private final Icon sprite;
+	private final Icon SPRITE;
 	private int health;
 	private Point position;
 	private int dmg;
-	private final Point speed;
+	private final Point SPEED;
 	private int range;
 	
 	public Actor(Icon sprite, Point speed) {
-		this.sprite = sprite;
-		this.speed = speed;
+		this.SPRITE = sprite;
+		this.SPEED = speed;
 	}
 	
 	public void setRange(int newRange){
@@ -32,7 +32,7 @@ public abstract class Actor {
 	}
 	
 	public Point getSpeed(){
-		return speed;
+		return SPEED;
 	}
 	
 	public void setDmg(int newDmg){
@@ -44,7 +44,7 @@ public abstract class Actor {
 	}
 	
 	public Icon getSprite(){
-		return sprite;
+		return SPRITE;
 	}
 	
 	public void setHealth(int newHealth){
