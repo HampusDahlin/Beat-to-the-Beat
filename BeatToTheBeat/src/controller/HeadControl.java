@@ -27,7 +27,7 @@ public class HeadControl implements ActionListener {
 	private ActorControl actorControl;
 	private EnviromentControl enviromentControl;
 	private MusicControl musicControl;
-	private UIControl uIControl;
+	private UIControl uiControl;
 	private Timer time;
 	private ChooseSong songPanel;
 	private GamePanel gamePanel;
@@ -38,7 +38,7 @@ public class HeadControl implements ActionListener {
 		enviromentControl = new EnviromentControl();
 		musicControl = new MusicControl();
 		time = new Timer(10, this);
-		uIControl = new UIControl(mainFrame);
+		uiControl = new UIControl(mainFrame);
 		songPanel = new ChooseSong(musicControl.getSongList());
 		mainFrame.add(songPanel);
 		mainFrame.setVisible(true);
@@ -64,12 +64,18 @@ public class HeadControl implements ActionListener {
 	 * {@inheritDoc}
 	 */
 	public void actionPerformed(ActionEvent e) {
+		boolean beat;
+		try {
+			beat = musicControl.isBeat();
+		} catch (GameOverException exc) {
+			//låten avklarad
+		}
 		
-		enviromentControl.updateBackground(musicControl.getWave());
+		enviromentControl.updateBackground(musicControl.getWave(), beat);
 		
 		
 		//Spawns a new enemy if there is a beat in the music.
-		if (musicControl.isBeat()) {
+		if (beat) {
 			actorControl.createActor();
 		}
 		
@@ -105,6 +111,8 @@ public class HeadControl implements ActionListener {
 			System.out.println("Enemy spawned.");
 			enemyNbr++;
 		}
+		
+		uiControl.update(actorControl.getNPCList());
 	}
 	
 	public void endGame() {

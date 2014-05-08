@@ -1,6 +1,5 @@
 package levels;
 
-import enviroment.StaticBackground;
 
 /** 
 * Levels(or stages) for the game "Beat to the Beat".
@@ -13,14 +12,12 @@ import enviroment.StaticBackground;
 public class BttBLevel implements ILevel {
 	private final String fileName;
 	private final String songName;
-	private final StaticBackground background;
 	private final long[] spawnTimes; //Array containing the spawntimes for NPCs.
 	
 	//Loading from saved file.
-	public BttBLevel(String fileName, String songName, StaticBackground background, long[] spawnTimes) {
+	public BttBLevel(String fileName, String songName, long[] spawnTimes) {
 		this.fileName = fileName;
 		this.songName = songName;
-		this.background = background;
 		this.spawnTimes = spawnTimes;
 	}
 	
@@ -35,10 +32,6 @@ public class BttBLevel implements ILevel {
 	
 	public String getSongName() {
 		return songName;
-	}
-	
-	public StaticBackground getBackground() {
-		return background;
 	}
 	
 	public long[] getSpawnTimes() {
