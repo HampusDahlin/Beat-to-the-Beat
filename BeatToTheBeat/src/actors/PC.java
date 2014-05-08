@@ -11,6 +11,8 @@ import support.GameOverException;
 
 public class PC extends Actor implements ActionListener {
 	private final int MISSTIME;
+	private final int MAXHP = 100;
+	
 	private int cash;
 	private int combo;
 	private Timer cooldown;
