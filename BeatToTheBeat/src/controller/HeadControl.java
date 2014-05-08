@@ -9,6 +9,8 @@ import javax.swing.Timer;
 import support.GameOverException;
 import support.RemoveActorException;
 import enviroment.WaveBackground;
+import gui.CardPanel;
+import gui.SongSelection;
 
 
 /**
@@ -29,8 +31,7 @@ public class HeadControl implements ActionListener {
 	private MusicControl musicControl;
 	private UIControl uiControl;
 	private Timer time;
-	private ChooseSong songPanel;
-	private GamePanel gamePanel;
+	private CardPanel mainPanel;
 	private JFrame mainFrame;
 	
 	public HeadControl(JFrame mainFrame) {
@@ -39,9 +40,8 @@ public class HeadControl implements ActionListener {
 		musicControl = new MusicControl();
 		time = new Timer(10, this);
 		uiControl = new UIControl(mainFrame);
-		songPanel = new ChooseSong(musicControl.getSongList());
-		mainFrame.add(songPanel);
 		mainFrame.setVisible(true);
+		mainPanel = new CardPanel(musicControl.getSongList()); // här skall en songlist skickas med eventually
 	}
 	
 	public void startGame(int songIndex) {
@@ -53,9 +53,9 @@ public class HeadControl implements ActionListener {
 			musicControl.setSong(songIndex);
 			musicControl.play();
 		}	
-		//osäkert vart detta skall göras.. 
-		mainFrame.remove(songPanel);
-		mainFrame.add(gamePanel);
+		
+		
+		
 	}
 	
 	
@@ -106,8 +106,7 @@ public class HeadControl implements ActionListener {
 		time.stop();
 		
 		//typ pseudo-kod
-		mainFrame.remove(gamePanel);
-		mainFrame.add(resultPanel);
+		mainFrame.remove(mainPanel);
 		
 		
 	}

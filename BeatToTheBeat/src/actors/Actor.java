@@ -12,10 +12,11 @@ import javax.swing.Icon;
  */
 public abstract class Actor {
 	private final Icon SPRITE;
+	private final Point SPEED;
+	
 	private int health;
 	private Point position;
 	private int dmg;
-	private final Point SPEED;
 	private int range;
 	
 	public Actor(Icon sprite, Point speed) {
