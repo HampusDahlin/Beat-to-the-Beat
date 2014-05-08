@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.List;
 import java.awt.image.BufferedImage;
@@ -38,11 +39,24 @@ public class SongSelection extends javax.swing.JPanel {
 	   g.drawImage(image, 0, 0, null);
    }
    
+   private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+	   ((CardPanel)this.getParent()).back();
+   }   
+   
+   private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+	   presentSongList(previousNewFirst + 4);
+   }     
+   
+   private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+	   presentSongList(previousNewFirst - 4);
+   }    
+   
    public void presentSongList(int newFirst) {
 	   
+	   previousNewFirst = newFirst;
 	   if(newFirst < 0) {
 		   newFirst = 0;
-	   } else if(newFirst <= songList.size()) {
+	   } else if(newFirst >= songList.size()) {
 		   newFirst = songList.size() - 1;
 	   }
 	   
@@ -53,7 +67,8 @@ public class SongSelection extends javax.swing.JPanel {
 	   }
 		
 	   for(int i = 0; i < 4; i++) {
-		   if(songList.get(newFirst + i) != null) {
+		   if(songList.get(newFirst + i) != null && (newFirst + i) < songList.size()) {
+			   System.out.println(newFirst + i);
 			   (songPanels[i].getSongNameLabel()).setText(songList.get(newFirst + i).getSongName());
 			   (songPanels[i].getArtistLabel()).setText(songList.get(newFirst + i).getArtist());
 			   (songPanels[i].getGenreLabel()).setText((songList.get(newFirst + i).getGenre()).getName());
@@ -63,8 +78,10 @@ public class SongSelection extends javax.swing.JPanel {
 		   }
 	   }	
 	   
-	   if(songList.get(newFirst + 3) != null && songList.get(newFirst + 4) == null) {
+	   if((newFirst + 4) <= songList.size() && (newFirst + 5) > songList.size()) {
 		   nextButton.setVisible(false);
+	   } else {
+		   nextButton.setVisible(true);
 	   }
    }
    
@@ -79,18 +96,18 @@ public class SongSelection extends javax.swing.JPanel {
    private void initComponents() {
 	   
 	   titleLabel = new javax.swing.JLabel();
-	   /*
+       songPanels = new SongPanel[10];
        songPanels[0] = new SongPanel();
        songPanels[1] = new SongPanel();
        songPanels[2] = new SongPanel();
        songPanels[3] = new SongPanel();
-       */
+       
        nextButton = new javax.swing.JButton();
        previousButton = new javax.swing.JButton();
        backButton = new javax.swing.JButton();
        searchField = new javax.swing.JTextField();
        searchButton = new javax.swing.JButton();
-       songPanels = new SongPanel[3];
+
        
        previousButton.setVisible(false);
        setBackground(new java.awt.Color(255, 255, 255));
@@ -98,8 +115,19 @@ public class SongSelection extends javax.swing.JPanel {
        titleLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Downloads\\chooseASong.png")); // NOI18N
 
        nextButton.setText("Next");
+       nextButton.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               nextButtonActionPerformed(evt);
+           }
+       });
 
        previousButton.setText("Previous");
+       previousButton.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               previousButtonActionPerformed(evt);
+           }
+       });
+
        
        backButton.setBackground(new java.awt.Color(204, 204, 204));
        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\back.png"))); // NOI18N
@@ -166,11 +194,6 @@ public class SongSelection extends javax.swing.JPanel {
        );
    }// </editor-fold>                        
 
-   private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
-	   ((CardPanel)this.getParent()).back();
-   }                                          
-
-
    // Variables declaration - do not modify     
    private SongPanel[] songPanels;
    private javax.swing.JButton backButton;
@@ -178,13 +201,8 @@ public class SongSelection extends javax.swing.JPanel {
    private javax.swing.JButton previousButton;
    private javax.swing.JButton searchButton;
    private javax.swing.JTextField searchField;
-   /*
-   private SongPanel songPanels[0];
-   private SongPanel songPanels[1];
-   private SongPanel songPanels[2];
-   private SongPanel songPanels[3];
-   */
    private javax.swing.JLabel titleLabel;
    private List<Song> songList;
+   private int previousNewFirst;
    // End of variables declaration                   
 }

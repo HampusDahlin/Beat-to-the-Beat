@@ -30,15 +30,17 @@ public class SongPanel extends javax.swing.JPanel {
 
        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+       setMaximumSize(new java.awt.Dimension(250, 60));
+       setMinimumSize(new java.awt.Dimension(250, 60));
 
        songNameLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-       songNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+       songNameLabel.setForeground(new java.awt.Color(255, 51, 51));
        songNameLabel.setOpaque(true);
 
        genreLabel.setForeground(new java.awt.Color(255, 51, 51));
        genreLabel.setOpaque(true);
 
-       artistLabel.setForeground(new java.awt.Color(255, 255, 255));
+       artistLabel.setForeground(new java.awt.Color(255, 51, 51));
        artistLabel.setOpaque(true);
 
        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
