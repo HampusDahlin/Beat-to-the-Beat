@@ -1,20 +1,18 @@
 package gui;
 
 import java.awt.CardLayout;
-import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import musichandler.Song;
-
 public class CardPanel extends JPanel {
 	
-	public CardPanel(List<Song> songList) {
-		
+	public CardPanel() {
 		this.setLayout(new CardLayout());
 		Options options = new Options();
 		MainMenu menu = new MainMenu();
-		SongSelection song = new SongSelection(songList);
+		SongSelection song = new SongSelection();
 		song.setVisible(true);
 		menu.setVisible(true);
 		options.setVisible(true);
