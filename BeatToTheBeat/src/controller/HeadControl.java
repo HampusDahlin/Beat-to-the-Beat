@@ -9,6 +9,7 @@ import javax.swing.Timer;
 import support.GameOverException;
 import support.RemoveActorException;
 import enviroment.WaveBackground;
+import gui.CardPanel;
 
 
 /**
@@ -29,8 +30,7 @@ public class HeadControl implements ActionListener {
 	private MusicControl musicControl;
 	private UIControl uiControl;
 	private Timer time;
-	private ChooseSong songPanel;
-	private GamePanel gamePanel;
+	private CardPanel mainPanel;
 	private JFrame mainFrame;
 	
 	public HeadControl(JFrame mainFrame) {
@@ -39,8 +39,8 @@ public class HeadControl implements ActionListener {
 		musicControl = new MusicControl();
 		time = new Timer(10, this);
 		uiControl = new UIControl(mainFrame);
-		songPanel = new ChooseSong(musicControl.getSongList());
-		mainFrame.add(songPanel);
+		mainPanel = new CardPanel(musicControl.getSongList());
+		mainFrame.add(mainPanel);
 		mainFrame.setVisible(true);
 	}
 	
@@ -53,9 +53,9 @@ public class HeadControl implements ActionListener {
 			musicControl.setSong(songIndex);
 			musicControl.play();
 		}	
-		//osäkert vart detta skall göras.. 
-		mainFrame.remove(songPanel);
-		mainFrame.add(gamePanel);
+		
+		//säg till cardpanel att visa spelet
+		mainPanel.goToGame();
 	}
 	
 	
@@ -83,7 +83,6 @@ public class HeadControl implements ActionListener {
 			}
 		
 		//Testkod
-		//vår "musikbeat"
 		if (actorControl.getFirstEnemy()!=null) {
 			System.out.println(300-actorControl.getFirstEnemy().getPosition().x);
 		} else {
@@ -105,10 +104,8 @@ public class HeadControl implements ActionListener {
 		
 		time.stop();
 		
-		//typ pseudo-kod
-		mainFrame.remove(gamePanel);
-		mainFrame.add(resultPanel);
-		
+		//säg till cardpanel att visa poäng
+		mainPanel.goToScore();
 		
 	}
 	
