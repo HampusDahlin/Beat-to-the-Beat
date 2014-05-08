@@ -100,6 +100,10 @@ public class MusicFacade {
 		return sh.isBeat();
 	}
 	
+	public Analyzer getAnalyzer(){
+		return sh.getAnalyzer();
+	}
+	
 	
 	public void changeDist(){
 		//TODO
