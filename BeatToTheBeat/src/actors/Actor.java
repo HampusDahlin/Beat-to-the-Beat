@@ -65,7 +65,11 @@ public abstract class Actor implements IObservable{
 	}
 	
 	public void setPosition(Point newPosition){
+		Point tmpPos = position;
 		position = newPosition;
+		
+		//är det bra att ha en pc här? eftersom actorcontrol använder sig av denna för att flytta på skiten..
+		pcs.firePropertyChange("move", tmpPos, position);
 	}
 	
 	public Point getPosition(){
@@ -80,7 +84,7 @@ public abstract class Actor implements IObservable{
 		//tmp variabel för att hålla defenders hp innan attacken.
 		int tmpHP = defender.getHealth();
 		defender.setHealth(defender.getHealth() - this.getDmg());
-		//om den som blev skadad är spelaren
+		//om den som blev skadad är spelaren vill vi ju skicka en annorlunda pc (?) 
 		if(defender instanceof PC){
 			pcs.firePropertyChange("hp", tmpHP, defender.getHealth());
 		}else{
