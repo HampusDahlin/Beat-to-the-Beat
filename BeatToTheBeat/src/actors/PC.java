@@ -11,19 +11,19 @@ import support.GameOverException;
 
 public class PC extends Actor implements ActionListener {
 	private final int MISSTIME;
-	private final int MAXHP = 100;
+	private final int MAXHP;
 	
 	private int cash;
 	private int combo;
 	private Timer cooldown;
 	
 	public PC(Point position, Icon sprite) {
+		super(sprite, new Point(0,0));
+		MAXHP = 5;
 		cash = 0;
 		combo = 0;
 		setHealth(1);
 		setPosition(position);
-		setSprite(sprite);
-		setSpeed(new Point(0,0));
 		setDmg(1);
 		MISSTIME = 1000; //ms
 		cooldown = new Timer(MISSTIME, this);
