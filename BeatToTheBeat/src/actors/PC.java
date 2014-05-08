@@ -3,6 +3,8 @@ package actors;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 import javax.swing.Timer;
 import javax.swing.Icon;
@@ -19,6 +21,7 @@ public class PC extends Actor implements ActionListener {
 	
 	public PC(Point position, Icon sprite) {
 		super(sprite, new Point(0,0));
+		
 		MAXHP = 5;
 		cash = 0;
 		combo = 0;
@@ -32,6 +35,7 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void death() {
+		//ska vi firea en property change eller kommer exceptionen att fixa allt?
 		throw new GameOverException();
 	}
 	
@@ -72,4 +76,5 @@ public class PC extends Actor implements ActionListener {
 		//noRepeat so cooldown stops 
 	}
 
+	
 }
