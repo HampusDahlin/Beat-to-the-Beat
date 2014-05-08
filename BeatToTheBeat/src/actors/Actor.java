@@ -7,15 +7,21 @@ import javax.swing.Icon;
 /**
  * @author Björn Hedström
  * @revisedBy Pontus "Bondi" Eriksson
+ * @revisedBy Malin "Nilhet" Thelin
  *
  */
 public abstract class Actor {
-	private Icon sprite;
+	private final Icon sprite;
 	private int health;
 	private Point position;
 	private int dmg;
-	private Point speed;
+	private final Point speed;
 	private int range;
+	
+	public Actor(Icon sprite, Point speed) {
+		this.sprite = sprite;
+		this.speed = speed;
+	}
 	
 	public void setRange(int newRange){
 		range = newRange;
@@ -23,10 +29,6 @@ public abstract class Actor {
 	
 	public int getRange(){
 		return range;
-	}
-	
-	public void setSpeed(Point newSpeed){
-		speed = newSpeed;
 	}
 	
 	public Point getSpeed(){
@@ -39,10 +41,6 @@ public abstract class Actor {
 	
 	public int getDmg(){
 		return dmg;
-	}
-
-	public void setSprite(Icon newSprite){
-		sprite = newSprite;
 	}
 	
 	public Icon getSprite(){
@@ -66,7 +64,7 @@ public abstract class Actor {
 	}
 	
 	public boolean isDead(){
-		return getHealth() < 0;
+		return getHealth() <= 0;
 	}
 	
 	public void dealDmg(Actor defender){
