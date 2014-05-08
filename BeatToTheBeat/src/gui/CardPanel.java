@@ -9,18 +9,22 @@ import musichandler.Song;
 
 public class CardPanel extends JPanel {
 	
+	Options options;
+	MainMenu menu;
+	SongSelection songPresenter;
+	
 	public CardPanel(List<Song> songList) {
 		
 		this.setLayout(new CardLayout());
-		Options options = new Options();
-		MainMenu menu = new MainMenu();
-		SongSelection song = new SongSelection(songList);
-		song.setVisible(true);
+		options = new Options();
+		menu = new MainMenu();
+		songPresenter = new SongSelection(songList);
+		songPresenter.setVisible(true);
 		menu.setVisible(true);
 		options.setVisible(true);
 		this.add(menu);
 		this.add(options);
-		this.add(song);
+		this.add(songPresenter);
 	}
 	
 	public void exit() {
@@ -37,6 +41,7 @@ public class CardPanel extends JPanel {
 	
 	public void playSong() {
 		((CardLayout)this.getLayout()).last(this);
+		songPresenter.presentSongList(0);
 	}
 
 }
