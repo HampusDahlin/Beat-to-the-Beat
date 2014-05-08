@@ -5,6 +5,8 @@ import java.util.List;
 
 import support.RemoveActorException;
 
+// ********** MIGHT BE POSSIBLE TO REMOVE **********
+
 /** 
 * Puts some logic in actor-package instead of controller.
 * @author Pontus "Bondi" Eriksson

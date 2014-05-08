@@ -26,11 +26,14 @@ public class MusicFacade {
 		songList = new ArrayList<Song>();
 		currentSong = 0;
 		
+		setGenres();		
+	}
+	
+	private void setGenres() {
 		genres.add(new Genre("Happy Hardcore", 0, 10, 5, 200));
 		genres.add(new Genre("Rap", 0, 5, 3, 200));
 		genres.add(new Genre("Rock", 0, 5, 3, 200));
 	}
-	
 	
 	/**
 	 * 

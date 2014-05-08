@@ -1,6 +1,13 @@
 package gui;
 
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
 *
@@ -13,11 +20,25 @@ public class Options extends javax.swing.JPanel {
     */
    public Options() {
        initComponents();
+       repaint();
+   }
+   
+   public void paintComponent(Graphics g) {
+	   
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File("C:\\Users\\edge\\Downloads\\speaker.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		   g.drawImage(image, 0, 0, null);
    }
    
    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-	   ((CardLayout)this.getLayout()).previous(this);
-   } 
+	   ((CardPanel)this.getParent()).back();
+   }                             
+                                       
+
 
    /**
     * This method is called from within the constructor to initialize the form.
@@ -49,14 +70,24 @@ public class Options extends javax.swing.JPanel {
        volumeSlider.setMinorTickSpacing(10);
        volumeSlider.setPaintTicks(true);
        volumeSlider.setSnapToTicks(true);
+       volumeSlider.setOpaque(false);
 
        maxVolume.setText("100");
+       maxVolume.setForeground(Color.WHITE);
 
        miniVolume.setText("0");
-
+       miniVolume.setForeground(Color.WHITE);
+       
+       backButton.setBackground(new java.awt.Color(204, 204, 204));
        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\back.png"))); // NOI18N
-
+       backButton.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               backButtonActionPerformed(evt);
+           }
+       });
+       
        volumeLabel.setText("Volume");
+       volumeLabel.setForeground(Color.WHITE);
 
        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
        this.setLayout(layout);
@@ -82,7 +113,9 @@ public class Options extends javax.swing.JPanel {
                        .addGap(329, 329, 329)
                        .addComponent(backButton)))
                .addGap(286, 286, 286))
+              
        );
+       disableBackground.setBackground(Color.BLACK);
        layout.setVerticalGroup(
            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            .addGroup(layout.createSequentialGroup()
