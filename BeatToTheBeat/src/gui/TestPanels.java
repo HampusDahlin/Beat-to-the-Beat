@@ -23,9 +23,11 @@ public class TestPanels extends JFrame {
 		this.setResizable(false);
 		List<Song> songList = new ArrayList<Song>();
 		Genre rock = new Genre("ROCK", 1, 1 ,1 ,1);
-		Song s1 = new Song("Jubel.wav", "Jubel", "bsös", rock);
-		Song s2 = new Song("Jubel.wav", "Jubel", "byös", rock);
-		Song s3 = new Song("Jubel.wav", "Jubel", "böss", rock);
+		Genre pop = new Genre("POP", 1, 1, 1, 1);
+		Genre techno = new Genre("TECHNO", 1, 1, 1, 1);
+		Song s1 = new Song("Jubel.wav", "Trains", "Porcupine Tree", rock);
+		Song s2 = new Song("Jubel.wav", "Call me Maby", "Carly Rae Jespen", pop);
+		Song s3 = new Song("Jubel.wav", "Breaking and Entering", "The Prodigy", techno);
 		Song s4 = new Song("Jubel.wav", "Jubel", "böts", rock);
 		Song s5 = new Song("Jubel.wav", "Jubsel", "bsös", rock);
 		Song s6 = new Song("Jubel.wav", "Jdubel", "byös", rock);

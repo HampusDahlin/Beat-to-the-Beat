@@ -53,13 +53,13 @@ public class SongPanel extends javax.swing.JPanel {
        setPreferredSize(new java.awt.Dimension(250, 60));
 
        songNameLabel.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-       songNameLabel.setForeground(new java.awt.Color(255, 51, 51));
+       songNameLabel.setForeground(new java.awt.Color(255, 255, 255));
        songNameLabel.setOpaque(false);
 
-       genreLabel.setForeground(new java.awt.Color(255, 51, 51));
+       genreLabel.setForeground(new java.awt.Color(255, 255, 255));
        genreLabel.setOpaque(false);
        
-       artistLabel.setForeground(new java.awt.Color(255, 51, 51));
+       artistLabel.setForeground(new java.awt.Color(255, 255, 255));
        artistLabel.setOpaque(false);
 
        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
