@@ -40,6 +40,10 @@ public class SoundHandler implements ActionListener {
 	public boolean isBeat() {
 		return !analyzer.equals(null) && analyzer.isBeat();
 	}
+	
+	public Analyzer getAnalyzer(){
+		return this.analyzer;
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		player.start();

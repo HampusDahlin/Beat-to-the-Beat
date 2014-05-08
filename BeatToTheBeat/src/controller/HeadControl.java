@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import enviroment.WaveBackground;
 import support.GameOverException;
 import support.Movable;
 import support.RemoveActorException;
@@ -35,7 +36,7 @@ public class HeadControl implements ActionListener {
 	
 	public HeadControl(JFrame mainFrame) {
 		actorControl = new ActorControl();
-		enviromentControl = new EnviromentControl();
+		enviromentControl = new EnviromentControl(new WaveBackground(), musicControl.getAnalyzer());
 		musicControl = new MusicControl();
 		time = new Timer(10, this);
 		uiControl = new UIControl(mainFrame);

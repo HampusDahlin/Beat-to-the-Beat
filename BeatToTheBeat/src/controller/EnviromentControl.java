@@ -1,7 +1,11 @@
 package controller;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import javax.swing.JPanel;
 
+import musichandler.Analyzer;
 import enviroment.WaveBackground;
 
 /**
@@ -9,7 +13,7 @@ import enviroment.WaveBackground;
  * @author Hampus Dahlin
  *
  */
-public class EnviromentControl {
+public class EnviromentControl implements PropertyChangeListener{
 	
 	private WaveBackground background;
 	
@@ -24,8 +28,9 @@ public class EnviromentControl {
 	 * Constructor setting background to a supplied Background.
 	 * @param background
 	 */
-	public EnviromentControl(WaveBackground background){
+	public EnviromentControl(WaveBackground background, Analyzer analyzer){
 		this.setBackground(background);
+		analyzer.getPcs().addPropertyChangeListener(this);
 	}
 
 	/**
@@ -62,6 +67,12 @@ public class EnviromentControl {
 		if(this.background != null){
 			this.background.updateBackground(soundWave, beat);
 		}
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

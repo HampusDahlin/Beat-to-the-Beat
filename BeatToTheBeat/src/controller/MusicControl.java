@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import musichandler.Analyzer;
 import musichandler.MusicFacade;
 import musichandler.Song;
 
@@ -35,6 +36,10 @@ public class MusicControl {
 	
 	public void pause() {
 		music.pause();
+	}
+	
+	public Analyzer getAnalyzer(){
+		return music.getAnalyzer();
 	}
 	
 	/**
