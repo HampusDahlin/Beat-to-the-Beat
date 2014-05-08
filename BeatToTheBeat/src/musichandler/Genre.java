@@ -9,12 +9,12 @@ package musichandler;
 * @date 02-05-14
 */ 
 
-public class Genre {
-	private final String name;
-	private final int low;
-	private final int high;
-	private final int th; //threshold
-	private final int sense; //sensitivity
+public final class Genre {
+	private final String NAME;
+	private final int LOW;
+	private final int HIGH;
+	private final int TH; //threshold
+	private final int SENSE; //sensitivity
 	
 	/**
 	 * Creates a song genre.
@@ -25,11 +25,11 @@ public class Genre {
 	 * @param sense How many ms the beat detector sleeps after a beat.
 	 */
 	public Genre(String name, int low, int high, int th, int sense) {
-		this.name = name;
-		this.low = low;
-		this.high = high;
-		this.th = th;
-		this.sense = sense;
+		this.NAME = name;
+		this.LOW = low;
+		this.HIGH = high;
+		this.TH = th;
+		this.SENSE = sense;
 	}
 	
 	/**
@@ -44,22 +44,22 @@ public class Genre {
 	}
 	
 	public String getName() {
-		return name;
+		return NAME;
 	}
 	
 	public int getLow() {
-		return low;
+		return LOW;
 	}
 	
 	public int getHigh() {
-		return high;
+		return HIGH;
 	}
 	
 	public int getThreshold() {
-		return th;
+		return TH;
 	}
 	
 	public int getSense() {
-		return sense;
+		return SENSE;
 	}
 }
