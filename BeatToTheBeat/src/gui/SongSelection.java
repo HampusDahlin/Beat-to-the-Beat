@@ -41,12 +41,18 @@ public class SongSelection extends javax.swing.JPanel {
    }
    
    public List<Song> searchSongList(String searchTerm) {
+	   searchTerm = searchTerm.toLowerCase();
 	   List<Song> searchResults = new ArrayList<Song>();
 	   if(searchTerm.equals("")) {
 		   return songList;
 	   } else {
 		   for(int i = 0; i < songList.size(); i++) {
-			   if((songList.get(i).getSongName()).contains(searchTerm)) {
+			   if(((songList.get(i).getSongName()).toLowerCase()).contains(searchTerm)) {
+				   searchResults.add(songList.get(i));
+			   } else if(((songList.get(i).getArtist()).toLowerCase()).contains(searchTerm)) {
+				   searchResults.add(songList.get(i));
+			   } else if((((songList.get(i).getGenre()).getName())
+					   .toLowerCase()).contains(searchTerm)) {
 				   searchResults.add(songList.get(i));
 			   }
 		   }
@@ -69,6 +75,7 @@ public class SongSelection extends javax.swing.JPanel {
    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {  
 	   presentedSongList = searchSongList(searchField.getText());
 	   presentSongList(0);
+	   searchField.setText("");
    }    
    
    public void presentSongList(int newFirst) {
