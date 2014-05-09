@@ -60,7 +60,8 @@ public class SongSelection extends javax.swing.JPanel {
 	   return searchResults;
    }
    
-   private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+   private void backButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+	   clearSearch();
 	   ((CardPanel)this.getParent()).back();
    }   
    
@@ -74,9 +75,24 @@ public class SongSelection extends javax.swing.JPanel {
    
    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {  
 	   presentedSongList = searchSongList(searchField.getText());
+	   if(!presentedSongList.equals(songList)) {
+		   clearSearchButton.setVisible(true);
+	   }
 	   presentSongList(0);
 	   searchField.setText("");
    }    
+   
+   private void clearSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+	   clearSearch();
+   } 
+   
+   public void clearSearch() {
+	   clearSearchButton.setVisible(false);
+	   presentedSongList = songList;
+	   presentSongList(0);
+	   searchField.setText("");
+   }
+   
    
    public void presentSongList(int newFirst) {
 	   
@@ -139,9 +155,11 @@ public class SongSelection extends javax.swing.JPanel {
        backButton = new javax.swing.JButton();
        searchField = new javax.swing.JTextField();
        searchButton = new javax.swing.JButton();
+       clearSearchButton = new javax.swing.JButton();
+       clearSearchButton.setVisible(false);
+       clearSearchButton.setPreferredSize(new Dimension(61, 23));
 
-       
-       previousButton.setVisible(false);
+
        setBackground(new java.awt.Color(255, 255, 255));
 
        titleLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Downloads\\chooseASong.png")); // NOI18N
@@ -160,8 +178,6 @@ public class SongSelection extends javax.swing.JPanel {
            }
        });
 
-       
-       backButton.setBackground(new java.awt.Color(204, 204, 204));
        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\back.png"))); // NOI18N
        backButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,10 +187,17 @@ public class SongSelection extends javax.swing.JPanel {
 
        searchField.setSelectionColor(new java.awt.Color(102, 102, 102));
 
-       searchButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Pictures\\search.png"));
+       searchButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Pictures\\search.png")); // NOI18N
        searchButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
                searchButtonActionPerformed(evt);
+           }
+       });
+
+       clearSearchButton.setText("Reset");
+       clearSearchButton.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               clearSearchButtonActionPerformed(evt);
            }
        });
 
@@ -192,6 +215,8 @@ public class SongSelection extends javax.swing.JPanel {
                    .addGroup(layout.createSequentialGroup()
                        .addComponent(previousButton)
                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                       .addComponent(clearSearchButton)
+                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                    .addComponent(songPanels[3], javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                    .addComponent(songPanels[2], javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -224,12 +249,14 @@ public class SongSelection extends javax.swing.JPanel {
                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                    .addComponent(previousButton)
-                   .addComponent(nextButton))
+                   .addComponent(nextButton)
+                   .addComponent(clearSearchButton))
                .addGap(26, 26, 26)
+               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                .addComponent(backButton)
                .addContainerGap(48, Short.MAX_VALUE))
        );
-   }// </editor-fold>                        
+   }// </editor-fold>                               
 
    // Variables declaration - do not modify     
    private SongPanel[] songPanels;
@@ -242,5 +269,7 @@ public class SongSelection extends javax.swing.JPanel {
    private List<Song> songList;
    private List<Song> presentedSongList;
    private int previousNewFirst;
+   private javax.swing.JButton clearSearchButton;
+
    // End of variables declaration                   
 }
