@@ -23,6 +23,7 @@ public class SongSelection extends javax.swing.JPanel {
     */
    public SongSelection(List<Song> songList) {
 	   this.songList = songList;
+	   presentedSongList = songList;
        initComponents();
        repaint();
        presentSongList(0);
@@ -39,6 +40,20 @@ public class SongSelection extends javax.swing.JPanel {
 	   g.drawImage(image, 0, 0, null);
    }
    
+   public List<Song> searchSongList(String searchTerm) {
+	   List<Song> searchResults = new ArrayList<Song>();
+	   if(searchTerm.equals("")) {
+		   return songList;
+	   } else {
+		   for(int i = 0; i < songList.size(); i++) {
+			   if((songList.get(i).getSongName()).contains(searchTerm)) {
+				   searchResults.add(songList.get(i));
+			   }
+		   }
+	   }
+	   return searchResults;
+   }
+   
    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
 	   ((CardPanel)this.getParent()).back();
    }   
@@ -51,13 +66,18 @@ public class SongSelection extends javax.swing.JPanel {
 	   presentSongList(previousNewFirst - 4);
    }    
    
+   private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+	   presentedSongList = searchSongList(searchField.getText());
+	   presentSongList(0);
+   }    
+   
    public void presentSongList(int newFirst) {
 	   
 	   previousNewFirst = newFirst;
 	   if(newFirst < 0) {
 		   newFirst = 0;
-	   } else if(newFirst >= songList.size()) {
-		   newFirst = songList.size() - 1;
+	   } else if(newFirst >= presentedSongList.size()) {
+		   newFirst = presentedSongList.size() - 1;
 	   }
 	   
 	   if(newFirst > 0) {
@@ -67,11 +87,14 @@ public class SongSelection extends javax.swing.JPanel {
 	   }
 		
 	   for(int i = 0; i < 4; i++) {
-		   if((newFirst + i) < songList.size()) {
+		   if((newFirst + i) < presentedSongList.size()) {
 			   songPanels[i].setVisible(true);
-			   (songPanels[i].getSongNameLabel()).setText(songList.get(newFirst + i).getSongName());
-			   (songPanels[i].getArtistLabel()).setText(songList.get(newFirst + i).getArtist());
-			   (songPanels[i].getGenreLabel()).setText((songList.get(newFirst + i).getGenre()).getName());
+			   (songPanels[i].getSongNameLabel()).setText(
+					   presentedSongList.get(newFirst + i).getSongName());
+			   (songPanels[i].getArtistLabel()).setText(
+					   presentedSongList.get(newFirst + i).getArtist());
+			   (songPanels[i].getGenreLabel()).setText((
+					   presentedSongList.get(newFirst + i).getGenre()).getName());
 		   } else {
 			   nextButton.setVisible(false);
 			   songPanels[i].setVisible(false);
@@ -79,7 +102,7 @@ public class SongSelection extends javax.swing.JPanel {
 	   }	
 	   
 	   for(int i = 0; i < 4; i++) {
-		   if(!songPanels[i].isVisible() || (newFirst + 4) >= songList.size()) {
+		   if(!songPanels[i].isVisible() || (newFirst + 4) >= presentedSongList.size()) {
 			   nextButton.setVisible(false);
 		   } else {
 			   nextButton.setVisible(true);
@@ -141,7 +164,12 @@ public class SongSelection extends javax.swing.JPanel {
 
        searchField.setSelectionColor(new java.awt.Color(102, 102, 102));
 
-       searchButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Pictures\\search.png")); // NOI18N
+       searchButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Pictures\\search.png"));
+       searchButton.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               searchButtonActionPerformed(evt);
+           }
+       });
 
        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
        this.setLayout(layout);
@@ -205,6 +233,7 @@ public class SongSelection extends javax.swing.JPanel {
    private javax.swing.JTextField searchField;
    private javax.swing.JLabel titleLabel;
    private List<Song> songList;
+   private List<Song> presentedSongList;
    private int previousNewFirst;
    // End of variables declaration                   
 }
