@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -26,7 +27,8 @@ public class SongPanel extends javax.swing.JPanel {
    public void paintComponent(Graphics g) {
 	   BufferedImage image = null;
 	   try {
-		   image = ImageIO.read(new File("C:\\Users\\edge\\Downloads\\" + bgFileName));
+		   URL url = getClass().getResource(bgFileName);
+		   image = ImageIO.read(new File(url.getPath()));
 	   } catch (IOException e) {
 		   e.printStackTrace();
 	   }
