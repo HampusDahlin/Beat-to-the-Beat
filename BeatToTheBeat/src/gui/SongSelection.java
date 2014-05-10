@@ -6,6 +6,7 @@ import java.util.List;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -25,7 +26,6 @@ public class SongSelection extends javax.swing.JPanel {
 	   this.songList = songList;
 	   presentedSongList = songList;
        initComponents();
-       repaint();
        presentSongList(0);
    } 
    
@@ -33,12 +33,14 @@ public class SongSelection extends javax.swing.JPanel {
 	   
 	   BufferedImage image = null;
 	   try {
-		   image = ImageIO.read(new File("C:\\Users\\edge\\Downloads\\speaker.png"));
+		   URL url = getClass().getResource("speaker.png");
+		   image = ImageIO.read(new File(url.getPath()));
 	   } catch (IOException e) {
 		   e.printStackTrace();
 	   }
 	   g.drawImage(image, 0, 0, null);
    }
+   
    
    public List<Song> searchSongList(String searchTerm) {
 	   searchTerm = searchTerm.toLowerCase();
