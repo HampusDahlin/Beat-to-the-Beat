@@ -120,6 +120,7 @@ public class SongSelection extends javax.swing.JPanel {
 					   presentedSongList.get(newFirst + i).getArtist());
 			   (songPanels[i].getGenreLabel()).setText((
 					   presentedSongList.get(newFirst + i).getGenre()).getName());
+			   songPanels[i].setIndexOfSong(newFirst + i);
 		   } else {
 			   nextButton.setVisible(false);
 			   songPanels[i].setVisible(false);

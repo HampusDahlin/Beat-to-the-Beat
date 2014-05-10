@@ -104,11 +104,20 @@ public class SongPanel extends javax.swing.JPanel {
    public JLabel getSongNameLabel() {
 	   return songNameLabel;
    }
+   
+   public void setIndexOfSong(int i) {
+	   indexOfSong = i;
+   }
+   
+   public int getIndexOfSong() {
+	   return indexOfSong;
+   }
 
    // Variables declaration - do not modify                     
    private javax.swing.JLabel artistLabel;
    private javax.swing.JLabel genreLabel;
    private javax.swing.JLabel songNameLabel;
    private String bgFileName;
+   private int indexOfSong;
    // End of variables declaration                   
 }
