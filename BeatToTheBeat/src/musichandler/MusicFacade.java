@@ -121,6 +121,19 @@ public class MusicFacade {
 		return sh.getAnalyzer();
 	}
 	
+	public int getIndexOfCurrentSong() {
+		return currentSong;
+	}
+	
+	public void setIndeOfCurrentSong(int newIndex) {
+		if(newIndex < 0) {
+			currentSong = 0;
+		} else if(newIndex > songList.size()) {
+			currentSong = 0;
+		} else {
+			currentSong = newIndex;
+		}
+	}
 	
 	public void changeDist(){
 		//TODO
