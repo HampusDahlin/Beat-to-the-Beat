@@ -9,6 +9,8 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 
+import musichandler.Song;
+
 /**
 *
 * @author Björn Hedström
@@ -21,7 +23,7 @@ public class SongPanel extends javax.swing.JPanel {
    public SongPanel(String bgFileName) {
 	   this.bgFileName = bgFileName;
        initComponents();
-       repaint();
+
    }
    
    public void paintComponent(Graphics g) {
@@ -33,6 +35,12 @@ public class SongPanel extends javax.swing.JPanel {
 		   e.printStackTrace();
 	   }
 	   g.drawImage(image, 0, 0, null);
+   }
+   
+   public void presentSong() {
+	   this.artistLabel.setText(song.getArtist());
+	   this.genreLabel.setText((song.getGenre()).getName());
+	   this.songNameLabel.setText(song.getSongName());
    }
 
    /**
@@ -105,12 +113,13 @@ public class SongPanel extends javax.swing.JPanel {
 	   return songNameLabel;
    }
    
-   public void setIndexOfSong(int i) {
-	   indexOfSong = i;
+   public void setSong(Song song) {
+	   this.song = song;
+       presentSong();
    }
    
-   public int getIndexOfSong() {
-	   return indexOfSong;
+   public Song getSong() {
+	   return song;
    }
 
    // Variables declaration - do not modify                     
@@ -118,6 +127,6 @@ public class SongPanel extends javax.swing.JPanel {
    private javax.swing.JLabel genreLabel;
    private javax.swing.JLabel songNameLabel;
    private String bgFileName;
-   private int indexOfSong;
+   private Song song;
    // End of variables declaration                   
 }
