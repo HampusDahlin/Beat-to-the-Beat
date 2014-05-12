@@ -149,20 +149,20 @@ public class MusicFacade {
 				addSong(in.nextLine(), in.nextLine(), in.nextLine(), in.nextLine());		
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	public void saveSonglist(){
 		try {
-	          File file = new File("songs\\songList.list");
-	          BufferedWriter output = new BufferedWriter(new FileWriter(file));
+	          BufferedWriter output = new BufferedWriter(new FileWriter(new File("songs\\songList.list")));
 	          
-	          
-	          output.write(songList.get(0).toString());
-	          output.close();
-	        
+	          for(Song s: songList){
+	        	  //toString() in Song and Genre are overridden to guarantee satisfaction.
+		          output.write(s.toString());
+		          output.close();
+		          
+	          }
 		} catch ( IOException e ) {
 	           e.printStackTrace();
 	        }

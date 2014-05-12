@@ -45,6 +45,7 @@ public final class Song implements Serializable {
 	}
 	
 	public String toString(){
-		return FILENAME+" "+" "+SONGNAME+" "+ARTIST+" "+GENRE.toString();
+		//we start from substring 6 to get rid of "song\" when writing to the songList.list file
+		return FILENAME.substring(6)+"\n"+SONGNAME+"\n"+ARTIST+"\n"+GENRE.toString();
 	}
 }
