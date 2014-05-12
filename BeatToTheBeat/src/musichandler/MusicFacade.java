@@ -1,8 +1,12 @@
 package musichandler;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,7 @@ public class MusicFacade {
 		currentSong = 0;
 		
 		loadSonglist();
+		saveSonglist();
 		sh  = new SoundHandler(songList.get(0), false);
 		
 	}
@@ -144,14 +149,22 @@ public class MusicFacade {
 				addSong(in.nextLine(), in.nextLine(), in.nextLine(), in.nextLine());		
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	public void saveSonglist(){
-		
-	}
-	
-	
+		try {
+	          BufferedWriter output = new BufferedWriter(new FileWriter(new File("songs\\songList.list")));
+	          
+	          for(Song s: songList){
+	        	  //toString() in Song and Genre are overridden to guarantee satisfaction.
+		          output.write(s.toString());
+		          output.close();
+		          
+	          }
+		} catch ( IOException e ) {
+	           e.printStackTrace();
+	        }
+}
 }
