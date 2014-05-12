@@ -1,9 +1,11 @@
 package gui;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -14,13 +16,14 @@ import javax.imageio.ImageIO;
 *
 * @author Björn Hedström
 */
-public class Options extends javax.swing.JPanel {
+public class Options extends javax.swing.JPanel implements ActionListener{
 
    /**
     * Creates new form Options
     */
    public Options() {
-       initComponents();
+       pcs = new PropertyChangeSupport(this);
+	   initComponents();
        repaint();
    }
    
@@ -38,8 +41,7 @@ public class Options extends javax.swing.JPanel {
    
    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
 	   ((CardPanel)this.getParent()).back();
-   }                             
-                                       
+   }
 
 
    /**
@@ -148,5 +150,19 @@ public class Options extends javax.swing.JPanel {
    private javax.swing.JLabel titleLabel;
    private javax.swing.JLabel volumeLabel;
    private javax.swing.JSlider volumeSlider;
+   private PropertyChangeSupport pcs;
    // End of variables declaration                   
+
+	
+   public void actionPerformed(ActionEvent e) {
+		
+	   if(e.getSource().equals(volumeSlider)){
+			pcs.firePropertyChange("volumeChange", 100, volumeSlider.getValue());
+	   }
+	   
+	   if(e.getSource().equals(disableBackground)){
+		   pcs.firePropertyChange("showBackground", true, disableBackground.getState());
+	   }
+	
+	}
 }
