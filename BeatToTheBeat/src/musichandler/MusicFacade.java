@@ -1,7 +1,10 @@
 package musichandler;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * A class handling a list of songs.
@@ -47,7 +50,7 @@ public class MusicFacade {
 	public void addSong(String fileName, String songName, String artist, String genre) {
 		for (Genre g : genres) {
 			if (g.getName().equalsIgnoreCase(genre)) {
-				addSong(fileName, songName, artist, g.getName());
+				addSong(fileName, songName, artist, g);
 				return;
 			}
 		}
@@ -124,5 +127,17 @@ public class MusicFacade {
 	
 	public List<Song> getSongList() {
 		return songList;
+	}
+	
+	public void loadSonglist() {
+		try {
+			Scanner in = new Scanner(new FileReader("songs\\songList.list"));
+			while (in.hasNextLine()) {			
+				addSong(in.nextLine(), in.nextLine(), in.nextLine(), in.nextLine());
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
