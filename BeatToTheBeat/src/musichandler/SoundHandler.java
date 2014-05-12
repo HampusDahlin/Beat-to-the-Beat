@@ -26,7 +26,7 @@ public class SoundHandler implements ActionListener {
 	}
 	
 	public void start() {
-		if (!analyzer.equals(null)) {
+		if (analyzer !=null) {
 			timer = new Timer(5000, this);
 			timer.setInitialDelay(5000);
 			timer.setRepeats(false);
