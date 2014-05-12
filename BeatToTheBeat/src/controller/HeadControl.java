@@ -34,14 +34,15 @@ public class HeadControl implements ActionListener {
 	private JFrame mainFrame;
 	
 	public HeadControl(JFrame mainFrame) {
+		this.mainFrame = mainFrame;
 		actorControl = new ActorControl();
 		enviromentControl = new EnviromentControl(new WaveBackground(), musicControl.getAnalyzer());
 		musicControl = new MusicControl();
 		time = new Timer(10, this);
 		uiControl = new UIControl(mainFrame);
 		mainPanel = new CardPanel(musicControl.getSongList());
-		mainFrame.add(mainPanel);
-		mainFrame.setVisible(true);
+		this.mainFrame.add(mainPanel);
+		this.mainFrame.setVisible(true);
 	}
 	
 	public void startGame(int songIndex) {
