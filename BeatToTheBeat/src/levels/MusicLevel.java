@@ -20,6 +20,6 @@ public class MusicLevel implements ILevel{
 	}
 	
 	public void start(){
-		
+		soundhandler.start();
 	}
 }
