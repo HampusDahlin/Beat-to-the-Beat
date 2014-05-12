@@ -11,7 +11,8 @@ import java.util.Scanner;
  * 
  * @author Hampus Dahlin
  * @helpFrom Pontus "Bondi" Eriksson
- * @version 0.0.2
+ * @revisedBy Malin "Nilhet" Thelin
+ * @version 0.0.3
  */
 public class MusicFacade {
 	
@@ -26,11 +27,13 @@ public class MusicFacade {
 	 */
 	public MusicFacade() {
 		genres = new ArrayList<Genre>();
+		setGenres();	
 		songList = new ArrayList<Song>();
 		currentSong = 0;
 		
+		loadSonglist();
 		sh  = new SoundHandler(songList.get(0), false);
-		setGenres();		
+		
 	}
 	
 	private void setGenres() {
