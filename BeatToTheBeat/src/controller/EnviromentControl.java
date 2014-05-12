@@ -45,8 +45,8 @@ public class EnviromentControl implements PropertyChangeListener{
 	 * Updates the background, then returns it.
 	 * @return
 	 */
-	public JPanel getNextBackground(float[][] bajskorv, boolean beat){
-		updateBackground(bajskorv, beat);
+	public JPanel getNextBackground(float[][] soundWave, boolean beat){
+		updateBackground(soundWave, beat);
 		return getBackground();
 	}
 	

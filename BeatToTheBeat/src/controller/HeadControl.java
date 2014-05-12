@@ -36,8 +36,9 @@ public class HeadControl implements ActionListener {
 	public HeadControl(JFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		actorControl = new ActorControl();
-		enviromentControl = new EnviromentControl(new WaveBackground(), musicControl.getAnalyzer());
 		musicControl = new MusicControl();
+		enviromentControl = new EnviromentControl(new WaveBackground(), musicControl.getAnalyzer());
+		
 		time = new Timer(10, this);
 		uiControl = new UIControl(mainFrame);
 		mainPanel = new CardPanel(musicControl.getSongList());

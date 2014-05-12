@@ -25,6 +25,7 @@ public class MusicFacade {
 		genres = new ArrayList<Genre>();
 		songList = new ArrayList<Song>();
 		currentSong = 0;
+		sh  = new SoundHandler();
 		
 		setGenres();		
 	}
