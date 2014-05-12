@@ -49,4 +49,12 @@ public class MusicControl {
 	public List<Song> getSongList() {
 		return music.getSongList();
 	}
+	
+	/**
+	 * How many songs are available.
+	 * @return songCount.
+	 */
+	public int getSongCount() {
+		return music.getSongCount();
+	}
 }

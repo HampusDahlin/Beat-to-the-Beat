@@ -186,4 +186,9 @@ public class MusicFacade {
 	           e.printStackTrace();
 	        }
 }
-}
+	
+	public int getSongCount() {
+		return songList.size();
+	}
+	
+} //end MusicFacade

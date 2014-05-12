@@ -1,5 +1,6 @@
 Hampus - Fixa homo-file-handler till statisk
 Hampus - Fixa clone i Song
 Björn - Fixa setIndex i MusicFacade
-Malin - Fixa play(Song) i MusicFacade, fråga Pontus om saker om du vill jobba mer
+Malin - Fixa play(Song) i MusicFacade
+Malin - Fixa spawn för NPCs i HeadControl, fråga Pontus om saker om du vill jobba mer
 Pontus - Börja pula med att visa saker i GamePanel
