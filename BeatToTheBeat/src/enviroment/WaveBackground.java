@@ -10,7 +10,7 @@ import javax.swing.JPanel;
  * @author Hampus Dahlin
  *
  */
-public class WaveBackground extends JPanel{
+public class WaveBackground extends JPanel implements IBackground{
 
 	Graphics g;
 	
