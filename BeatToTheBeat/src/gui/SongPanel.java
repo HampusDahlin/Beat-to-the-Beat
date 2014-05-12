@@ -1,6 +1,10 @@
 package gui;
 
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,11 +27,11 @@ public class SongPanel extends javax.swing.JPanel {
    public SongPanel(String bgFileName) {
 	   this.bgFileName = bgFileName;
        initComponents();
-
+       addMouseListener(listener);
    }
    
    public void paintComponent(Graphics g) {
-	   BufferedImage image = null;
+	   image = null;
 	   try {
 		   URL url = getClass().getResource(bgFileName);
 		   image = ImageIO.read(new File(url.getPath()));
@@ -118,6 +122,12 @@ public class SongPanel extends javax.swing.JPanel {
        presentSong();
    }
    
+   private MouseListener listener = new MouseAdapter() {
+	   public void mouseClicked(MouseEvent e) {
+		   System.out.println("!");
+	   }
+   };
+   
    public Song getSong() {
 	   return song;
    }
@@ -128,5 +138,6 @@ public class SongPanel extends javax.swing.JPanel {
    private javax.swing.JLabel songNameLabel;
    private String bgFileName;
    private Song song;
+   private BufferedImage image;
    // End of variables declaration                   
 }
