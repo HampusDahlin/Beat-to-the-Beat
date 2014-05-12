@@ -31,7 +31,7 @@ public class HeadControl implements ActionListener {
 	private UIControl uiControl;
 	private Timer time;
 	private CardPanel mainPanel;
-	private JFrame mainFrame;
+	//private JFrame mainFrame;
 	
 	public HeadControl(JFrame mainFrame) {
 		actorControl = new ActorControl();
