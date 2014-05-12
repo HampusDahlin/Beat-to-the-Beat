@@ -1,5 +1,7 @@
 package controller;
 
+import gui.CardPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,8 +10,6 @@ import javax.swing.Timer;
 
 import support.GameOverException;
 import support.RemoveActorException;
-import enviroment.WaveBackground;
-import gui.CardPanel;
 
 
 /**
