@@ -64,11 +64,9 @@ public abstract class Actor{
 	}
 	
 	public void setPosition(Point newPosition){
-		Point tmpPos = position;
-		position = newPosition;
-		
 		//är det bra att ha en pc här? eftersom actorcontrol använder sig av denna för att flytta på skiten..
-		pcs.firePropertyChange("move", tmpPos, position);
+		pcs.firePropertyChange("move", position, newPosition);
+		position = newPosition;
 	}
 	
 	public Point getPosition(){
@@ -76,6 +74,7 @@ public abstract class Actor{
 	}
 	
 	public boolean isDead(){
+		pcs.firePropertyChange("death", this, this);
 		return getHealth() <= 0;
 	}
 	
