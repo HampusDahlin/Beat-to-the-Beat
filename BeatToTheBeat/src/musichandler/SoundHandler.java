@@ -70,4 +70,6 @@ public class SoundHandler implements ActionListener {
 	public float[][] getWave() {
 		return analyzer.getWave();
 	}
+	
+	
 }
