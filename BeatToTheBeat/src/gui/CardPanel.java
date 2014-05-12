@@ -12,6 +12,7 @@ public class CardPanel extends JPanel {
 	Options options;
 	MainMenu menu;
 	SongSelection songPresenter;
+	private GamePanel gamePanel;
 	
 	public CardPanel(List<Song> songList) {
 		
@@ -25,6 +26,7 @@ public class CardPanel extends JPanel {
 		this.add(menu);
 		this.add(options);
 		this.add(songPresenter);
+		this.add(gamePanel);
 	}
 	
 	public void exit() {
@@ -50,6 +52,10 @@ public class CardPanel extends JPanel {
 	
 	public void goToScore() {
 		
+	}
+	
+	public JPanel getGamePanel() {
+		return gamePanel;
 	}
 
 }

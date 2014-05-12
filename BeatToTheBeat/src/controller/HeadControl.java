@@ -34,7 +34,6 @@ public class HeadControl implements ActionListener {
 	//private JFrame mainFrame;
 	
 	public HeadControl(JFrame mainFrame) {
-		actorControl = new ActorControl();
 		musicControl = new MusicControl();
 		enviromentControl = new EnviromentControl();
 		
@@ -42,6 +41,9 @@ public class HeadControl implements ActionListener {
 		uiControl = new UIControl(mainFrame);
 		mainPanel = new CardPanel(musicControl.getSongList());
 		mainFrame.add(mainPanel);
+		
+		actorControl = new ActorControl(mainPanel.getGamePanel());
+		
 		mainFrame.setVisible(true);
 	}
 	
@@ -93,7 +95,7 @@ public class HeadControl implements ActionListener {
 		
 		if (enemyNbr != spawnTimes.length && spawnTimes[enemyNbr] < System.currentTimeMillis()-startTime+100 &&
 				spawnTimes[enemyNbr] > System.currentTimeMillis()-startTime-100) {
-			actorControl.createActor();
+			actorControl.createActor(mainPanel.getGamePanel());
 			System.out.println("Enemy spawned.");
 			enemyNbr++;
 		}

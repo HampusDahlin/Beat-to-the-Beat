@@ -2,8 +2,11 @@ package controller;
 
 
 import java.awt.Point;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JPanel;
 
 import support.RemoveActorException;
 import actors.Actor;
@@ -15,15 +18,17 @@ public class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
 	
-	public ActorControl(){
+	public ActorControl(JPanel listener) {
 		NPCList = new ArrayList<NPC>();
 		player = new PC(new Point(500, 100), null);
+		player.addObserver((PropertyChangeListener)listener);
 	}
 	
-	public void createActor() {
+	public void createActor(JPanel listener) {
 		NPCList.add(new NPC( new Point(-100, 100),
 				//System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0), //random which side
 			null));
+		NPCList.get(NPCList.size()-1).addObserver((PropertyChangeListener)listener);
 	}
 	
 	public void removeActor(Actor actor) {
