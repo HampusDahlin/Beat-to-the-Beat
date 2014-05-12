@@ -10,16 +10,14 @@ import enviroment.IBackground;
  * 
  *
  */
-public class MusicLevel implements ILevel{
-	SoundHandler soundhandler;
-	IBackground background;
+public class MusicLevel extends Level{
 	
 	public MusicLevel(SoundHandler soundhandler, IBackground background){
-		this.soundhandler = soundhandler;
+		this.soundHandler = soundhandler;
 		this.background = background;
 	}
 	
 	public void start(){
-		soundhandler.start();
+		soundHandler.start();
 	}
 }
