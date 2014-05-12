@@ -67,6 +67,13 @@ public class MusicFacade {
 		System.out.println("Hittade ingen genre som heter: \"" + genre + "\"");
 	}
 	
+	/**
+	 * Plays the song.
+	 * @param playSong Song to be played.
+	 */
+	public void play(Song playSong) {
+		
+	}
 	
 	/**
 	 * Plays the current song with analyzing.
@@ -125,7 +132,8 @@ public class MusicFacade {
 		return currentSong;
 	}
 	
-	public void setIndeOfCurrentSong(int newIndex) {
+	// TODO
+	public void setIndex(int newIndex) {
 		if(newIndex < 0) {
 			currentSong = 0;
 		} else if(newIndex > songList.size()) {
