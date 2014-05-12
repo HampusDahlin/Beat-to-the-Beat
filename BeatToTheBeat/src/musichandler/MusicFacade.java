@@ -1,8 +1,12 @@
 package musichandler;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,7 @@ public class MusicFacade {
 		currentSong = 0;
 		
 		loadSonglist();
+		saveSonglist();
 		sh  = new SoundHandler(songList.get(0), false);
 		
 	}
@@ -150,8 +155,16 @@ public class MusicFacade {
 	}
 	
 	public void saveSonglist(){
-		
-	}
-	
-	
+		try {
+	          File file = new File("songs\\songList.list");
+	          BufferedWriter output = new BufferedWriter(new FileWriter(file));
+	          
+	          
+	          output.write(songList.get(0).toString());
+	          output.close();
+	        
+		} catch ( IOException e ) {
+	           e.printStackTrace();
+	        }
+}
 }

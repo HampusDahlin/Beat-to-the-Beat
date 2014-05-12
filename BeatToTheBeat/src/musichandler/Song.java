@@ -43,4 +43,8 @@ public final class Song implements Serializable {
 	public String getArtist() {
 		return ARTIST;
 	}
+	
+	public String toString(){
+		return FILENAME+" "+" "+SONGNAME+" "+ARTIST+" "+GENRE.toString();
+	}
 }

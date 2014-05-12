@@ -62,4 +62,7 @@ public final class Genre {
 	public int getSense() {
 		return SENSE;
 	}
+	public String toString(){
+		return NAME;
+	}
 }
