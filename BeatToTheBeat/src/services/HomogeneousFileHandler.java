@@ -66,6 +66,7 @@ public class HomogeneousFileHandler implements IFileHandler<Object>{
 	
 	/**
 	 * {@inheritDoc}
+	 * 
 	 */
 	public List<Object> load(String filename) {
 		List<Object> list = new ArrayList<Object>();
@@ -87,7 +88,7 @@ public class HomogeneousFileHandler implements IFileHandler<Object>{
 			e.printStackTrace();
 		}
 		
-		if(temp instanceof List<?>){
+		if(temp instanceof ArrayList<?>){
 			list = ((ArrayList<Object>)temp);
 		}else{
 			System.out.println("Temp is not a List, corrupt file?");

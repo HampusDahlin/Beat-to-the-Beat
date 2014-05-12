@@ -3,11 +3,9 @@ package actors;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
-import javax.swing.Timer;
 import javax.swing.Icon;
+import javax.swing.Timer;
 
 import support.GameOverException;
 
