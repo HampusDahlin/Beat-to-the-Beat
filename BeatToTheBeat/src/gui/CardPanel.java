@@ -43,5 +43,13 @@ public class CardPanel extends JPanel {
 		((CardLayout)this.getLayout()).last(this);
 		songPresenter.presentSongList(0);
 	}
+	
+	public void goToGame() {
+		
+	}
+	
+	public void goToScore() {
+		
+	}
 
 }

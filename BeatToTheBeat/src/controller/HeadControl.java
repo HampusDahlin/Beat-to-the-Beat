@@ -31,10 +31,9 @@ public class HeadControl implements ActionListener {
 	private UIControl uiControl;
 	private Timer time;
 	private CardPanel mainPanel;
-	private JFrame mainFrame;
+	//private JFrame mainFrame;
 	
 	public HeadControl(JFrame mainFrame) {
-		this.mainFrame = mainFrame;
 		actorControl = new ActorControl();
 		musicControl = new MusicControl();
 		enviromentControl = new EnviromentControl(new WaveBackground(), musicControl.getAnalyzer());
@@ -42,8 +41,8 @@ public class HeadControl implements ActionListener {
 		time = new Timer(10, this);
 		uiControl = new UIControl(mainFrame);
 		mainPanel = new CardPanel(musicControl.getSongList());
-		this.mainFrame.add(mainPanel);
-		this.mainFrame.setVisible(true);
+		mainFrame.add(mainPanel);
+		mainFrame.setVisible(true);
 	}
 	
 	public void startGame(int songIndex) {
