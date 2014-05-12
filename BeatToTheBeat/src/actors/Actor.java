@@ -4,17 +4,16 @@ import java.awt.Point;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import support.IObservable;
-
 import javax.swing.Icon;
 
 /**
  * @author Björn Hedström
  * @revisedBy Pontus "Bondi" Eriksson
  * @revisedBy Malin "Nilhet" Thelin
+ * @revisedBy Hampus Dahlin
  *
  */
-public abstract class Actor implements IObservable{
+public abstract class Actor{
 	private final Icon SPRITE;
 	private int health;
 	private Point position;
@@ -92,12 +91,13 @@ public abstract class Actor implements IObservable{
 		}
 	}
 	
-	@Override
+	
 	public void addObserver(PropertyChangeListener observer) {
 		pcs.addPropertyChangeListener(observer);
 	}
 
-	@Override
+	
+	
 	public void removeObserver(PropertyChangeListener observer) {
 		pcs.removePropertyChangeListener(observer);
 		
