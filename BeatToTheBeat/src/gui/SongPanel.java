@@ -137,10 +137,6 @@ public class SongPanel extends javax.swing.JPanel implements IObservable {
 		   pcs.firePropertyChange("play", null, song);
 	   }
    };
-   
-   public Song getSong() {
-	   return song;
-   }
 
    // Variables declaration - do not modify                     
    private javax.swing.JLabel artistLabel;
