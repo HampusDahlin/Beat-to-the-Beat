@@ -128,12 +128,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		
 	}
 
-	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		
-		//oj nu hände nåt. då ska vi starta spelet
 		startGame((Song) evt.getNewValue());
-		
 	}
 	
 	
