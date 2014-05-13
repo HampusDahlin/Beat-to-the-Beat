@@ -39,9 +39,11 @@ public class PC extends Actor implements ActionListener {
 	
 	public void incCombo() {
 		combo++;
+		pcs.firePropertyChange("combo", combo-1, combo);
 	}
 	
 	public void resetCombo() {
+		pcs.firePropertyChange("combo", combo, 0);
 		combo = 0;
 	}
 	
@@ -50,6 +52,7 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void setCash(int newCash){
+		pcs.firePropertyChange("cash", cash, newCash);
 		cash = newCash;
 	}
 	

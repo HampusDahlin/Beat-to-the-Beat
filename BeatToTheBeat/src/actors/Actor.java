@@ -21,7 +21,7 @@ public abstract class Actor{
 	private final Point SPEED;
 	private int range;
 
-	private PropertyChangeSupport pcs;
+	protected PropertyChangeSupport pcs;
 	
 	public Actor(Icon sprite, Point speed) {
 		this.SPRITE = sprite;
