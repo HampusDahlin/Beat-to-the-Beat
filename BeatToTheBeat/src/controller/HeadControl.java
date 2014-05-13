@@ -129,7 +129,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 	}
 
 	public void propertyChange(PropertyChangeEvent evt) {
-		startGame((Song) evt.getNewValue());
+		if (evt.getPropertyName().equals("play")) {
+			startGame((Song) evt.getNewValue());
+		}
 	}
 	
 	
