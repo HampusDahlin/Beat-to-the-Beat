@@ -1,11 +1,16 @@
 package gui;
 
 import java.awt.Graphics;
+
+import support.IObservable;
+
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -18,14 +23,18 @@ import musichandler.Song;
 /**
 *
 * @author Björn Hedström
+* @revised by Malin "Nilhet" Thelin
 */
-public class SongPanel extends javax.swing.JPanel {
+public class SongPanel extends javax.swing.JPanel implements IObservable {
+	
+	private PropertyChangeSupport pcs;
 
    /**
     * Creates new form SongPanel
     */
    public SongPanel(String bgFileName) {
 	   this.bgFileName = bgFileName;
+	   pcs = new PropertyChangeSupport(this);
        initComponents();
        addMouseListener(listener);
    }
@@ -140,4 +149,15 @@ public class SongPanel extends javax.swing.JPanel {
    private Song song;
    private BufferedImage image;
    // End of variables declaration                   
+
+@Override
+public void addObserver(PropertyChangeListener observer) {
+	pcs.addPropertyChangeListener(observer);
+}
+
+@Override
+public void removeObserver(PropertyChangeListener observer) {
+	pcs.removePropertyChangeListener(observer);
+	
+}
 }
