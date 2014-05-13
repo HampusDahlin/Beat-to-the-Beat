@@ -3,14 +3,12 @@ package enviroment;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.JPanel;
-
 /**
  * A class for handling a JPanel showing a waveform.
  * @author Hampus Dahlin
  *
  */
-public class WaveBackground extends JPanel implements IBackground{
+public class WaveBackground extends ABackground{
 
 	Graphics g;
 	

@@ -1,7 +1,7 @@
 package levels;
 
 import musichandler.SoundHandler;
-import enviroment.IBackground;
+import enviroment.ABackground;
 
 /**
  * 
@@ -12,7 +12,7 @@ import enviroment.IBackground;
  */
 public class MusicLevel extends Level{
 	
-	public MusicLevel(SoundHandler soundhandler, IBackground background){
+	public MusicLevel(SoundHandler soundhandler, ABackground background){
 		this.soundHandler = soundhandler;
 		this.background = background;
 	}

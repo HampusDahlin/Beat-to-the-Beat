@@ -12,36 +12,39 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import levels.Level;
-import enviroment.IBackground;
+import enviroment.ABackground;
+import enviroment.WaveBackground;
 
 public class GamePanel extends JPanel implements PropertyChangeListener {
 	
-	private IBackground background;
+	private ABackground background;
 	private Level level;
-	private List<Point> NPCList;
+	private List<Point> npcPosList;
 	private int health;
 	private int combo;
 	private int cash;
 	
-	public GamePanel() {
-		NPCList = new ArrayList<Point>();
+	public GamePanel(Level level) {
+		npcPosList = new ArrayList<Point>();
+		setLevel(level);
+		
 	}
 	
-	public void addNewGame(Level level){
+	public void setLevel(Level level){
 		this.level = level;
-		addBackground(this.level.getBackground());
-		this.NPCList = new ArrayList<Point>();
+		setBackground(this.level.getBackground());
+		this.npcPosList = new ArrayList<Point>();
 	}
 
-	private void addBackground(IBackground background) {
+	private void setBackground(ABackground background) {
 		this.background = background;
 	}
 
 	public void propertyChange(IndexedPropertyChangeEvent pce) {
 		if (pce.getPropertyName().equals("move")) {
-			NPCList.get(pce.getIndex()).setLocation( (Point)pce.getNewValue() );
+			npcPosList.get(pce.getIndex()).setLocation( (Point)pce.getNewValue() );
 		} else if (pce.getPropertyName().equals("death")) {
-			NPCList.remove(pce.getIndex());
+			npcPosList.remove(pce.getIndex());
 		}
 	}
 
@@ -57,7 +60,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	public void paint(Graphics g) {
 		//loops through NPCList and draws them
-		for (Point npc : NPCList) {
+		for (Point npc : npcPosList) {
 			g.drawRect(npc.x, npc.y, 10, 10);
 		}
 		

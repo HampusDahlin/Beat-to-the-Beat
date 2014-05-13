@@ -1,7 +1,7 @@
 package levels;
 
 import musichandler.SoundHandler;
-import enviroment.IBackground;
+import enviroment.ABackground;
 
 /** 
 * Interface for Levels(or stages) for any game.
@@ -13,10 +13,10 @@ import enviroment.IBackground;
 */ 
 
 public abstract class Level {
-	IBackground  background;
+	ABackground  background;
 	SoundHandler soundHandler;
 	
-	public IBackground getBackground(){
+	public ABackground getBackground(){
 		return this.background;
 	}
 	
