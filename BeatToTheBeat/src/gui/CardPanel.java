@@ -9,10 +9,14 @@ import musichandler.Song;
 
 public class CardPanel extends JPanel {
 	
-	Options options;
-	MainMenu menu;
-	SongSelection songPresenter;
+	private Options options;
+	private MainMenu menu;
+	private SongSelection songPresenter;
 	private GamePanel gamePanel;
+	private static final String OPTIONSPANEL = "Panel with Options";
+	private static final String MENUPANEL = "Panel with MainMenu";
+	private static final String SONGSELECTIONPANEL = "Panel with Song selection";
+	private static final String GAMEPANEL = "Panel with the game";
 	
 	public CardPanel(List<Song> songList) {
 		
@@ -24,10 +28,10 @@ public class CardPanel extends JPanel {
 		songPresenter.setVisible(true);
 		menu.setVisible(true);
 		options.setVisible(true);
-		this.add(menu);
-		this.add(options);
-		this.add(songPresenter);
-		this.add(gamePanel);
+		this.add(menu, MENUPANEL);
+		this.add(options, OPTIONSPANEL);
+		this.add(songPresenter, SONGSELECTIONPANEL);
+		this.add(gamePanel, GAMEPANEL);
 	}
 	
 	public void exit() {
@@ -35,20 +39,20 @@ public class CardPanel extends JPanel {
 	}
 	
 	public void back() {
-		((CardLayout)this.getLayout()).first(this);
+		((CardLayout)this.getLayout()).show(this, MENUPANEL);
 	}
 	
 	public void goToOptions() {
-		((CardLayout)this.getLayout()).next(this);
+		((CardLayout)this.getLayout()).show(this, OPTIONSPANEL);
 	}
 	
 	public void playSong() {
-		((CardLayout)this.getLayout()).last(this);
+		((CardLayout)this.getLayout()).show(this, SONGSELECTIONPANEL);
 		songPresenter.presentSongList(0);
 	}
 	
 	public void goToGame() {
-		
+		((CardLayout)this.getLayout()).show(this, GAMEPANEL);
 	}
 	
 	public void goToScore() {
