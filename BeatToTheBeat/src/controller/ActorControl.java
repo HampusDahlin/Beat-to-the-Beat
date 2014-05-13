@@ -21,14 +21,13 @@ public class ActorControl {
 	public ActorControl(JPanel listener) {
 		NPCList = new ArrayList<NPC>();
 		player = new PC(new Point(500, 100), null);
-		player.addObserver((PropertyChangeListener)listener);
+		player.addPropertyChangeListener((PropertyChangeListener)listener);
 	}
 	
 	public void createActor(JPanel listener) {
-		NPCList.add(new NPC( new Point(-100, 100),
-				//System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0), //random which side
+		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0), //random which side
 			null));
-		NPCList.get(NPCList.size()-1).addObserver((PropertyChangeListener)listener);
+		NPCList.get(NPCList.size()-1).addPropertyChangeListener((PropertyChangeListener)listener);
 	}
 	
 	public void removeActor(Actor actor) {
