@@ -93,11 +93,7 @@ public class Analyzer {
 		if (isGameOver()) {
 			throw new GameOverException("win");
 		} else {
-			if (isBeat()) {
-				pcs.firePropertyChange("beat", true, this.getWave());
-			} else {
-				pcs.firePropertyChange("beat", false, this.getWave());
-			}
+			pcs.firePropertyChange("beat", isBeat(), this.getWave());
 		}
 	}
 	
