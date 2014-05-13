@@ -146,7 +146,7 @@ public class SongSelection extends javax.swing.JPanel {
    private void initComponents() {
 	   
 	   titleLabel = new javax.swing.JLabel();
-       songPanels = new SongPanel[10];
+       songPanels = new SongPanel[4];
        songPanels[0] = new SongPanel("k1plate.jpg");
        songPanels[1] = new SongPanel("k2plate.jpg");
        songPanels[2] = new SongPanel("k3plate.jpg");
