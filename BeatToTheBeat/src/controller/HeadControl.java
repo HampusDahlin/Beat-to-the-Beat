@@ -62,7 +62,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		time.start();
 		
 		musicControl.play(song, true);
-
+		musicControl.getAnalyzer().addPropertyChangeListener(this);
 	}
 	
 	public void startGame(int songIndex) {
@@ -90,7 +90,6 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 			endGame();
 		}
 		
-		//TODO Spawn a new enemy if there is a beat in the music.
 		//analyzes song, going down to Analyzer..
 		musicControl.analyzeSong();
 		
