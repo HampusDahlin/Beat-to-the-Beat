@@ -164,7 +164,7 @@ public class SongSelection extends javax.swing.JPanel {
 
        setBackground(new java.awt.Color(255, 255, 255));
 
-       titleLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Downloads\\chooseASong.png")); // NOI18N
+       titleLabel.setIcon(new javax.swing.ImageIcon("images\\chooseASong.png")); // NOI18N
 
        nextButton.setText("Next");
        nextButton.addActionListener(new java.awt.event.ActionListener() {
