@@ -2,6 +2,8 @@ package controller;
 
 import gui.CardPanel;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,7 +22,7 @@ import support.RemoveActorException;
  * @version 0.0.6
  *
  */
-public class HeadControl implements ActionListener {
+public class HeadControl implements ActionListener, PropertyChangeListener {
 	
 	private long startTime;
 	private long[] spawnTimes;
@@ -108,6 +110,12 @@ public class HeadControl implements ActionListener {
 		
 		//säg till cardpanel att visa poäng
 		mainPanel.goToScore();
+		
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		// TODO Auto-generated method stub
 		
 	}
 	
