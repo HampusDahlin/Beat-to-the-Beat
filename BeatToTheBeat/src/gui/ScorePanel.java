@@ -52,14 +52,14 @@ public class ScorePanel extends javax.swing.JPanel {
         scoreLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
 
-        titleLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Downloads\\score.png")); // NOI18N
+        titleLabel.setIcon(new javax.swing.ImageIcon("images\score.png"));
 
-        scoreLabel.setFont(new java.awt.Font("Serif", 1, 89)); // NOI18N
+        scoreLabel.setFont(new java.awt.Font("Serif", 1, 89));
         scoreLabel.setForeground(new java.awt.Color(255, 255, 255));
         scoreLabel.setText("3458900");
         scoreLabel.setOpaque(true);
 
-        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication3/back.png"))); // NOI18N
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\back.png")));
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
