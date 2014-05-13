@@ -44,7 +44,7 @@ public class Analyzer {
 		BUFFERSIZE = 512;
 		minim = new Minim(this);
 		player = minim.loadFile(song.getFilename(), BUFFERSIZE);// this loads song from the data folder	
-		detective = new BeatDetect();
+		detective = new BeatDetect(BUFFERSIZE, player.sampleRate());
 		detective.setSensitivity(genre.getSense());
 		
 		this.waveList = new ArrayList<float[][]>();
