@@ -23,6 +23,10 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int combo;
 	private int cash;
 	
+	public GamePanel() {
+		NPCList = new ArrayList<Point>();
+	}
+	
 	public void addNewGame(Level level){
 		this.level = level;
 		addBackground(this.level.getBackground());
