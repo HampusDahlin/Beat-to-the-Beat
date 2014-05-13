@@ -2,6 +2,7 @@ package musichandler;
 
 
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -131,4 +132,7 @@ public class Analyzer {
 		return waveList.remove(0);
 	}
 	
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+	}
 }
