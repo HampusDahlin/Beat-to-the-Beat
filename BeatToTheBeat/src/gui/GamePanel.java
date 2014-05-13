@@ -24,6 +24,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int combo;
 	private int cash;
 	
+	//test
 	public GamePanel(Level level) {
 		npcPosList = new ArrayList<Point>();
 		setLevel(level);
