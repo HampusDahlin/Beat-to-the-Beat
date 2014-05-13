@@ -9,6 +9,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import levels.Level;
@@ -24,11 +25,18 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int combo;
 	private int cash;
 	
-	//test
+	public GamePanel(){
+		npcPosList = new ArrayList<Point>();
+		//testkod
+		setSize(100, 100);
+		this.setBackground(Color.WHITE);
+		revalidate();
+		repaint();
+	}
+
 	public GamePanel(Level level) {
 		npcPosList = new ArrayList<Point>();
 		setLevel(level);
-		
 	}
 	
 	public void setLevel(Level level){
