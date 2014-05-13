@@ -61,6 +61,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.setColor(Color.RED);
 		g.fillRect(5, 15, health*20, 10);
 
-		//score
+		//combo
+		//cash?
 	}
 }

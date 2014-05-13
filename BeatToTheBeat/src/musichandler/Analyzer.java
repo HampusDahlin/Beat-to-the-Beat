@@ -5,6 +5,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import support.GameOverException;
 import ddf.minim.*;
@@ -25,7 +27,9 @@ public class Analyzer {
 	private BeatDetect detective;
 	private final int BUFFERSIZE;
 	private Genre genre;
-	PropertyChangeSupport pcs;
+	private PropertyChangeSupport pcs;
+	private List<float[][]> waveList;
+	private final int DELAY;
 	
 	/**
 	 * 
@@ -33,6 +37,7 @@ public class Analyzer {
 	 * @param sensitivity how sensitive the Analyzer will be
 	 */
 	public Analyzer(Song song, int sensitivity) {
+		DELAY = 5000; //delay in ms
 		pcs = new PropertyChangeSupport(this);
 		genre = song.getGenre();
 		BUFFERSIZE = 512;
@@ -40,6 +45,11 @@ public class Analyzer {
 		player = minim.loadFile(song.getFilename(), BUFFERSIZE);// this loads song from the data folder	
 		detective = new BeatDetect();
 		detective.setSensitivity(genre.getSense());
+		
+		this.waveList = new ArrayList<float[][]>();
+		for (int i = 0; i < DELAY/10; i++) {
+			waveList.add(new float[2][BUFFERSIZE]);
+		}
 	}
 	
 	/**
@@ -117,7 +127,8 @@ public class Analyzer {
 		float[][] temp = new float[2][BUFFERSIZE];
 		temp[0] = player.left.toArray();
 		temp[1] = player.right.toArray();
-		return temp;
+		waveList.add(temp);
+		return waveList.remove(0);
 	}
 	
 }
