@@ -9,12 +9,10 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import levels.Level;
 import enviroment.ABackground;
-import enviroment.WaveBackground;
 
 public class GamePanel extends JPanel implements PropertyChangeListener {
 	
@@ -27,11 +25,14 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	public GamePanel(){
 		npcPosList = new ArrayList<Point>();
-		//testkod
-		setSize(100, 100);
-		this.setBackground(Color.WHITE);
+		
+		this.setBackground(new java.awt.Color(255, 255, 255));
+		setSize(914, 600);
+		setMaximumSize(new java.awt.Dimension(914, 600));
+		setMinimumSize(new java.awt.Dimension(914, 600));
+		this.setVisible(true);
+		
 		revalidate();
-		repaint();
 	}
 
 	public GamePanel(Level level) {
@@ -67,7 +68,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 	}
 	
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {		
+		super.paintComponent(g);
 		//loops through NPCList and draws them
 		for (Point npc : npcPosList) {
 			g.drawRect(npc.x, npc.y, 10, 10);
