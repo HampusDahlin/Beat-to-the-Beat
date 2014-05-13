@@ -64,10 +64,12 @@ public abstract class Actor{
 	}
 	
 	/**
-	 * Unused but needed for compilation.
+	 * Only used for constructor.
 	 * Please use setPosition(newPosition, yourIndex) instead.
 	 */
-	public void setPosition(Point newPosition) {}
+	public void setPosition(Point newPosition) {
+		position = newPosition;
+	}
 	
 	public void setPosition(Point newPosition, int yourIndex){
 		//är det bra att ha en pc här? eftersom actorcontrol använder sig av denna för att flytta på skiten..
