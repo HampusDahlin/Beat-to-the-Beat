@@ -133,8 +133,8 @@ public class SongPanel extends javax.swing.JPanel implements IObservable {
    
    private MouseListener listener = new MouseAdapter() {
 	   public void mouseClicked(MouseEvent e) {
+		   ((CardPanel)(getParent().getParent())).goToGame();
 		   pcs.firePropertyChange("play", null, song);
-		   System.out.println("!");
 	   }
    };
    
