@@ -7,7 +7,7 @@ import javax.swing.Icon;
 public class NPC extends Actor implements support.Movable{
 
 	public NPC(Point position, Icon sprite){
-		super(sprite, new Point(100,0));
+		super(sprite, new Point(10,0));
 		setHealth(1);
 		setPosition(position);
 		setDmg(1);
