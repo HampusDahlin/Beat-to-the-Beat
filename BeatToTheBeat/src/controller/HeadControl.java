@@ -50,11 +50,10 @@ public class HeadControl implements ActionListener {
 	public void startGame(int songIndex) {
 		startTime = System.currentTimeMillis();
 		time.start();
-		int amntOfSongs = 10;//tillfällig! bara för att if satsen skall se vettig ut. kan finnas i en annan klass senare?
 		if(songIndex >=0 && songIndex <= musicControl.getSongCount())//hur många låtar vi nu än kommer att ha
 		{
 			musicControl.setSong(songIndex);
-			musicControl.play();
+			musicControl.play(true);
 		}	
 		
 		//säg till cardpanel att visa spelet

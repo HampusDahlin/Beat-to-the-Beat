@@ -68,27 +68,20 @@ public class MusicFacade {
 	}
 	
 	/**
-	 * Plays the song.
+	 * Plays the song and choose if to analyze it or not.
 	 * @param playSong Song to be played.
+	 * @param analyze
 	 */
-	public void play(Song playSong) {
-		
-	}
-	
-	/**
-	 * Plays the current song with analyzing.
-	 */
-	public void play(){
-		sh = new SoundHandler(songList.get(currentSong), true);
+	public void play(Song playSong, boolean analyze) {
+		sh = new SoundHandler(playSong, analyze);
 		sh.start();
 	}
 	
 	/**
-	 * Plays the current song without analyzing.
+	 * Plays the current song and choose if to analyze it or not.
 	 */
-	public void playOnly() {
-		sh = new SoundHandler(songList.get(currentSong), false);
-		sh.start();
+	public void playCurrent(boolean analyze) {
+		play(songList.get(currentSong), analyze);
 	}
 	
 	/**

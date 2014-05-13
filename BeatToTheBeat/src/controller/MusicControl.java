@@ -27,8 +27,8 @@ public class MusicControl {
 		
 	}
 	
-	public void play() {
-		music.play();
+	public void play(boolean analyze) {
+		music.playCurrent(analyze);
 	}
 	
 	public void pause() {
