@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  * @author Björn Hedström
@@ -14,7 +14,7 @@ import javax.swing.Icon;
  *
  */
 public abstract class Actor{
-	private final Icon SPRITE;
+	private final ImageIcon SPRITE;
 	private int health;
 	private Point position;
 	private int dmg;
@@ -23,10 +23,9 @@ public abstract class Actor{
 
 	protected PropertyChangeSupport pcs;
 	
-	public Actor(Icon sprite, Point speed) {
+	public Actor(ImageIcon sprite, Point speed) {
 		this.SPRITE = sprite;
 		this.SPEED = speed;
-		//propertychange, vår sak som skall firea när saker händer till observers.
 		pcs = new PropertyChangeSupport(this);
 				
 	}
@@ -51,7 +50,7 @@ public abstract class Actor{
 		return dmg;
 	}
 	
-	public Icon getSprite(){
+	public ImageIcon getSprite(){
 		return SPRITE;
 	}
 	

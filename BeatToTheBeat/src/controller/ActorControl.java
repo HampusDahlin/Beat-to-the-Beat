@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import support.RemoveActorException;
@@ -17,16 +18,18 @@ import actors.PC;
 public class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
+	private ImageIcon sprite;
 	
 	public ActorControl(JPanel listener) {
+		this.sprite = new ImageIcon("sprites\\ninja.gif");
 		NPCList = new ArrayList<NPC>();
-		player = new PC(new Point(500, 100), null);
+		player = new PC(new Point(500, 100), sprite);
 		player.addPropertyChangeListener((PropertyChangeListener)listener);
 	}
 	
 	public void createActor(JPanel listener) {
 		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0), //random which side
-			null));
+			sprite));
 		NPCList.get(NPCList.size()-1).addPropertyChangeListener((PropertyChangeListener)listener);
 	}
 	
@@ -59,7 +62,6 @@ public class ActorControl {
 	public void NPCAttack() {
 		if (canHitClose(100)) { //take damage and remove enemy
 			NPCList.get(0).dealDmg(player);
-			System.out.println("TRÄFFAd! ouch!");
 			if (player.getHealth() <= 0) {
 				player.death();
 			} else {
@@ -75,14 +77,12 @@ public class ActorControl {
 	
 	public void playerAttack() {
 		if (!player.onCooldown()) {
-			if (canHitClose(200)) { //+ player.getSprite().getIconHeight()/2 )) {
-				//Test-printing
+			if (canHitClose(200 + player.getSprite().getIconHeight()/2 )) {
 				System.out.println("TRÄff!");
 				player.incCombo();
 				
 				throw new RemoveActorException();
 			} else {
-				//Test-printing
 				System.out.println("MISS!");
 				
 				player.startCooldown();

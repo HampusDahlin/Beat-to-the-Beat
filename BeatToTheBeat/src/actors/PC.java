@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 import support.GameOverException;
@@ -17,7 +17,7 @@ public class PC extends Actor implements ActionListener {
 	private int combo;
 	private Timer cooldown;
 	
-	public PC(Point position, Icon sprite) {
+	public PC(Point position, ImageIcon sprite) {
 		super(sprite, new Point(0,0));
 		
 		MAXHP = 5;
