@@ -91,6 +91,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		}
 		
 		//TODO Spawn a new enemy if there is a beat in the music.
+		//analyzes song, going down to Analyzer..
+		musicControl.analyzeSong();
 		
 		//Moves the actors along their path.
 		try {
@@ -99,15 +101,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 				endGame();
 			} catch (RemoveActorException exc) {
 				actorControl.removeActor();
-			}
-		
-		//Testkod
-		if (actorControl.getFirstEnemy()!=null) {
-			System.out.println(300-actorControl.getFirstEnemy().getPosition().x);
-		} else {
-			System.out.println("Nästa spawn om: "+ (spawnTimes[enemyNbr] - (System.currentTimeMillis()-startTime)));
-		}
-		
+			}		
 		
 		if (enemyNbr != spawnTimes.length && spawnTimes[enemyNbr] < System.currentTimeMillis()-startTime+100 &&
 				spawnTimes[enemyNbr] > System.currentTimeMillis()-startTime-100) {
@@ -131,8 +125,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("play")) {
 			startGame((Song) evt.getNewValue());
+		}else if(evt.getPropertyName().equals("beat") && (boolean) evt.getOldValue()){
+			actorControl.createActor(mainPanel.getGamePanel());
 		}
 	}
-	
-	
+
 }
