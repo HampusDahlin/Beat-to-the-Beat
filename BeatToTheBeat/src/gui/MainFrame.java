@@ -18,7 +18,7 @@ public class MainFrame extends JFrame{
 	
 	public MainFrame() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(100, 100);
+		this.setSize(914, 600);
 		this.setLayout(new CardLayout());
 		hc = new HeadControl(this);
 		

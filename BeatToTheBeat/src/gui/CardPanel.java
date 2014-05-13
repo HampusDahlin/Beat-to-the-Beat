@@ -19,6 +19,7 @@ public class CardPanel extends JPanel {
 		this.setLayout(new CardLayout());
 		options = new Options();
 		menu = new MainMenu();
+		gamePanel = new GamePanel();
 		songPresenter = new SongSelection(songList);
 		songPresenter.setVisible(true);
 		menu.setVisible(true);
