@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import musichandler.Song;
@@ -43,6 +44,13 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		time = new Timer(10, this);
 		uiControl = new UIControl(mainFrame);
 		mainPanel = new CardPanel(musicControl.getSongList());
+		
+		
+		//make headcontrol observe all the songPanels. 
+		for(JPanel p : mainPanel.getSongPanels()){
+			p.addPropertyChangeListener(this);
+		}
+		
 		mainFrame.add(mainPanel);
 		
 		actorControl = new ActorControl(mainPanel.getGamePanel());

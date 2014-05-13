@@ -62,5 +62,9 @@ public class CardPanel extends JPanel {
 	public JPanel getGamePanel() {
 		return gamePanel;
 	}
+	
+	public JPanel[] getSongPanels(){
+		return songPresenter.getSongPanels();
+	}
 
 }
