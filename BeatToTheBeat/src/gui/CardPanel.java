@@ -13,10 +13,12 @@ public class CardPanel extends JPanel {
 	private MainMenu menu;
 	private SongSelection songPresenter;
 	private GamePanel gamePanel;
+	private ScorePanel scorePanel;
 	private static final String OPTIONSPANEL = "Panel with Options";
 	private static final String MENUPANEL = "Panel with MainMenu";
 	private static final String SONGSELECTIONPANEL = "Panel with Song selection";
 	private static final String GAMEPANEL = "Panel with the game";
+	private static final String SCOREPANEL = "Panel with Score";
 	
 	public CardPanel(List<Song> songList) {
 		
@@ -24,6 +26,7 @@ public class CardPanel extends JPanel {
 		options = new Options();
 		menu = new MainMenu();
 		gamePanel = new GamePanel();
+		scorePanel = new ScorePanel();
 		songPresenter = new SongSelection(songList);
 		songPresenter.setVisible(true);
 		menu.setVisible(true);
@@ -32,6 +35,8 @@ public class CardPanel extends JPanel {
 		this.add(options, OPTIONSPANEL);
 		this.add(songPresenter, SONGSELECTIONPANEL);
 		this.add(gamePanel, GAMEPANEL);
+		this.add(scorePanel, SCOREPANEL);
+		
 	}
 	
 	public void exit() {
@@ -56,7 +61,7 @@ public class CardPanel extends JPanel {
 	}
 	
 	public void goToScore() {
-		
+		((CardLayout)this.getLayout()).show(this, SCOREPANEL);
 	}
 	
 	public JPanel getGamePanel() {
