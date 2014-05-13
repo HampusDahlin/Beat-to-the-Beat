@@ -93,18 +93,10 @@ public class Analyzer {
 		if (isGameOver()) {
 			throw new GameOverException("win");
 		} else {
-			if (isBeat()) {
-				pcs.firePropertyChange("Beat Detected", true, this.getWave());
-			} else {
-				pcs.firePropertyChange("No Beat Detected", false, this.getWave());
-			}
+			pcs.firePropertyChange("beat", isBeat(), this.getWave());
 		}
 	}
 	
-	/**
-	 * 
-	 * @return true if there currently is a beat, false otherwise
-	 */
 	public boolean isBeat() {
 		// getting the buffer for current time in song
 		detective.detect(player.mix);
