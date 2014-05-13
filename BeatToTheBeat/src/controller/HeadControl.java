@@ -101,13 +101,6 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 				endGame();
 			} catch (RemoveActorException exc) {
 				actorControl.removeActor();
-			}		
-		
-		if (enemyNbr != spawnTimes.length && spawnTimes[enemyNbr] < System.currentTimeMillis()-startTime+100 &&
-				spawnTimes[enemyNbr] > System.currentTimeMillis()-startTime-100) {
-			actorControl.createActor(mainPanel.getGamePanel());
-			System.out.println("Enemy spawned.");
-			enemyNbr++;
 		}
 		
 		uiControl.update(actorControl.getNPCList());
