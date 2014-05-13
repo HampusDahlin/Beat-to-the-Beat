@@ -80,7 +80,7 @@ public abstract class Actor{
 	}
 	
 	public boolean isDead(){
-		pcs.firePropertyChange("death", this, this);
+		pcs.firePropertyChange("death", null, this);
 		return getHealth() <= 0;
 	}
 	
