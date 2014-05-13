@@ -99,14 +99,14 @@ public abstract class Actor{
 	}
 	
 	
-	public void addObserver(PropertyChangeListener observer) {
-		pcs.addPropertyChangeListener(observer);
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
 	}
 
 	
 	
-	public void removeObserver(PropertyChangeListener observer) {
-		pcs.removePropertyChangeListener(observer);
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		pcs.removePropertyChangeListener(listener);
 		
 	}
 	
