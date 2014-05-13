@@ -63,9 +63,15 @@ public abstract class Actor{
 		return health;
 	}
 	
-	public void setPosition(Point newPosition){
+	/**
+	 * Unused but needed for compilation.
+	 * Please use setPosition(newPosition, yourIndex) instead.
+	 */
+	public void setPosition(Point newPosition) {}
+	
+	public void setPosition(Point newPosition, int yourIndex){
 		//är det bra att ha en pc här? eftersom actorcontrol använder sig av denna för att flytta på skiten..
-		pcs.firePropertyChange("move", position, newPosition);
+		pcs.fireIndexedPropertyChange("move", yourIndex, position, newPosition);
 		position = newPosition;
 	}
 	
