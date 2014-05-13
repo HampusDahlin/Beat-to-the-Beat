@@ -55,8 +55,6 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		
 		musicControl.play(song, true);
 
-		//säg till cardpanel att visa spelet
-		mainPanel.goToGame();
 	}
 	
 	public void startGame(int songIndex) {
@@ -69,8 +67,6 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 			musicControl.play(true);
 		}	
 		
-		//säg till cardpanel att visa spelet
-		mainPanel.goToGame();
 	}
 	
 	
@@ -126,7 +122,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
+		
+		//oj nu hände nåt. då ska vi starta spelet
+		startGame((Song) evt.getNewValue());
 		
 	}
 	
