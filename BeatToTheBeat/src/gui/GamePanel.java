@@ -17,7 +17,6 @@ import enviroment.IBackground;
 public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	private IBackground background;
-	private Level level;
 	private List<Point> NPCList;
 	private int health;
 	private int combo;
@@ -27,14 +26,10 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		NPCList = new ArrayList<Point>();
 	}
 	
-	public void addNewGame(Level level){
-		this.level = level;
-		addBackground(this.level.getBackground());
-		this.NPCList = new ArrayList<Point>();
-	}
-
-	private void addBackground(IBackground background) {
+	public void addNewGame(IBackground background){
 		this.background = background;
+		//this.add bakgrunden
+		this.NPCList = new ArrayList<Point>();
 	}
 
 	public void propertyChange(IndexedPropertyChangeEvent pce) {
