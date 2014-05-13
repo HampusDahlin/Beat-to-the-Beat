@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import musichandler.Song;
 import support.GameOverException;
 import support.RemoveActorException;
 
@@ -49,9 +50,19 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		mainFrame.setVisible(true);
 	}
 	
+	public void startGame(Song song) {
+		time.start();
+		
+		musicControl.play(song, true);
+
+		//säg till cardpanel att visa spelet
+		mainPanel.goToGame();
+	}
+	
 	public void startGame(int songIndex) {
 		startTime = System.currentTimeMillis();
 		time.start();
+		
 		if(songIndex >=0 && songIndex <= musicControl.getSongCount())//hur många låtar vi nu än kommer att ha
 		{
 			musicControl.setSong(songIndex);

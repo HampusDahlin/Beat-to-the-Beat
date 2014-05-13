@@ -27,6 +27,10 @@ public class MusicControl {
 		
 	}
 	
+	public void play(Song song, boolean analyze) {
+		music.play(song, analyze);
+	}
+	
 	public void play(boolean analyze) {
 		music.playCurrent(analyze);
 	}
