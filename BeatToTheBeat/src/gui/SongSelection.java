@@ -112,7 +112,7 @@ public class SongSelection extends javax.swing.JPanel {
 	   }
 		
 	   for(int i = 0; i < 4; i++) {
-		   if((newFirst + i) < presentedSongList.size()) {
+		   if((newFirst + i) < presentedSongList.size() && presentedSongList.size() > 0) {
 			   songPanels[i].setVisible(true);
 			   songPanels[i].setSong(presentedSongList.get(newFirst + i));
 			   //songPanels[i].setIndex(newFirst + i);
