@@ -91,6 +91,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		}
 		
 		//TODO Spawn a new enemy if there is a beat in the music.
+		//analyzes song, going down to Analyzer..
+		musicControl.analyzeSong();
 		
 		//Moves the actors along their path.
 		try {
@@ -132,7 +134,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		if (evt.getPropertyName().equals("play")) {
 			startGame((Song) evt.getNewValue());
 		}
+		if(evt.getPropertyName().equals("beat")){
+			actorControl.createActor(mainPanel.getGamePanel());
+		}
 	}
-	
-	
+
 }
