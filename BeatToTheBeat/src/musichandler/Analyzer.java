@@ -97,10 +97,6 @@ public class Analyzer {
 		}
 	}
 	
-	/**
-	 * 
-	 * @return true if there currently is a beat, false otherwise
-	 */
 	public boolean isBeat() {
 		// getting the buffer for current time in song
 		detective.detect(player.mix);
