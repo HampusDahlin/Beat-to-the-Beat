@@ -125,10 +125,10 @@ public class ActorControl {
 
 	// Move all NPCs and then try to attack.
 	public void moveActors() {
-		for (NPC enemy : NPCList) {
-			enemy.setPosition(new Point( (int) (enemy.getPosition().getX() +
-					(player.getPosition().getX() - enemy.getPosition().getX() > 0 ? 1 : -1)
-					*enemy.getSpeed().getX()), 100));
+		for (int i = 0; i < NPCList.size(); i++) {
+			NPCList.get(i).setPosition(new Point( (int) (NPCList.get(i).getPosition().getX() +
+					(player.getPosition().getX() - NPCList.get(i).getPosition().getX() > 0 ? 1 : -1)
+					*NPCList.get(i).getSpeed().getX()), 300), i);
 		}
 		NPCAttack();
 	}
