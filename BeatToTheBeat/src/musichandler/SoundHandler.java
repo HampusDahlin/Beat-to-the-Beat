@@ -7,11 +7,13 @@ import javax.swing.Timer;
 
 
 public class SoundHandler implements ActionListener {
+	private final int DELAY;
 	private MusicPlayer player;
 	private Analyzer analyzer;
 	private Timer timer;
 	
 	public SoundHandler(Song song, boolean toAnalyze) {
+		DELAY = 4500;
 		if (toAnalyze) {
 			analyzer = new Analyzer(song, song.getGenre().getSense());
 		}
@@ -27,8 +29,8 @@ public class SoundHandler implements ActionListener {
 	
 	public void start() {
 		if (analyzer !=null) {
-			timer = new Timer(5000, this);
-			timer.setInitialDelay(5000);
+			timer = new Timer(DELAY, this);
+			timer.setInitialDelay(DELAY);
 			timer.setRepeats(false);
 			timer.start();
 			analyzer.start();

@@ -78,18 +78,17 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
 			sprite.paintIcon(this, g, npc.x, npc.y);
 			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
-		
-		sprite.paintIcon(this, g, 500, 100);
-		
+
+		sprite.paintIcon(this, g, 450, 300);
+
 		g.drawRect(4, 16, 101, 11);
-		g.fillRect(10, 40, 200, 200);
 		g.setColor(Color.RED);
 		g.fillRect(5, 15, health*20, 10);
 		

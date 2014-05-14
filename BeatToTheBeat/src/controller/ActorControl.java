@@ -1,20 +1,14 @@
 package controller;
-
-
 import java.awt.Point;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
 import support.RemoveActorException;
 import actors.Actor;
 import actors.NPC;
 import actors.PC;
-
-
 public class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
@@ -23,12 +17,12 @@ public class ActorControl {
 	public ActorControl(JPanel listener) {
 		this.sprite = new ImageIcon("sprites\\ninja.gif");
 		NPCList = new ArrayList<NPC>();
-		player = new PC(new Point(500, 100), sprite);
+		player = new PC(new Point(450, 0), sprite);
 		player.addPropertyChangeListener((PropertyChangeListener)listener);
 	}
 	
 	public void createActor(JPanel listener) {
-		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0), //random which side
+		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 900, 0), //random which side
 			sprite, (PropertyChangeListener)listener));
 	}
 	
@@ -59,7 +53,7 @@ public class ActorControl {
 	 * Tries to attack with the closest NPC.
 	 */
 	public void NPCAttack() {
-		if (canHitClose(100)) { //take damage and remove enemy
+		if (canHitClose(15)) { //take damage and remove enemy
 			NPCList.get(0).dealDmg(player);
 			if (player.getHealth() <= 0) {
 				player.death();
@@ -76,7 +70,7 @@ public class ActorControl {
 	
 	public void playerAttack() {
 		if (!player.onCooldown()) {
-			if (canHitClose(200 + player.getSprite().getIconHeight()/2 )) {
+			if (canHitClose(300 + player.getSprite().getIconHeight()/2 )) {
 				System.out.println("TRÄff!");
 				player.incCombo();
 				
@@ -89,7 +83,6 @@ public class ActorControl {
 			}
 		}
 	}
-
 	// Possibly to be used with powerups etc later.
 	/**
 	 * Checks which NPCs are within range of player.
@@ -106,22 +99,19 @@ public class ActorControl {
 				hittable.add(enemy);
 			}
 		}
-
 		return hittable;
 	}
 	*/
-
 	/**
 	 * Checks if first NPC in list is within range.
 	 * @param range How close NPC can be to player.
 	 */
 	public boolean canHitClose(int range) {
 		return !NPCList.isEmpty() &&
-				player.getPosition().getX() -
+				(player.getPosition().getX() + player.getSprite().getIconWidth()/2) -
 				(NPCList.get(0).getPosition().getX() +
 						(NPCList.get(0).getSprite().getIconWidth()/2)) <= range;
 	}
-
 	// Move all NPCs and then try to attack.
 	public void moveActors() {
 		for (int i = 0; i < NPCList.size(); i++) {
@@ -131,5 +121,4 @@ public class ActorControl {
 		}
 		NPCAttack();
 	}
-
 }
