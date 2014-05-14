@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.beans.IndexedPropertyChangeEvent;
@@ -92,6 +93,10 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.setColor(Color.RED);
 		g.fillRect(5, 15, health*20, 10);
 		
+		String stringCombo = ""+combo;
+		
+		g.setFont(new Font("Sans", Font.BOLD, 24));
+		g.drawString(stringCombo, 504, 26);
 
 		//combo
 		//cash?
