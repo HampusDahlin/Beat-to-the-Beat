@@ -29,8 +29,7 @@ public class ActorControl {
 	
 	public void createActor(JPanel listener) {
 		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0), //random which side
-			sprite));
-		NPCList.get(NPCList.size()-1).addPropertyChangeListener((PropertyChangeListener)listener);
+			sprite, (PropertyChangeListener)listener));
 	}
 	
 	public void removeActor(Actor actor) {

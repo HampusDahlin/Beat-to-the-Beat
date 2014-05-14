@@ -9,6 +9,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import levels.Level;
@@ -22,9 +23,11 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int health;
 	private int combo;
 	private int cash;
+	private ImageIcon sprite;
 	
 	public GamePanel(){
 		npcPosList = new ArrayList<Point>();
+		this.sprite = new ImageIcon("sprites\\ninja.gif");
 		
 		this.setBackground(new java.awt.Color(255, 255, 255));
 		setSize(914, 600);
@@ -73,23 +76,30 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 	}
 	
-	public void paintComponent(Graphics g) {		
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
-			g.fillRect(npc.x, npc.y, 10, 10);
+			sprite.paintIcon(this, g, npc.x, npc.y);
+			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
 		
+		sprite.paintIcon(this, g, 500, 100);
+		
 		g.drawRect(4, 16, 101, 11);
+		g.fillRect(10, 40, 200, 200);
 		g.setColor(Color.RED);
 		g.fillRect(5, 15, health*20, 10);
+		
 
 		//combo
 		//cash?
 	}
 	
 	public void update() {
+		revalidate();
 		repaint();
 	}
 }

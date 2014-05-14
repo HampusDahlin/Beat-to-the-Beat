@@ -24,7 +24,7 @@ public class PC extends Actor implements ActionListener {
 		MAXHP = 5;
 		cash = 0;
 		combo = 0;
-		setHealth(1);
+		setHealth(MAXHP);
 		setPosition(position);
 		setDmg(1);
 		MISSTIME = 1000; //ms
