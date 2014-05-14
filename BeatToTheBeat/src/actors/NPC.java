@@ -12,6 +12,7 @@ public class NPC extends Actor implements support.Movable{
 		setPosition(position);
 		setDmg(1);
 		setRange(1);
+		pcs.firePropertyChange("newNPC", false, getPosition());
 	}
 	
 }

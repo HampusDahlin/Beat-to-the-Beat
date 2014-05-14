@@ -59,7 +59,13 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	}
 
 	public void propertyChange(PropertyChangeEvent pce) {
-		if (pce.getPropertyName().equals("combo")) {
+		if (pce.getPropertyName().equals("move") && npcPosList.size() > 0) {
+			npcPosList.get(((IndexedPropertyChangeEvent) pce).getIndex()).setLocation(( (Point)pce.getNewValue() ));
+		} else if (pce.getPropertyName().equals("newNPC")) {
+			npcPosList.add(new Point((Point) pce.getNewValue()));
+		} else if (pce.getPropertyName().equals("death")) {
+			//avsluta spel
+		} else if (pce.getPropertyName().equals("combo")) {
 			combo = (int) pce.getNewValue();
 		} else if (pce.getPropertyName().equals("hp")) {
 			health = (int) pce.getNewValue();
