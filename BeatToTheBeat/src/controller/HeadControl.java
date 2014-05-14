@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import musichandler.Song;
-import support.GameOverException;
 import support.RemoveActorException;
 
 
@@ -82,12 +81,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 	 * {@inheritDoc}
 	 */
 	public void actionPerformed(ActionEvent e) {
-		try {
-			musicControl.analyzeSong();
-		} catch (GameOverException exc) {
-			System.out.println("Song Finished");
-			endGame();
-		}
+		musicControl.analyzeSong();
 		
 		//analyzes song, going down to Analyzer..
 		musicControl.analyzeSong();
@@ -95,8 +89,6 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		//Moves the actors along their path.
 		try {
 				actorControl.moveActors();
-			} catch (GameOverException exc) {
-				endGame();
 			} catch (RemoveActorException exc) {
 				actorControl.removeActor();
 		}
@@ -121,6 +113,10 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 			startGame((Song) evt.getNewValue());
 		} else if(evt.getPropertyName().equals("beat") && (boolean) evt.getOldValue()) {
 			actorControl.createActor(mainPanel.getGamePanel());
+		} else if (evt.getPropertyName().equals("death")) {
+			endGame(actorControl.getScore());
+		} else if (evt.getPropertyName().equals("songEnd")) {
+			endGame((int) evt.getNewValue());
 		}
 	}
 

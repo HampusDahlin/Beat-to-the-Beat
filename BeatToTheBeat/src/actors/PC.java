@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
-import support.GameOverException;
-
 public class PC extends Actor implements ActionListener {
 	private final int MISSTIME;
 	private final int MAXHEALTH;
@@ -34,8 +32,8 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void death() {
-		//ska vi firea en property change eller kommer exceptionen att fixa allt?
-		throw new GameOverException();
+		pcs.firePropertyChange("death", true, score);
+	}
 	}
 	
 	public void incCombo() {

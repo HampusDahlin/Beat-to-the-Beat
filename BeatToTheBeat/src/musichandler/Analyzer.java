@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import support.GameOverException;
 import ddf.minim.*;
 import ddf.minim.analysis.BeatDetect;
 
@@ -92,7 +91,7 @@ public class Analyzer {
 	 */
 	public void analyze() {
 		if (isGameOver()) {
-			throw new GameOverException("win");
+			pcs.firePropertyChange("songEnd", false, true);
 		} else {
 			pcs.firePropertyChange("beat", isBeat(), this.getWave());
 		}
