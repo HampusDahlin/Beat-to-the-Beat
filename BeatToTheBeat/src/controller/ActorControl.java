@@ -102,6 +102,7 @@ public class ActorControl {
 		return hittable;
 	}
 	*/
+	
 	/**
 	 * Checks if first NPC in list is within range.
 	 * @param range How close NPC can be to player.
