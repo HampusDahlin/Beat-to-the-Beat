@@ -108,16 +108,12 @@ public class ActorControl {
 	 * @param right If attack is directed to the right.
 	 */
 	public boolean canHitClose(int range, boolean right) {
-		if (right) {
-			return (NPCList.get(0).getPosition().x) -
-					(player.getPosition().x + player.getSprite().getIconWidth()) <
-					range;
-		} else {
-			return (player.getPosition().x) -
-					(NPCList.get(0).getPosition().x + NPCList.get(0).getSprite().getIconWidth()) <
-					range;
-		}
+		return ((right ? NPCList.get(0) : player).getPosition().x) -
+				((right ? player : NPCList.get(0)).getPosition().x +
+						(right ? player : NPCList.get(0)).getSprite().getIconWidth()) <
+				range;
 	}
+	
 	// Move all NPCs and then try to attack.
 	public void moveActors() {
 		for (int i = 0; i < NPCList.size(); i++) {
