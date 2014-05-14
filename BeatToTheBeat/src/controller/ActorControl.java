@@ -53,7 +53,7 @@ public class ActorControl {
 	 * Tries to attack with the closest NPC.
 	 */
 	public void NPCAttack() {
-		if (canHitClose(15)) { //take damage and remove enemy
+		if (canHitClose(15, false) || canHitClose(15,true)) { //take damage and remove enemy
 			NPCList.get(0).dealDmg(player);
 			if (player.getHealth() <= 0) {
 				player.death();
@@ -68,9 +68,9 @@ public class ActorControl {
 		return NPCList;
 	}
 	
-	public void playerAttack() {
+	public void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
-			if (canHitClose(300 + player.getSprite().getIconHeight()/2 )) {
+			if (canHitClose(300 + player.getSprite().getIconHeight()/2, right)) {
 				System.out.println("TRÄff!");
 				player.incCombo();
 				
@@ -105,12 +105,18 @@ public class ActorControl {
 	/**
 	 * Checks if first NPC in list is within range.
 	 * @param range How close NPC can be to player.
+	 * @param right If attack is directed to the right.
 	 */
-	public boolean canHitClose(int range) {
-		return !NPCList.isEmpty() &&
-				(player.getPosition().getX() + player.getSprite().getIconWidth()/2) -
-				(NPCList.get(0).getPosition().getX() +
-						(NPCList.get(0).getSprite().getIconWidth()/2)) <= range;
+	public boolean canHitClose(int range, boolean right) {
+		if (right) {
+			return (NPCList.get(0).getPosition().x) -
+					(player.getPosition().x + player.getSprite().getIconWidth()) <
+					range;
+		} else {
+			return (player.getPosition().x) -
+					(NPCList.get(0).getPosition().x + NPCList.get(0).getSprite().getIconWidth()) <
+					range;
+		}
 	}
 	// Move all NPCs and then try to attack.
 	public void moveActors() {
