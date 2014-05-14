@@ -22,7 +22,7 @@ public class ScorePanel extends javax.swing.JPanel {
     }
     
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
-    	((CardPanel)(getParent().getParent())).playSong();
+    	((CardPanel)this.getParent()).playSong();
     }                            
     
     public void paintComponent(Graphics g) {

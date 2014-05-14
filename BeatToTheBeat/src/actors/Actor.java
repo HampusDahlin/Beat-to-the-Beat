@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
  * @revisedBy Hampus Dahlin
  *
  */
-public abstract class Actor{
+public abstract class Actor {
 	private final ImageIcon SPRITE;
 	private int health;
 	private Point position;
