@@ -35,6 +35,7 @@ public class ActorControl {
 	 * Removes first actor in actorList.
 	 */
 	public void removeActor() {
+		NPCList.get(0).removeYourself(0);
 		removeActor(NPCList.get(0));
 	}
 	
@@ -60,7 +61,7 @@ public class ActorControl {
 			} else {
 				player.resetCooldown();
 			}
-			throw new RemoveActorException();
+			removeActor();
 		}
 	}
 	
@@ -70,11 +71,11 @@ public class ActorControl {
 	
 	public void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
-			if (canHitClose(300 + player.getSprite().getIconHeight()/2, right)) {
+			if (canHitClose(500, right)) {
 				System.out.println("TRÄff!");
 				player.incCombo();
 				
-				throw new RemoveActorException();
+				removeActor();
 			} else {
 				System.out.println("MISS!");
 				

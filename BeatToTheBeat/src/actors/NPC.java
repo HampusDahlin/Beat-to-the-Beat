@@ -17,4 +17,8 @@ public class NPC extends Actor implements support.Movable{
 		pcs.firePropertyChange("newNPC", null, getPosition());
 	}
 	
+	public void removeYourself(int index) {
+		pcs.firePropertyChange("removeNPC", null, index);
+	}
+	
 }
