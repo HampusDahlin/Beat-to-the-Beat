@@ -43,7 +43,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public void setLevel(Level level){
 		this.level = level;
 		setBackground(this.level.getBackground());
-		this.npcPosList = new ArrayList<Point>();
 	}
 
 	private void setBackground(ABackground background) {
@@ -77,8 +76,9 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public void paintComponent(Graphics g) {		
 		super.paintComponent(g);
 		//loops through NPCList and draws them
+		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
-			g.drawRect(npc.x, npc.y, 10, 10);
+			g.fillRect(npc.x, npc.y, 10, 10);
 		}
 		
 		g.drawRect(4, 16, 101, 11);
@@ -87,5 +87,9 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 
 		//combo
 		//cash?
+	}
+	
+	public void update() {
+		repaint();
 	}
 }

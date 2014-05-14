@@ -102,7 +102,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 				actorControl.removeActor();
 		}
 		
-		uiControl.update(actorControl.getNPCList());
+		mainPanel.update();
+		//uiControl.update(actorControl.getNPCList());
 	}
 	
 	public void endGame() {
