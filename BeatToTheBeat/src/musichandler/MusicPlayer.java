@@ -25,6 +25,7 @@ public class MusicPlayer {
 	
 	public void stop() {
 		player.pause();
+		player.rewind();
 	}
 	
 	public void start() {

@@ -73,6 +73,7 @@ public class ActorControl {
 			if (canHitClose(500, right)) {
 				System.out.println("TRÄff!");
 				player.incCombo();
+				player.incScore();
 				
 				removeActor();
 			} else {
@@ -136,5 +137,9 @@ public class ActorControl {
 	
 	public void resetHealth(){
 		player.setHealth(player.getMaxHealth());
+	}
+	
+	public void resetScore(){
+		player.resetScore();
 	}
 }
