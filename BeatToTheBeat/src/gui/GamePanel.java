@@ -34,8 +34,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		setMaximumSize(new java.awt.Dimension(914, 600));
 		setMinimumSize(new java.awt.Dimension(914, 600));
 		this.setVisible(true);
-		
-		revalidate();
 	}
 
 	public GamePanel(Level level) {
