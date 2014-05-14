@@ -2,16 +2,16 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.util.List;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import musichandler.Song;
+import musichandler.SongListSearcher;
 
 /**
 *
@@ -41,27 +41,6 @@ public class SongSelection extends javax.swing.JPanel {
 	   g.drawImage(image, 0, 0, null);
    }
    
-   
-   public List<Song> searchSongList(String searchTerm) {
-	   searchTerm = searchTerm.toLowerCase();
-	   List<Song> searchResults = new ArrayList<Song>();
-	   if(searchTerm.equals("")) {
-		   return songList;
-	   } else {
-		   for(int i = 0; i < songList.size(); i++) {
-			   if(((songList.get(i).getSongName()).toLowerCase()).contains(searchTerm)) {
-				   searchResults.add(songList.get(i));
-			   } else if(((songList.get(i).getArtist()).toLowerCase()).contains(searchTerm)) {
-				   searchResults.add(songList.get(i));
-			   } else if((((songList.get(i).getGenre()).getName())
-					   .toLowerCase()).contains(searchTerm)) {
-				   searchResults.add(songList.get(i));
-			   }
-		   }
-	   }
-	   return searchResults;
-   }
-   
    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) { 
 	   clearSearch();
 	   ((CardPanel)this.getParent()).back();
@@ -76,7 +55,7 @@ public class SongSelection extends javax.swing.JPanel {
    }    
    
    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {  
-	   presentedSongList = searchSongList(searchField.getText());
+	   presentedSongList = SongListSearcher.searchSongList(searchField.getText(), presentedSongList);
 	   if(!presentedSongList.equals(songList)) {
 		   clearSearchButton.setVisible(true);
 	   }
@@ -112,7 +91,7 @@ public class SongSelection extends javax.swing.JPanel {
 	   }
 		
 	   for(int i = 0; i < 4; i++) {
-		   if((newFirst + i) < presentedSongList.size()) {
+		   if((newFirst + i) < presentedSongList.size() && presentedSongList.size() > 0) {
 			   songPanels[i].setVisible(true);
 			   songPanels[i].setSong(presentedSongList.get(newFirst + i));
 			   //songPanels[i].setIndex(newFirst + i);
