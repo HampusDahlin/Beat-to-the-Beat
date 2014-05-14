@@ -46,8 +46,10 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		mainFrame.add(mainPanel);
 		
 		actorControl = new ActorControl(mainPanel.getGamePanel());
-		mainFrame.setVisible(true);
 		
+		mainFrame.setFocusable(true);
+		mainFrame.addKeyListener(this);
+		mainFrame.setVisible(true);
 		
 		//bakgrundsmusik i menyn.
 		musicControl.playRandom();
