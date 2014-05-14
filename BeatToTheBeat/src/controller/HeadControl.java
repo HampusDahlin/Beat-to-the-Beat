@@ -1,14 +1,18 @@
 package controller;
 import gui.CardPanel;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import actors.PC;
 import musichandler.Song;
 import support.RemoveActorException;
 /**
@@ -61,7 +65,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		time.start();
 		musicControl.play(song, true);
 		musicControl.getAnalyzer().addPropertyChangeListener(this);
-		System.out.println("###############HPPP"+actorControl.getPlayer().getHealth());
+		
+		PC player = actorControl.getPlayer();
+		player.setHealth(player.getMaxHealth());
 		
 	}
 	

@@ -20,7 +20,7 @@ public class PC extends Actor implements ActionListener {
 		
 		this.pcs = new PropertyChangeSupport(this);
 		setPosition(position);
-		MAXHEALTH = 5;
+		MAXHEALTH = 100;
 		score = 0;
 		combo = 0;
 		setHealth(MAXHEALTH);
@@ -81,6 +81,10 @@ public class PC extends Actor implements ActionListener {
 	
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
+	}
+	
+	public int getMaxHealth(){
+		return MAXHEALTH;
 	}
 	
 }
