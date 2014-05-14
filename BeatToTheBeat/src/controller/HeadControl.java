@@ -97,14 +97,14 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		//uiControl.update(actorControl.getNPCList());
 	}
 	
-	public void endGame() {
+	public void endGame(int score) {
 		
 
 		musicControl.pause();
 		time.stop();
 		
 		//säg till cardpanel att visa poäng
-		mainPanel.goToScore();
+		mainPanel.goToScore(score);
 		
 	}
 

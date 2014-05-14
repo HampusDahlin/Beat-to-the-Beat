@@ -121,4 +121,8 @@ public class ActorControl {
 		}
 		NPCAttack();
 	}
+	
+	public int getScore() {
+		return player.getScore();
+	}
 }

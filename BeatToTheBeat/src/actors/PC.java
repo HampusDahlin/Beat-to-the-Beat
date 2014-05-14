@@ -11,7 +11,7 @@ public class PC extends Actor implements ActionListener {
 	private final int MISSTIME;
 	private final int MAXHEALTH;
 	
-	private int cash;
+	private int score;
 	private int combo;
 	private Timer cooldown;
 	
@@ -20,7 +20,7 @@ public class PC extends Actor implements ActionListener {
 		
 		setPosition(position);
 		MAXHEALTH = 100;
-		cash = 0;
+		score = 0;
 		combo = 0;
 		setHealth(MAXHEALTH);
 		setPosition(position);
@@ -34,6 +34,9 @@ public class PC extends Actor implements ActionListener {
 	public void death() {
 		pcs.firePropertyChange("death", true, score);
 	}
+	
+	public int getScore() {
+		return score;
 	}
 	
 	public void incCombo() {
@@ -51,12 +54,12 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void setCash(int newCash){
-		pcs.firePropertyChange("cash", cash, newCash);
-		cash = newCash;
+		pcs.firePropertyChange("cash", score, newCash);
+		score = newCash;
 	}
 	
 	public int getCash(){
-		return cash;
+		return score;
 	}
 	
 	public void startCooldown() {
