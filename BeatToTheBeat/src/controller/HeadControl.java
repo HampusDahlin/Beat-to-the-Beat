@@ -46,6 +46,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		mainFrame.add(mainPanel);
 		
 		actorControl = new ActorControl(mainPanel.getGamePanel());
+		actorControl.getPlayer().addPropertyChangeListener(this);
 		
 		mainFrame.setFocusable(true);
 		mainFrame.addKeyListener(this);
@@ -60,6 +61,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		time.start();
 		musicControl.play(song, true);
 		musicControl.getAnalyzer().addPropertyChangeListener(this);
+		System.out.println("###############HPPP"+actorControl.getPlayer().getHealth());
+		
 	}
 	
 	public void startGame(int songIndex) {

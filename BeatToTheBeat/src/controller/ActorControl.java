@@ -128,4 +128,9 @@ public class ActorControl {
 	public int getScore() {
 		return player.getScore();
 	}
+	
+	//gjgj
+	public PC getPlayer(){
+		return player;
+	}
 }
