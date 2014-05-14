@@ -40,7 +40,7 @@ public class MusicControl {
 		Random r = new Random();
 		int rand = r.nextInt(3);
 		Song song = music.getSongList().get(rand);
-		music.play(song,true);
+		music.play(song,false);
 		
 	}
 	

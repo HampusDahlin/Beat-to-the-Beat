@@ -12,11 +12,16 @@ public class SoundHandler implements ActionListener {
 	private Analyzer analyzer;
 	private Timer timer;
 	
-	public SoundHandler(Song song, boolean toAnalyze) {
-		DELAY = 4500;
-		if (toAnalyze) {
-			analyzer = new Analyzer(song, song.getGenre().getSense());
+	public SoundHandler(Song song, boolean isDelay) {
+		//when we play music in the menu we don't want the delay, but when we play it in the game we want it in order to
+		//analyze perfectly
+		if (isDelay) {
+			DELAY = 4000;
+		}else{
+			DELAY = 0;
 		}
+
+		analyzer = new Analyzer(song, song.getGenre().getSense());
 		player = new MusicPlayer(song);
 	}
 	
