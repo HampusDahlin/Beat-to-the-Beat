@@ -108,7 +108,7 @@ public class ActorControl {
 	 * @param right If attack is directed to the right.
 	 */
 	public boolean canHitClose(int range, boolean right) {
-		return ((right ? NPCList.get(0) : player).getPosition().x) -
+		return !NPCList.isEmpty() && ((right ? NPCList.get(0) : player).getPosition().x) -
 				((right ? player : NPCList.get(0)).getPosition().x +
 						(right ? player : NPCList.get(0)).getSprite().getIconWidth()) <
 				range;
