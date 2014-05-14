@@ -60,7 +60,6 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 	
 	public void startGame(Song song) {
 		time.start();
-		
 		musicControl.play(song, true);
 		musicControl.getAnalyzer().addPropertyChangeListener(this);
 	}
@@ -108,6 +107,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 	
 	public void endGame() {
 		
+
+		musicControl.pause();
 		time.stop();
 		
 		//säg till cardpanel att visa poäng
