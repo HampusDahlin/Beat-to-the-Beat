@@ -11,7 +11,7 @@ import support.GameOverException;
 
 public class PC extends Actor implements ActionListener {
 	private final int MISSTIME;
-	private final int MAXHP;
+	private final int MAXHEALTH;
 	
 	private int cash;
 	private int combo;
@@ -21,10 +21,10 @@ public class PC extends Actor implements ActionListener {
 		super(sprite, new Point(0,0));
 		
 		setPosition(position);
-		MAXHP = 5;
+		MAXHEALTH = 100;
 		cash = 0;
 		combo = 0;
-		setHealth(MAXHP);
+		setHealth(MAXHEALTH);
 		setPosition(position);
 		setDmg(1);
 		MISSTIME = 1000; //ms
