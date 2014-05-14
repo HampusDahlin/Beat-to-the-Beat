@@ -20,6 +20,7 @@ public class PC extends Actor implements ActionListener {
 	public PC(Point position, ImageIcon sprite) {
 		super(sprite, new Point(0,0));
 		
+		setPosition(position);
 		MAXHP = 5;
 		cash = 0;
 		combo = 0;
