@@ -143,8 +143,8 @@ public class SongSelection extends javax.swing.JPanel {
 
        setBackground(new java.awt.Color(255, 255, 255));
 
-       titleLabel.setIcon(new javax.swing.ImageIcon("images\\chooseASong.png")); // NOI18N
-
+       titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\chooseASong.png"))); // NOI18N
+       titleLabel.setVisible(true);
        nextButton.setText("Next");
        nextButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +168,7 @@ public class SongSelection extends javax.swing.JPanel {
 
        searchField.setSelectionColor(new java.awt.Color(102, 102, 102));
 
-       searchButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Pictures\\search.png")); // NOI18N
+       searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\search.png"))); // NOI18N
        searchButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
                searchButtonActionPerformed(evt);
