@@ -21,6 +21,10 @@ public class ScorePanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    public void presentScore(int score) {
+    	scoreLabel.setText(score + "");
+    }
+    
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {  
     	((CardPanel)this.getParent()).playSong();
     }                            
