@@ -133,4 +133,8 @@ public class ActorControl {
 	public PC getPlayer(){
 		return player;
 	}
+	
+	public void resetHealth(){
+		player.setHealth(player.getMaxHealth());
+	}
 }

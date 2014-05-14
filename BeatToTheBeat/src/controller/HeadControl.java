@@ -66,9 +66,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		musicControl.play(song, true);
 		musicControl.getAnalyzer().addPropertyChangeListener(this);
 		
-		PC player = actorControl.getPlayer();
-		player.setHealth(player.getMaxHealth());
-		
+		actorControl.resetHealth();
 	}
 	
 	public void startGame(int songIndex) {
