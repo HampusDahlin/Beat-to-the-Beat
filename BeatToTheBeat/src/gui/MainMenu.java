@@ -8,18 +8,24 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import controller.MusicControl;
+
 /**
 *
 * @author Björn Hedström
 */
 public class MainMenu extends javax.swing.JPanel {
+	MusicControl mC;
 
    /**
     * Creates new form MainMenu
     */
    public MainMenu() {
+	   mC = new MusicControl();
+	   mC.playRandom();
        initComponents();
        repaint();
+       
    }
    
    public void paintComponent(Graphics g) {
