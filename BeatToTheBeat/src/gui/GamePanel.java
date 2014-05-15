@@ -26,11 +26,17 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int combo;
 	private int maxCombo;
 	private int score;
-	private ImageIcon sprite;
+	private ImageIcon[] walkImg;
+	private int walkIndex;
 	
 	public GamePanel(){
+		this.walkImg = new ImageIcon[16];
+		walkIndex = 0;
 		npcPosList = new ArrayList<Point>();
-		this.sprite = new ImageIcon("sprites\\ninja.gif");
+		for (int i = 0; i < 16; i++) {
+			//this.walkImg[i-1] = new ImageIcon("sprites\\walk1.gif");
+			this.walkImg[i] = new ImageIcon("sprites\\walk" + (i+1) + ".gif");
+		}
 		
 		this.setBackground(new java.awt.Color(255, 255, 255));
 		setSize(914, 600);
@@ -86,15 +92,21 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		if (walkIndex == 79) {
+			walkIndex = 0;
+		} else {
+			walkIndex++;
+		}
 
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
-			sprite.paintIcon(this, g, npc.x, npc.y);
+			(npc.x > 450 ? walkImg[walkIndex/10] : walkImg[(walkIndex/10)+8]).paintIcon(this, g, npc.x, npc.y);
 			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
 
-		sprite.paintIcon(this, g, 450, 300);
+		walkImg[0].paintIcon(this, g, 450, 300);
 
 		//draw the healthbar
 		g.drawRect(4, 16, 101, 11);
@@ -105,8 +117,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		g.fillRect(4, 16, health*20, 11);
 		
+		String stringCombo = ""+combo;
 		
-		//draw the combo on screen
 		g.setFont(new Font("Sans", Font.BOLD, 24));
 		g.drawString("Combo:",750,20);
 		g.drawString(""+combo, 780, 40);
@@ -118,7 +130,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		//draw the score on screen
 		g.drawString("Score:", 420, 20);
 		g.drawString(""+score,450 , 40);
-		
 
 		//combo
 		//cash?
