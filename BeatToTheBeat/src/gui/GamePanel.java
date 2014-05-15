@@ -104,7 +104,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		//draw the combo on screen
 		g.setFont(new Font("Sans", Font.BOLD, 24));
 		g.drawString("Combo:",750,20);
-		g.drawString(""+combo, 800, 40);
+		g.drawString(""+combo, 780, 40);
+		//drawing maxcombo on screen
 		g.drawString("Max:",750,60);
 		g.drawString(""+maxCombo,780,80);
 		

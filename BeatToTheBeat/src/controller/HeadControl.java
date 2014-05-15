@@ -49,6 +49,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		mainFrame.add(mainPanel);
 		
+		
+		//creates an actorcontrol. the gamepanel is sent to listen to a PC *player*
+		//also this headcontrol will listen to the PC *player*
 		actorControl = new ActorControl(mainPanel.getGamePanel());
 		actorControl.getPlayer().addPropertyChangeListener(this);
 		
@@ -56,31 +59,37 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		mainFrame.addKeyListener(this);
 		mainFrame.setVisible(true);
 		
-		//bakgrundsmusik i menyn.
+		//background music for the menu.
 		musicControl.playRandom();
 	}
 	
 	public void startGame(Song song) {
+		
+		//pause the music in menu
 		musicControl.pause();
 		time.start();
+		
+		//start the music for the game
 		musicControl.play(song, true);
 		musicControl.getAnalyzer().addPropertyChangeListener(this);
 		
+		//reset the PC values
 		actorControl.resetHealth();
 		actorControl.resetScore();
+		actorControl.resetCombo();
 	}
 	
 	public void startGame(int songIndex) {
 		time.start();
-		
 		if(songIndex >=0 && songIndex <= musicControl.getSongCount())//hur många låtar vi nu än kommer att ha
 		{
 			musicControl.setSong(songIndex);
 			musicControl.play(true);
-		}	
+		}else{//just error handling
+			System.out.println("Song doesn't exist");
+		}
 		
 	}
-	
 	
 	
 	/**
@@ -105,7 +114,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		musicControl.pause();
 		time.stop();
 		
-		//säg till cardpanel att visa poäng
+		//tells cardpanel to go to the scorescreen.
 		mainPanel.goToScore(score);
 		
 	}

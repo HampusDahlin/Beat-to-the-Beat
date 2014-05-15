@@ -71,14 +71,11 @@ public class ActorControl {
 	public void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
 			if (canHitClose(500, right)) {
-				System.out.println("TRÄff!");
 				player.incCombo();
 				player.incScore();
 				
 				removeActor();
 			} else {
-				System.out.println("MISS!");
-				
 				player.startCooldown();
 				player.resetCombo();
 			}
@@ -126,6 +123,9 @@ public class ActorControl {
 		NPCAttack();
 	}
 	
+	
+	//BTW! ALL GETTERS AND SETTER AND METHODS BELOW HAVE BEEN CREATED TO BE USED; ERGO THEY ARE NECESSARY
+	
 	public int getScore() {
 		return player.getScore();
 	}
@@ -141,5 +141,8 @@ public class ActorControl {
 	
 	public void resetScore(){
 		player.resetScore();
+	}
+	public void resetCombo(){
+		player.resetCombo();
 	}
 }

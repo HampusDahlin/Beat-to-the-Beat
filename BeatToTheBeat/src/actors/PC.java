@@ -12,7 +12,6 @@ public class PC extends Actor implements ActionListener {
 	
 	private int score;
 	private int combo;
-	private int maxCombo;
 	private Timer cooldown;
 	private PropertyChangeSupport pcs;
 	
@@ -42,7 +41,13 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void incScore(){
-		score ++;
+		
+		if(getCombo()>1){
+			//we want the player to recieve the combo points they currently have, and not the ones they will get.
+			score = score + getCombo()-1;	
+		}else{
+			score ++;
+		}
 		pcs.firePropertyChange("score", score-1, score);
 		
 	}
@@ -51,15 +56,6 @@ public class PC extends Actor implements ActionListener {
 		combo++;
 		pcs.firePropertyChange("combo", combo-1, combo);
 	}
-	
-	public void setMaxCombo(int maxCombo){
-		this.maxCombo = maxCombo;
-	}
-	
-	public int getMaxCombo(){
-		return maxCombo;
-	}
-	
 	
 	public void resetCombo() {
 		pcs.firePropertyChange("combo", combo, 0);
