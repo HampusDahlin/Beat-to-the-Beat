@@ -28,10 +28,10 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int walkIndex;
 	
 	public GamePanel(){
-		this.walkImg = new ImageIcon[8];
+		this.walkImg = new ImageIcon[16];
 		walkIndex = 0;
 		npcPosList = new ArrayList<Point>();
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 16; i++) {
 			//this.walkImg[i-1] = new ImageIcon("sprites\\walk1.gif");
 			this.walkImg[i] = new ImageIcon("sprites\\walk" + (i+1) + ".gif");
 		}
@@ -95,7 +95,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
-			walkImg[walkIndex/10].paintIcon(this, g, npc.x, npc.y);
+			(npc.x > 450 ? walkImg[walkIndex/10] : walkImg[(walkIndex/10)+8]).paintIcon(this, g, npc.x, npc.y);
 			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
 
