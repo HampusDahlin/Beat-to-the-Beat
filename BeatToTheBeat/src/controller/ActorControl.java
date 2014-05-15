@@ -1,20 +1,13 @@
 package controller;
-
-
 import java.awt.Point;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
-import support.RemoveActorException;
 import actors.Actor;
 import actors.NPC;
 import actors.PC;
-
-
 public class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
@@ -23,12 +16,12 @@ public class ActorControl {
 	public ActorControl(JPanel listener) {
 		this.sprite = new ImageIcon("sprites\\ninja.gif");
 		NPCList = new ArrayList<NPC>();
-		player = new PC(new Point(500, 100), sprite);
+		player = new PC(new Point(450, 0), sprite);
 		player.addPropertyChangeListener((PropertyChangeListener)listener);
 	}
 	
 	public void createActor(JPanel listener) {
-		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 1000, 0), //random which side
+		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 900, 0), //random which side
 			sprite, (PropertyChangeListener)listener));
 	}
 	
@@ -41,6 +34,7 @@ public class ActorControl {
 	 * Removes first actor in actorList.
 	 */
 	public void removeActor() {
+		NPCList.get(0).removeYourself(0);
 		removeActor(NPCList.get(0));
 	}
 	
@@ -59,14 +53,14 @@ public class ActorControl {
 	 * Tries to attack with the closest NPC.
 	 */
 	public void NPCAttack() {
-		if (canHitClose(100)) { //take damage and remove enemy
+		if (canHitClose(15, false) || canHitClose(15,true)) { //take damage and remove enemy
 			NPCList.get(0).dealDmg(player);
 			if (player.getHealth() <= 0) {
 				player.death();
 			} else {
 				player.resetCooldown();
 			}
-			throw new RemoveActorException();
+			removeActor();
 		}
 	}
 	
@@ -74,13 +68,14 @@ public class ActorControl {
 		return NPCList;
 	}
 	
-	public void playerAttack() {
+	public void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
-			if (canHitClose(200 + player.getSprite().getIconHeight()/2 )) {
+			if (canHitClose(500, right)) {
 				System.out.println("TRÄff!");
 				player.incCombo();
+				player.incScore();
 				
-				throw new RemoveActorException();
+				removeActor();
 			} else {
 				System.out.println("MISS!");
 				
@@ -89,7 +84,6 @@ public class ActorControl {
 			}
 		}
 	}
-
 	// Possibly to be used with powerups etc later.
 	/**
 	 * Checks which NPCs are within range of player.
@@ -106,30 +100,46 @@ public class ActorControl {
 				hittable.add(enemy);
 			}
 		}
-
 		return hittable;
 	}
 	*/
-
+	
 	/**
 	 * Checks if first NPC in list is within range.
 	 * @param range How close NPC can be to player.
+	 * @param right If attack is directed to the right.
 	 */
-	public boolean canHitClose(int range) {
-		return !NPCList.isEmpty() &&
-				player.getPosition().getX() -
-				(NPCList.get(0).getPosition().getX() +
-						(NPCList.get(0).getSprite().getIconWidth()/2)) <= range;
+	public boolean canHitClose(int range, boolean right) {
+		return !NPCList.isEmpty() && (NPCList.get(0).getSpeed().x < 0 == right) &&
+				((right ? NPCList.get(0) : player).getPosition().x) -
+				((right ? player : NPCList.get(0)).getPosition().x +
+						(right ? player : NPCList.get(0)).getSprite().getIconWidth()) <
+				range;
 	}
-
+	
 	// Move all NPCs and then try to attack.
 	public void moveActors() {
-		for (int i = 0; i < NPCList.size(); i++) {
-			NPCList.get(i).setPosition(new Point( (int) (NPCList.get(i).getPosition().getX() +
-					(player.getPosition().getX() - NPCList.get(i).getPosition().getX() > 0 ? 1 : -1)
-					*NPCList.get(i).getSpeed().getX()), 300), i);
+		for (int i = 0; i < NPCList.size() && !NPCList.isEmpty(); i++) {
+			NPCList.get(i).setPosition(new Point(
+					(NPCList.get(i).getPosition().x + NPCList.get(i).getSpeed().x), 300), i);
 		}
 		NPCAttack();
 	}
-
+	
+	public int getScore() {
+		return player.getScore();
+	}
+	
+	//gjgj
+	public PC getPlayer(){
+		return player;
+	}
+	
+	public void resetHealth(){
+		player.setHealth(player.getMaxHealth());
+	}
+	
+	public void resetScore(){
+		player.resetScore();
+	}
 }

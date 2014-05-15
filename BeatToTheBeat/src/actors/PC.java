@@ -1,30 +1,29 @@
 package actors;
-
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
-
-import support.GameOverException;
-
 public class PC extends Actor implements ActionListener {
 	private final int MISSTIME;
-	private final int MAXHP;
+	private final int MAXHEALTH;
 	
-	private int cash;
+	private int score;
 	private int combo;
 	private Timer cooldown;
+	private PropertyChangeSupport pcs;
 	
 	public PC(Point position, ImageIcon sprite) {
 		super(sprite, new Point(0,0));
 		
+		this.pcs = new PropertyChangeSupport(this);
 		setPosition(position);
-		MAXHP = 5;
-		cash = 0;
+		MAXHEALTH = 10;
+		score = 0;
 		combo = 0;
-		setHealth(MAXHP);
+		setHealth(MAXHEALTH);
 		setPosition(position);
 		setDmg(1);
 		MISSTIME = 1000; //ms
@@ -34,8 +33,15 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void death() {
-		//ska vi firea en property change eller kommer exceptionen att fixa allt?
-		throw new GameOverException();
+		pcs.firePropertyChange("death", true, score);
+	}
+	
+	public int getScore() {
+		return score;
+	}
+	
+	public void incScore(){
+		score ++;
 	}
 	
 	public void incCombo() {
@@ -53,12 +59,12 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void setCash(int newCash){
-		pcs.firePropertyChange("cash", cash, newCash);
-		cash = newCash;
+		pcs.firePropertyChange("cash", score, newCash);
+		score = newCash;
 	}
 	
 	public int getCash(){
-		return cash;
+		return score;
 	}
 	
 	public void startCooldown() {
@@ -73,10 +79,20 @@ public class PC extends Actor implements ActionListener {
 	public boolean onCooldown() {
 		return cooldown.isRunning();
 	}
-
 	public void actionPerformed(ActionEvent e) {
 		//noRepeat so cooldown stops 
 	}
-
+	
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+	}
+	
+	public int getMaxHealth(){
+		return MAXHEALTH;
+	}
+	
+	public void resetScore(){
+		score = 0;
+	}
 	
 }

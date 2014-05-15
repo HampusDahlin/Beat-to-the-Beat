@@ -8,6 +8,8 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import controller.MusicControl;
+
 /**
 *
 * @author Björn Hedström
@@ -20,6 +22,7 @@ public class MainMenu extends javax.swing.JPanel {
    public MainMenu() {
        initComponents();
        repaint();
+       
    }
    
    public void paintComponent(Graphics g) {

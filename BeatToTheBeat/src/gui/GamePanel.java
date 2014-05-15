@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.beans.IndexedPropertyChangeEvent;
@@ -23,19 +24,23 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int health;
 	private int combo;
 	private int cash;
-	private ImageIcon sprite;
+	private ImageIcon[] walkImg;
+	private int walkIndex;
 	
 	public GamePanel(){
+		this.walkImg = new ImageIcon[16];
+		walkIndex = 0;
 		npcPosList = new ArrayList<Point>();
-		this.sprite = new ImageIcon("sprites\\ninja.gif");
+		for (int i = 0; i < 16; i++) {
+			//this.walkImg[i-1] = new ImageIcon("sprites\\walk1.gif");
+			this.walkImg[i] = new ImageIcon("sprites\\walk" + (i+1) + ".gif");
+		}
 		
 		this.setBackground(new java.awt.Color(255, 255, 255));
 		setSize(914, 600);
 		setMaximumSize(new java.awt.Dimension(914, 600));
 		setMinimumSize(new java.awt.Dimension(914, 600));
 		this.setVisible(true);
-		
-		revalidate();
 	}
 
 	public GamePanel(Level level) {
@@ -65,6 +70,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			npcPosList.get(((IndexedPropertyChangeEvent) pce).getIndex()).setLocation(( (Point)pce.getNewValue() ));
 		} else if (pce.getPropertyName().equals("newNPC")) {
 			npcPosList.add(new Point((Point) pce.getNewValue()));
+		} else if (pce.getPropertyName().equals("removeNPC")) {
+			npcPosList.remove(pce.getNewValue());
 		} else if (pce.getPropertyName().equals("death")) {
 			//avsluta spel
 		} else if (pce.getPropertyName().equals("combo")) {
@@ -79,20 +86,29 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		if (walkIndex == 79) {
+			walkIndex = 0;
+		} else {
+			walkIndex++;
+		}
+
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
-			sprite.paintIcon(this, g, npc.x, npc.y);
+			(npc.x > 450 ? walkImg[walkIndex/10] : walkImg[(walkIndex/10)+8]).paintIcon(this, g, npc.x, npc.y);
 			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
-		
-		sprite.paintIcon(this, g, 500, 100);
-		
+
+		walkImg[0].paintIcon(this, g, 450, 300);
+
 		g.drawRect(4, 16, 101, 11);
-		g.fillRect(10, 40, 200, 200);
 		g.setColor(Color.RED);
 		g.fillRect(5, 15, health*20, 10);
 		
+		String stringCombo = ""+combo;
+		
+		g.setFont(new Font("Sans", Font.BOLD, 24));
+		g.drawString(stringCombo, 504, 26);
 
 		//combo
 		//cash?

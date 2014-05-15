@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Random;
 
 import musichandler.Analyzer;
 import musichandler.MusicFacade;
@@ -33,6 +34,14 @@ public class MusicControl {
 	
 	public void play(boolean analyze) {
 		music.playCurrent(analyze);
+	}
+	
+	public void playRandom(){
+		Random r = new Random();
+		int rand = r.nextInt(3);
+		Song song = music.getSongList().get(rand);
+		music.play(song,false);
+		
 	}
 	
 	public void pause() {

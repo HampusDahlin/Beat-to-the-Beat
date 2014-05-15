@@ -60,7 +60,8 @@ public class CardPanel extends JPanel {
 		((CardLayout)this.getLayout()).show(this, GAMEPANEL);
 	}
 	
-	public void goToScore() {
+	public void goToScore(int score) {
+		scorePanel.presentScore(score);
 		((CardLayout)this.getLayout()).show(this, SCOREPANEL);
 	}
 	

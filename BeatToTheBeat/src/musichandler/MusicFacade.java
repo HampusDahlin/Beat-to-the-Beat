@@ -168,13 +168,13 @@ public class MusicFacade {
 	public void saveSonglist(){
 		try {
 	          BufferedWriter output = new BufferedWriter(new FileWriter(new File("songs\\songList.list")));
-	          
+	          System.out.println(songList.size());
 	          for(Song s: songList){
 	        	  //toString() in Song and Genre are overridden to guarantee satisfaction.
 		          output.write(s.toString());
-		          output.close();
-		          
+		          output.write("\n");
 	          }
+	          output.close();
 		} catch ( IOException e ) {
 	           e.printStackTrace();
 	        }

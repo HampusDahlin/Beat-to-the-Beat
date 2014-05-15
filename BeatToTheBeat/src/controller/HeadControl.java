@@ -1,21 +1,20 @@
 package controller;
-
 import gui.CardPanel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import actors.PC;
 import musichandler.Song;
-import support.GameOverException;
 import support.RemoveActorException;
-
-
 /**
  * 
  * @author Hampus Dahlin
@@ -24,11 +23,8 @@ import support.RemoveActorException;
  * @version 0.0.6
  *
  */
-public class HeadControl implements ActionListener, PropertyChangeListener {
+public class HeadControl implements ActionListener, PropertyChangeListener, KeyListener {
 	
-	private long startTime;
-	private long[] spawnTimes;
-	private int enemyNbr;
 	private ActorControl actorControl;
 	private EnviromentControl enviromentControl;
 	private MusicControl musicControl;
@@ -54,19 +50,27 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		mainFrame.add(mainPanel);
 		
 		actorControl = new ActorControl(mainPanel.getGamePanel());
+		actorControl.getPlayer().addPropertyChangeListener(this);
 		
+		mainFrame.setFocusable(true);
+		mainFrame.addKeyListener(this);
 		mainFrame.setVisible(true);
+		
+		//bakgrundsmusik i menyn.
+		musicControl.playRandom();
 	}
 	
 	public void startGame(Song song) {
+		musicControl.pause();
 		time.start();
-		
 		musicControl.play(song, true);
 		musicControl.getAnalyzer().addPropertyChangeListener(this);
+		
+		actorControl.resetHealth();
+		actorControl.resetScore();
 	}
 	
 	public void startGame(int songIndex) {
-		startTime = System.currentTimeMillis();
 		time.start();
 		
 		if(songIndex >=0 && songIndex <= musicControl.getSongCount())//hur många låtar vi nu än kommer att ha
@@ -83,21 +87,11 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 	 * {@inheritDoc}
 	 */
 	public void actionPerformed(ActionEvent e) {
-		try {
-			musicControl.analyzeSong();
-		} catch (GameOverException exc) {
-			System.out.println("Song Finished");
-			endGame();
-		}
-		
-		//analyzes song, going down to Analyzer..
 		musicControl.analyzeSong();
 		
 		//Moves the actors along their path.
 		try {
 				actorControl.moveActors();
-			} catch (GameOverException exc) {
-				endGame();
 			} catch (RemoveActorException exc) {
 				actorControl.removeActor();
 		}
@@ -106,21 +100,37 @@ public class HeadControl implements ActionListener, PropertyChangeListener {
 		//uiControl.update(actorControl.getNPCList());
 	}
 	
-	public void endGame() {
+	public void endGame(int score) {
 		
+		musicControl.pause();
 		time.stop();
 		
 		//säg till cardpanel att visa poäng
-		mainPanel.goToScore();
+		mainPanel.goToScore(score);
 		
 	}
-
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("play")) {
 			startGame((Song) evt.getNewValue());
 		} else if(evt.getPropertyName().equals("beat") && (boolean) evt.getOldValue()) {
 			actorControl.createActor(mainPanel.getGamePanel());
+		} else if (evt.getPropertyName().equals("death")) {
+			endGame((int) evt.getNewValue());
+		} else if (evt.getPropertyName().equals("songEnd")) {
+			endGame(actorControl.getScore());
 		}
 	}
-
+	public void keyPressed(KeyEvent evt) {
+		if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
+			actorControl.playerAttack(false);
+		} else if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
+			actorControl.playerAttack(true);
+		}
+	}
+	public void keyReleased(KeyEvent evt) {
+		
+	}
+	public void keyTyped(KeyEvent evt) {
+		
+	}
 }
