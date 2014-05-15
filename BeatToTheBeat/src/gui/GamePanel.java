@@ -23,7 +23,9 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private List<Point> npcPosList;
 	private int health;
 	private int combo;
-	private int cash;
+	private int maxCombo;
+	
+	private int score;
 	private ImageIcon sprite;
 	
 	public GamePanel(){
@@ -69,11 +71,16 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		} else if (pce.getPropertyName().equals("death")) {
 			//avsluta spel
 		} else if (pce.getPropertyName().equals("combo")) {
+			if((int)pce.getNewValue() == 0){
+				if(combo > maxCombo){
+					maxCombo = combo;
+				}			
+			}
 			combo = (int) pce.getNewValue();
 		} else if (pce.getPropertyName().equals("hp")) {
 			health = (int) pce.getNewValue();
-		} else if (pce.getPropertyName().equals("cash")) {
-			cash = (int) pce.getNewValue();
+		} else if (pce.getPropertyName().equals("score")) {
+			score = (int) pce.getNewValue();
 		}
 	}
 	
@@ -93,10 +100,20 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.setColor(Color.RED);
 		g.fillRect(5, 15, health*20, 10);
 		
-		String stringCombo = ""+combo;
 		
+		//draw the combo on screen
 		g.setFont(new Font("Sans", Font.BOLD, 24));
-		g.drawString(stringCombo, 504, 26);
+		g.drawString("Combo:",750,20);
+		g.drawString(""+combo, 800, 40);
+		g.drawString("Max:",750,60);
+		g.drawString(""+maxCombo,780,80);
+		
+		
+		//draw the score on screen
+		String stringScore = ""+score;
+		g.drawString("Score:", 420, 20);
+		g.drawString(stringScore,450 , 40);
+		
 
 		//combo
 		//cash?
