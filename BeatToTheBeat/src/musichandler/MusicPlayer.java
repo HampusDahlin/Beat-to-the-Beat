@@ -15,7 +15,7 @@ public class MusicPlayer {
 	public MusicPlayer(Song song) {
 		this.song = song;
 		minim = new Minim(this);
-		System.out.println(song.getFilename());
+		//System.out.println(song.getFilename());
 		player = minim.loadFile(song.getFilename(), BUFFERSIZE);// this loads song from the data folder
 	}
 	
@@ -48,14 +48,14 @@ public class MusicPlayer {
 	}
 	
 	public InputStream createInput(String fileName) {
-		System.out.println("creating inputStream from file: " + fileName);
+		//System.out.println("creating inputStream from file: " + fileName);
 		InputStream is;
 		try {
 			is = new FileInputStream(fileName);
-			System.out.println("Success!");
+			//System.out.println("Success!");
 			return is;
 		} catch (Exception e) {
-			System.out.println("Failed! Exception: " + e);
+			//System.out.println("Failed! Exception: " + e);
 			is = null;
 		}
 		return is;

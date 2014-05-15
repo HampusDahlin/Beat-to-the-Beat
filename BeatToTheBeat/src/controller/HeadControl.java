@@ -77,6 +77,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		actorControl.resetHealth();
 		actorControl.resetScore();
 		actorControl.resetCombo();
+		//empty out the npclist
+		actorControl.emptyNPCList();
 	}
 	
 	public void startGame(int songIndex) {
@@ -114,8 +116,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		musicControl.pause();
 		time.stop();
 		
-		//tells cardpanel to go to the scorescreen.
+		//tells cardpanel to go to the scorescreen, and play background music again 
 		mainPanel.goToScore(score);
+		musicControl.playRandom();
 		
 	}
 	public void propertyChange(PropertyChangeEvent evt) {

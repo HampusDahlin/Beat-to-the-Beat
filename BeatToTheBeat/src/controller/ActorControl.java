@@ -11,18 +11,18 @@ import actors.PC;
 public class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
-	private ImageIcon sprite;
+	private final ImageIcon SPRITE;
 	
 	public ActorControl(JPanel listener) {
-		this.sprite = new ImageIcon("sprites\\ninja.gif");
+		this.SPRITE = new ImageIcon("sprites\\ninja.gif");
 		NPCList = new ArrayList<NPC>();
-		player = new PC(new Point(450, 0), sprite);
+		player = new PC(new Point(450, 0), SPRITE);
 		player.addPropertyChangeListener((PropertyChangeListener)listener);
 	}
 	
 	public void createActor(JPanel listener) {
 		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 900, 0), //random which side
-			sprite, (PropertyChangeListener)listener));
+			SPRITE, (PropertyChangeListener)listener));
 	}
 	
 	public void removeActor(Actor actor) {
@@ -55,6 +55,7 @@ public class ActorControl {
 	public void NPCAttack() {
 		if (canHitClose(15, false) || canHitClose(15,true)) { //take damage and remove enemy
 			NPCList.get(0).dealDmg(player);
+			player.resetCombo();
 			if (player.getHealth() <= 0) {
 				player.death();
 			} else {
@@ -144,5 +145,9 @@ public class ActorControl {
 	}
 	public void resetCombo(){
 		player.resetCombo();
+	}
+	
+	public void emptyNPCList(){
+		NPCList.clear();
 	}
 }

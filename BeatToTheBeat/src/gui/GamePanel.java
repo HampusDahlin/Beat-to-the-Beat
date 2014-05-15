@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import actors.PC;
 import levels.Level;
 import enviroment.ABackground;
 
@@ -24,7 +25,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int health;
 	private int combo;
 	private int maxCombo;
-	
 	private int score;
 	private ImageIcon sprite;
 	
@@ -96,9 +96,14 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 
 		sprite.paintIcon(this, g, 450, 300);
 
+		//draw the healthbar
 		g.drawRect(4, 16, 101, 11);
 		g.setColor(Color.RED);
-		g.fillRect(5, 15, health*20, 10);
+		if(health<=0){
+			//"fake"PC just to get the maxhealth which is the same for all PC's
+			health = new PC(null,null).getMaxHealth();
+		}
+		g.fillRect(4, 16, health*20, 11);
 		
 		
 		//draw the combo on screen
@@ -111,9 +116,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		
 		
 		//draw the score on screen
-		String stringScore = ""+score;
 		g.drawString("Score:", 420, 20);
-		g.drawString(stringScore,450 , 40);
+		g.drawString(""+score,450 , 40);
 		
 
 		//combo
