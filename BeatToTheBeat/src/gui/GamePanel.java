@@ -24,11 +24,17 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int health;
 	private int combo;
 	private int cash;
-	private ImageIcon sprite;
+	private ImageIcon[] walkImg;
+	private int walkIndex;
 	
 	public GamePanel(){
+		this.walkImg = new ImageIcon[8];
+		walkIndex = 0;
 		npcPosList = new ArrayList<Point>();
-		this.sprite = new ImageIcon("sprites\\ninja.gif");
+		for (int i = 0; i < 8; i++) {
+			//this.walkImg[i-1] = new ImageIcon("sprites\\walk1.gif");
+			this.walkImg[i] = new ImageIcon("sprites\\walk" + (i+1) + ".gif");
+		}
 		
 		this.setBackground(new java.awt.Color(255, 255, 255));
 		setSize(914, 600);
@@ -79,15 +85,21 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		if (walkIndex == 79) {
+			walkIndex = 0;
+		} else {
+			walkIndex++;
+		}
 
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
-			sprite.paintIcon(this, g, npc.x, npc.y);
+			walkImg[walkIndex/10].paintIcon(this, g, npc.x, npc.y);
 			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
 
-		sprite.paintIcon(this, g, 450, 300);
+		walkImg[0].paintIcon(this, g, 450, 300);
 
 		g.drawRect(4, 16, 101, 11);
 		g.setColor(Color.RED);
