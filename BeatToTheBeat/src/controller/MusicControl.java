@@ -70,4 +70,14 @@ public class MusicControl {
 	public int getSongCount() {
 		return music.getSongCount();
 	}
+	
+	
+	//Code to loop music in menu
+	public void loopMusic(boolean inGame){
+		while(!inGame){
+			playRandom();
+		}
+	}
+	
+	
 }

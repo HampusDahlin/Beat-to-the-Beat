@@ -77,16 +77,20 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		} else if (pce.getPropertyName().equals("death")) {
 			//avsluta spel
 		} else if (pce.getPropertyName().equals("combo")) {
-			if((int)pce.getNewValue() == 0){
-				if(combo > maxCombo){
-					maxCombo = combo;
-				}			
-			}
+			
 			combo = (int) pce.getNewValue();
 		} else if (pce.getPropertyName().equals("hp")) {
 			health = (int) pce.getNewValue();
 		} else if (pce.getPropertyName().equals("score")) {
 			score = (int) pce.getNewValue();
+		}else if(pce.getPropertyName().equals("max")) {
+			if((int)pce.getNewValue() == 0){
+				maxCombo = 0;
+			}
+			if(combo > maxCombo){
+				maxCombo = combo;
+			}			
+			
 		}
 	}
 	

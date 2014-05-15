@@ -74,6 +74,7 @@ public class ActorControl {
 			if (canHitClose(500, right)) {
 				player.incCombo();
 				player.incScore();
+				player.incMaxCombo();
 				
 				removeActor();
 			} else {
@@ -145,6 +146,9 @@ public class ActorControl {
 	}
 	public void resetCombo(){
 		player.resetCombo();
+	}
+	public void resetMaxCombo(){
+		player.resetMaxCombo();
 	}
 	
 	public void emptyNPCList(){

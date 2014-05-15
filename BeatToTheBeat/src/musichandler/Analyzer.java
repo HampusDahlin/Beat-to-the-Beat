@@ -31,6 +31,9 @@ public class Analyzer {
 	private List<float[][]> waveList;
 	private final int DELAY;
 	
+	//test
+	private boolean isPlaying;
+	
 	/**
 	 * 
 	 * @param song the song to be analyzed
@@ -45,7 +48,6 @@ public class Analyzer {
 		player = minim.loadFile(song.getFilename(), BUFFERSIZE);// this loads song from the data folder	
 		detective = new BeatDetect(BUFFERSIZE, player.sampleRate());
 		detective.setSensitivity(genre.getSense());
-		
 		this.waveList = new ArrayList<float[][]>();
 		for (int i = 0; i < DELAY/10; i++) {
 			waveList.add(new float[2][BUFFERSIZE]);
@@ -58,6 +60,9 @@ public class Analyzer {
 	public void start() {
 		player.mute();
 		player.play();
+		
+		//ssj
+		isPlaying = true;
 	}
 	
 	/**
@@ -90,11 +95,31 @@ public class Analyzer {
 	 * Fires a {@link PropertyChangeEvent} with sound data, also throws GameOverException with string "win" if song is over.
 	 */
 	public void analyze() {
+		//test
+		int time = 0;
+		
 		if (isGameOver()) {
 			pcs.firePropertyChange("songEnd", false, true);
 		} else {
+			//testcode
+			int nmrBeats = 0;
 			pcs.firePropertyChange("beat", isBeat(), this.getWave());
+			nmrBeats ++;
+			if(time % 5 == 0 && nmrBeats != 5){
+				pcs.firePropertyChange("songStop", false, true);
+				isPlaying = false;
+			}else{
+				isPlaying = true;
+			}
+			if(nmrBeats == 5){
+				nmrBeats =0;
+			}
+			
 		}
+	}
+	
+	public boolean isPlaying(){
+		return isPlaying;
 	}
 	
 	/**

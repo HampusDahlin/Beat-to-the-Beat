@@ -31,6 +31,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	private UIControl uiControl;
 	private Timer time;
 	private CardPanel mainPanel;
+	private boolean inGame;
 	//private JFrame mainFrame;
 	
 	public HeadControl(JFrame mainFrame) {
@@ -61,6 +62,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		//background music for the menu.
 		musicControl.playRandom();
+		
+		inGame = false;
 	}
 	
 	public void startGame(Song song) {
@@ -68,6 +71,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		//pause the music in menu
 		musicControl.pause();
 		time.start();
+		inGame = true;
 		
 		//start the music for the game
 		musicControl.play(song, true);
@@ -77,6 +81,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		actorControl.resetHealth();
 		actorControl.resetScore();
 		actorControl.resetCombo();
+		actorControl.resetMaxCombo();
 		//empty out the npclist
 		actorControl.emptyNPCList();
 	}
@@ -119,6 +124,11 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		//tells cardpanel to go to the scorescreen, and play background music again 
 		mainPanel.goToScore(score);
 		musicControl.playRandom();
+		inGame = false;
+		
+		//trying out some code to make the music loop
+		
+		
 		
 	}
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -130,13 +140,17 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			endGame((int) evt.getNewValue());
 		} else if (evt.getPropertyName().equals("songEnd")) {
 			endGame(actorControl.getScore());
+		}else if(evt.getPropertyName().equals("songStop")){
+			musicControl.playRandom();
 		}
 	}
 	public void keyPressed(KeyEvent evt) {
-		if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
-			actorControl.playerAttack(false);
-		} else if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
-			actorControl.playerAttack(true);
+		if(time.isRunning()){
+			if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
+				actorControl.playerAttack(false);
+			} else if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
+				actorControl.playerAttack(true);
+			}
 		}
 	}
 	public void keyReleased(KeyEvent evt) {

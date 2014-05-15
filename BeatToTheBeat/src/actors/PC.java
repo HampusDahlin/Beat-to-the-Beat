@@ -12,6 +12,7 @@ public class PC extends Actor implements ActionListener {
 	
 	private int score;
 	private int combo;
+	private int maxCombo;
 	private Timer cooldown;
 	private PropertyChangeSupport pcs;
 	
@@ -23,6 +24,7 @@ public class PC extends Actor implements ActionListener {
 		MAXHEALTH = 10;
 		score = 0;
 		combo = 0;
+		maxCombo = 0;
 		setHealth(MAXHEALTH);
 		setPosition(position);
 		setDmg(1);
@@ -102,6 +104,21 @@ public class PC extends Actor implements ActionListener {
 	
 	public void resetScore(){
 		score = 0;
+	}
+	
+	public void incMaxCombo(){
+		maxCombo++;
+		pcs.firePropertyChange("max", maxCombo-1, maxCombo);
+	}
+	
+	public int getMaxCombo(){
+		return maxCombo;
+	}
+	
+	public void resetMaxCombo(){
+		pcs.firePropertyChange("max",maxCombo,0);
+		maxCombo = 0;
+		
 	}
 	
 }
