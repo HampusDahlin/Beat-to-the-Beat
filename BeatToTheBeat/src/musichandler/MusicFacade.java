@@ -188,4 +188,8 @@ public class MusicFacade {
 		return songList.size();
 	}
 	
+	public Genre[] getGenres() {
+		return genres;
+	}
+	
 } //end MusicFacade

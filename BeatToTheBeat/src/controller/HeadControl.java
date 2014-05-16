@@ -38,7 +38,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		time = new Timer(10, this);
 		uiControl = new UIControl(mainFrame);
-		mainPanel = new CardPanel(musicControl.getSongList());
+		mainPanel = new CardPanel(musicControl.getSongList());//, musicControl.getGenres());
 		
 		
 		//make headcontrol observe all the songPanels. 
