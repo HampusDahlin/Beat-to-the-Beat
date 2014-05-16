@@ -21,11 +21,10 @@ public class PC extends Actor implements ActionListener {
 		
 		this.pcs = new PropertyChangeSupport(this);
 		setPosition(position);
-		MAXHEALTH = 10;
+		MAXHEALTH = 5;
 		score = 0;
 		combo = 0;
 		maxCombo = 0;
-		setHealth(MAXHEALTH);
 		setPosition(position);
 		setDmg(1);
 		MISSTIME = 1000; //ms

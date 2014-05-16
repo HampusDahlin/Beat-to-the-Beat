@@ -55,6 +55,7 @@ public abstract class Actor {
 	}
 	
 	public void setHealth(int newHealth){
+		pcs.firePropertyChange("hp", health, newHealth);
 		health = newHealth;
 	}
 	
@@ -86,15 +87,7 @@ public abstract class Actor {
 	}
 	
 	public void dealDmg(Actor defender){
-		//tmp variabel för att hålla defenders hp innan attacken.
-		int tmpHP = defender.getHealth();
 		defender.setHealth(defender.getHealth() - this.getDmg());
-		//om den som blev skadad är spelaren vill vi ju skicka en annorlunda pc (?) 
-		if(defender instanceof PC){
-			pcs.firePropertyChange("hp", tmpHP, defender.getHealth());
-		}else{
-			pcs.firePropertyChange("hpEnemy", tmpHP, defender.getHealth());
-		}
 	}
 	
 	

@@ -18,6 +18,7 @@ public class ActorControl {
 		NPCList = new ArrayList<NPC>();
 		player = new PC(new Point(450, 0), SPRITE);
 		player.addPropertyChangeListener((PropertyChangeListener)listener);
+		player.setHealth(player.getMaxHealth()); //setting health after so player fires event to gamepanel
 	}
 	
 	public void createActor(JPanel listener) {
