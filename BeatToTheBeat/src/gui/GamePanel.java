@@ -58,14 +58,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private void setBackground(ABackground background) {
 		this.background = background;
 	}
-/*
-	public void propertyChange(IndexedPropertyChangeEvent pce) {
-		if (pce.getPropertyName().equals("move")) {
-			npcPosList.get(pce.getIndex()).setLocation( (Point)pce.getNewValue() );
-		} else if (pce.getPropertyName().equals("death")) {
-			npcPosList.remove(pce.getIndex());
-		}
-	}*/
 
 	public void propertyChange(PropertyChangeEvent pce) {
 		if (pce.getPropertyName().equals("move") && npcPosList.size() > 0) {
