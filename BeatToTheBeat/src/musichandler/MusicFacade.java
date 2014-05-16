@@ -155,14 +155,17 @@ public class MusicFacade {
 	}
 	
 	public void loadSonglist() {
+		Scanner in = null;
 		try {
-			Scanner in = new Scanner(new FileReader("songs\\songList.list"));
+			in = new Scanner(new FileReader("songs\\songList.list"));
 			while (in.hasNextLine()) {	
 				//adds a song with: filename, songname, artist and genre
 				addSong(in.nextLine(), in.nextLine(), in.nextLine(), in.nextLine());		
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} finally {
+			in.close();
 		}
 	}
 	
