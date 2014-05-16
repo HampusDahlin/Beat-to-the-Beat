@@ -14,7 +14,13 @@ import javax.swing.Timer;
 import ddf.minim.*;
 import ddf.minim.analysis.BeatDetect;
 
-public class MinimHandler extends JPanel implements ActionListener {
+/** 
+* MinimTools is used to test Minim and create genres.
+* <p> A class written with the purpose to test Minim and to in an easy way create new genres and test their values for beatdetection.
+* @author Pontus "Bondi" Eriksson
+* @group 14
+*/ 
+public class MinimTools extends JPanel implements ActionListener {
 	Minim minim;
 	AudioPlayer player;
 	AudioInput input;
@@ -30,19 +36,21 @@ public class MinimHandler extends JPanel implements ActionListener {
 	Song songs[];
 	Song activeSong;
 	
-	public MinimHandler() {
-		genres = new Genre[3];
+	public MinimTools() {
+		genres = new Genre[10];
 		genres[0] = new Genre("Happy Hardcore", 0, 10, 5, 200);
 		genres[1] = new Genre("Rap", 0, 5, 3, 200);
 		genres[2] = new Genre("Rock", 0, 5, 3, 200);
+		//Add your genre here,
 		
-		songs = new Song[3];
+		songs = new Song[10];
 		songs[0] = new Song("Eminem - Till I Collapse.mp3", "Till I Collapse", "Eminem", genres[2]);
 		songs[1] = new Song("Rotterdam Termination Source - Poing.mp3", "Poing", "Rotterdam Terminator Source", genres[0]);
-		
+		//your song here
+		//and set this value to same as your song.
 		activeSong = songs[1];
-		mode = false; // true for sound-energy, false for frequency-energy
-		visMode = false; // true for frequency, false for "ball" (only works in sound-energy so far)
+		mode = false; 		//Set TRUE for sound-energy, FALSE for frequency-energy
+		visMode = false; 	//Set TRUE for frequency, FALSE for "ball"
 		BUFFERSIZE = 512;
 		one = false;
 		setup();
@@ -122,7 +130,7 @@ public class MinimHandler extends JPanel implements ActionListener {
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		MinimHandler test = new MinimHandler();
+		MinimTools test = new MinimTools();
 		frame.setSize(test.getSize().width, test.getSize().height+50);
 		frame.add(test);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -132,37 +140,22 @@ public class MinimHandler extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// getting the buffer for current time in song
 		detective.detect(player.mix);
-		
-		if (detective.isRange(activeSong.getGenre().getLow(), activeSong.getGenre().getHigh(), activeSong.getGenre().getThreshold())) {
+
+		if ((mode && detective.isOnset()) ||
+				(!mode && detective.isRange(activeSong.getGenre().getLow(), activeSong.getGenre().getHigh(), activeSong.getGenre().getThreshold()))) {
 			System.out.println("BEAT: " + beatNr);
 			beatNr++;
 			ballSize = 200;
 		} else {
 			ballSize *= 0.997;
 		}
-		
-		/*
-		if (detective.isOnset()) { // always false in freq.mode
-			System.out.println("BEAT: " + beatNr);
-			beatNr++;
-			ballSize = 200;
-		} else if (!mode) {
-			if (detective.isKick()) {
-				System.out.println("KICK!");
-			}
-			if (detective.isSnare()) {
-				System.out.println("SNARE!");
-			}
-		} else if (one) {
-			ballSize--;
-		}
+
 		if (one) {
 			repaint();
 			one = false;
 		} else {
 			one = true;
 		}
-		*/
 		repaint();
 	}
 }
