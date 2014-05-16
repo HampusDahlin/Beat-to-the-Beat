@@ -73,7 +73,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		} else if (pce.getPropertyName().equals("newNPC")) {
 			npcPosList.add(new Point((Point) pce.getNewValue()));
 		} else if (pce.getPropertyName().equals("removeNPC")) {
-			npcPosList.remove(pce.getNewValue());
+			npcPosList.remove((int)pce.getNewValue());
+			System.out.println(npcPosList.size());
 		} else if (pce.getPropertyName().equals("death")) {
 			//avsluta spel
 		} else if (pce.getPropertyName().equals("combo")) {
@@ -89,8 +90,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			}
 			if(combo > maxCombo){
 				maxCombo = combo;
-			}			
-			
+			}				
 		}
 	}
 	
@@ -121,7 +121,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		g.fillRect(4, 16, health*20, 11);
 		
-		String stringCombo = ""+combo;
+		
 		
 		g.setFont(new Font("Sans", Font.BOLD, 24));
 		g.drawString("Combo:",750,20);

@@ -38,7 +38,7 @@ public class MusicControl {
 	
 	public void playRandom(){
 		Random r = new Random();
-		int rand = r.nextInt(3);
+		int rand = r.nextInt(getSongCount());
 		Song song = music.getSongList().get(rand);
 		music.play(song,false);
 		

@@ -27,8 +27,7 @@ public class ActorControl {
 	
 	public void removeActor(Actor actor) {
 		NPCList.remove(actor);
-		//panelWhereActorIs.remove(actor);
-	}
+		}
 	
 	/**
 	 * Removes first actor in actorList.
