@@ -83,6 +83,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			if(combo > maxCombo){
 				maxCombo = combo;
 			}				
+		} else if (pce.getPropertyName().equals("attack")) {
+			
 		}
 	}
 	
@@ -107,10 +109,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		//draw the healthbar
 		g.drawRect(4, 16, 101, 11);
 		g.setColor(Color.RED);
-		if(health<=0){
-			//"fake"PC just to get the maxhealth which is the same for all PC's
-			health = new PC(null,null).getMaxHealth();
-		}
 		g.fillRect(4, 16, health*20, 11);
 		
 		
@@ -126,9 +124,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		//draw the score on screen
 		g.drawString("Score:", 420, 20);
 		g.drawString(""+score,450 , 40);
-
-		//combo
-		//cash?
 	}
 	
 	public void update() {
