@@ -101,20 +101,7 @@ public class Analyzer {
 		if (isGameOver()) {
 			pcs.firePropertyChange("songEnd", false, true);
 		} else {
-			//testcode
-			int nmrBeats = 0;
 			pcs.firePropertyChange("beat", isBeat(), this.getWave());
-			nmrBeats ++;
-			if(time % 5 == 0 && nmrBeats != 5){
-				pcs.firePropertyChange("songStop", false, true);
-				isPlaying = false;
-			}else{
-				isPlaying = true;
-			}
-			if(nmrBeats == 5){
-				nmrBeats =0;
-			}
-			
 		}
 	}
 	
