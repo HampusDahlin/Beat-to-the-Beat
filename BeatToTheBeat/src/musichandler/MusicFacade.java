@@ -22,7 +22,7 @@ public class MusicFacade {
 	
 	private List<Song> songList;
 	private int currentSong;
-	private List<Genre> genres;
+	private Genre[] genres;
 	private SoundHandler sh;
 	
 	
@@ -30,7 +30,6 @@ public class MusicFacade {
 	 * 
 	 */
 	public MusicFacade() {
-		genres = new ArrayList<Genre>();
 		setGenres();	
 		songList = new ArrayList<Song>();
 		currentSong = 0;
@@ -42,9 +41,11 @@ public class MusicFacade {
 	}
 	
 	private void setGenres() {
-		genres.add(new Genre("Happy Hardcore", 0, 10, 3, 200));
-		genres.add(new Genre("Rap", 0, 5, 3, 200));
-		genres.add(new Genre("Rock", 0, 5, 3, 200));
+		genres = new Genre[]{
+			new Genre("Happy Hardcore", 0, 10, 3, 200),
+			new Genre("Rap", 0, 5, 3, 200),
+			new Genre("Rock", 0, 5, 3, 200)
+		};
 	}
 	
 	/**
