@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import actors.PC;
 import musichandler.Song;
 import support.RemoveActorException;
 /**

@@ -4,9 +4,6 @@ import java.awt.CardLayout;
 
 import javax.swing.JFrame;
 
-import controller.HeadControl;
-
-
 /**
  * 
  * @author Hampus Dahlin
