@@ -6,12 +6,21 @@ import java.awt.Graphics2D;
 
 import javax.swing.ImageIcon;
 
+/** 
+* Mirrors an ImageIcon.
+* @author Pontus "Bondi" Eriksson
+* @group 14
+*/ 
 public class MirroredImageIcon extends ImageIcon {
 
+	/**
+	 * Creates a mirrored ImageIcon from the specified path.
+	 */
 	public MirroredImageIcon(String imagePath) {
 		super(imagePath);
 	}
 
+	@Override
 	public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
 		Graphics2D g2d = (Graphics2D)g.create();
 		g2d.translate(getIconWidth(), 0);
