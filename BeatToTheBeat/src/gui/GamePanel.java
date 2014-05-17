@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int attackIndex;
 	private boolean hit;
 	
+	
 	public GamePanel(){
 		attackIndex = -1;
 		this.attackImg = new ImageIcon[16];
@@ -74,9 +75,11 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		} else if (pce.getPropertyName().equals("newNPC")) {
 			npcPosList.add(new Point((Point) pce.getNewValue()));
 		} else if (pce.getPropertyName().equals("removeNPC")) {
+			
 			npcPosList.remove((int)pce.getNewValue());
 			System.out.println(npcPosList.size());
 		} else if (pce.getPropertyName().equals("death")) {
+			npcPosList.clear();
 			//avsluta spel
 		} else if (pce.getPropertyName().equals("combo")) {
 			
@@ -98,8 +101,10 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 	}
 	
+	Long time = null;
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
 		
 		if (walkIndex == 79) {
 			walkIndex = 0;
@@ -135,6 +140,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.drawRect(4, 16, 101, 11);
 		g.setColor(Color.RED);
 		g.fillRect(4, 16, health*20, 11);
+		
+		
 		
 		
 		

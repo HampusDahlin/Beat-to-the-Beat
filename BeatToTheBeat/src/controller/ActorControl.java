@@ -60,8 +60,8 @@ public class ActorControl {
 				player.death();
 			} else {
 				player.resetCooldown();
+				removeActor();
 			}
-			removeActor();
 		}
 	}
 	
@@ -80,6 +80,7 @@ public class ActorControl {
 			} else {
 				player.startCooldown();
 				player.resetCombo();
+				
 			}
 		}
 	}
