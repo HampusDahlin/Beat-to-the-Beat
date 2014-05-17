@@ -114,4 +114,8 @@ public class PC extends Actor implements ActionListener {
 		
 	}
 	
+	public void attack(boolean hit, int direction) {
+		pcs.firePropertyChange("attack", direction, hit);
+	}
+	
 }

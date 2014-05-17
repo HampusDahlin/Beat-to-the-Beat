@@ -71,7 +71,9 @@ public class ActorControl {
 	
 	public void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
-			if (canHitClose(500, right)) {
+			boolean hit = canHitClose(500, right);
+			player.attack(hit, (right ? -1 : 1));
+			if (hit) {
 				player.incCombo();
 				player.incScore();
 				player.incMaxCombo();

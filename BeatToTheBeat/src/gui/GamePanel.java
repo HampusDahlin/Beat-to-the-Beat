@@ -27,15 +27,15 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int maxCombo;
 	private int score;
 	private ImageIcon[] walkImg;
-	private ImageIcon[] attackImg;
 	private int walkIndex;
+	private ImageIcon[] attackImg;
 	private int attackIndex;
 	private boolean hit;
 	
 	
 	public GamePanel(){
-		attackIndex = -1;
 		this.attackImg = new ImageIcon[16];
+		attackIndex = -1;
 		this.walkImg = new ImageIcon[16];
 		walkIndex = 0;
 		npcPosList = new ArrayList<Point>();
@@ -96,8 +96,9 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 				maxCombo = combo;
 			}				
 		} else if (pce.getPropertyName().equals("attack")) {
+			hit = (boolean) pce.getNewValue();
+			attackIndex = ((int) pce.getOldValue() > 0 ? 0 : 16);
 			attackIndex = 0;
-			hit = (Boolean)pce.getNewValue();
 		}
 	}
 	
@@ -118,23 +119,21 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			(npc.x > 450 ? walkImg[walkIndex/10] : walkImg[(walkIndex/10)+8]).paintIcon(this, g, npc.x, npc.y);
 			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
-
+		
 		//draw the player
 		if (attackIndex < 0) {
-			walkImg[0].paintIcon(this, g, 450, 300);
-		} else if (attackIndex < 7) {
-			attackImg[attackIndex].paintIcon(this, g, 450, 300);
-			attackIndex++;
+			walkImg[0].paintIcon(this, g,
+					(457-walkImg[0].getIconWidth()/2), 300);
 		} else {
-			attackImg[attackIndex + (hit ? 0 : 10)].paintIcon(this, g, 450, 300);
-			if (attackIndex == 16) {
-				attackIndex = -1;
-			} else {
+			attackImg[attackIndex/2].paintIcon(this, g,
+					(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
+			if (attackIndex < 30) {
 				attackIndex++;
+			} else {
+				attackIndex = -1;
 			}
 		}
-		
-		walkImg[0].paintIcon(this, g, 450, 300);
+		//walkImg[0].paintIcon(this, g, 450, 300);
 
 		//draw the healthbar
 		g.drawRect(4, 16, 101, 11);
