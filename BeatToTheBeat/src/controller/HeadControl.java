@@ -38,7 +38,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		time = new Timer(10, this);
 		uiControl = new UIControl(mainFrame);
-		mainPanel = new CardPanel(musicControl.getSongList());
+		mainPanel = new CardPanel(musicControl.getSongList());//, musicControl.getGenres());
 		
 		
 		//make headcontrol observe all the songPanels. 
@@ -51,7 +51,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		//creates an actorcontrol. the gamepanel is sent to listen to a PC *player*
 		//also this headcontrol will listen to the PC *player*
-		actorControl = new ActorControl(mainPanel.getGamePanel());
+		actorControl = new ActorControl((PropertyChangeListener) mainPanel.getGamePanel());
 		actorControl.getPlayer().addPropertyChangeListener(this);
 		
 		mainFrame.setFocusable(true);

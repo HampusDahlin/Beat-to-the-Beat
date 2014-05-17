@@ -1,11 +1,14 @@
 package actors;
+
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
+
 import java.beans.PropertyChangeSupport;
+
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+
 public class PC extends Actor implements ActionListener {
 	private final int MISSTIME;
 	private final int MAXHEALTH;
@@ -14,12 +17,9 @@ public class PC extends Actor implements ActionListener {
 	private int combo;
 	private int maxCombo;
 	private Timer cooldown;
-	private PropertyChangeSupport pcs;
 	
 	public PC(Point position, ImageIcon sprite) {
 		super(sprite, new Point(0,0));
-		
-		this.pcs = new PropertyChangeSupport(this);
 		setPosition(position);
 		MAXHEALTH = 5;
 		score = 0;
@@ -91,10 +91,6 @@ public class PC extends Actor implements ActionListener {
 	}
 	public void actionPerformed(ActionEvent e) {
 		//noRepeat so cooldown stops 
-	}
-	
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
 	}
 	
 	public int getMaxHealth(){

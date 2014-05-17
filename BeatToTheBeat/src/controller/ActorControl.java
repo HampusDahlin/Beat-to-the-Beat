@@ -13,7 +13,7 @@ public class ActorControl {
 	private PC player;
 	private final ImageIcon SPRITE;
 	
-	public ActorControl(JPanel listener) {
+	public ActorControl(PropertyChangeListener listener) {
 		this.SPRITE = new ImageIcon("sprites\\ninja.gif");
 		NPCList = new ArrayList<NPC>();
 		player = new PC(new Point(450, 0), SPRITE);

@@ -27,7 +27,6 @@ public abstract class Actor {
 		this.SPRITE = sprite;
 		this.SPEED = speed;
 		pcs = new PropertyChangeSupport(this);
-				
 	}
 	
 	public void setRange(int newRange){

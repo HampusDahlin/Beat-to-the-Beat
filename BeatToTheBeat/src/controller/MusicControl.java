@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import musichandler.Analyzer;
+import musichandler.Genre;
 import musichandler.MusicFacade;
 import musichandler.Song;
 
@@ -79,5 +80,8 @@ public class MusicControl {
 		}
 	}
 	
+	public Genre[] getGenres() {
+		return music.getGenres();
+	}
 	
 }
