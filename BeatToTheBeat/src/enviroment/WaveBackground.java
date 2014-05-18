@@ -1,7 +1,9 @@
 package enviroment;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * A class for handling a JPanel showing a waveform.
@@ -10,13 +12,19 @@ import java.awt.Graphics;
  */
 public class WaveBackground extends ABackground{
 
-	Graphics g;
 	int colorChange; //the index of the currently increasing color value
+	float[][] soundwave;
+	boolean beat;
+	Color c;
 	
 	/**
 	 * 
 	 */
 	public WaveBackground(){
+		soundwave = new float[2][512];
+		beat = false;
+		colorChange = 1;
+		c = new Color(252, 0, 0);
 	}
 	
 	/**
@@ -25,33 +33,60 @@ public class WaveBackground extends ABackground{
 	 * @param beat, true if there is a beat, false otherwise.
 	 */
 	public void updateBackground(float[][] soundwave, boolean beat) {
+		this.soundwave = soundwave;
+		this.beat = beat;
+		revalidate();
+		repaint();
+	}
+	
+	@Override
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		
-		//If there is a beat, switch the color of the graphical representation of the soundwave.
+		Graphics2D g2d = (Graphics2D)g; 
+		
+		
+		//Changes the color of the soundwave
 		if(beat){
-			for(int i = 0; i < 255; i++){
-				g.setColor(gradientChange(g.getColor()));
+			for(int i = 0; i < 150; i++){
+				c = gradientChange(c);
+				g2d.setStroke(new BasicStroke(3));
 			}
 		}else{
-			g.setColor(gradientChange(g.getColor()));
+			c = gradientChange(c);
+			if(((BasicStroke)(g2d.getStroke())).getLineWidth() > 1){
+				g2d.setStroke(new BasicStroke(((BasicStroke)(g2d.getStroke())).getLineWidth() - 1));
+			}
 		}
 		
-		//Draws the soundwave.
+		g.setColor(c);
+		
+		drawWave(g);
+	}
+	
+	private void drawWave(Graphics g){
 		for(int i = 0; i < 511; i++) {
-			g.clearRect(0, 0, 914, 600);
+			//g.clearRect(0, 0, 914, 600);
 			g.drawLine(i, (int) (50 + soundwave[0][i]*50), i+1, (int) (50 + soundwave[0][i+1]*50));
 			g.drawLine(i, (int) (150 + soundwave[1][i]*50), i+1, (int) (150 + soundwave[1][i+1]*50));
 		}
 	}
 	
+	/**
+	 * 
+	 * @param prevColor
+	 * @return
+	 */
 	public Color gradientChange(Color prevColor){
 		Color nextColor;
-		float[] colorRGB = prevColor.getRGBColorComponents(null);
 		
-		if(colorRGB[colorChange] == 255){
-			colorChange = (colorChange + 1) % 3;
+		int[] colorRGB = {prevColor.getRed(), prevColor.getGreen(), prevColor.getBlue()};
+		
+		if(colorRGB[((colorChange + 2) % 3)] == 0){
+			colorChange = ((colorChange + 1) % 3);
 		}
 		
-		colorRGB[colorChange - 1]--;
+		colorRGB[(colorChange + 2) % 3]--;
 		colorRGB[colorChange]++;
 		
 		nextColor = new Color(colorRGB[0], colorRGB[1], colorRGB[2]);

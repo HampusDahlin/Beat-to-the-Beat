@@ -32,11 +32,16 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	private CardPanel mainPanel;
 	//private JFrame mainFrame;
 	
+	//testtt
+	private Timer menuTime;
+	
 	public HeadControl(JFrame mainFrame) {
 		musicControl = new MusicControl();
 		enviromentControl = new EnviromentControl();
 		
 		time = new Timer(10, this);
+		//this is for looping music in menu
+		menuTime = new Timer(2000,this);
 		uiControl = new UIControl(mainFrame);
 		mainPanel = new CardPanel(musicControl.getSongList());//, musicControl.getGenres());
 		
@@ -60,6 +65,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		//background music for the menu.
 		musicControl.playRandom();
+		menuTime.start();
 		
 	}
 	
@@ -67,6 +73,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		//pause the music in menu
 		musicControl.pause();
+		menuTime.stop();
 		time.start();
 		
 		//start the music for the game
@@ -99,6 +106,12 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	 * {@inheritDoc}
 	 */
 	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == menuTime){
+			musicControl.loopMusic(false);
+		}
+		
+		
 		musicControl.analyzeSong();
 		
 		//Moves the actors along their path.
@@ -116,6 +129,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		musicControl.pause();
 		time.stop();
+		menuTime.start();
 		
 		//tells cardpanel to go to the scorescreen, and play background music again 
 		mainPanel.goToScore(score);

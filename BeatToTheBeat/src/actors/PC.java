@@ -19,7 +19,7 @@ public class PC extends Actor implements ActionListener {
 	public PC(Point position, ImageIcon sprite) {
 		super(sprite, new Point(0,0));
 		setPosition(position);
-		MAXHEALTH = 5;
+		MAXHEALTH = 10;
 		score = 0;
 		combo = 0;
 		maxCombo = 0;
@@ -96,6 +96,7 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void resetScore(){
+		pcs.firePropertyChange("score",score,0);
 		score = 0;
 	}
 	

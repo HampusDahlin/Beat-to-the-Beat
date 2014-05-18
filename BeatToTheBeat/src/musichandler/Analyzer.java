@@ -31,8 +31,6 @@ public class Analyzer {
 	private List<float[][]> waveList;
 	private final int DELAY;
 	
-	//test
-	private boolean isPlaying;
 	
 	/**
 	 * 
@@ -61,8 +59,6 @@ public class Analyzer {
 		player.mute();
 		player.play();
 		
-		//ssj
-		isPlaying = true;
 	}
 	
 	/**
@@ -96,8 +92,6 @@ public class Analyzer {
 	 */
 	public void analyze() {
 		//test
-		int time = 0;
-		
 		if (isGameOver()) {
 			pcs.firePropertyChange("songEnd", false, true);
 		} else {
@@ -105,9 +99,7 @@ public class Analyzer {
 		}
 	}
 	
-	public boolean isPlaying(){
-		return isPlaying;
-	}
+	
 	
 	/**
 	 * 
@@ -125,6 +117,11 @@ public class Analyzer {
 	 */
 	public boolean isGameOver(){
 		return (!player.isPlaying());
+	}
+	
+	//test
+	public boolean isSongPlaying(){
+		return player.isPlaying();
 	}
 	
 	public PropertyChangeSupport getPcs(){
