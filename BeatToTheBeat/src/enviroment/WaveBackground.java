@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 /**
  * A class for handling a JPanel showing a waveform.
@@ -12,87 +13,102 @@ import java.awt.Graphics2D;
  */
 public class WaveBackground extends ABackground{
 
-	int colorChange; //the index of the currently increasing color value
-	float[][] soundwave;
-	boolean beat;
-	Color c;
-	
+	private int colorChange; //the index of the currently increasing color value
+	private final int LISTSIZE = 1;
+	ArrayList<WaveForm> waveList;
+
 	/**
 	 * 
 	 */
 	public WaveBackground(){
-		soundwave = new float[2][512];
-		beat = false;
+		waveList = new ArrayList<WaveForm>();
+		waveList.add(new WaveForm(new float[2][512], false, new Color(252, 0, 0)));
 		colorChange = 1;
-		c = new Color(252, 0, 0);
 	}
-	
+
 	/**
 	 * Updates the graphical representation to represent a new soundwave.
 	 * @param soundwave, the float-data of the soundwave.
 	 * @param beat, true if there is a beat, false otherwise.
 	 */
 	public void updateBackground(float[][] soundwave, boolean beat) {
-		this.soundwave = soundwave;
-		this.beat = beat;
-		this.setBackground(invertColor(c));
+		waveList.add(0, new WaveForm(soundwave, beat, waveList.get(0).getColor()));
+		if(waveList.size() > LISTSIZE){
+			waveList.remove(LISTSIZE);
+		}
+
+		//Changes the color of the soundwave
+		if(waveList.get(0).getBeat()){
+			for(int i = 0; i < 150; i++){
+				waveList.get(0).setColor(gradientChange(waveList.get(0).getColor()));
+			}
+			waveList.get(0).setWidth(3);
+		}else{
+			waveList.get(0).setColor(gradientChange(waveList.get(0).getColor()));
+			if(waveList.get(0).getWidth() > 1){
+				waveList.get(0).setWidth(waveList.get(0).getWidth() - 1);
+			}
+		}
+
+		this.setBackground(invertColor(waveList.get(0).getColor()));
+
+
 		repaint();
+
+		//TODO implement age-method in WaveForm.java.
 	}
-	
-	public Color invertColor(Color c){
+
+	/**
+	 * 
+	 * @param c
+	 * @return complementary color of c
+	 */
+	private Color invertColor(Color c){
 		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
-	
+
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		
+
 		Graphics2D g2d = (Graphics2D)g; 
-		
-		
-		//Changes the color of the soundwave
-		if(beat){
-			for(int i = 0; i < 150; i++){
-				c = gradientChange(c);
-				g2d.setStroke(new BasicStroke(3));
-		}
-		}else{
-			c = gradientChange(c);
-			if(((BasicStroke)(g2d.getStroke())).getLineWidth() > 1){
-				g2d.setStroke(new BasicStroke(((BasicStroke)(g2d.getStroke())).getLineWidth() - 1));
+
+		drawWave(g2d);
+	}
+
+	/**
+	 * Draws a waveform using graphics g.
+	 * @param g
+	 */
+	private void drawWave(Graphics2D g2d){
+
+		for(WaveForm wave : waveList){
+			g2d.setColor(wave.getColor());
+			g2d.setStroke(new BasicStroke(wave.getWidth()));
+			for(int i = 0; i < 511; i++) {
+				g2d.drawLine(i, (int) (50 + wave.getSoundwave()[0][i]*50), i+1, (int) (50 + wave.getSoundwave()[0][i+1]*50));
+				g2d.drawLine(i, (int) (150 + wave.getSoundwave()[1][i]*50), i+1, (int) (150 + wave.getSoundwave()[1][i+1]*50));
 			}
 		}
-		
-		g.setColor(c);
-		
-		drawWave(g);
 	}
-	
-	private void drawWave(Graphics g){
-		for(int i = 0; i < 511; i++) {
-			//g.clearRect(0, 0, 914, 600);
-			g.drawLine(i, (int) (50 + soundwave[0][i]*50), i+1, (int) (50 + soundwave[0][i+1]*50));
-			g.drawLine(i, (int) (150 + soundwave[1][i]*50), i+1, (int) (150 + soundwave[1][i+1]*50));
-		}
-	}
-	
+
 	/**
-	 * 
+	 * Simulates a gradient colorchange.
 	 * @param prevColor
-	 * @return
+	 * @return nextColor
 	 */
 	public Color gradientChange(Color prevColor){
 		Color nextColor;
-		
+
 		int[] colorRGB = {prevColor.getRed(), prevColor.getGreen(), prevColor.getBlue()};
-		
+
 		if(colorRGB[((colorChange + 2) % 3)] == 0){
 			colorChange = ((colorChange + 1) % 3);
 		}
-		
+
 		colorRGB[(colorChange + 2) % 3]--;
 		colorRGB[colorChange]++;
-		
+
 		nextColor = new Color(colorRGB[0], colorRGB[1], colorRGB[2]);
 		return nextColor;
 	}
