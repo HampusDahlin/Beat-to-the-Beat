@@ -1,14 +1,26 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import musichandler.Genre;
+import musichandler.Song;
+
+import org.blinkenlights.jid3.ID3Exception;
+import org.blinkenlights.jid3.MP3File;
+import org.blinkenlights.jid3.v1.ID3V1Tag;
 
 /**
 *
@@ -19,11 +31,53 @@ public class SongUploadPanel extends javax.swing.JPanel {
    /**
     * Creates new form SongUploadPanel
     */
-   public SongUploadPanel() {
+   public SongUploadPanel(List<Song> songList, List<Genre> genreList) {
+       this.songList = songList;
+       this.genreList = genreList;
        initComponents();
+       loadToChoice();
    }
    
-   public String removeFileEnding(String filename) {
+   public boolean checkIfFieldOk(JTextField textfield) {
+	   if(!textfield.getText().equals("")) {
+		   return true;
+	   } 
+	   return false;
+   }
+   
+   public void setResponse(String response, boolean success) {
+	   succesLabel.setVisible(true);
+	   succesLabel.setText(response);
+	   if(success) {
+		   succesLabel.setForeground(Color.green);
+	   } else {
+		   succesLabel.setForeground(Color.red);
+	   }
+   }
+   
+   public boolean checkInputOk() {
+	   if(!checkIfFieldOk(originalFilepathField)) {
+		   return false;
+	   } else if (!checkIfFieldOk(songNameField)) {
+		   return false;
+	   } else if (!checkIfFieldOk(artistField)) {
+		   return false;
+	   }
+	   return true;
+   }
+   
+   public void loadToChoice() {
+	   for(Genre genre : genreList) {
+		   genreChoice.add(genre.getName());
+	   }
+   }
+   
+   public String returnFileEnding(String filename) {
+	   String[] splited = filename.split("\\.");
+	   return splited[splited.length - 1];
+   }
+   
+   public String returnFileName(String filename) {
 	   String[] splited = filename.split("\\.");
 	   return splited[splited.length - 2];
    }
@@ -43,21 +97,76 @@ public class SongUploadPanel extends javax.swing.JPanel {
        ((CardPanel)(this.getParent().getParent())).back();
    }                                          
 
-   private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-       // TODO add your handling code here:
-   }            
+   private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+	   if(checkInputOk()) {
+		   setResponse("File loaded successfully!", true);
+		   File songFile = new File(originalFilepathField.getText());
+		   copyFileToBTTB(songFile);
+		   Song song = new Song("songs\\" + songFile.getName(), songNameField.getText()
+				   , artistField.getText(), genreList.get(genreChoice.getSelectedIndex()));
+		   songList.add(song);
+	   } else {
+		   setResponse("Fields cannot be empty", false);	   
+	   }
+   }          
    
    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+	   browse();
+   }   
+   
+   public void browse() {
 	   JFileChooser chooser = new JFileChooser();
 	   FileNameExtensionFilter filter = new FileNameExtensionFilter(
-	       "MP3 & WAV Music", "mp3", "wav");
+	       "MP3, WAV & WMA music", "mp3", "wav", "wma");
 	   chooser.setFileFilter(filter);
 	   int returnVal = chooser.showOpenDialog(getParent());
 	   if(returnVal == JFileChooser.APPROVE_OPTION) {
 	      originalFilepathField.setText(chooser.getSelectedFile().getAbsolutePath());
-	      songNameField.setText(removeFileEnding(chooser.getSelectedFile().getName()));
+	      File songFile = new File(chooser.getSelectedFile().getAbsolutePath());
+	      presentInfo(songFile);
 	   }
-   }   
+   }
+   
+   public void presentInfo(File songFile) {
+	   ID3V1Tag tag = null;
+	   if(FileIsMP3(songFile)) {
+		    try {
+				tag = new MP3File(songFile).getID3V1Tag();
+			} catch (ID3Exception e) {
+				e.printStackTrace();
+			}
+		    
+		    try {
+		    	artistField.setText(tag.getArtist());
+		    } catch (NullPointerException e) {
+		    	artistField.setText("");
+		    }
+		    
+		    try {
+			    songNameField.setText(tag.getTitle());
+		    } catch (NullPointerException e) {
+		    	songNameField.setText(returnFileName(songFile.getName()));
+		    }
+	   } else {
+		   songNameField.setText(returnFileName(songFile.getName()));
+	   }
+   }
+   
+   public boolean FileIsMP3(File songFile) {
+	   if((returnFileEnding(songFile.toString()).toLowerCase()).equals("mp3")) {
+		   return true;
+	   }
+	   return false;
+   }
+   
+   public void copyFileToBTTB(File songFile) {
+	   File dest = new File(System.getProperty("user.dir") + "\\songs\\" + songFile.getName());
+	   try {
+		   Files.copy(songFile.toPath(), dest.toPath());
+	   } catch (IOException e) {
+		   System.out.println("!");
+	   } 
+   }
 
    /**
     * This method is called from within the constructor to initialize the form.
@@ -85,9 +194,9 @@ public class SongUploadPanel extends javax.swing.JPanel {
        succesLabel.setVisible(false);
 	   originalFilepathField.setEditable(false);
 
-       titleLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Pictures\\loadSong.png")); // NOI18N
+       titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\loadSong.png"))); // NOI18N
 
-       backButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Downloads\\back.png")); // NOI18N
+       backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\back.png"))); // NOI18N
        backButton.setLabel("");
        backButton.setMaximumSize(new java.awt.Dimension(255, 47));
        backButton.setMinimumSize(new java.awt.Dimension(255, 47));
@@ -115,7 +224,7 @@ public class SongUploadPanel extends javax.swing.JPanel {
 
        genreLabel.setText("Genre:");
 
-       loadButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Downloads\\load.png")); // NOI18N
+       loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\loadSongToGame.png"))); // NOI18N
        loadButton.setMaximumSize(new java.awt.Dimension(255, 47));
        loadButton.setMinimumSize(new java.awt.Dimension(255, 47));
        loadButton.setPreferredSize(new java.awt.Dimension(255, 47));
@@ -228,5 +337,7 @@ public class SongUploadPanel extends javax.swing.JPanel {
    private java.awt.Label songNameLabel;
    private javax.swing.JLabel succesLabel;
    private javax.swing.JLabel titleLabel;
+   private List<Song> songList;
+   private List<Genre> genreList;
    // End of variables declaration                   
 }
