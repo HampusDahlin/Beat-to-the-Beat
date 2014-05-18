@@ -35,8 +35,12 @@ public class WaveBackground extends ABackground{
 	public void updateBackground(float[][] soundwave, boolean beat) {
 		this.soundwave = soundwave;
 		this.beat = beat;
-		revalidate();
+		this.setBackground(invertColor(c));
 		repaint();
+	}
+	
+	public Color invertColor(Color c){
+		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
 	
 	@Override
@@ -51,7 +55,7 @@ public class WaveBackground extends ABackground{
 			for(int i = 0; i < 150; i++){
 				c = gradientChange(c);
 				g2d.setStroke(new BasicStroke(3));
-			}
+		}
 		}else{
 			c = gradientChange(c);
 			if(((BasicStroke)(g2d.getStroke())).getLineWidth() > 1){
