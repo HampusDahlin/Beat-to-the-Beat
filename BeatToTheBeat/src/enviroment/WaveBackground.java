@@ -32,6 +32,10 @@ public class WaveBackground extends ABackground{
 	 * @param beat, true if there is a beat, false otherwise.
 	 */
 	public void updateBackground(float[][] soundwave, boolean beat) {
+		for(WaveForm wave : waveList){
+			wave.age();
+		}
+		
 		waveList.add(0, new WaveForm(soundwave, beat, waveList.get(0).getColor()));
 		if(waveList.size() > LISTSIZE){
 			waveList.remove(LISTSIZE);
@@ -42,7 +46,6 @@ public class WaveBackground extends ABackground{
 			for(int i = 0; i < 150; i++){
 				waveList.get(0).setColor(gradientChange(waveList.get(0).getColor()));
 			}
-			waveList.get(0).setWidth(3);
 		}else{
 			waveList.get(0).setColor(gradientChange(waveList.get(0).getColor()));
 			if(waveList.get(0).getWidth() > 1){
@@ -54,8 +57,6 @@ public class WaveBackground extends ABackground{
 
 
 		repaint();
-
-		//TODO implement age-method in WaveForm.java.
 	}
 
 	/**
@@ -72,22 +73,22 @@ public class WaveBackground extends ABackground{
 		super.paintComponent(g);
 
 		Graphics2D g2d = (Graphics2D)g; 
-
-		drawWave(g2d);
+		drawWaves(g2d);
 	}
 
 	/**
 	 * Draws a waveform using graphics g.
 	 * @param g
 	 */
-	private void drawWave(Graphics2D g2d){
+	private void drawWaves(Graphics2D g2d){
 
 		for(WaveForm wave : waveList){
-			g2d.setColor(wave.getColor());
+			g2d.setColor(new Color(wave.getColor().getRGB()));
+//			g2d.setColor(wave.getColor());
 			g2d.setStroke(new BasicStroke(wave.getWidth()));
 			for(int i = 0; i < 511; i++) {
-				g2d.drawLine(i, (int) (50 + wave.getSoundwave()[0][i]*50), i+1, (int) (50 + wave.getSoundwave()[0][i+1]*50));
-				g2d.drawLine(i, (int) (150 + wave.getSoundwave()[1][i]*50), i+1, (int) (150 + wave.getSoundwave()[1][i+1]*50));
+				g2d.drawLine(i, (int) (150 + wave.getSoundwave()[0][i]*100), i+1, (int) (150 + wave.getSoundwave()[0][i+1]*100));
+				g2d.drawLine(i, (int) (350 + wave.getSoundwave()[1][i]*100), i+1, (int) (350 + wave.getSoundwave()[1][i+1]*100));
 			}
 		}
 	}

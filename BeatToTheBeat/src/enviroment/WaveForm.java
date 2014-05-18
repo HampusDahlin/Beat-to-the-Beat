@@ -7,20 +7,17 @@ public class WaveForm {
 	private final boolean beat;
 	private Color c;
 	private int width;
-	private int time;
 	
 	public WaveForm(float[][] soundwave, boolean beat, Color c){
 		this.soundwave = soundwave;
 		this.beat = beat;
 		this.c = c;
-		time = 5;
-		width = 1;
+		width = 5;
 	}
 	
 	public void age(){
-		time--;
-		width++;
-		c = new Color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha() - 50);
+		width = width > 1 ? width - 1 : 0;
+		setColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0));
 	}
 	
 	public void setWidth(int width){
