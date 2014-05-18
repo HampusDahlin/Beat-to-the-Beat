@@ -1,7 +1,9 @@
 package enviroment;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  * A class for handling a JPanel showing a waveform.
@@ -41,13 +43,20 @@ public class WaveBackground extends ABackground{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
+		Graphics2D g2d = (Graphics2D)g; 
+		
+		
 		//Changes the color of the soundwave
 		if(beat){
 			for(int i = 0; i < 150; i++){
 				c = gradientChange(c);
+				g2d.setStroke(new BasicStroke(3));
 			}
 		}else{
 			c = gradientChange(c);
+			if(((BasicStroke)(g2d.getStroke())).getLineWidth() > 1){
+				g2d.setStroke(new BasicStroke(((BasicStroke)(g2d.getStroke())).getLineWidth() - 1));
+			}
 		}
 		
 		g.setColor(c);
