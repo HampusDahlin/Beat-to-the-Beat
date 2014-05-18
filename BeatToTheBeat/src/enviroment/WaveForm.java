@@ -31,10 +31,6 @@ public class WaveForm {
 		this.c = c;
 	}
 	
-	public int getTime(){
-		return this.time;
-	}
-	
 	public Color getColor(){
 		return this.c;
 	}

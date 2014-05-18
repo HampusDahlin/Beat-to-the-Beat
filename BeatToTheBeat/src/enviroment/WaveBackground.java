@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class WaveBackground extends ABackground{
 
 	private int colorChange; //the index of the currently increasing color value
-	private final int LISTSIZE = 1;
+	private final int LISTSIZE = 10; //the amount of soundframes being displayed
 	ArrayList<WaveForm> waveList;
 
 	/**
