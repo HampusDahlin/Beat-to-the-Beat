@@ -82,7 +82,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			npcPosList.clear();
 			//avsluta spel
 		} else if (pce.getPropertyName().equals("combo")) {
-			
 			combo = (int) pce.getNewValue();
 		} else if (pce.getPropertyName().equals("hp")) {
 			health = (int) pce.getNewValue();
@@ -136,24 +135,29 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		//walkImg[0].paintIcon(this, g, 450, 300);
 
 		//draw the healthbar
-		g.drawRect(4, 16, 101, 11);
+		g.drawRect(4, 16, 100, 11);
 		g.setColor(Color.RED);
-		g.fillRect(4, 16, health*20, 11);
+		g.fillRect(4, 16, health*10, 11);
 		
 		
 		
-		
-		
+		//drawing combo on screen
+		g.setColor(Color.BLACK);
 		g.setFont(new Font("Sans", Font.BOLD, 24));
 		g.drawString("Combo:",750,20);
+		g.setColor(Color.RED);
 		g.drawString(""+combo, 780, 40);
 		//drawing maxcombo on screen
+		g.setColor(Color.BLACK);
 		g.drawString("Max:",750,60);
+		g.setColor(Color.RED);
 		g.drawString(""+maxCombo,780,80);
 		
 		
 		//draw the score on screen
+		g.setColor(Color.BLACK);
 		g.drawString("Score:", 420, 20);
+		g.setColor(Color.RED);
 		g.drawString(""+score,450 , 40);
 	}
 	
