@@ -38,14 +38,16 @@ public class MinimTools extends JPanel implements ActionListener {
 	
 	public MinimTools() {
 		genres = new Genre[10];
-		genres[0] = new Genre("Happy Hardcore", 0, 10, 5, 200);
-		genres[1] = new Genre("Rap", 0, 5, 3, 200);
-		genres[2] = new Genre("Rock", 0, 5, 3, 200);
+		genres[0] = new Genre("Happy Hardcore", 0, 1, 2, 100);
+		genres[1] = new Genre("Rap", 0, 5, 3, 1);
+		genres[2] = new Genre("Rock", 0, 5, 3, 1);
+		genres[3] = new Genre("Ballade", 0, 4, 2, 1);
 		//Add your genre here,
 		
 		songs = new Song[10];
 		songs[0] = new Song("Eminem - Till I Collapse.mp3", "Till I Collapse", "Eminem", genres[2]);
 		songs[1] = new Song("Rotterdam Termination Source - Poing.mp3", "Poing", "Rotterdam Terminator Source", genres[0]);
+		songs[2] = new Song("Groove Armada - Edge Hill", "Groove Armada", "Edge Hill", genres[3]);
 		//your song here
 		//and set this value to same as your song.
 		activeSong = songs[1];
