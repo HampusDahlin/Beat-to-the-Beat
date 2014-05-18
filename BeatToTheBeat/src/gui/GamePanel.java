@@ -75,7 +75,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		} else if (pce.getPropertyName().equals("newNPC")) {
 			npcPosList.add(new Point((Point) pce.getNewValue()));
 		} else if (pce.getPropertyName().equals("removeNPC")) {
-			
 			npcPosList.remove((int)pce.getNewValue());
 			System.out.println(npcPosList.size());
 		} else if (pce.getPropertyName().equals("death")) {

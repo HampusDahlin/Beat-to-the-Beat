@@ -20,7 +20,6 @@ public class SoundHandler implements ActionListener {
 		}else{
 			DELAY = 0;
 		}
-
 		analyzer = new Analyzer(song, song.getGenre().getSense());
 		player = new MusicPlayer(song);
 	}
