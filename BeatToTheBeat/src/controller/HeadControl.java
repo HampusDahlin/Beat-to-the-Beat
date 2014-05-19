@@ -149,7 +149,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		} else if (evt.getPropertyName().equals("songEnd")) {
 			endGame(actorControl.getScore());
 		} else if (evt.getPropertyName().equals("volumeChange")) {
-			
+			musicControl.setVolume((int) evt.getNewValue());
 		} else if (evt.getPropertyName().equals("backgroundSlider")) {
 			
 		}

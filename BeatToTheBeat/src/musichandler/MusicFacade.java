@@ -192,4 +192,8 @@ public class MusicFacade {
 		return genres;
 	}
 	
+	public void setVolume(int vol) {
+		sh.setVolume(vol);
+	}
+	
 } //end MusicFacade

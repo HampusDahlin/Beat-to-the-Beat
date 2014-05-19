@@ -151,7 +151,7 @@ public class Options extends ZoomablePanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource().equals(volumeSlider)){
-			pcs.firePropertyChange("volumeChange", 100, volumeSlider.getValue());
+			pcs.firePropertyChange("volumeChange", null, volumeSlider.getValue());
 		}
 
 		if(e.getSource().equals(disableBackground)){
