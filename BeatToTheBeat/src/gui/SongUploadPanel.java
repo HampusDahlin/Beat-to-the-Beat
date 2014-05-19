@@ -164,7 +164,8 @@ public class SongUploadPanel extends javax.swing.JPanel {
 	   try {
 		   Files.copy(songFile.toPath(), dest.toPath());
 	   } catch (IOException e) {
-		   System.out.println("!");
+		   succesLabel.setText("An error occured while trying to copy the selected file");
+		   succesLabel.setForeground(Color.red);
 	   } 
    }
 
