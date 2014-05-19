@@ -46,6 +46,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		uiControl = new UIControl(mainFrame);
 		mainPanel = new CardPanel(musicControl.getSongList());//, musicControl.getGenres());
 		
+		mainPanel.getOptionsPanel().addPropertyChangeListener(this);
 		
 		//make headcontrol observe all the songPanels. 
 		for(JPanel p : mainPanel.getSongPanels()){
