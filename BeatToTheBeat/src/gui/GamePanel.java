@@ -3,7 +3,12 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -16,6 +21,14 @@ import javax.swing.JPanel;
 import actors.PC;
 import levels.Level;
 import enviroment.ABackground;
+
+/**
+ * 
+ * @author Björn Hedström
+ * @revisedBy Malin "Nilhet" Thelin
+ * @version 0.0.3
+ *
+ */
 
 public class GamePanel extends JPanel implements PropertyChangeListener {
 	
@@ -76,7 +89,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			npcPosList.add(new Point((Point) pce.getNewValue()));
 		} else if (pce.getPropertyName().equals("removeNPC")) {
 			npcPosList.remove((int)pce.getNewValue());
-			System.out.println(npcPosList.size());
 		} else if (pce.getPropertyName().equals("death")) {
 			npcPosList.clear();
 			//avsluta spel
@@ -103,6 +115,11 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	Long time = null;
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		ImageIcon mii = new MirroredImageIcon("sprites\\walk1.gif");
+		
+		mii.paintIcon(this, g, 450, 150);
+		
 		
 		
 		if (walkIndex == 79) {
@@ -137,8 +154,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.drawRect(4, 16, 100, 11);
 		g.setColor(Color.RED);
 		g.fillRect(4, 16, health*10, 11);
-		
-		
 		
 		//drawing combo on screen
 		g.setColor(Color.BLACK);
