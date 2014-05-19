@@ -26,7 +26,7 @@ import org.blinkenlights.jid3.v1.ID3V1Tag;
 *
 * @author Björn Hedström
 */
-public class SongUploadPanel extends javax.swing.JPanel {
+public class SongUploadPanel extends ZoomablePanel {
 
    /**
     * Creates new form SongUploadPanel

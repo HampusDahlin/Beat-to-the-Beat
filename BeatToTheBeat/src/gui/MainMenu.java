@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 *
 * @author Björn Hedström
 */
-public class MainMenu extends javax.swing.JPanel {
+public class MainMenu extends ZoomablePanel {
 
    /**
     * Creates new form MainMenu

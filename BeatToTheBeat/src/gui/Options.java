@@ -19,7 +19,7 @@ import services.IFileHandler;
  *
  * @author Björn Hedström
  */
-public class Options extends javax.swing.JPanel implements ActionListener{
+public class Options extends ZoomablePanel implements ActionListener{
 
 	/**
 	 * Creates new form Options

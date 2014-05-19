@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
  *
  * @author Björn Hedström
  */
-public class ScorePanel extends javax.swing.JPanel {
+public class ScorePanel extends ZoomablePanel {
 
     /**
      * Creates new form ScorePanel
