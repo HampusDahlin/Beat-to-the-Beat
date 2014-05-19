@@ -38,7 +38,7 @@ public class MinimTools extends JPanel implements ActionListener {
 	
 	public MinimTools() {
 		genres = new Genre[10];
-		genres[0] = new Genre("Happy Hardcore", 0, 1, 2, 100);
+		genres[0] = new Genre("Happy Hardcore", 2, 6, 3, 100);
 		genres[1] = new Genre("Rap", 0, 5, 3, 1);
 		genres[2] = new Genre("Rock", 0, 5, 3, 1);
 		genres[3] = new Genre("Ballade", 0, 4, 2, 1);
