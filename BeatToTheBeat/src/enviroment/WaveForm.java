@@ -2,12 +2,24 @@ package enviroment;
 
 import java.awt.Color;
 
+/**
+ * 
+ * @author Hampus Dahlin
+ * @date 2014-05-18
+ *
+ */
 public class WaveForm {
 	private final float[][] soundwave;
 	private final boolean beat;
 	private Color c;
 	private int width;
 	
+	/**
+	 * Creating a new soundwave
+	 * @param soundwave
+	 * @param beat
+	 * @param c
+	 */
 	public WaveForm(float[][] soundwave, boolean beat, Color c){
 		this.soundwave = soundwave;
 		this.beat = beat;
@@ -15,9 +27,12 @@ public class WaveForm {
 		width = 5;
 	}
 	
+	/**
+	 * Aging the waveform, reducing its width and making it more transparent.
+	 */
 	public void age(){
-		width = width > 1 ? width - 1 : 0;
-		setColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0));
+		width = width > 1 ? width - 1 : 1;
+		setColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha() / 2));
 	}
 	
 	public void setWidth(int width){

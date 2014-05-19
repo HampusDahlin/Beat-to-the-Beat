@@ -45,6 +45,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		uiControl = new UIControl(mainFrame);
 		mainPanel = new CardPanel(musicControl.getSongList());//, musicControl.getGenres());
 		
+		mainPanel.getOptionsPanel().addPropertyChangeListener(this);
 		
 		//make headcontrol observe all the songPanels. 
 		for(JPanel p : mainPanel.getSongPanels()){
@@ -136,6 +137,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		
 	}
+	
+	
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("play")) {
 			startGame((Song) evt.getNewValue());
@@ -145,8 +148,14 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			endGame((int) evt.getNewValue());
 		} else if (evt.getPropertyName().equals("songEnd")) {
 			endGame(actorControl.getScore());
+		} else if (evt.getPropertyName().equals("volumeChange")) {
+			
+		} else if (evt.getPropertyName().equals("backgroundSlider")) {
+			
 		}
 	}
+	
+	
 	public void keyPressed(KeyEvent evt) {
 		if(time.isRunning()){
 			if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -156,9 +165,13 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			}
 		}
 	}
+	
+	
 	public void keyReleased(KeyEvent evt) {
 		
 	}
+	
+	
 	public void keyTyped(KeyEvent evt) {
 		
 	}

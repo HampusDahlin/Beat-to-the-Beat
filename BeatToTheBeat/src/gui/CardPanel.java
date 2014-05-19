@@ -65,6 +65,10 @@ public class CardPanel extends JPanel {
 		((CardLayout)this.getLayout()).show(this, SCOREPANEL);
 	}
 	
+	public JPanel getOptionsPanel(){
+		return options;
+	}
+	
 	public JPanel getGamePanel() {
 		return gamePanel;
 	}
