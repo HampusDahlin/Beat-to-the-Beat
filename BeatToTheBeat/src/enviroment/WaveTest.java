@@ -22,7 +22,7 @@ public class WaveTest extends JFrame implements PropertyChangeListener, ActionLi
 	public WaveTest(){
 		back = new WaveBackground();
 		time = new Timer(10, this);
-		sound = new SoundHandler(new Song("Jubel.wav", "Jubel", "Bajsis", new Genre("Happy Hardcore", 0, 10, 3, 200)), false);
+		sound = new SoundHandler(new Song("Rotterdam Termination Source - Poing.mp3", "Jubel", "Bajsis", new Genre("Happy Hardcore", 0, 10, 3, 200)), false);
 		sound.getAnalyzer().getPcs().addPropertyChangeListener(this);
 		
 		this.add(back);

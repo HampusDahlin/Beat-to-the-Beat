@@ -3,7 +3,12 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -17,6 +22,14 @@ import actors.PC;
 import levels.Level;
 import enviroment.ABackground;
 
+/**
+ * 
+ * @author Björn Hedström
+ * @revisedBy Malin "Nilhet" Thelin
+ * @version 0.0.3
+ *
+ */
+
 public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	private ABackground background;
@@ -29,12 +42,20 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private ImageIcon[] walkImg;
 	private int walkIndex;
 	private ImageIcon[] attackImg;
+	//test
+	private ImageIcon[]leftAttackImg;
+	private boolean right;
+	
 	private int attackIndex;
 	private boolean hit;
 	
 	
 	public GamePanel(){
 		this.attackImg = new ImageIcon[16];
+		//test
+		this.leftAttackImg = new MirroredImageIcon[16];
+		right = true;
+		
 		attackIndex = -1;
 		this.walkImg = new ImageIcon[16];
 		walkIndex = 0;
@@ -46,6 +67,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		
 		for (int i = 0; i < 16; i++) {
 			this.attackImg[i] = new ImageIcon("sprites\\attack" + (i+1) + ".gif");
+			//test
+			this.leftAttackImg[i] = new MirroredImageIcon("sprites\\attack" + (i+1) + ".gif");
 		}
 		
 		this.setBackground(new java.awt.Color(255, 255, 255));
@@ -76,7 +99,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			npcPosList.add(new Point((Point) pce.getNewValue()));
 		} else if (pce.getPropertyName().equals("removeNPC")) {
 			npcPosList.remove((int)pce.getNewValue());
-			System.out.println(npcPosList.size());
 		} else if (pce.getPropertyName().equals("death")) {
 			npcPosList.clear();
 			//avsluta spel
@@ -95,14 +117,19 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			}				
 		} else if (pce.getPropertyName().equals("attack")) {
 			hit = (boolean) pce.getNewValue();
-			attackIndex = ((int) pce.getOldValue() > 0 ? 0 : 16);
+			//attackIndex = ((int) pce.getOldValue() == 1 ? 0 : 16);
 			attackIndex = 0;
+			right = ((int)pce.getOldValue() == 1 ? true : false);
 		}
 	}
 	
 	Long time = null;
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		//test
+		//leftAttackImg[1].paintIcon(this, g, 450, 150);
+		
 		
 		
 		if (walkIndex == 79) {
@@ -123,12 +150,22 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			walkImg[0].paintIcon(this, g,
 					(457-walkImg[0].getIconWidth()/2), 300);
 		} else {
-			attackImg[attackIndex/2].paintIcon(this, g,
-					(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
-			if (attackIndex < 30) {
-				attackIndex++;
-			} else {
-				attackIndex = -1;
+			if(right){
+				attackImg[attackIndex/2].paintIcon(this, g,
+						(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
+				if (attackIndex < 30) {
+					attackIndex++;
+				} else {
+					attackIndex = -1;
+				}
+				
+			}else{
+				leftAttackImg[attackIndex/2].paintIcon(this, g,480, 150);
+				if (attackIndex < 30) {
+					attackIndex++;
+				} else {
+					attackIndex = -1;
+				}
 			}
 		}
 		//walkImg[0].paintIcon(this, g, 450, 300);
@@ -137,8 +174,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.drawRect(4, 16, 100, 11);
 		g.setColor(Color.RED);
 		g.fillRect(4, 16, health*10, 11);
-		
-		
 		
 		//drawing combo on screen
 		g.setColor(Color.BLACK);

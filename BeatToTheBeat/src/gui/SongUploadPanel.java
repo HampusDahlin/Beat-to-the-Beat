@@ -26,7 +26,7 @@ import org.blinkenlights.jid3.v1.ID3V1Tag;
 *
 * @author Björn Hedström
 */
-public class SongUploadPanel extends javax.swing.JPanel {
+public class SongUploadPanel extends ZoomablePanel {
 
    /**
     * Creates new form SongUploadPanel
@@ -83,14 +83,7 @@ public class SongUploadPanel extends javax.swing.JPanel {
    }
    
    public void paintComponent(Graphics g) {
-	   BufferedImage image = null;
-	   try {
-		   URL url = getClass().getResource("speaker.png");
-		   image = ImageIO.read(new File(url.getPath()));
-	   } catch (IOException e) {
-		   e.printStackTrace();
-	   }
-	   g.drawImage(image, 0, 0, null);
+	   super.paintComponent(g);
    }
    
    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -164,7 +157,8 @@ public class SongUploadPanel extends javax.swing.JPanel {
 	   try {
 		   Files.copy(songFile.toPath(), dest.toPath());
 	   } catch (IOException e) {
-		   System.out.println("!");
+		   succesLabel.setText("An error occured while trying to copy the selected file");
+		   succesLabel.setForeground(Color.red);
 	   } 
    }
 
@@ -191,8 +185,9 @@ public class SongUploadPanel extends javax.swing.JPanel {
        genreLabel = new java.awt.Label();
        loadButton = new javax.swing.JButton();
        succesLabel = new javax.swing.JLabel();
-       succesLabel.setVisible(false);
+
 	   originalFilepathField.setEditable(false);
+	   loadPanel.setSize(getPreferredSize());
 
        titleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\loadSong.png"))); // NOI18N
 
@@ -235,6 +230,7 @@ public class SongUploadPanel extends javax.swing.JPanel {
        });
 
        succesLabel.setText("Label that states if succesful");
+       succesLabel.setForeground(Color.white);
 
        javax.swing.GroupLayout loadPanelLayout = new javax.swing.GroupLayout(loadPanel);
        loadPanel.setLayout(loadPanelLayout);
@@ -284,9 +280,9 @@ public class SongUploadPanel extends javax.swing.JPanel {
                .addGroup(loadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                    .addComponent(genreChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                    .addComponent(genreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-               .addGap(41, 41, 41)
+               .addGap(34, 34, 34)
                .addComponent(succesLabel)
-               .addGap(18, 18, 18)
+               .addGap(10, 10, 10)
                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addContainerGap(35, Short.MAX_VALUE))
        );
