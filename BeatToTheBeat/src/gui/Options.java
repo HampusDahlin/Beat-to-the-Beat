@@ -163,7 +163,7 @@ public class Options extends javax.swing.JPanel implements ActionListener{
 		}
 
 		if(e.getSource().equals(disableBackground)){
-			pcs.firePropertyChange("showBackground", true, disableBackground.getState());
+			pcs.firePropertyChange("backgroundSlider", true, disableBackground.getState());
 		}
 
 	}
