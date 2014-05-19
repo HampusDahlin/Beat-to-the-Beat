@@ -144,6 +144,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			startGame((Song) evt.getNewValue());
 		} else if(evt.getPropertyName().equals("beat") && (boolean) evt.getOldValue()) {
 			actorControl.createActor(mainPanel.getGamePanel());
+			mainPanel.beat();
 		} else if (evt.getPropertyName().equals("death")) {
 			endGame((int) evt.getNewValue());
 		} else if (evt.getPropertyName().equals("songEnd")) {

@@ -3,21 +3,27 @@ package gui;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public abstract class ZoomablePanel extends JPanel {
+@SuppressWarnings("serial")
+public abstract class ZoomablePanel extends JPanel implements ActionListener {
     private BufferedImage image;  
     private double scale = 1.0;
     private final double STANDARDSCALE = 1.1;
+    private Timer timer;
 
     protected void paintComponent(Graphics g) {  
+    	timer = new Timer(10, this);
         loadImage();  
         super.paintComponent(g);  
         Graphics2D g2 = (Graphics2D)g;  
@@ -42,12 +48,11 @@ public abstract class ZoomablePanel extends JPanel {
     
     public void zoom() {
     	setScale(STANDARDSCALE);
+    	timer.start();
     }
     
     public void recead() {
     	setScale(1.0);
-    	repaint();
-    	revalidate();
     }
    
     private void loadImage() {  
@@ -61,4 +66,12 @@ public abstract class ZoomablePanel extends JPanel {
             System.out.println("read trouble: " + ioe.getMessage());  
         }  
     }  
+    
+    public void actionPerformed(ActionEvent e) {
+    	if (scale == STANDARDSCALE) {
+    		timer.stop();
+    	} else {
+    		scale -= 0.01;
+    	}
+    }
 }  

@@ -19,6 +19,7 @@ public class CardPanel extends JPanel {
 	private static final String SONGSELECTIONPANEL = "Panel with Song selection";
 	private static final String GAMEPANEL = "Panel with the game";
 	private static final String SCOREPANEL = "Panel with Score";
+	private int activePanel;
 	
 	public CardPanel(List<Song> songList) {
 		
@@ -45,23 +46,28 @@ public class CardPanel extends JPanel {
 	
 	public void back() {
 		((CardLayout)this.getLayout()).show(this, MENUPANEL);
+		activePanel = 0;
 	}
 	
 	public void goToOptions() {
 		((CardLayout)this.getLayout()).show(this, OPTIONSPANEL);
+		activePanel = 1;
 	}
 	
 	public void playSong() {
 		((CardLayout)this.getLayout()).show(this, SONGSELECTIONPANEL);
+		activePanel = 2;
 		songPresenter.presentSongList(0);
 	}
 	
 	public void goToGame() {
 		((CardLayout)this.getLayout()).show(this, GAMEPANEL);
+		activePanel = 3;
 	}
 	
 	public void goToScore(int score) {
 		scorePanel.presentScore(score);
+		activePanel = 4;
 		((CardLayout)this.getLayout()).show(this, SCOREPANEL);
 	}
 	
@@ -79,6 +85,12 @@ public class CardPanel extends JPanel {
 	
 	public void update() {
 		gamePanel.update();
+	}
+	
+	public void beat() {
+		if (activePanel != 3) {
+			((ZoomablePanel) this.getComponent(activePanel)).zoom();
+		}
 	}
 
 }
