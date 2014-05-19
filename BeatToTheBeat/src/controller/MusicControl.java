@@ -75,14 +75,12 @@ public class MusicControl {
 	
 	//Code to loop music in menu
 	public void loopMusic(boolean inGame){
-		//while(!inGame && !isSongPlaying()){
-			//System.out.println("##############hallå########## "+isSongPlaying());
-			//playRandom();
-		//}
+		while(!inGame && !isSongPlaying()){
+			playRandom();
+		}
 	}
 	
 	public boolean isSongPlaying(){
-		System.out.println(music.getAnalyzer().isSongPlaying());
 		return music.getAnalyzer().isSongPlaying();
 	}
 	
