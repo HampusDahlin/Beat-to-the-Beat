@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
  *
  * @author Björn Hedström
  */
-public class ScorePanel extends javax.swing.JPanel {
+public class ScorePanel extends ZoomablePanel {
 
     /**
      * Creates new form ScorePanel
@@ -30,15 +30,7 @@ public class ScorePanel extends javax.swing.JPanel {
     }                            
     
     public void paintComponent(Graphics g) {
- 	   
- 	   BufferedImage image = null;
- 	   try {
- 		   URL url = getClass().getResource("speaker.png");
- 		   image = ImageIO.read(new File(url.getPath()));
- 	   } catch (IOException e) {
- 		   e.printStackTrace();
- 	   }
- 	   g.drawImage(image, 0, 0, null);
+    	super.paintComponent(g);
     }
 
 

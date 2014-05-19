@@ -26,7 +26,7 @@ import org.blinkenlights.jid3.v1.ID3V1Tag;
 *
 * @author Björn Hedström
 */
-public class SongUploadPanel extends javax.swing.JPanel {
+public class SongUploadPanel extends ZoomablePanel {
 
    /**
     * Creates new form SongUploadPanel
@@ -83,14 +83,7 @@ public class SongUploadPanel extends javax.swing.JPanel {
    }
    
    public void paintComponent(Graphics g) {
-	   BufferedImage image = null;
-	   try {
-		   URL url = getClass().getResource("speaker.png");
-		   image = ImageIO.read(new File(url.getPath()));
-	   } catch (IOException e) {
-		   e.printStackTrace();
-	   }
-	   g.drawImage(image, 0, 0, null);
+	   super.paintComponent(g);
    }
    
    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           

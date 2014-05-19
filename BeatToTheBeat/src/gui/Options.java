@@ -19,7 +19,7 @@ import services.IFileHandler;
  *
  * @author Björn Hedström
  */
-public class Options extends javax.swing.JPanel implements ActionListener{
+public class Options extends ZoomablePanel implements ActionListener{
 
 	/**
 	 * Creates new form Options
@@ -31,15 +31,7 @@ public class Options extends javax.swing.JPanel implements ActionListener{
 	}
 
 	public void paintComponent(Graphics g) {
-
-		BufferedImage image = null;
-		try {
-			URL url = getClass().getResource("speaker.png");
-			image = ImageIO.read(new File(url.getPath()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		g.drawImage(image, 0, 0, null);
+		super.paintComponent(g);
 	}
 
 	private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
