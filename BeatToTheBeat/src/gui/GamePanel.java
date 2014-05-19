@@ -42,12 +42,20 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private ImageIcon[] walkImg;
 	private int walkIndex;
 	private ImageIcon[] attackImg;
+	//test
+	private ImageIcon[]leftAttackImg;
+	private boolean right;
+	
 	private int attackIndex;
 	private boolean hit;
 	
 	
 	public GamePanel(){
 		this.attackImg = new ImageIcon[16];
+		//test
+		this.leftAttackImg = new MirroredImageIcon[16];
+		right = true;
+		
 		attackIndex = -1;
 		this.walkImg = new ImageIcon[16];
 		walkIndex = 0;
@@ -59,6 +67,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		
 		for (int i = 0; i < 16; i++) {
 			this.attackImg[i] = new ImageIcon("sprites\\attack" + (i+1) + ".gif");
+			//test
+			this.leftAttackImg[i] = new MirroredImageIcon("sprites\\attack" + (i+1) + ".gif");
 		}
 		
 		this.setBackground(new java.awt.Color(255, 255, 255));
@@ -107,8 +117,9 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			}				
 		} else if (pce.getPropertyName().equals("attack")) {
 			hit = (boolean) pce.getNewValue();
-			attackIndex = ((int) pce.getOldValue() > 0 ? 0 : 16);
+			//attackIndex = ((int) pce.getOldValue() == 1 ? 0 : 16);
 			attackIndex = 0;
+			right = ((int)pce.getOldValue() == 1 ? true : false);
 		}
 	}
 	
@@ -116,9 +127,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		ImageIcon mii = new MirroredImageIcon("sprites\\walk1.gif");
-		
-		mii.paintIcon(this, g, 450, 150);
+		//test
+		//leftAttackImg[1].paintIcon(this, g, 450, 150);
 		
 		
 		
@@ -140,12 +150,22 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			walkImg[0].paintIcon(this, g,
 					(457-walkImg[0].getIconWidth()/2), 300);
 		} else {
-			attackImg[attackIndex/2].paintIcon(this, g,
-					(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
-			if (attackIndex < 30) {
-				attackIndex++;
-			} else {
-				attackIndex = -1;
+			if(right){
+				attackImg[attackIndex/2].paintIcon(this, g,
+						(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
+				if (attackIndex < 30) {
+					attackIndex++;
+				} else {
+					attackIndex = -1;
+				}
+				
+			}else{
+				leftAttackImg[attackIndex/2].paintIcon(this, g,480, 150);
+				if (attackIndex < 30) {
+					attackIndex++;
+				} else {
+					attackIndex = -1;
+				}
 			}
 		}
 		//walkImg[0].paintIcon(this, g, 450, 300);
