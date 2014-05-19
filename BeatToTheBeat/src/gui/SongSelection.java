@@ -17,7 +17,7 @@ import musichandler.SongListSearcher;
 *
 * @author Björn Hedström
 */
-public class SongSelection extends javax.swing.JPanel {
+public class SongSelection extends ZoomablePanel {
 	
    /**
     * Creates new form SongSelection
@@ -30,15 +30,7 @@ public class SongSelection extends javax.swing.JPanel {
    } 
    
    public void paintComponent(Graphics g) {
-	   
-	   BufferedImage image = null;
-	   try {
-		   URL url = getClass().getResource("speaker.png");
-		   image = ImageIO.read(new File(url.getPath()));
-	   } catch (IOException e) {
-		   e.printStackTrace();
-	   }
-	   g.drawImage(image, 0, 0, null);
+	   super.paintComponent(g);
    }
    
    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) { 

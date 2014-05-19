@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public abstract class ZoomablePanel extends JPanel {
     private BufferedImage image;  
-    private double scale;
+    private double scale = 1.0;
     private final double STANDARDSCALE = 1.1;
 
     protected void paintComponent(Graphics g) {  
@@ -46,6 +46,8 @@ public abstract class ZoomablePanel extends JPanel {
     
     public void recead() {
     	setScale(1.0);
+    	repaint();
+    	revalidate();
     }
    
     private void loadImage() {  
