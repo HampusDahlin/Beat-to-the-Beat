@@ -127,6 +127,11 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		//test
+		//leftAttackImg[1].paintIcon(this, g, 450, 150);
+		
+		
+		
 		if (walkIndex == 79) {
 			walkIndex = 0;
 		} else {
