@@ -162,24 +162,18 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.setColor(Color.RED);
 		g.fillRect(4, 16, health*10, 11);
 		
-		//drawing combo on screen
+		//drawing combo,maxcombo and score on screen
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Sans", Font.BOLD, 24));
 		g.drawString("Combo:",750,20);
-		g.setColor(Color.RED);
-		g.drawString(""+combo, 780, 40);
-		//drawing maxcombo on screen
-		g.setColor(Color.WHITE);
 		g.drawString("Max:",750,60);
-		g.setColor(Color.RED);
-		g.drawString(""+maxCombo,780,80);
-		
-		
-		//draw the score on screen
-		g.setColor(Color.WHITE);
 		g.drawString("Score:", 420, 20);
 		g.setColor(Color.RED);
+		g.drawString(""+combo, 780, 40);
+		g.drawString(""+maxCombo,780,80);
 		g.drawString(""+score,450 , 40);
+		
+		
 	}
 	
 	public void update() {
