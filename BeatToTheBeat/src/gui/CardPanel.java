@@ -24,7 +24,7 @@ public class CardPanel extends JPanel {
 	private static final String SONGUPLOADPANEL = "Panel with Song upload";
 	private int activePanel;
 	
-	public CardPanel(List<Song> songList, List<Genre> genreList) {
+	public CardPanel(List<Song> songList, Genre[] genreList) {
 		this.setLayout(new CardLayout());
 		options = new Options();
 		menu = new MainMenu();
