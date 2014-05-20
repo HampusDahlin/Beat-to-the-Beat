@@ -2,24 +2,17 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
-
-import services.HomogeneousFileHandler;
-import services.IFileHandler;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author Björn Hedström
  */
-public class Options extends ZoomablePanel implements ActionListener{
+public class Options extends ZoomablePanel implements ChangeListener {
 
 	/**
 	 * Creates new form Options
@@ -27,6 +20,7 @@ public class Options extends ZoomablePanel implements ActionListener{
 	public Options() {
 		pcs = new PropertyChangeSupport(this);
 		initComponents();
+		volumeSlider.addChangeListener(this);
 		repaint();
 	}
 
@@ -49,7 +43,7 @@ public class Options extends ZoomablePanel implements ActionListener{
 
 		titleLabel = new javax.swing.JLabel();
 		disableBackground = new java.awt.Checkbox();
-		volumeSlider = new javax.swing.JSlider();
+		volumeSlider = new javax.swing.JSlider(0, 100, 100);
 		maxVolume = new javax.swing.JLabel();
 		miniVolume = new javax.swing.JLabel();
 		backButton = new javax.swing.JButton();
@@ -147,16 +141,16 @@ public class Options extends ZoomablePanel implements ActionListener{
 	private PropertyChangeSupport pcs;
 	// End of variables declaration                   
 
-
-	public void actionPerformed(ActionEvent e) {
-		
-		if(e.getSource().equals(volumeSlider)){
-			pcs.firePropertyChange("volumeChange", 100, volumeSlider.getValue());
-		}
-
-		if(e.getSource().equals(disableBackground)){
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		if (e.getSource() == volumeSlider) {
+			pcs.firePropertyChange("volumeChange", null, volumeSlider.getValue());
+		} else if (e.getSource().equals(disableBackground)) {
 			pcs.firePropertyChange("backgroundSlider", true, disableBackground.getState());
 		}
-
+	}
+	
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
 	}
 }

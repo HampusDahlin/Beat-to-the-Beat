@@ -77,5 +77,8 @@ public class SoundHandler implements ActionListener {
 		return analyzer.getWave();
 	}
 	
+	public void setVolume(int vol) {
+		player.setVolume(vol);
+	}
 	
 }

@@ -34,6 +34,7 @@ public class MusicPlayer {
 	
 	public void setVolume(float vol) {
 		player.setVolume(vol);
+		player.setGain(vol);
 	}
 	
 	/**
@@ -43,6 +44,7 @@ public class MusicPlayer {
 	public void setVolume(int vol) {
 		setVolume((float)vol/100);
 	}
+	
 	public String sketchPath(String fileName) {
 		return "sketchPath: " + fileName;
 	}

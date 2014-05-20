@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 * @author Pontus "Bondi" Eriksson
 * @group 14
 */ 
+@SuppressWarnings("serial")
 public class MirroredImageIcon extends ImageIcon {
 
 	/**

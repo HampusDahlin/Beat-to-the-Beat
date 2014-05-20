@@ -88,4 +88,7 @@ public class MusicControl {
 		return music.getGenres();
 	}
 	
+	public void setVolume(int vol) {
+		music.setVolume(vol);
+	}
 }
