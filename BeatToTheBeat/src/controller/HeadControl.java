@@ -1,5 +1,6 @@
 package controller;
 import gui.CardPanel;
+import gui.GamePanel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -142,8 +143,11 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("play")) {
 			startGame((Song) evt.getNewValue());
-		} else if(evt.getPropertyName().equals("beat") && (boolean) evt.getOldValue()) {
-			actorControl.createActor(mainPanel.getGamePanel());
+		} else if(evt.getPropertyName().equals("beat")){
+			if((boolean) evt.getOldValue()) {
+				actorControl.createActor(mainPanel.getGamePanel());
+			}
+			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		} else if (evt.getPropertyName().equals("death")) {
 			endGame((int) evt.getNewValue());
 		} else if (evt.getPropertyName().equals("songEnd")) {

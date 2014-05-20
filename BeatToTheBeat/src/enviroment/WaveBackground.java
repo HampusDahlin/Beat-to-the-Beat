@@ -4,6 +4,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 /**
@@ -11,13 +13,13 @@ import java.util.ArrayList;
  * @author Hampus Dahlin
  *
  */
-public class WaveBackground extends ABackground{
+public class WaveBackground implements PropertyChangeListener{
 
 	private int colorChange; //the index of the currently increasing color value
 	private final int LISTSIZE = 20; //the amount of soundframes being displayed
 	private final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
 	private final int WAVEAMP = 100; //the amplitude of the waves
-	ArrayList<WaveForm> waveList;
+	private ArrayList<WaveForm> waveList;
 
 	/**
 	 * 
@@ -54,13 +56,12 @@ public class WaveBackground extends ABackground{
 				waveList.get(0).setWidth(waveList.get(0).getWidth() - 1);
 			}
 		}
-
-		this.setBackground(invertColor(waveList.get(0).getColor()));
-
-
-		repaint();
 	}
 
+	public Color getFirstCompCol(){
+		return(invertColor(waveList.get(0).getColor()));
+	}
+	
 	/**
 	 * 
 	 * @param c
@@ -70,26 +71,18 @@ public class WaveBackground extends ABackground{
 		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
 
-	@Override
-	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-
-		Graphics2D g2d = (Graphics2D)g; 
-		drawWaves(g2d);
-	}
-
 	/**
 	 * Draws a waveform using graphics g.
 	 * @param g
 	 */
-	private void drawWaves(Graphics2D g2d){
+	public void drawWaves(Graphics2D g2d){
 
 		for(WaveForm wave : waveList){
 			g2d.setColor(new Color(wave.getColor().getRGB()));//Cloning instead of giving reference
 			g2d.setStroke(new BasicStroke(wave.getWidth()));
 			for(int i = 0; i < 511; i++) {
-				g2d.drawLine(i, (int) (YPOS[0] + wave.getSoundwave()[0][i]*WAVEAMP), i+1, (int) (YPOS[0] + wave.getSoundwave()[0][i+1]*WAVEAMP));
-				g2d.drawLine(i, (int) (YPOS[1] + wave.getSoundwave()[1][i]*WAVEAMP), i+1, (int) (YPOS[1] + wave.getSoundwave()[1][i+1]*WAVEAMP));
+				g2d.drawLine(2 * i, (int) (YPOS[0] + wave.getSoundwave()[0][i]*WAVEAMP), 2 * (i+1), (int) (YPOS[0] + wave.getSoundwave()[0][i+1]*WAVEAMP));
+				g2d.drawLine(2 * i, (int) (YPOS[1] + wave.getSoundwave()[1][i]*WAVEAMP), 2 * (i+1), (int) (YPOS[1] + wave.getSoundwave()[1][i+1]*WAVEAMP));
 			}
 		}
 	}
@@ -113,5 +106,13 @@ public class WaveBackground extends ABackground{
 
 		nextColor = new Color(colorRGB[0], colorRGB[1], colorRGB[2]);
 		return nextColor;
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		System.out.println("derp");
+		if(evt.getPropertyName().equals("beat")){
+			updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
+		}
 	}
 }

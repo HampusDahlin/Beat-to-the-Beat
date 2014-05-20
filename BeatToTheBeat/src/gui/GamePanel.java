@@ -4,11 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Point;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
 import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -18,9 +14,9 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import actors.PC;
 import levels.Level;
 import enviroment.ABackground;
+import enviroment.WaveBackground;
 
 /**
  * 
@@ -32,8 +28,7 @@ import enviroment.ABackground;
 
 public class GamePanel extends JPanel implements PropertyChangeListener {
 	
-	private ABackground background;
-	private Level level;
+	private WaveBackground backgroundWave;
 	private List<Point> npcPosList;
 	private int health;
 	private int combo;
@@ -72,24 +67,19 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		this.setBackground(new java.awt.Color(255, 255, 255));
+		this.setBackgroundWave(new WaveBackground());
 		setSize(914, 600);
 		setMaximumSize(new java.awt.Dimension(914, 600));
 		setMinimumSize(new java.awt.Dimension(914, 600));
 		this.setVisible(true);
 	}
 
-	public GamePanel(Level level) {
-		npcPosList = new ArrayList<Point>();
-		setLevel(level);
+	private void setBackgroundWave(WaveBackground background) {
+		this.backgroundWave = background;
 	}
 	
-	public void setLevel(Level level){
-		this.level = level;
-		setBackground(this.level.getBackground());
-	}
-
-	private void setBackground(ABackground background) {
-		this.background = background;
+	public WaveBackground getBackgroundWave(){
+		return this.backgroundWave;
 	}
 
 	public void propertyChange(PropertyChangeEvent pce) {
@@ -127,6 +117,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		this.setBackground(backgroundWave.getFirstCompCol());
+		
 		//test
 		//leftAttackImg[1].paintIcon(this, g, 450, 150);
 		
@@ -137,6 +129,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		} else {
 			walkIndex++;
 		}
+		
+		backgroundWave.drawWaves((Graphics2D)g);
 
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
