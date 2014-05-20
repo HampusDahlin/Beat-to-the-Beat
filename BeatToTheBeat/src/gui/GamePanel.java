@@ -66,7 +66,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			this.leftAttackImg[i] = new MirroredImageIcon("sprites\\attack" + (i+1) + ".gif");
 		}
 		
-		this.setBackground(new java.awt.Color(255, 255, 255));
+		this.setBackground(new java.awt.Color(0,0,0));
 		this.setBackgroundWave(new WaveBackground());
 		setSize(914, 600);
 		setMaximumSize(new java.awt.Dimension(914, 600));
@@ -117,12 +117,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		this.setBackground(backgroundWave.getFirstCompCol());
-		
-		//test
-		//leftAttackImg[1].paintIcon(this, g, 450, 150);
-		
-		
 		
 		if (walkIndex == 79) {
 			walkIndex = 0;
@@ -162,7 +156,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 				}
 			}
 		}
-		//walkImg[0].paintIcon(this, g, 450, 300);
 
 		//draw the healthbar
 		g.drawRect(4, 16, 100, 11);
@@ -170,20 +163,20 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.fillRect(4, 16, health*10, 11);
 		
 		//drawing combo on screen
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.setFont(new Font("Sans", Font.BOLD, 24));
 		g.drawString("Combo:",750,20);
 		g.setColor(Color.RED);
 		g.drawString(""+combo, 780, 40);
 		//drawing maxcombo on screen
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.drawString("Max:",750,60);
 		g.setColor(Color.RED);
 		g.drawString(""+maxCombo,780,80);
 		
 		
 		//draw the score on screen
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.drawString("Score:", 420, 20);
 		g.setColor(Color.RED);
 		g.drawString(""+score,450 , 40);
