@@ -1,4 +1,4 @@
-package gui;
+	package gui;
 
 import java.awt.CardLayout;
 import java.util.List;
@@ -92,5 +92,7 @@ public class CardPanel extends JPanel {
 			((ZoomablePanel) this.getComponent(activePanel)).zoom();
 		}
 	}
+	
+	
 
 }

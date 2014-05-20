@@ -90,7 +90,6 @@ public class Analyzer {
 	 * Fires a {@link PropertyChangeEvent} with sound data, also throws GameOverException with string "win" if song is over.
 	 */
 	public void analyze() {
-		//test
 		if (isGameOver()) {
 			pcs.firePropertyChange("songEnd", false, true);
 		} else {
