@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import musichandler.Genre;
 import musichandler.Song;
 
 public class CardPanel extends JPanel {
@@ -14,34 +15,38 @@ public class CardPanel extends JPanel {
 	private SongSelection songPresenter;
 	private GamePanel gamePanel;
 	private ScorePanel scorePanel;
+	private SongUploadPanel songUpload;
 	private static final String OPTIONSPANEL = "Panel with Options";
 	private static final String MENUPANEL = "Panel with MainMenu";
 	private static final String SONGSELECTIONPANEL = "Panel with Song selection";
 	private static final String GAMEPANEL = "Panel with the game";
 	private static final String SCOREPANEL = "Panel with Score";
+	private static final String SONGUPLOADPANEL = "Panel with Song upload";
 	private int activePanel;
 	
-	public CardPanel(List<Song> songList) {
-		
+	public CardPanel(List<Song> songList, Genre[] genreList) {
 		this.setLayout(new CardLayout());
 		options = new Options();
 		menu = new MainMenu();
 		gamePanel = new GamePanel();
 		scorePanel = new ScorePanel();
 		songPresenter = new SongSelection(songList);
-		songPresenter.setVisible(true);
-		menu.setVisible(true);
-		options.setVisible(true);
+		songUpload = new SongUploadPanel(songList, genreList);
 		this.add(menu, MENUPANEL);
 		this.add(options, OPTIONSPANEL);
 		this.add(songPresenter, SONGSELECTIONPANEL);
 		this.add(gamePanel, GAMEPANEL);
 		this.add(scorePanel, SCOREPANEL);
-		
+		this.add(songUpload, SONGUPLOADPANEL);
 	}
 	
 	public void exit() {
 		System.exit(0);
+	}
+	
+	public void goToSongUpload() {
+		((CardLayout)this.getLayout()).show(this, SONGUPLOADPANEL);
+		activePanel = 5;
 	}
 	
 	public void back() {
