@@ -14,6 +14,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import musichandler.Genre;
 import musichandler.Song;
 
+import org.blinkenlights.jid3.ID3Exception;
+import org.blinkenlights.jid3.MP3File;
+import org.blinkenlights.jid3.v1.ID3V1Tag;
+
 /*import org.blinkenlights.jid3.ID3Exception;
 import org.blinkenlights.jid3.MP3File;
 import org.blinkenlights.jid3.v1.ID3V1Tag;
@@ -23,7 +27,6 @@ import org.blinkenlights.jid3.v1.ID3V1Tag;
 * @author Björn Hedström
 */
 public class SongUploadPanel extends ZoomablePanel {
-
    /**
     * Creates new form SongUploadPanel
     */
@@ -32,6 +35,14 @@ public class SongUploadPanel extends ZoomablePanel {
        this.genreList = genreList;
        initComponents();
        loadToChoice();
+   }
+   
+   public void setSource(String source) {
+	   this.source = source;
+   }
+   
+   public String getSource() {
+	   return source;
    }
    
    public boolean checkIfFieldOk(JTextField textfield) {
@@ -82,8 +93,12 @@ public class SongUploadPanel extends ZoomablePanel {
 	   super.paintComponent(g);
    }
    
-   private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-       ((CardPanel)(this.getParent().getParent())).back();
+   private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {       
+	   if(source.equals("SongSelection")) {
+		   ((CardPanel)(this.getParent())).playSong();
+	   } else {
+		   ((CardPanel)(this.getParent())).back();
+	   }
    }                                          
 
    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) { 
@@ -112,11 +127,11 @@ public class SongUploadPanel extends ZoomablePanel {
 	   if(returnVal == JFileChooser.APPROVE_OPTION) {
 	      originalFilepathField.setText(chooser.getSelectedFile().getAbsolutePath());
 	      File songFile = new File(chooser.getSelectedFile().getAbsolutePath());
-	     // presentInfo(songFile);
+	      presentInfo(songFile);
 	   }
    }
    
-  /* public void presentInfo(File songFile) {
+   public void presentInfo(File songFile) {
 	   ID3V1Tag tag = null;
 	   if(FileIsMP3(songFile)) {
 		    try {
@@ -139,8 +154,8 @@ public class SongUploadPanel extends ZoomablePanel {
 	   } else {
 		   songNameField.setText(returnFileName(songFile.getName()));
 	   }
-   }*/
-   
+   }
+  
    public boolean FileIsMP3(File songFile) {
 	   if((returnFileEnding(songFile.toString()).toLowerCase()).equals("mp3")) {
 		   return true;
@@ -312,7 +327,7 @@ public class SongUploadPanel extends ZoomablePanel {
                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addContainerGap(34, Short.MAX_VALUE))
        );
-   }// </editor-fold>                                                   
+   }                                                 
 
    // Variables declaration - do not modify                     
    private javax.swing.JTextField artistField;
@@ -331,5 +346,8 @@ public class SongUploadPanel extends ZoomablePanel {
    private javax.swing.JLabel titleLabel;
    private List<Song> songList;
    private Genre[] genreList;
+   private String source = "";
    // End of variables declaration                   
 }
+
+
