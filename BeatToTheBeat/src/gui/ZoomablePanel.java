@@ -19,7 +19,7 @@ import javax.swing.Timer;
 public abstract class ZoomablePanel extends JPanel implements ActionListener {
     private BufferedImage image;  
     private double scale = 1.0;
-    private final double STANDARDSCALE = 1.2;
+    private final double STANDARDSCALE = 1.1;
     private Timer timer;
 
     protected void paintComponent(Graphics g) {  
@@ -68,17 +68,10 @@ public abstract class ZoomablePanel extends JPanel implements ActionListener {
     }  
     
     public void actionPerformed(ActionEvent e) {
-    	if(scale == 1.2){
-    		recead();
-    	}else{
-    		setScale(1.2);
-    	}
-    	
-    	
-    	/**if (scale == STANDARDSCALE) {
-    		recead();
+    	if (scale == STANDARDSCALE) {
+    		timer.stop();
     	} else {
     		scale -= 0.01;
-    	}*/
+    	}
     }
 }  

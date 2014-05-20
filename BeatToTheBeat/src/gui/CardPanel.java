@@ -1,4 +1,4 @@
-	package gui;
+package gui;
 
 import java.awt.CardLayout;
 import java.util.List;
@@ -47,7 +47,6 @@ public class CardPanel extends JPanel {
 	public void goToSongUpload() {
 		((CardLayout)this.getLayout()).show(this, SONGUPLOADPANEL);
 		activePanel = 5;
-		songUpload.setSource("MainMenu");
 	}
 	
 	public void back() {
@@ -98,7 +97,5 @@ public class CardPanel extends JPanel {
 			((ZoomablePanel) this.getComponent(activePanel)).zoom();
 		}
 	}
-	
-	
 
 }
