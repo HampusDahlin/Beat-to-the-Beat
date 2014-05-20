@@ -71,18 +71,18 @@ public class MusicFacade {
 	/**
 	 * Plays the song and choose if to analyze it or not.
 	 * @param playSong Song to be played.
-	 * @param analyze
+	 * @param isDelay
 	 */
-	public void play(Song playSong, boolean analyze) {
-		sh = new SoundHandler(playSong, analyze);
+	public void play(Song playSong, boolean isDelay) {
+		sh = new SoundHandler(playSong, isDelay);
 		sh.start();
 	}
 	
 	/**
 	 * Plays the current song and choose if to analyze it or not.
 	 */
-	public void playCurrent(boolean analyze) {
-		play(songList.get(currentSong), analyze);
+	public void playCurrent(boolean isDelay) {
+		play(songList.get(currentSong), isDelay);
 	}
 	
 	/**

@@ -29,12 +29,12 @@ public class MusicControl {
 		
 	}
 	
-	public void play(Song song, boolean analyze) {
-		music.play(song, analyze);
+	public void play(Song song, boolean isDelay) {
+		music.play(song, isDelay);
 	}
 	
-	public void play(boolean analyze) {
-		music.playCurrent(analyze);
+	public void play(boolean isDelay) {
+		music.playCurrent(isDelay);
 	}
 	
 	public void playRandom(){

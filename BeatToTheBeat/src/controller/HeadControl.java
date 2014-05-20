@@ -67,6 +67,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		//background music for the menu.
 		musicControl.playRandom();
+		musicControl.getAnalyzer().addPropertyChangeListener(this);
 		menuTime.start();
 		
 	}
@@ -112,6 +113,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		if(e.getSource().equals(menuTime)){
 			musicControl.loopMusic(false);
+			musicControl.analyzeSong();
 		}else{
 			musicControl.analyzeSong();
 			//Moves the actors along their path.
@@ -148,6 +150,10 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 				actorControl.createActor(mainPanel.getGamePanel());
 			}
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
+			
+			if(menuTime.isRunning()){
+				mainPanel.beat();
+			}
 		} else if (evt.getPropertyName().equals("death")) {
 			endGame((int) evt.getNewValue());
 		} else if (evt.getPropertyName().equals("songEnd")) {

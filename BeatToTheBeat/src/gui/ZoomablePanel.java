@@ -68,10 +68,19 @@ public abstract class ZoomablePanel extends JPanel implements ActionListener {
     }  
     
     public void actionPerformed(ActionEvent e) {
+    	 if(scale == STANDARDSCALE){
+             recead();
+         }else{
+             setScale(STANDARDSCALE);
+         }
+         
+    	
+    	
+    	/**
     	if (scale == STANDARDSCALE) {
     		timer.stop();
     	} else {
     		scale -= 0.01;
-    	}
+    	}*/
     }
 }  
