@@ -73,6 +73,7 @@ public class HomogeneousFileHandler implements IFileHandler<Object>{
 		File file = new File(filename);
 		FileInputStream in;
 		Object temp = null;
+		boolean empty = true;
 		
 		
 		try {

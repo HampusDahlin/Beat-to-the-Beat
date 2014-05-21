@@ -15,9 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import services.FileHandler;
 import services.HomogeneousFileHandler;
-import support.EmptyFileException;
 import enviroment.WaveBackground;
 
 /**

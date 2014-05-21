@@ -8,8 +8,7 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import services.*;
-import support.EmptyFileException;
+import services.HomogeneousFileHandler;
 
 /**
  *
