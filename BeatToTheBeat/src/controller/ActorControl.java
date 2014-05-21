@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import powerup.Powerup;
 import actors.Actor;
 import actors.NPC;
 import actors.PC;
@@ -83,11 +84,14 @@ class ActorControl {
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				player.incCombo();
+				int prevScore = player.getScore();
 				player.incScore((int) (Math.abs((right ? 51 : 66) - Math.abs(NPCList.get(0).getPosition().x
 						- (right ? 515 : 375))) / (right ? 5.5 : 6.6 )));
 				player.incMaxCombo();
 				
 				removeActor();
+				
+				powerupCheck(prevScore);
 			} else {
 				player.startCooldown();
 				player.resetCombo();
@@ -115,6 +119,16 @@ class ActorControl {
 	}
 	*/
 	
+	private void powerupCheck(int prevScore) {
+
+		for(Powerup p : player.getPowerups()){
+			if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
+				p.effect();
+			}
+		}
+		
+	}
+
 	/**
 	 * Checks if first NPC in list is within range.
 	 * @param range How close NPC can be to player.
