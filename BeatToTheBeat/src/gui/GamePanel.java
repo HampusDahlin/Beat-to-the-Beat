@@ -37,6 +37,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int score;
 	private ImageIcon[] walkImg;
 	private MirroredImageIcon[] leftWalkImg;
+	private PauseMenuPanel pauspanel;
 	
 	private int walkIndex;
 	private ImageIcon[] attackImg;
@@ -49,6 +50,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private boolean paused;
 	
 	public GamePanel(){
+		pauspanel = new PauseMenuPanel();
 		this.attackImg = new ImageIcon[16];
 		//test
 		this.leftAttackImg = new MirroredImageIcon[16];
@@ -72,7 +74,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			this.leftAttackImg[i] = new MirroredImageIcon("sprites\\attack" + (i+1) + ".gif");
 		}
 		
-		
+		pauspanel.setVisible(false);
+		this.add(pauspanel, CENTER_ALIGNMENT);
 		this.setBackground(new java.awt.Color(0,0,0));
 		this.setBackgroundWave(new WaveBackground());
 		setSize(914, 600);
@@ -87,6 +90,10 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	public WaveBackground getBackgroundWave(){
 		return this.backgroundWave;
+	}
+	
+	public PauseMenuPanel getPausepanel(){
+		return this.pauspanel;
 	}
 
 	public void propertyChange(PropertyChangeEvent pce) {
@@ -122,23 +129,16 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	public void pause(){
 		this.paused  = true;
-		Graphics g = this.getGraphics();
-
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Sans", Font.BOLD, 40));
-		g.drawString("Game Paused", 340, 80);
+		this.pauspanel.setVisible(true);
 	}
 	
 	public void unPause(){
 		this.paused = false;
+		this.pauspanel.setVisible(false);
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
-		//test
-		//g.drawRect(350, 100, 220, 200);
-		
 		
 		
 		if (walkIndex == 79) {
@@ -210,9 +210,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.drawString(""+score,450 , 40);
 		
 		if(this.paused){
-			g.setColor(Color.WHITE);
-			g.setFont(new Font("Sans", Font.BOLD, 40));
-			g.drawString("Game Paused", 340, 80);
+			this.pauspanel.setVisible(true);
 		}
 	}
 	
