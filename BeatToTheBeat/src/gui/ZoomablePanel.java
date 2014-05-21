@@ -18,11 +18,12 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public abstract class ZoomablePanel extends JPanel implements ActionListener {
     private BufferedImage image;  
-    private final double STANDARDSCALE = 1.0;
-    private final double ZOOMSCALE = 1.1;
-    private double scale = STANDARDSCALE;
+    private double scale = 1.0;
+    private final double STANDARDSCALE = 1.1;
+    private Timer timer;
 
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {  
+    	timer = new Timer(10, this);
         loadImage();  
         super.paintComponent(g);  
         Graphics2D g2 = (Graphics2D)g;  
@@ -36,12 +37,7 @@ public abstract class ZoomablePanel extends JPanel implements ActionListener {
         double y = (h - scale * imageHeight)/2;  
         AffineTransform at = AffineTransform.getTranslateInstance(x,y);  
         at.scale(scale, scale);  
-        g2.drawRenderedImage(image, at);
-
-        if (scale != STANDARDSCALE) {
-        	scale -= 0.01;
-        	System.out.println(scale);
-        }
+        g2.drawRenderedImage(image, at);  
     }  
     
     public void setScale(double s) {
@@ -51,11 +47,12 @@ public abstract class ZoomablePanel extends JPanel implements ActionListener {
     }
     
     public void zoom() {
-    	setScale(ZOOMSCALE);
+    	setScale(STANDARDSCALE);
+    	timer.start();
     }
     
     public void recead() {
-    	setScale(STANDARDSCALE);
+    	setScale(1.0);
     }
    
     private void loadImage() {  
@@ -68,6 +65,22 @@ public abstract class ZoomablePanel extends JPanel implements ActionListener {
         } catch(IOException ioe) {  
             System.out.println("read trouble: " + ioe.getMessage());  
         }  
-    }
+    }  
     
-} //end ZoomablePanel
+    public void actionPerformed(ActionEvent e) {
+    	 if(scale == STANDARDSCALE){
+             recead();
+         }else{
+             setScale(STANDARDSCALE);
+         }
+         
+    	
+    	
+    	/**
+    	if (scale == STANDARDSCALE) {
+    		timer.stop();
+    	} else {
+    		scale -= 0.01;
+    	}*/
+    }
+}  
