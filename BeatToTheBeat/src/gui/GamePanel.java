@@ -147,7 +147,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			walkIndex++;
 		}
 		
-		backgroundWave.drawWaves((Graphics2D)g);
+		backgroundWave.drawSinWaves((Graphics2D)g);
 		
 		//paint the hitbox, with the extrapoint zones
 		int boxWidth = 230;
