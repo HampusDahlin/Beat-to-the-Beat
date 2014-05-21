@@ -15,6 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import services.FileHandler;
+import services.HomogeneousFileHandler;
 import enviroment.WaveBackground;
 
 /**
@@ -51,7 +53,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private boolean paused;
 	
 	public GamePanel(){
-		bgIntensity = 2;
+		bgIntensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
 		pauspanel = new PauseMenuPanel();
 		this.attackImg = new ImageIcon[16];
 		//test

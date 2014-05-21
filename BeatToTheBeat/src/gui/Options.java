@@ -8,6 +8,8 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import services.*;
+
 /**
  *
  * @author Björn Hedström
@@ -39,6 +41,8 @@ public class Options extends ZoomablePanel implements ChangeListener {
 			pcs.firePropertyChange("volumeChange", null, volumeSlider.getValue());
 		} else if (e.getSource().equals(intensitySlider)) {
 			pcs.firePropertyChange("bgSlider", true, intensitySlider.getValue());
+			
+			new HomogeneousFileHandler().saveAs("options.conf", intensitySlider.getValue());
 		}
 	}
 	
@@ -94,6 +98,7 @@ public class Options extends ZoomablePanel implements ChangeListener {
         volumeLabel.setText("Volume");
         volumeLabel.setForeground(Color.white);
 
+        
         intensitySlider.setBackground(new java.awt.Color(255, 255, 255));
         intensitySlider.setForeground(new java.awt.Color(255, 51, 102));
         intensitySlider.setMaximum(2);
@@ -102,6 +107,7 @@ public class Options extends ZoomablePanel implements ChangeListener {
         intensitySlider.setPaintTicks(true);
         intensitySlider.setSnapToTicks(true);
         intensitySlider.addChangeListener(this);
+        intensitySlider.setValue((int)new HomogeneousFileHandler().load("options.conf").get(0));
 
         backgroundIntensityLabel.setText("Background Intensity");
         backgroundIntensityLabel.setForeground(Color.white);
