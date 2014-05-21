@@ -83,8 +83,8 @@ class ActorControl {
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				player.incCombo();
-				player.incScore((int) (Math.abs(51 - Math.abs(NPCList.get(0).getPosition().x
-						- (right ? 509 : 382))) / 5.1 ));
+				player.incScore((int) (Math.abs((right ? 51 : 66) - Math.abs(NPCList.get(0).getPosition().x
+						- (right ? 515 : 375))) / (right ? 5.5 : 6.6 )));
 				player.incMaxCombo();
 				
 				removeActor();
