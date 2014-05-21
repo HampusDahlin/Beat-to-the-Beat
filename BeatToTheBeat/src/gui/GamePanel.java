@@ -36,6 +36,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int combo;
 	private int maxCombo;
 	private int score;
+	private int lives;
+	
 	private ImageIcon[] walkImg;
 	private MirroredImageIcon[] leftWalkImg;
 	private PauseMenuPanel pauspanel;
@@ -133,6 +135,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			//attackIndex = ((int) pce.getOldValue() == 1 ? 0 : 16);
 			attackIndex = 0;
 			right = ((int)pce.getOldValue() == 1 ? true : false);
+		}else if(pce.getPropertyName().equals("life")){
+			lives = (int)pce.getNewValue();
 		}
 	}
 	
@@ -173,14 +177,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			break;
 		}
 		
-		//paint the hitbox, with the extrapoint zones
-		int boxWidth = 230;
-		int playerPos = 450;
-		g.setColor(backgroundWave.getFirstCompCol());
-		g.drawRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
-		g.fillRect((playerPos-boxWidth/2)+40,331,boxWidth/10,20);
-		g.fillRect((playerPos+boxWidth/2)-50,331,boxWidth/10,20);
-
+		
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
@@ -192,29 +189,44 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
 		
-		//draw the player
-		if (attackIndex < 0) {
-			walkImg[0].paintIcon(this, g,
-					(457-walkImg[0].getIconWidth()/2), 300);
-		} else {
-			if(right){
-				attackImg[attackIndex/2].paintIcon(this, g,
-						(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
-				if (attackIndex < 30) {
-					attackIndex++;
-				} else {
-					attackIndex = -1;
+		//paint the hitbox, with the extrapoint zones
+				int boxWidth = 230;
+				final int playerPos = 457;
+				g.setColor(backgroundWave.getFirstCompCol());
+				g.drawRect(playerPos-(boxWidth/2), 270, boxWidth, 80);
+				g.fillRect((playerPos-(boxWidth/2))+40,331,boxWidth/10,20);
+				g.fillRect((playerPos+(boxWidth/2))-(40+boxWidth/10),331,boxWidth/10,20);
+				//loops through NPCList and draws them
+				g.setColor(Color.BLACK);
+				for (Point npc : npcPosList) {
+					if(npc.x>450){
+						walkImg[walkIndex/10].paintIcon(this, g, npc.x, npc.y);
+					}else{
+						leftWalkImg[walkIndex/10].paintIcon(this, g, npc.x, npc.y,true);
+					}
+					//g.fillRect(npc.x, npc.y, 10, 10);
 				}
 				
-			}else{
-				leftAttackImg[attackIndex/2].paintIcon(this, g, 480, 150, false);
-				if (attackIndex < 30) {
-					attackIndex++;
+				//draw the player
+				if (attackIndex < 0) {
+					walkImg[0].paintIcon(this, g,
+							(457-walkImg[0].getIconWidth()/2), 300);
 				} else {
-					attackIndex = -1;
+					if(right){
+						attackImg[attackIndex/2].paintIcon(this, g,
+								(457-attackImg[attackIndex/2].getIconWidth()/2), 300);
+						
+					}else{
+						leftAttackImg[attackIndex/2].paintIcon(this, g,
+								480, 150, false);
+					}
+					
+					if (attackIndex < 30) {
+						attackIndex++;
+					} else {
+						attackIndex = -1;
+					}
 				}
-			}
-		}
 
 		//draw the healthbar
 		g.drawRect(4, 16, 100, 11);
@@ -232,10 +244,17 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.drawString(""+maxCombo,780,80);
 		g.drawString(""+score,450 , 40);
 		
+		//draws extralives
+		for(int i = 1; i < lives; i++){
+			g.setColor(Color.PINK);
+			g.fillRect(10+i*30,50,20,20);
+		}
+		
 		if(this.paused){
 			this.pauspanel.setVisible(true);
 		}
 	}
+	
 	
 	void update() {
 		revalidate();

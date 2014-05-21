@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 /** 
 * Mirrors an ImageIcon.
 * @author Pontus "Bondi" Eriksson
+* @revisedBy Malin "Nilhet" Thelin
 * @group 14
 */ 
 @SuppressWarnings("serial")
