@@ -11,7 +11,7 @@ public final class Song implements Serializable {
 	private final Genre GENRE;
 	
 	public Song(String fileName, String songName, String artist, Genre genre) {
-		this.FILENAME = "songs\\" + fileName;
+		this.FILENAME = (!fileName.substring(0, 5).equals("songs\\") ? "songs\\" : "") + fileName;
 		this.SONGNAME = songName;
 		this.ARTIST = artist;
 		this.GENRE = genre;
