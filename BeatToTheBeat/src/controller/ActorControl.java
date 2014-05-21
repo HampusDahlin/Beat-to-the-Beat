@@ -1,9 +1,7 @@
 package controller;
 
 import java.awt.Point;
-
 import java.beans.PropertyChangeListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +79,7 @@ class ActorControl {
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				player.incCombo();
-				player.incScore();
+				player.incScore((int) (Math.abs(NPCList.get(0).getPosition().x - (right ? 465 : 375)) / 5.5 ));
 				player.incMaxCombo();
 				
 				removeActor();
