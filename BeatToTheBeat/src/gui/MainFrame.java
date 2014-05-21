@@ -15,6 +15,7 @@ public class MainFrame extends JFrame{
 	public MainFrame() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(914, 600);
+		//this.setResizable(false);
 		this.setLayout(new CardLayout());
 
 	}

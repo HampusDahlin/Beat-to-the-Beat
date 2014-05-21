@@ -34,12 +34,15 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int maxCombo;
 	private int score;
 	private ImageIcon[] walkImg;
+    //test
+    private MirroredImageIcon[] leftWalkImg;
+
 	private int walkIndex;
 	private ImageIcon[] attackImg;
 	//test
-	private ImageIcon[]leftAttackImg;
-	private boolean right;
+	private MirroredImageIcon[]leftAttackImg;
 	
+	private boolean right;
 	private int attackIndex;
 	private boolean hit;
 	
@@ -52,11 +55,15 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		
 		attackIndex = -1;
 		this.walkImg = new ImageIcon[16];
+		//test
+		this.leftWalkImg = new MirroredImageIcon[16];
 		walkIndex = 0;
 		npcPosList = new ArrayList<Point>();
 		for (int i = 0; i < 16; i++) {
 			//this.walkImg[i-1] = new ImageIcon("sprites\\walk1.gif");
 			this.walkImg[i] = new ImageIcon("sprites\\walk" + (i+1) + ".gif");
+			//test
+			this.leftWalkImg[i] = new MirroredImageIcon("sprites\\walk" + (i+1) + ".gif");
 		}
 		
 		for (int i = 0; i < 16; i++) {
@@ -127,7 +134,14 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
-			(npc.x > 450 ? walkImg[walkIndex/10] : walkImg[(walkIndex/10)+8]).paintIcon(this, g, npc.x, npc.y);
+			//(npc.x > 450 ? walkImg[walkIndex/10] : leftWalkImg[walkIndex/10]).paintIcon(this, g, npc.x, npc.y);
+			
+			//test
+			if(npc.x > 450){
+				walkImg[walkIndex/10].paintIcon(this, g, npc.x, npc.y);
+			}else{
+				leftWalkImg[walkIndex/10].paintIcon(this, g, npc.x, npc.y,false);
+			}
 			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
 		
@@ -146,7 +160,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 				}
 				
 			}else{
-				leftAttackImg[attackIndex/2].paintIcon(this, g,480, 150);
+				leftAttackImg[attackIndex/2].paintIcon(this, g,480, 150,true);
 				if (attackIndex < 30) {
 					attackIndex++;
 				} else {
