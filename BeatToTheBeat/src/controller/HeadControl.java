@@ -36,8 +36,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		musicControl = new MusicControl();
 		
 		time = new Timer(10, this);
+		
 		//this is for looping music in menu
-		menuTime = new Timer(2000,this);
+		menuTime = new Timer(10,this);
 		
 		mainPanel = new CardPanel(musicControl.getSongList(), musicControl.getGenres());
 		
@@ -92,12 +93,10 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
-		
+		musicControl.analyzeSong();
 		if(e.getSource().equals(menuTime)){
 			musicControl.loopMusic(false);
-			musicControl.analyzeSong();
 		}else{
-			musicControl.analyzeSong();
 			//Moves the actors along their path.
 			try {
 					actorControl.moveActors();
@@ -124,17 +123,22 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	
 	
 	public void propertyChange(PropertyChangeEvent evt) {
+		if (menuTime.isRunning()) {
+			mainPanel.repaint();
+		}
+		
 		if (evt.getPropertyName().equals("play")) {
 			startGame((Song) evt.getNewValue());
 		} else if(evt.getPropertyName().equals("beat")){
 			if((boolean) evt.getOldValue()) {
-				actorControl.createActor(mainPanel.getGamePanel());
+				if (menuTime.isRunning()) {
+					mainPanel.beat();
+				} else {
+					actorControl.createActor(mainPanel.getGamePanel());
+				}
 			}
-			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
-			
-			if(menuTime.isRunning()){
-				mainPanel.beat();
-			}
+			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground(
+					(float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		} else if (evt.getPropertyName().equals("death")) {
 			endGame((int) evt.getNewValue());
 		} else if (evt.getPropertyName().equals("songEnd")) {
@@ -153,6 +157,14 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 				actorControl.playerAttack(false);
 			} else if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
 				actorControl.playerAttack(true);
+			} else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				time.stop();
+				((GamePanel)(mainPanel.getGamePanel())).pause();
+			}
+		}else{
+			if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				time.start();
+				((GamePanel)(mainPanel.getGamePanel())).unPause();
 			}
 		}
 	}
