@@ -40,11 +40,11 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void incScore(int point){
-		System.out.println(10-point);
+		System.out.println(point);
 		
 		if(getCombo()>1){
 			//we want the player to recieve the combo points they currently have, and not the ones they will get.
-			score += (10 - point) * getCombo()-1;	
+			score += (10 - point) * getCombo()-1;
 		}else{
 			score += 10 - point;
 		}
