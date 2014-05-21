@@ -22,7 +22,6 @@ public class Options extends ZoomablePanel implements ChangeListener {
 		pcs = new PropertyChangeSupport(this);
 		initComponents();
 		volumeSlider.addChangeListener(this);
-		lsdSlider.addChangeListener(this);
 		repaint();
 	}
 
@@ -46,7 +45,6 @@ public class Options extends ZoomablePanel implements ChangeListener {
 		titleLabel = new javax.swing.JLabel();
 		disableBackground = new java.awt.Checkbox();
 		volumeSlider = new javax.swing.JSlider(0, 100, 100);
-		lsdSlider = new javax.swing.JSlider(0, 100, 100);
 		maxVolume = new javax.swing.JLabel();
 		miniVolume = new javax.swing.JLabel();
 		backButton = new javax.swing.JButton();
@@ -66,13 +64,6 @@ public class Options extends ZoomablePanel implements ChangeListener {
 		volumeSlider.setPaintTicks(true);
 		volumeSlider.setSnapToTicks(true);
 		volumeSlider.setOpaque(false);
-		
-		lsdSlider.setBackground(new java.awt.Color(255, 255, 255));
-		lsdSlider.setForeground(new java.awt.Color(255, 51, 102));
-		lsdSlider.setMinorTickSpacing(10);
-		lsdSlider.setPaintTicks(true);
-		lsdSlider.setSnapToTicks(true);
-		lsdSlider.setOpaque(false);
 
 		maxVolume.setText("100");
 		maxVolume.setForeground(Color.WHITE);
@@ -108,7 +99,6 @@ public class Options extends ZoomablePanel implements ChangeListener {
 														.addComponent(maxVolume))
 														.addComponent(titleLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 														.addComponent(volumeSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-														.addComponent(lsdSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 														.addGroup(layout.createSequentialGroup()
 																.addGap(385, 385, 385)
 																.addComponent(disableBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,7 +122,6 @@ public class Options extends ZoomablePanel implements ChangeListener {
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(volumeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(lsdSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGap(56, 56, 56)
 								.addComponent(disableBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGap(76, 76, 76)
@@ -151,7 +140,6 @@ public class Options extends ZoomablePanel implements ChangeListener {
 	private javax.swing.JLabel titleLabel;
 	private javax.swing.JLabel volumeLabel;
 	private javax.swing.JSlider volumeSlider;
-	private javax.swing.JSlider lsdSlider;
 	private PropertyChangeSupport pcs;
 	// End of variables declaration                   
 
@@ -161,8 +149,6 @@ public class Options extends ZoomablePanel implements ChangeListener {
 			pcs.firePropertyChange("volumeChange", null, volumeSlider.getValue());
 		} else if (e.getSource().equals(disableBackground)) {
 			pcs.firePropertyChange("backgroundSlider", true, disableBackground.getState());
-		} else if (e.getSource() == lsdSlider) {
-			pcs.firePropertyChange("lsd", null, lsdSlider.getValue());
 		}
 	}
 	
