@@ -153,6 +153,14 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 				actorControl.playerAttack(false);
 			} else if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
 				actorControl.playerAttack(true);
+			} else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				time.stop();
+				((GamePanel)(mainPanel.getGamePanel())).pause();
+			}
+		}else{
+			if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				time.start();
+				((GamePanel)(mainPanel.getGamePanel())).unPause();
 			}
 		}
 	}
