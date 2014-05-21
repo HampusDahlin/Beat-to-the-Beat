@@ -61,7 +61,11 @@ class ActorControl {
 			NPCList.get(0).dealDmg(player);
 			player.resetCombo();
 			if (player.getHealth() <= 0) {
-				player.death();
+				player.setLives(-1);
+				if(player.getLives() <= 0){
+					player.death();
+				}
+				player.setHealth(player.getMaxHealth());
 			} else {
 				player.resetCooldown();
 				removeActor();
@@ -163,6 +167,10 @@ class ActorControl {
 	
 	void emptyNPCList(){
 		NPCList.clear();
+	}
+	
+	void resetLives(){
+		player.resetLives();
 	}
 	
 }
