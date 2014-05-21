@@ -36,6 +36,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int combo;
 	private int maxCombo;
 	private int score;
+	private int lives;
+	
 	private ImageIcon[] walkImg;
 	private MirroredImageIcon[] leftWalkImg;
 	private PauseMenuPanel pauspanel;
@@ -129,6 +131,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			//attackIndex = ((int) pce.getOldValue() == 1 ? 0 : 16);
 			attackIndex = 0;
 			right = ((int)pce.getOldValue() == 1 ? true : false);
+		}else if (pce.getPropertyName().equals("life")) {
+			lives = (int)pce.getNewValue();
 		}
 	}
 	
@@ -226,6 +230,12 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.drawString(""+combo, 780, 40);
 		g.drawString(""+maxCombo,780,80);
 		g.drawString(""+score,450 , 40);
+		
+		//draw extralives
+		for(int i = 1; i < lives; i++){
+			g.setColor(Color.PINK);
+			g.fillRect(10 + (i-1)*20, 50, 10, 10);
+		}
 		
 		if(this.paused){
 			this.pauspanel.setVisible(true);

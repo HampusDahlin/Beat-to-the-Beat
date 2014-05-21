@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import powerup.Powerup;
 import actors.Actor;
 import actors.NPC;
 import actors.PC;
@@ -61,7 +62,11 @@ class ActorControl {
 			NPCList.get(0).dealDmg(player);
 			player.resetCombo();
 			if (player.getHealth() <= 0) {
-				player.death();
+				player.setLives(-1);
+				if(player.getLives() <= 0){
+					player.death();
+				}
+				player.setHealth(player.getMaxHealth());
 			} else {
 				player.resetCooldown();
 				removeActor();
@@ -79,12 +84,16 @@ class ActorControl {
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				player.incCombo();
+
 				//System.out.println(NPCList.get(0).getPosition().x);
 				player.incScore((int) (((right ? 55 : 66) - Math.abs(NPCList.get(0).getPosition().x
 						- (right ? 515 : 375))) / (right ? 5.5 : 6.6 )));
+				int prevScore = player.getScore();
 				player.incMaxCombo();
 				
 				removeActor();
+				
+				powerupCheck(prevScore);
 			} else {
 				player.startCooldown();
 				player.resetCombo();
@@ -112,6 +121,16 @@ class ActorControl {
 	}
 	*/
 	
+	private void powerupCheck(int prevScore) {
+
+		for(Powerup p : player.getPowerups()){
+			if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
+				p.effect();
+			}
+		}
+		
+	}
+
 	/**
 	 * Checks if first NPC in list is within range.
 	 * @param range How close NPC can be to player.
@@ -164,6 +183,10 @@ class ActorControl {
 	
 	void emptyNPCList(){
 		NPCList.clear();
+	}
+	
+	void resetLives(){
+		player.resetLives();
 	}
 	
 }
