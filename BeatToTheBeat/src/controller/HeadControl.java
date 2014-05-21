@@ -1,6 +1,7 @@
 package controller;
 import gui.CardPanel;
 import gui.GamePanel;
+import gui.Options;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -42,7 +43,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		mainPanel = new CardPanel(musicControl.getSongList(), musicControl.getGenres());
 		
-		mainPanel.getOptionsPanel().addPropertyChangeListener(this);
+		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(this);
 		((GamePanel)(mainPanel.getGamePanel())).getPausepanel().pcs.addPropertyChangeListener(this);
 		
 		//make headcontrol observe all the songPanels. 
@@ -148,8 +149,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			endGame(actorControl.getScore());
 		} else if (evt.getPropertyName().equals("volumeChange")) {
 			
-		} else if (evt.getPropertyName().equals("backgroundSlider")) {
-			
+		} else if (evt.getPropertyName().equals("bgSlider")) {
+			((GamePanel)(mainPanel.getGamePanel())).setBgIntensity((int)evt.getNewValue());
 		} else if (evt.getPropertyName().equals("resumeGame")){
 			time.start();
 			musicControl.resume();

@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import services.HomogeneousFileHandler;
 import enviroment.WaveBackground;
 
 /**
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private MirroredImageIcon[] leftWalkImg;
 	private PauseMenuPanel pauspanel;
 	
+	private int bgIntensity;
 	private int walkIndex;
 	private ImageIcon[] attackImg;
 	private JLabel pause;
@@ -52,6 +54,13 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private boolean paused;
 	
 	public GamePanel(){
+		try{
+			bgIntensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
+		}catch(ArrayIndexOutOfBoundsException e){
+			e.printStackTrace();
+			bgIntensity = 2;
+		}
+			
 		pauspanel = new PauseMenuPanel();
 		this.attackImg = new ImageIcon[16];
 		//test
@@ -141,6 +150,10 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		this.pauspanel.setVisible(false);
 	}
 	
+	public void setBgIntensity(int intensity){
+		this.bgIntensity = intensity;
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -151,7 +164,18 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			walkIndex++;
 		}
 		
-		backgroundWave.drawSinWaves((Graphics2D)g);
+		switch(bgIntensity){
+		case 1:
+			backgroundWave.drawWaves((Graphics2D)g);
+			break;
+		case 2:
+			backgroundWave.drawSinWaves((Graphics2D)g);
+			break;
+		case 3:
+			backgroundWave.drawWaves((Graphics2D)g);
+			backgroundWave.drawSinWaves((Graphics2D)g);
+			break;
+		}
 		
 		
 		//loops through NPCList and draws them
