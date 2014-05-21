@@ -20,8 +20,9 @@ import enviroment.WaveBackground;
 /**
  * 
  * @author Björn Hedström
- * @revisedBy Malin "Nilhet" Thelin
- * @version 0.0.3
+ * @revisedBy Malin Thelin
+ * @revisedBy Hampus Dahlin
+ * @version 0.0.4
  *
  */
 
