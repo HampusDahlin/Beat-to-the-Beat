@@ -37,7 +37,6 @@ public abstract class ZoomablePanel extends JPanel {
 
         if (scale != STANDARDSCALE) {
         	scale -= 0.01;
-        	System.out.println(scale);
         }
     }  
     
