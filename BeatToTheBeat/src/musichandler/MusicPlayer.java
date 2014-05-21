@@ -27,6 +27,10 @@ public class MusicPlayer {
 		player.rewind();
 	}
 	
+	void pause() {
+		player.pause();
+	}
+	
 	void start() {
 		player.play();
 	}

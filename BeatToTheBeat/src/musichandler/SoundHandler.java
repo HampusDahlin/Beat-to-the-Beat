@@ -25,9 +25,16 @@ public class SoundHandler implements ActionListener {
 	}
 	
 	void pause() {
-		player.stop();
+		player.pause();
 		if (!analyzer.equals(null)) {
 			analyzer.pauseAnalyzer();
+		}
+	}
+	
+	void resume() {
+		if (analyzer != null){
+			analyzer.resumeAnalyzer();
+			player.start();
 		}
 	}
 	

@@ -94,6 +94,12 @@ public class MusicFacade {
 		}
 	}
 	
+	public void resume(){
+		if (!sh.equals(null)){
+			sh.resume();
+		}
+	}
+	
 	public void analyze(){
 		sh.analyze();
 	}

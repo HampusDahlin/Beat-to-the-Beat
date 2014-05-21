@@ -84,6 +84,10 @@ public class Analyzer {
 	void pauseAnalyzer() {
 		player.pause();
 	}
+	
+	void resumeAnalyzer() {
+		player.play();
+	}
 
 	/**
 	 * Fires a {@link PropertyChangeEvent} with sound data, also throws GameOverException with string "win" if song is over.

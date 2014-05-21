@@ -45,6 +45,10 @@ class MusicControl {
 		music.pause();
 	}
 	
+	void resume() {
+		music.resume();
+	}
+	
 	public Analyzer getAnalyzer(){
 		return music.getAnalyzer();
 	}
