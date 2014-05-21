@@ -5,6 +5,9 @@ import gui.Options;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import musichandler.Song;
+import services.HomogeneousFileHandler;
 import support.RemoveActorException;
 /**
  * 
@@ -34,6 +38,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	private Timer menuTime;
 	
 	public HeadControl(JFrame mainFrame) {
+		
+		fileCheck();
+		
 		musicControl = new MusicControl();
 		
 		time = new Timer(10, this);
@@ -68,6 +75,14 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		musicControl.getAnalyzer().addPropertyChangeListener(this);
 		menuTime.start();
 		
+	}
+
+	private void fileCheck() {
+		try {
+			new FileInputStream(new File("options.conf"));
+		} catch (FileNotFoundException e) {
+			new HomogeneousFileHandler().saveAs("options.conf", 1);
+		}
 	}
 	
 	private void startGame(Song song) {
