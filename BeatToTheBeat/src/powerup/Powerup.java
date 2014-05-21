@@ -9,6 +9,15 @@ public abstract class Powerup {
 	private String description;
 	private Double duration;
 	private PC owner;
+	private int threshold;
+	
+	public void setThreshold(int threshold){
+		this.threshold = threshold;
+	}
+	
+	public int getThreshold(){
+		return this.threshold;
+	}
 	
 	public void setOwner(PC newOwner) {
 		owner = newOwner;
