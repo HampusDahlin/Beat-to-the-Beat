@@ -152,9 +152,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		//paint the hitbox, with the extrapoint zones
 		int boxWidth = 230;
 		int playerPos = 450;
-		g.setColor(Color.GRAY);
-		g.fillRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
-		g.setColor(Color.RED);
+		g.setColor(backgroundWave.getFirstCompCol());
+		g.drawRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
 		g.fillRect((playerPos-boxWidth/2)+40,331,boxWidth/10,20);
 		g.fillRect((playerPos+boxWidth/2)-50,331,boxWidth/10,20);
 
