@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import enviroment.WaveBackground;
@@ -21,7 +20,8 @@ import enviroment.WaveBackground;
  * 
  * @author Björn Hedström
  * @revisedBy Malin "Nilhet" Thelin
- * @version 0.0.3
+ * @revisedBy Hampus Dahlin
+ * @version 0.0.4
  *
  */
 
@@ -37,7 +37,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private ImageIcon[] walkImg;
 	private int walkIndex;
 	private ImageIcon[] attackImg;
-	private JLabel pause;
 	private ImageIcon[]leftAttackImg;
 	private boolean right;
 	private int attackIndex;
