@@ -61,7 +61,11 @@ class ActorControl {
 			NPCList.get(0).dealDmg(player);
 			player.resetCombo();
 			if (player.getHealth() <= 0) {
-				player.death();
+				player.setLives(-1);
+				if(player.getLives() <= 0){
+					player.death();
+				}
+				player.setHealth(player.getMaxHealth());
 			} else {
 				player.resetCooldown();
 				removeActor();
@@ -79,8 +83,8 @@ class ActorControl {
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				player.incCombo();
-				player.incScore((int) (Math.abs(51 - Math.abs(NPCList.get(0).getPosition().x
-						- (right ? 509 : 382))) / 5.1 ));
+				player.incScore((int) (Math.abs((right ? 51 : 66) - Math.abs(NPCList.get(0).getPosition().x
+						- (right ? 515 : 375))) / (right ? 5.5 : 6.6 )));
 				player.incMaxCombo();
 				
 				removeActor();
@@ -163,6 +167,10 @@ class ActorControl {
 	
 	void emptyNPCList(){
 		NPCList.clear();
+	}
+	
+	void resetLives(){
+		player.resetLives();
 	}
 	
 }
