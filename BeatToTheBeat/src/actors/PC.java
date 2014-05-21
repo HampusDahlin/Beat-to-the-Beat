@@ -15,6 +15,8 @@ public class PC extends Actor implements ActionListener {
 	private int combo;
 	private int maxCombo;
 	private Timer cooldown;
+	//test
+	private int lives;
 	
 	public PC(Point position, ImageIcon sprite) {
 		super(sprite, new Point(0,0));
@@ -23,6 +25,7 @@ public class PC extends Actor implements ActionListener {
 		score = 0;
 		combo = 0;
 		maxCombo = 0;
+		lives = 1;
 		setPosition(position);
 		setDmg(1);
 		MISSTIME = 1000; //ms
@@ -55,6 +58,10 @@ public class PC extends Actor implements ActionListener {
 	public void incCombo() {
 		combo++;
 		pcs.firePropertyChange("combo", combo-1, combo);
+		if(combo % 20 == 0){
+			incLives();
+			pcs.firePropertyChange("life",lives-1,lives);
+		}
 	}
 	
 	public void resetCombo() {
@@ -118,6 +125,16 @@ public class PC extends Actor implements ActionListener {
 	
 	public void attack(boolean hit, int direction) {
 		pcs.firePropertyChange("attack", direction, hit);
+	}
+	
+	public int getLives(){
+		return lives;
+	}
+	
+	public void incLives(){
+		if(lives > 0){
+			lives++;
+		}
 	}
 	
 }
