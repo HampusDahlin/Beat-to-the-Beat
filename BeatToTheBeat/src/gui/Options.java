@@ -13,7 +13,7 @@ import javax.swing.event.ChangeListener;
  * @author Björn Hedström
  */
 @SuppressWarnings("serial")
-class Options extends ZoomablePanel implements ChangeListener {
+public class Options extends ZoomablePanel implements ChangeListener {
 
 	/**
 	 * Creates new form Options
@@ -38,7 +38,7 @@ class Options extends ZoomablePanel implements ChangeListener {
 		if (e.getSource() == volumeSlider) {
 			pcs.firePropertyChange("volumeChange", null, volumeSlider.getValue());
 		} else if (e.getSource().equals(intensitySlider)) {
-			pcs.firePropertyChange("backgroundSlider", true, intensitySlider.getValue());
+			pcs.firePropertyChange("bgSlider", true, intensitySlider.getValue());
 		}
 	}
 	
@@ -101,6 +101,7 @@ class Options extends ZoomablePanel implements ChangeListener {
         intensitySlider.setMinorTickSpacing(1);
         intensitySlider.setPaintTicks(true);
         intensitySlider.setSnapToTicks(true);
+        intensitySlider.addChangeListener(this);
 
         backgroundIntensityLabel.setText("Background Intensity");
         backgroundIntensityLabel.setForeground(Color.white);
@@ -178,6 +179,6 @@ class Options extends ZoomablePanel implements ChangeListener {
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel volumeLabel;
     private javax.swing.JSlider volumeSlider;
-	private PropertyChangeSupport pcs;
+	public PropertyChangeSupport pcs;
 	// End of variables declaration                   
 }

@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private MirroredImageIcon[] leftWalkImg;
 	private PauseMenuPanel pauspanel;
 	
+	private int bgIntensity;
 	private int walkIndex;
 	private ImageIcon[] attackImg;
 	private JLabel pause;
@@ -137,6 +138,10 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		this.pauspanel.setVisible(false);
 	}
 	
+	public void setBgIntensity(int intensity){
+		this.bgIntensity = intensity;
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -147,7 +152,18 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			walkIndex++;
 		}
 		
-		backgroundWave.drawSinWaves((Graphics2D)g);
+		switch(bgIntensity){
+		case 1:
+			backgroundWave.drawWaves((Graphics2D)g);
+			break;
+		case 2:
+			backgroundWave.drawSinWaves((Graphics2D)g);
+			break;
+		case 3:
+			backgroundWave.drawWaves((Graphics2D)g);
+			backgroundWave.drawSinWaves((Graphics2D)g);
+			break;
+		}
 		
 		//paint the hitbox, with the extrapoint zones
 		int boxWidth = 230;
