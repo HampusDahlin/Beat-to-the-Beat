@@ -2,8 +2,11 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -13,7 +16,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import musichandler.Genre;
 import musichandler.Song;
-
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
@@ -26,7 +28,7 @@ import org.blinkenlights.jid3.v1.ID3V1Tag;
 * @author Björn Hedström
 */
 @SuppressWarnings("serial")
-class SongUploadPanel extends ZoomablePanel {
+public class SongUploadPanel extends ZoomablePanel {
    /**
     * Creates new form SongUploadPanel
     */
@@ -126,9 +128,32 @@ class SongUploadPanel extends ZoomablePanel {
 	   }
    }
    
-   private void presentInfo(File songFile) {
-	   AudioPlayer player = new Minim(this).loadFile(songFile.getName());
-	   
+   public InputStream createInput(String fileName) {
+	   System.out.println(fileName);
+       System.out.println("creating inputStream from file: " + fileName);
+       InputStream is;
+       try {
+           is = new FileInputStream(fileName);
+           System.out.println("Success!");
+           return is;
+       } catch (Exception e) {
+           System.out.println("Failed! Exception: " + e);
+           is = null;
+       }
+       return is;
+   }
+   
+   public void presentInfo(File songFile) {
+	   AudioPlayer player = null;
+	   	try {
+	   		minim = new Minim(this);
+			player = minim.loadFile(originalFilepathField.getText(), 1000);
+	   	} catch (Exception e) {
+	   		System.out.println(originalFilepathField.getText());
+	   		System.out.println(e.getMessage());
+	   		System.exit(0);
+	   	}
+	   	
 	    try {
 	    	artistField.setText(player.getMetaData().author());
 	    } catch (NullPointerException e) {
@@ -324,7 +349,11 @@ class SongUploadPanel extends ZoomablePanel {
    private List<Song> songList;
    private Genre[] genreList;
    private String source = "";
+   private Minim minim;
    // End of variables declaration                   
+
+
+
 }
 
 
