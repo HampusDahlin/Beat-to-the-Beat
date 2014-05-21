@@ -7,13 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-/**
- * A class for handling a JPanel showing a waveform.
- * @author Hampus Dahlin
- *
- */
 public class WaveBackground implements PropertyChangeListener{
-
 	private int colorChange; //the index of the currently increasing color value
 	private final int LISTSIZE = 20; //the amount of soundframes being displayed
 	private final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
@@ -34,33 +28,65 @@ public class WaveBackground implements PropertyChangeListener{
 	 * @param soundwave, the float-data of the soundwave.
 	 * @param beat, true if there is a beat, false otherwise.
 	 */
-	public void updateBackground(float[][] soundwave, boolean beat) {
+	public void updateBackground(float[][] soundwave, boolean beat){
 		for(WaveForm wave : waveList){
 			wave.age();
 		}
+		handleWaveList(soundwave, beat);
+		waveList.get(0).setColor(calcColorChange());
 		
+	}
+	
+	/**
+	 * Adds a new waveform to the list and removes any excess elements down to LISTSIZE.
+	 * @param soundwave
+	 * @param beat
+	 */
+	private void handleWaveList(float[][] soundwave, boolean beat){
 		waveList.add(0, new WaveForm(soundwave, beat, waveList.get(0).getColor()));
+		
 		if(waveList.size() > LISTSIZE){
 			waveList.remove(LISTSIZE);
 		}
-
-		//Changes the color of the soundwave
-		if(waveList.get(0).getBeat()){
-			for(int i = 0; i < 150; i++){
-				waveList.get(0).setColor(gradientChange(waveList.get(0).getColor()));
-			}
-		}else{
-			waveList.get(0).setColor(gradientChange(waveList.get(0).getColor()));
-			if(waveList.get(0).getWidth() > 1){
-				waveList.get(0).setWidth(waveList.get(0).getWidth() - 1);
-			}
-		}
-	}
-
-	public Color getFirstCompCol(){
-		return(invertColor(waveList.get(0).getColor()));
 	}
 	
+	/**
+	 * Returns the color of the next waveform.
+	 */
+	private Color calcColorChange(){
+		Color c = waveList.get(0).getColor();
+		if(waveList.get(0).getBeat()){
+			for(int i = 0; i < 150; i++){
+				c = gradientChange(c);
+			}
+		}else{
+			c = gradientChange(c);
+		}
+		return c;
+	}
+	
+	
+	/**
+	 * Simulates a gradient colorchange.
+	 * @param prevColor
+	 * @return nextColor
+	 */
+	private Color gradientChange(Color prevColor){
+		Color nextColor;
+	
+		int[] colorRGB = {prevColor.getRed(), prevColor.getGreen(), prevColor.getBlue()};
+	
+		if(colorRGB[((colorChange + 2) % 3)] == 0){
+			colorChange = ((colorChange + 1) % 3);
+		}
+	
+		colorRGB[(colorChange + 2) % 3]--;
+		colorRGB[colorChange]++;
+	
+		nextColor = new Color(colorRGB[0], colorRGB[1], colorRGB[2]);
+		return nextColor;
+	}
+
 	/**
 	 * 
 	 * @param c
@@ -86,25 +112,12 @@ public class WaveBackground implements PropertyChangeListener{
 		}
 	}
 
-	/**
-	 * Simulates a gradient colorchange.
-	 * @param prevColor
-	 * @return nextColor
-	 */
-	private Color gradientChange(Color prevColor){
-		Color nextColor;
+	public Color getFirstColor(){
+		return(waveList.get(0).getColor());
+	}
 
-		int[] colorRGB = {prevColor.getRed(), prevColor.getGreen(), prevColor.getBlue()};
-
-		if(colorRGB[((colorChange + 2) % 3)] == 0){
-			colorChange = ((colorChange + 1) % 3);
-		}
-
-		colorRGB[(colorChange + 2) % 3]--;
-		colorRGB[colorChange]++;
-
-		nextColor = new Color(colorRGB[0], colorRGB[1], colorRGB[2]);
-		return nextColor;
+	public Color getFirstCompCol(){
+		return(invertColor(getFirstColor()));
 	}
 
 	@Override
