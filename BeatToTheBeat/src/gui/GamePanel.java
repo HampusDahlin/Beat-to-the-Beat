@@ -14,8 +14,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import levels.Level;
-import enviroment.ABackground;
 import enviroment.WaveBackground;
 
 /**
@@ -26,6 +24,7 @@ import enviroment.WaveBackground;
  *
  */
 
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	private WaveBackground backgroundWave;
@@ -113,7 +112,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 	}
 	
-	Long time = null;
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -176,7 +174,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		
 	}
 	
-	public void update() {
+	void update() {
 		revalidate();
 		repaint();
 	}

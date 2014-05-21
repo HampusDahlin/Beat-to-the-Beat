@@ -23,7 +23,7 @@ public abstract class Actor {
 
 	protected PropertyChangeSupport pcs;
 	
-	public Actor(ImageIcon sprite, Point speed) {
+	Actor(ImageIcon sprite, Point speed) {
 		this.SPRITE = sprite;
 		this.SPEED = speed;
 		pcs = new PropertyChangeSupport(this);
@@ -93,16 +93,5 @@ public abstract class Actor {
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
-
 	
-	
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		pcs.removePropertyChangeListener(listener);
-		
-	}
-	
-	//attack and death moved to ActorFacade until further notice
-	//abstract public void attack();
-	//abstract public void death();
-	
-}
+} //end Actor

@@ -8,7 +8,7 @@ import java.awt.*;
  * 
  *
  */
-public class BackgroundObject {
+class BackgroundObject {
 	
 	private Image sprite;
 	private Point position;
@@ -18,7 +18,7 @@ public class BackgroundObject {
 	 * @param sprite
 	 * @param position
 	 */
-	public BackgroundObject(Image sprite,Point position){
+	BackgroundObject(Image sprite,Point position){
 		setSprite(sprite);
 		setPosition(position);
 	}

@@ -26,24 +26,19 @@ import support.RemoveActorException;
 public class HeadControl implements ActionListener, PropertyChangeListener, KeyListener {
 	
 	private ActorControl actorControl;
-	private EnviromentControl enviromentControl;
 	private MusicControl musicControl;
-	private UIControl uiControl;
 	private Timer time;
 	private CardPanel mainPanel;
-	//private JFrame mainFrame;
 	
 	private Timer menuTime;
 	
 	public HeadControl(JFrame mainFrame) {
 		musicControl = new MusicControl();
-		enviromentControl = new EnviromentControl();
 		
 		time = new Timer(10, this);
 		//this is for looping music in menu
 		menuTime = new Timer(2000,this);
 		
-		uiControl = new UIControl(mainFrame);
 		mainPanel = new CardPanel(musicControl.getSongList(), musicControl.getGenres());
 		
 		mainPanel.getOptionsPanel().addPropertyChangeListener(this);
@@ -72,7 +67,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 	}
 	
-	public void startGame(Song song) {
+	private void startGame(Song song) {
 		
 		//pause the music in menu
 		musicControl.pause();
@@ -90,20 +85,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		actorControl.resetMaxCombo();
 		//empty out the npclist
 		actorControl.emptyNPCList();
-	}
-	
-	public void startGame(int songIndex) {
-		time.start();
-		if(songIndex >=0 && songIndex <= musicControl.getSongCount())//hur många låtar vi nu än kommer att ha
-		{
-			musicControl.setSong(songIndex);
-			musicControl.play(true);
-		}else{//just error handling
-			System.out.println("Song doesn't exist");
-		}
-		
-	}
-	
+	}	
 	
 	/**
 	 * {@inheritDoc}
@@ -124,10 +106,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 				}
 			mainPanel.update();
 			}
-		//uiControl.update(actorControl.getNPCList());
 	}
 	
-	public void endGame(int score) {
+	private void endGame(int score) {
 		//stop the music and the gametime
 		musicControl.pause();
 		time.stop();
@@ -176,13 +157,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		}
 	}
 	
+	public void keyReleased(KeyEvent evt) { }
+	public void keyTyped(KeyEvent evt) { }
 	
-	public void keyReleased(KeyEvent evt) {
-		
-	}
-	
-	
-	public void keyTyped(KeyEvent evt) {
-		
-	}
-}
+} //end HeadControl

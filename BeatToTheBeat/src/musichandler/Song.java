@@ -2,6 +2,7 @@ package musichandler;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public final class Song implements Serializable {
 	
 	private final String FILENAME;

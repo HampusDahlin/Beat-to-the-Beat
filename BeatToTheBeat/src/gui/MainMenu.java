@@ -1,18 +1,12 @@
 package gui;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
 
 /**
 *
 * @author Björn Hedström
 */
-public class MainMenu extends ZoomablePanel {
+@SuppressWarnings("serial") class MainMenu extends ZoomablePanel {
 
    /**
     * Creates new form MainMenu

@@ -12,7 +12,7 @@ public class SoundHandler implements ActionListener {
 	private Analyzer analyzer;
 	private Timer timer;
 	
-	public SoundHandler(Song song, boolean isDelay) {
+	SoundHandler(Song song, boolean isDelay) {
 		//when we play music in the menu we don't want the delay, but when we play it in the game we want it in order to
 		//analyze perfectly
 		if (isDelay) {
@@ -24,7 +24,7 @@ public class SoundHandler implements ActionListener {
 		player = new MusicPlayer(song);
 	}
 	
-	public void pause() {
+	void pause() {
 		player.stop();
 		if (!analyzer.equals(null)) {
 			analyzer.pauseAnalyzer();
@@ -43,7 +43,7 @@ public class SoundHandler implements ActionListener {
 		}
 	}
 	
-	public void analyze(){
+	void analyze(){
 		analyzer.analyze();
 	}
 	

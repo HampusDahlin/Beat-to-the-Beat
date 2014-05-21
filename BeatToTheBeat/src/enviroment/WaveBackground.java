@@ -2,7 +2,6 @@ package enviroment;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -92,7 +91,7 @@ public class WaveBackground implements PropertyChangeListener{
 	 * @param prevColor
 	 * @return nextColor
 	 */
-	public Color gradientChange(Color prevColor){
+	private Color gradientChange(Color prevColor){
 		Color nextColor;
 
 		int[] colorRGB = {prevColor.getRed(), prevColor.getGreen(), prevColor.getBlue()};

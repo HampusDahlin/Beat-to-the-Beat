@@ -52,11 +52,11 @@ public class MusicFacade {
 	 * 
 	 * @param fileName
 	 */
-	public void addSong(String fileName, String songName, String artist, Genre genre) {
+	private void addSong(String fileName, String songName, String artist, Genre genre) {
 		songList.add(new Song(fileName, songName, artist, genre));
 	}
 	
-	public void addSong(String fileName, String songName, String artist, String genre) {
+	private void addSong(String fileName, String songName, String artist, String genre) {
 		System.out.println(genre);
 		for (Genre g : genres) {
 			System.out.println(genre.equals(g.getName()));
@@ -94,26 +94,6 @@ public class MusicFacade {
 		}
 	}
 	
-	
-	/**
-	 * Changes the current song to the next in the list.
-	 */
-	public void next(){
-		if(currentSong < songList.size()){
-			currentSong++;
-		}
-	}
-	
-	
-	/**
-	 * Changes the current song to the previous in the list.
-	 */
-	public void previous(){
-		if (currentSong > 0) {
-			currentSong--;
-		}
-	}
-	
 	public void analyze(){
 		sh.analyze();
 	}
@@ -126,7 +106,6 @@ public class MusicFacade {
 		return currentSong;
 	}
 	
-	// TODO
 	public void setIndex(int newIndex) {
 		if(newIndex < 0) {
 			currentSong = 0;
@@ -137,15 +116,6 @@ public class MusicFacade {
 		}
 	}
 	
-	public void changeDist(){
-		//TODO
-	}
-	
-	
-	public void changeSpeed(){
-		//TODO
-	}
-	
 	public float[][] getWave() {
 		return sh.getWave();
 	}
@@ -154,7 +124,7 @@ public class MusicFacade {
 		return songList;
 	}
 	
-	public void loadSonglist() {
+	private void loadSonglist() {
 		Scanner in = null;
 		try {
 			in = new Scanner(new FileReader("songs\\songList.list"));
@@ -169,7 +139,7 @@ public class MusicFacade {
 		}
 	}
 	
-	public void saveSonglist(){
+	private void saveSonglist(){
 		try {
 	          BufferedWriter output = new BufferedWriter(new FileWriter(new File("songs\\songList.list")));
 	          System.out.println(songList.size());

@@ -22,14 +22,15 @@ import musichandler.Song;
 * @author Björn Hedström
 * @revised by Malin "Nilhet" Thelin
 */
-public class SongPanel extends JPanel{
+@SuppressWarnings("serial")
+class SongPanel extends JPanel{
 	
 	private PropertyChangeSupport pcs;
 
    /**
     * Creates new form SongPanel
     */
-   public SongPanel(String bgFileName) {
+   SongPanel(String bgFileName) {
 	   this.bgFileName = bgFileName;
 	   pcs = new PropertyChangeSupport(this);
        initComponents();
@@ -47,7 +48,7 @@ public class SongPanel extends JPanel{
 	   g.drawImage(image, 0, 0, null);
    }
    
-   public void presentSong() {
+   private void presentSong() {
 	   this.artistLabel.setText(song.getArtist());
 	   this.genreLabel.setText((song.getGenre()).getName());
 	   this.songNameLabel.setText(song.getSongName());

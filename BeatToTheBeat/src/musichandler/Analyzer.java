@@ -4,12 +4,11 @@ package musichandler;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import ddf.minim.*;
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import ddf.minim.analysis.BeatDetect;
 
 
@@ -37,7 +36,7 @@ public class Analyzer {
 	 * @param song the song to be analyzed
 	 * @param sensitivity how sensitive the Analyzer will be
 	 */
-	public Analyzer(Song song, int sensitivity) {
+	Analyzer(Song song, int sensitivity) {
 		DELAY = 4000; //delay in ms
 		pcs = new PropertyChangeSupport(this);
 		genre = song.getGenre();
@@ -55,41 +54,22 @@ public class Analyzer {
 	/**
 	 * Mutes any music playing from the analyzer and then starts analyzing the song.
 	 */
-	public void start() {
+	void start() {
 		player.mute();
 		player.play();	
 	}
 	
 	/**
-	 * Creates an InputStream using the supplied filename fileName.
-	 * @param fileName the files filename
-	 * @return an InputStream linked to the filename fileName.
-	 */
-	public InputStream createInput(String fileName) {
-		System.out.println("creating inputStream from file: " + fileName);
-		InputStream is;
-		try {
-			is = new FileInputStream(fileName);
-			System.out.println("Success!");
-			return is;
-		} catch (Exception e) {
-			System.out.println("Failed! Exception: " + e);
-			is = null;
-		}
-		return is;
-	}
-	
-	/**
 	 * Pauses the analyzer.
 	 */
-	public void pauseAnalyzer() {
+	void pauseAnalyzer() {
 		player.pause();
 	}
 
 	/**
 	 * Fires a {@link PropertyChangeEvent} with sound data, also throws GameOverException with string "win" if song is over.
 	 */
-	public void analyze() {
+	void analyze() {
 		//test
 		if (isGameOver()) {
 			pcs.firePropertyChange("songEnd", false, true);

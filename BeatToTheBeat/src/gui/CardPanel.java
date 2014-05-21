@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import musichandler.Genre;
 import musichandler.Song;
 
+@SuppressWarnings("serial")
 public class CardPanel extends JPanel {
 	
 	private Options options;
@@ -40,32 +41,28 @@ public class CardPanel extends JPanel {
 		this.add(songUpload, SONGUPLOADPANEL);
 	}
 	
-	public void exit() {
-		System.exit(0);
-	}
-	
-	public void goToSongUpload() {
+	void goToSongUpload() {
 		((CardLayout)this.getLayout()).show(this, SONGUPLOADPANEL);
 		activePanel = 5;
 	}
 	
-	public void back() {
+	void back() {
 		((CardLayout)this.getLayout()).show(this, MENUPANEL);
 		activePanel = 0;
 	}
 	
-	public void goToOptions() {
+	void goToOptions() {
 		((CardLayout)this.getLayout()).show(this, OPTIONSPANEL);
 		activePanel = 1;
 	}
 	
-	public void playSong() {
+	void playSong() {
 		((CardLayout)this.getLayout()).show(this, SONGSELECTIONPANEL);
 		activePanel = 2;
 		songPresenter.presentSongList(0);
 	}
 	
-	public void goToGame() {
+	void goToGame() {
 		((CardLayout)this.getLayout()).show(this, GAMEPANEL);
 		activePanel = 3;
 	}

@@ -1,19 +1,25 @@
 package controller;
+
 import java.awt.Point;
+
 import java.beans.PropertyChangeListener;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+
 import actors.Actor;
 import actors.NPC;
 import actors.PC;
-public class ActorControl {
+
+class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
 	private final ImageIcon SPRITE;
 	
-	public ActorControl(PropertyChangeListener listener) {
+	ActorControl(PropertyChangeListener listener) {
 		this.SPRITE = new ImageIcon("sprites\\ninja.gif");
 		NPCList = new ArrayList<NPC>();
 		player = new PC(new Point(450, 0), SPRITE);
@@ -21,19 +27,19 @@ public class ActorControl {
 		player.setHealth(player.getMaxHealth()); //setting health after so player fires event to gamepanel
 	}
 	
-	public void createActor(JPanel listener) {
+	void createActor(JPanel listener) {
 		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 900, 0), //random which side
 			SPRITE, (PropertyChangeListener)listener));
 	}
 	
-	public void removeActor(Actor actor) {
+	private void removeActor(Actor actor) {
 		NPCList.remove(actor);
 		}
 	
 	/**
 	 * Removes first actor in actorList.
 	 */
-	public void removeActor() {
+	void removeActor() {
 		NPCList.get(0).removeYourself(0);
 		removeActor(NPCList.get(0));
 	}
@@ -52,7 +58,7 @@ public class ActorControl {
 	/**
 	 * Tries to attack with the closest NPC.
 	 */
-	public void NPCAttack() {
+	private void NPCAttack() {
 		if (canHitClose(15, false) || canHitClose(15,true)) { //take damage and remove enemy
 			NPCList.get(0).dealDmg(player);
 			player.resetCombo();
@@ -69,7 +75,7 @@ public class ActorControl {
 		return NPCList;
 	}
 	
-	public void playerAttack(boolean right) {
+	void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
 			boolean hit = canHitClose(500, right);
 			player.attack(hit, (right ? -1 : 1));
@@ -111,7 +117,7 @@ public class ActorControl {
 	 * @param range How close NPC can be to player.
 	 * @param right If attack is directed to the right.
 	 */
-	public boolean canHitClose(int range, boolean right) {
+	private boolean canHitClose(int range, boolean right) {
 		return !NPCList.isEmpty() && (NPCList.get(0).getSpeed().x < 0 == right) &&
 				((right ? NPCList.get(0) : player).getPosition().x) -
 				((right ? player : NPCList.get(0)).getPosition().x +
@@ -120,7 +126,7 @@ public class ActorControl {
 	}
 	
 	// Move all NPCs and then try to attack.
-	public void moveActors() {
+	void moveActors() {
 		for (int i = 0; i < NPCList.size() && !NPCList.isEmpty(); i++) {
 			NPCList.get(i).setPosition(new Point(
 					(NPCList.get(i).getPosition().x + NPCList.get(i).getSpeed().x), 300), i);
@@ -140,21 +146,23 @@ public class ActorControl {
 		return player;
 	}
 	
-	public void resetHealth(){
+	void resetHealth(){
 		player.setHealth(player.getMaxHealth());
 	}
 	
-	public void resetScore(){
+	void resetScore(){
 		player.resetScore();
 	}
-	public void resetCombo(){
+	
+	void resetCombo(){
 		player.resetCombo();
 	}
-	public void resetMaxCombo(){
+	
+	void resetMaxCombo(){
 		player.resetMaxCombo();
 	}
 	
-	public void emptyNPCList(){
+	void emptyNPCList(){
 		NPCList.clear();
 	}
 }

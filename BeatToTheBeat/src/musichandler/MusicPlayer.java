@@ -6,13 +6,13 @@ import java.io.InputStream;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
-public class MusicPlayer {
+class MusicPlayer {
 	private Song song;
 	private AudioPlayer player;
 	private Minim minim;
 	private final int BUFFERSIZE = 512;
 
-	public MusicPlayer(Song song) {
+	MusicPlayer(Song song) {
 		this.song = song;
 		minim = new Minim(this);
 		//System.out.println(song.getFilename());
@@ -23,12 +23,12 @@ public class MusicPlayer {
 		return song;
 	}
 	
-	public void stop() {
+	void stop() {
 		player.pause();
 		player.rewind();
 	}
 	
-	public void start() {
+	void start() {
 		player.play();
 	}
 	
@@ -45,10 +45,12 @@ public class MusicPlayer {
 		setVolume((float)vol/100);
 	}
 	
+	//needed for minim
 	public String sketchPath(String fileName) {
 		return "sketchPath: " + fileName;
 	}
 	
+	//needed for minim
 	public InputStream createInput(String fileName) {
 		//System.out.println("creating inputStream from file: " + fileName);
 		InputStream is;

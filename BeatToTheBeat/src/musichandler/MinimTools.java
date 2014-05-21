@@ -20,6 +20,7 @@ import ddf.minim.analysis.BeatDetect;
 * @author Pontus "Bondi" Eriksson
 * @group 14
 */ 
+@SuppressWarnings("serial")
 public class MinimTools extends JPanel implements ActionListener {
 	Minim minim;
 	AudioPlayer player;

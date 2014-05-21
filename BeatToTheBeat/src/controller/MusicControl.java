@@ -13,7 +13,7 @@ import musichandler.Song;
  * @author Hampus Dahlin
  *
  */
-public class MusicControl {
+class MusicControl {
 	
 	private MusicFacade music;
 	
@@ -21,23 +21,19 @@ public class MusicControl {
 		music = new MusicFacade();
 	}
 	
-	public void analyzeSong(){
+	void analyzeSong(){
 		music.analyze();
 	}
 	
-	public void setSong(int index) {
-		
-	}
-	
-	public void play(Song song, boolean isDelay) {
+	void play(Song song, boolean isDelay) {
 		music.play(song, isDelay);
 	}
 	
-	public void play(boolean isDelay) {
+	void play(boolean isDelay) {
 		music.playCurrent(isDelay);
 	}
 	
-	public void playRandom(){
+	void playRandom(){
 		Random r = new Random();
 		int rand = r.nextInt(getSongCount());
 		Song song = music.getSongList().get(rand);
@@ -45,7 +41,7 @@ public class MusicControl {
 		
 	}
 	
-	public void pause() {
+	void pause() {
 		music.pause();
 	}
 	
@@ -74,7 +70,7 @@ public class MusicControl {
 	
 	
 	//Code to loop music in menu
-	public void loopMusic(boolean inGame){
+	void loopMusic(boolean inGame){
 		while(!inGame && !isSongPlaying()){
 			playRandom();
 		}
