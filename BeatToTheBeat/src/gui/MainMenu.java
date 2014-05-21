@@ -6,7 +6,7 @@ import java.awt.Graphics;
 *
 * @author Björn Hedström
 */
-@SuppressWarnings("serial") class MainMenu extends ZoomablePanel {
+@SuppressWarnings("serial")class MainMenu extends ZoomablePanel {
 
    /**
     * Creates new form MainMenu

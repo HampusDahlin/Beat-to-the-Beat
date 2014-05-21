@@ -21,10 +21,10 @@ class MirroredImageIcon extends ImageIcon {
 		super(imagePath);
 	}
 
-	@Override
-	public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
+	
+	public synchronized void paintIcon(Component c, Graphics g, int x, int y, boolean isMoving) {
 		Graphics2D g2d = (Graphics2D)g.create();
-		g2d.translate(x*2,y);
+		g2d.translate(x*2,y - (isMoving ? 300 : 0));
 		g2d.scale(-1, 1);
 		super.paintIcon(c, g2d, x, y);
 	}

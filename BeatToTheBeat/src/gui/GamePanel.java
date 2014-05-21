@@ -35,10 +35,13 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int maxCombo;
 	private int score;
 	private ImageIcon[] walkImg;
+	private MirroredImageIcon[] leftWalkImg;
+	
 	private int walkIndex;
 	private ImageIcon[] attackImg;
 	private JLabel pause;
-	private ImageIcon[]leftAttackImg;
+	
+	private MirroredImageIcon[]leftAttackImg;
 	private boolean right;
 	private int attackIndex;
 	private boolean hit;
@@ -52,12 +55,14 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		
 		
 		attackIndex = -1;
-		this.walkImg = new ImageIcon[16];
+		this.walkImg = new ImageIcon[8];
+		this.leftWalkImg = new MirroredImageIcon[8];
 		walkIndex = 0;
 		npcPosList = new ArrayList<Point>();
-		for (int i = 0; i < 16; i++) {
+		for (int i = 0; i < 8; i++) {
 			//this.walkImg[i-1] = new ImageIcon("sprites\\walk1.gif");
 			this.walkImg[i] = new ImageIcon("sprites\\walk" + (i+1) + ".gif");
+			this.leftWalkImg[i] = new MirroredImageIcon("sprites\\walk" + (i+1) + ".gif");
 		}
 		
 		for (int i = 0; i < 16; i++) {
@@ -130,6 +135,18 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		//test
+		//g.drawRect(350, 100, 220, 200);
+		int boxWidth = 230;
+		int playerPos = 450;
+		g.setColor(Color.WHITE);
+		g.fillRect(450-boxWidth/2, 200, boxWidth, 200);
+		g.setColor(Color.RED);
+		g.fillRect((450-boxWidth/2)+40,360,20,20);
+		g.fillRect((450+boxWidth/2)-50,360,20,20);
+		
+		
+		
 		if (walkIndex == 79) {
 			walkIndex = 0;
 		} else {
@@ -141,7 +158,11 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
-			(npc.x > 450 ? walkImg[walkIndex/10] : walkImg[(walkIndex/10)+8]).paintIcon(this, g, npc.x, npc.y);
+			if(npc.x>450){
+				walkImg[walkIndex/10].paintIcon(this, g, npc.x, npc.y);
+			}else{
+				leftWalkImg[walkIndex/10].paintIcon(this, g, npc.x, npc.y,true);
+			}
 			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
 		
@@ -160,7 +181,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 				}
 				
 			}else{
-				leftAttackImg[attackIndex/2].paintIcon(this, g,480, 150);
+				leftAttackImg[attackIndex/2].paintIcon(this, g, 480, 150, false);
 				if (attackIndex < 30) {
 					attackIndex++;
 				} else {
