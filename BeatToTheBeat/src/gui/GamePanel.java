@@ -51,6 +51,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private boolean paused;
 	
 	public GamePanel(){
+		bgIntensity = 2;
 		pauspanel = new PauseMenuPanel();
 		this.attackImg = new ImageIcon[16];
 		//test
