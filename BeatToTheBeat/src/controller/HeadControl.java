@@ -36,8 +36,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		musicControl = new MusicControl();
 		
 		time = new Timer(10, this);
+		
 		//this is for looping music in menu
-		menuTime = new Timer(2000,this);
+		menuTime = new Timer(10,this);
 		
 		mainPanel = new CardPanel(musicControl.getSongList(), musicControl.getGenres());
 		
@@ -124,16 +125,21 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	
 	
 	public void propertyChange(PropertyChangeEvent evt) {
+		if (menuTime.isRunning()) {
+			mainPanel.repaint();
+		}
+		
 		if (evt.getPropertyName().equals("play")) {
 			startGame((Song) evt.getNewValue());
 		} else if(evt.getPropertyName().equals("beat")){
 			if((boolean) evt.getOldValue()) {
-				actorControl.createActor(mainPanel.getGamePanel());
-			}
-			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
-			
-			if(menuTime.isRunning()){
-				mainPanel.beat();
+				if (menuTime.isRunning()) {
+					mainPanel.beat();
+				} else {
+					actorControl.createActor(mainPanel.getGamePanel());
+					((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground(
+							(float[][])evt.getNewValue(), (boolean)evt.getOldValue());
+				}
 			}
 		} else if (evt.getPropertyName().equals("death")) {
 			endGame((int) evt.getNewValue());
