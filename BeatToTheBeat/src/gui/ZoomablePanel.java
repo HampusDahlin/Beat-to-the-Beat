@@ -18,12 +18,11 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public abstract class ZoomablePanel extends JPanel implements ActionListener {
     private BufferedImage image;  
-    private double scale = 1.0;
-    private final double STANDARDSCALE = 1.1;
-    private Timer timer;
+    private final double STANDARDSCALE = 1.0;
+    private final double ZOOMSCALE = 1.1;
+    private double scale = STANDARDSCALE;
 
-    protected void paintComponent(Graphics g) {  
-    	timer = new Timer(10, this);
+    protected void paintComponent(Graphics g) {
         loadImage();  
         super.paintComponent(g);  
         Graphics2D g2 = (Graphics2D)g;  
@@ -37,7 +36,12 @@ public abstract class ZoomablePanel extends JPanel implements ActionListener {
         double y = (h - scale * imageHeight)/2;  
         AffineTransform at = AffineTransform.getTranslateInstance(x,y);  
         at.scale(scale, scale);  
-        g2.drawRenderedImage(image, at);  
+        g2.drawRenderedImage(image, at);
+
+        if (scale != STANDARDSCALE) {
+        	scale -= 0.01;
+        	System.out.println(scale);
+        }
     }  
     
     public void setScale(double s) {
@@ -47,12 +51,11 @@ public abstract class ZoomablePanel extends JPanel implements ActionListener {
     }
     
     public void zoom() {
-    	setScale(STANDARDSCALE);
-    	timer.start();
+    	setScale(ZOOMSCALE);
     }
     
     public void recead() {
-    	setScale(1.0);
+    	setScale(STANDARDSCALE);
     }
    
     private void loadImage() {  
@@ -65,22 +68,6 @@ public abstract class ZoomablePanel extends JPanel implements ActionListener {
         } catch(IOException ioe) {  
             System.out.println("read trouble: " + ioe.getMessage());  
         }  
-    }  
-    
-    public void actionPerformed(ActionEvent e) {
-    	 if(scale == STANDARDSCALE){
-             recead();
-         }else{
-             setScale(STANDARDSCALE);
-         }
-         
-    	
-    	
-    	/**
-    	if (scale == STANDARDSCALE) {
-    		timer.stop();
-    	} else {
-    		scale -= 0.01;
-    	}*/
     }
-}  
+    
+} //end ZoomablePanel
