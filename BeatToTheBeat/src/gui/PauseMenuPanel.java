@@ -8,7 +8,7 @@ import java.beans.PropertyChangeSupport;
  */
 public class PauseMenuPanel extends javax.swing.JPanel {
 	
-	PropertyChangeSupport pcs;
+	public PropertyChangeSupport pcs;
 	/**
 	 * Creates new form PauseMenuPanel
 	 */
@@ -76,11 +76,11 @@ public class PauseMenuPanel extends javax.swing.JPanel {
 
 	private void resumeButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		pcs.firePropertyChange("resumeGame", true, false);
-	}                                            
+	}
 
 	private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		pcs.firePropertyChange("quitGame", true, false);
-	}                                          
+	}
 
 
 	// Variables declaration - do not modify                     
