@@ -6,7 +6,7 @@ import java.io.InputStream;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
-class MusicPlayer {
+public class MusicPlayer {
 	private Song song;
 	private AudioPlayer player;
 	private Minim minim;
@@ -15,7 +15,6 @@ class MusicPlayer {
 	MusicPlayer(Song song) {
 		this.song = song;
 		minim = new Minim(this);
-		//System.out.println(song.getFilename());
 		player = minim.loadFile(song.getFilename(), BUFFERSIZE);// this loads song from the data folder
 	}
 	
