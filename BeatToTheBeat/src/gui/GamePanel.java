@@ -176,7 +176,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.drawRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
 		g.fillRect((playerPos-boxWidth/2)+40,331,boxWidth/10,20);
 		g.fillRect((playerPos+boxWidth/2)-50,331,boxWidth/10,20);
-
+		
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
 		for (Point npc : npcPosList) {
@@ -185,7 +185,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			}else{
 				leftWalkImg[walkIndex/10].paintIcon(this, g, npc.x, npc.y,true);
 			}
-			//g.fillRect(npc.x, npc.y, 10, 10);
 		}
 		
 		//draw the player

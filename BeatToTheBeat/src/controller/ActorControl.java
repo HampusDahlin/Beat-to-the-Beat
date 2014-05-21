@@ -79,7 +79,8 @@ class ActorControl {
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				player.incCombo();
-				player.incScore((int) (Math.abs((right ? 51 : 66) - Math.abs(NPCList.get(0).getPosition().x
+				//System.out.println(NPCList.get(0).getPosition().x);
+				player.incScore((int) (((right ? 55 : 66) - Math.abs(NPCList.get(0).getPosition().x
 						- (right ? 515 : 375))) / (right ? 5.5 : 6.6 )));
 				player.incMaxCombo();
 				
