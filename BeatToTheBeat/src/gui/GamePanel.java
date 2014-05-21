@@ -138,13 +138,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		
 		//test
 		//g.drawRect(350, 100, 220, 200);
-		int boxWidth = 230;
-		int playerPos = 450;
-		g.setColor(Color.WHITE);
-		g.fillRect(450-boxWidth/2, 200, boxWidth, 200);
-		g.setColor(Color.RED);
-		g.fillRect((450-boxWidth/2)+40,360,20,20);
-		g.fillRect((450+boxWidth/2)-50,360,20,20);
 		
 		
 		
@@ -155,6 +148,15 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		backgroundWave.drawWaves((Graphics2D)g);
+		
+		//paint the hitbox, with the extrapoint zones
+		int boxWidth = 230;
+		int playerPos = 450;
+		g.setColor(Color.GRAY);
+		g.fillRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
+		g.setColor(Color.RED);
+		g.fillRect((playerPos-boxWidth/2)+40,331,boxWidth/10,20);
+		g.fillRect((playerPos+boxWidth/2)-50,331,boxWidth/10,20);
 
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);

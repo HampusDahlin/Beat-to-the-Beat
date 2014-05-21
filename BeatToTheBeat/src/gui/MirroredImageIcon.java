@@ -28,6 +28,7 @@ class MirroredImageIcon extends ImageIcon {
 		g2d.scale(-1, 1);
 		super.paintIcon(c, g2d, x, y);
 	}
+	
 
 
 } //end MirroredImageIcon

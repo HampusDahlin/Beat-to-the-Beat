@@ -77,7 +77,7 @@ class ActorControl {
 	
 	void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
-			boolean hit = canHitClose(200, right);
+			boolean hit = canHitClose(120, right);
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				player.incCombo();
