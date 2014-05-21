@@ -93,12 +93,10 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
-		
+		musicControl.analyzeSong();
 		if(e.getSource().equals(menuTime)){
 			musicControl.loopMusic(false);
-			musicControl.analyzeSong();
 		}else{
-			musicControl.analyzeSong();
 			//Moves the actors along their path.
 			try {
 					actorControl.moveActors();
@@ -137,10 +135,10 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 					mainPanel.beat();
 				} else {
 					actorControl.createActor(mainPanel.getGamePanel());
-					((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground(
-							(float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 				}
 			}
+			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground(
+					(float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		} else if (evt.getPropertyName().equals("death")) {
 			endGame((int) evt.getNewValue());
 		} else if (evt.getPropertyName().equals("songEnd")) {
