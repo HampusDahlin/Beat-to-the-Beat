@@ -42,6 +42,7 @@ public class CardPanel extends JPanel {
 	}
 	
 	void goToSongUpload() {
+		songUpload.clearFields();
 		((CardLayout)this.getLayout()).show(this, SONGUPLOADPANEL);
 		activePanel = 5;
 	}

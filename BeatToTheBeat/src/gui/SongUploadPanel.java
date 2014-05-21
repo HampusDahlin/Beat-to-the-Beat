@@ -167,12 +167,19 @@ public class SongUploadPanel extends ZoomablePanel {
 	    }
    }
    
+   public void clearFields() {
+	   succesLabel.setVisible(false);
+	   artistField.setText("");
+	   songNameField.setText("");
+	   originalFilepathField.setText("");
+   }
+   
    private void copyFileToBTTB(File songFile) {
 	   File dest = new File(System.getProperty("user.dir") + "\\songs\\" + songFile.getName());
 	   try {
 		   Files.copy(songFile.toPath(), dest.toPath());
 	   } catch (IOException e) {
-		   succesLabel.setText("An error occured while trying to copy the selected file");
+		   succesLabel.setText("An error occured, please try again");
 		   succesLabel.setForeground(Color.red);
 	   } 
    }
