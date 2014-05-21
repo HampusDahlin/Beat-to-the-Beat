@@ -3,8 +3,6 @@ package gui;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -13,10 +11,9 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 @SuppressWarnings("serial")
-public abstract class ZoomablePanel extends JPanel implements ActionListener {
+public abstract class ZoomablePanel extends JPanel {
     private BufferedImage image;  
     private final double STANDARDSCALE = 1.0;
     private final double ZOOMSCALE = 1.1;
@@ -52,10 +49,6 @@ public abstract class ZoomablePanel extends JPanel implements ActionListener {
     
     public void zoom() {
     	setScale(ZOOMSCALE);
-    }
-    
-    public void recead() {
-    	setScale(STANDARDSCALE);
     }
    
     private void loadImage() {  
