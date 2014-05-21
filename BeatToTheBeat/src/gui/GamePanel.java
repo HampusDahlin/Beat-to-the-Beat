@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import enviroment.WaveBackground;
@@ -34,24 +35,23 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int maxCombo;
 	private int score;
 	private ImageIcon[] walkImg;
-    //test
     private MirroredImageIcon[] leftWalkImg;
 
 	private int walkIndex;
 	private ImageIcon[] attackImg;
-	//test
 	private MirroredImageIcon[]leftAttackImg;
-	
+	private JLabel pause;
 	private boolean right;
 	private int attackIndex;
 	private boolean hit;
-	
+	private boolean paused;
 	
 	public GamePanel(){
 		this.attackImg = new ImageIcon[16];
 		//test
 		this.leftAttackImg = new MirroredImageIcon[16];
 		right = true;
+		
 		
 		attackIndex = -1;
 		this.walkImg = new ImageIcon[16];
@@ -71,6 +71,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			//test
 			this.leftAttackImg[i] = new MirroredImageIcon("sprites\\attack" + (i+1) + ".gif");
 		}
+		
 		
 		this.setBackground(new java.awt.Color(0,0,0));
 		this.setBackgroundWave(new WaveBackground());
@@ -119,9 +120,21 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 	}
 	
+	public void pause(){
+		this.paused  = true;
+		Graphics g = this.getGraphics();
+
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Sans", Font.BOLD, 40));
+		g.drawString("Game Paused", 340, 80);
+	}
+	
+	public void unPause(){
+		this.paused = false;
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
 		
 		if (walkIndex == 79) {
 			walkIndex = 0;
@@ -185,7 +198,11 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.drawString(""+maxCombo,780,80);
 		g.drawString(""+score,450 , 40);
 		
-		
+		if(this.paused){
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Sans", Font.BOLD, 40));
+			g.drawString("Game Paused", 340, 80);
+		}
 	}
 	
 	void update() {
