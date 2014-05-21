@@ -19,9 +19,10 @@ import ddf.minim.analysis.BeatDetect;
 * <p> A class written with the purpose to test Minim and to in an easy way create new genres and test their values for beatdetection.
 * @author Pontus "Bondi" Eriksson
 * @group 14
-*/ 
+*/
+
 @SuppressWarnings("serial")
-public class MinimTools extends JPanel implements ActionListener {
+public class MinimTools extends JPanel implements ActionListener { // NO_UCD (used code)
 	Minim minim;
 	AudioPlayer player;
 	AudioInput input;
@@ -39,7 +40,7 @@ public class MinimTools extends JPanel implements ActionListener {
 	
 	public MinimTools() {
 		genres = new Genre[10];
-		genres[0] = new Genre("Happy Hardcore", 2, 6, 3, 100);
+		genres[0] = new Genre("Happy Hardcore", 0, 0, 1, 330);
 		genres[1] = new Genre("Rap", 0, 5, 3, 1);
 		genres[2] = new Genre("Rock", 0, 5, 3, 1);
 		genres[3] = new Genre("Ballade", 0, 4, 2, 1);
