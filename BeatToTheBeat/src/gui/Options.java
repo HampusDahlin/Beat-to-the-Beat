@@ -13,7 +13,7 @@ import javax.swing.event.ChangeListener;
  * @author Björn Hedström
  */
 @SuppressWarnings("serial")
-public class Options extends ZoomablePanel implements ChangeListener {
+class Options extends ZoomablePanel implements ChangeListener {
 
 	/**
 	 * Creates new form Options

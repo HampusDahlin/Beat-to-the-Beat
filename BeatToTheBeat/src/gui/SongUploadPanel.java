@@ -28,7 +28,7 @@ import org.blinkenlights.jid3.v1.ID3V1Tag;
 * @author Björn Hedström
 */
 @SuppressWarnings("serial")
-class SongUploadPanel extends ZoomablePanel {
+public class SongUploadPanel extends ZoomablePanel {
    /**
     * Creates new form SongUploadPanel
     */
@@ -128,7 +128,8 @@ class SongUploadPanel extends ZoomablePanel {
 	   }
    }
    
-   private InputStream createInput(String fileName) {
+   public InputStream createInput(String fileName) {
+	   System.out.println(fileName);
        System.out.println("creating inputStream from file: " + fileName);
        InputStream is;
        try {
@@ -142,11 +143,11 @@ class SongUploadPanel extends ZoomablePanel {
        return is;
    }
    
-   private void presentInfo(File songFile) {
+   public void presentInfo(File songFile) {
 	   AudioPlayer player = null;
 	   	try {
 	   		minim = new Minim(this);
-			player = minim.loadFile(originalFilepathField.getText(), 512);
+			player = minim.loadFile(originalFilepathField.getText(), 1000);
 	   	} catch (Exception e) {
 	   		System.out.println(originalFilepathField.getText());
 	   		System.out.println(e.getMessage());
@@ -350,11 +351,8 @@ class SongUploadPanel extends ZoomablePanel {
    private String source = "";
    private Minim minim;
    // End of variables declaration                   
-@Override
-public void actionPerformed(ActionEvent e) {
-	// TODO Auto-generated method stub
-	
-}
+
+
 
 }
 

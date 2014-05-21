@@ -6,7 +6,9 @@ import java.awt.Graphics;
 *
 * @author Björn Hedström
 */
-@SuppressWarnings("serial")class MainMenu extends ZoomablePanel {
+
+@SuppressWarnings("serial")
+class MainMenu extends ZoomablePanel {
 
    /**
     * Creates new form MainMenu
@@ -129,5 +131,6 @@ import java.awt.Graphics;
    private javax.swing.JLabel logo;
    private javax.swing.JButton optionsButton;
    private javax.swing.JButton songUploadButton;
-   // End of variables declaration                   
+   // End of variables declaration
+   
 }
