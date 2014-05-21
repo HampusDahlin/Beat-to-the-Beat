@@ -40,10 +40,10 @@ public class HighScoreList {
 	}
 	
 	public int[] getScores() {
-		return scores;
+		return scores.clone();
 	}
 	
 	public String[] getNames() {
-		return names;
+		return names.clone();
 	}
 }
