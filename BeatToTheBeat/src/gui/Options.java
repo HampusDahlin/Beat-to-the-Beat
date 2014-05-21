@@ -108,9 +108,9 @@ public class Options extends ZoomablePanel implements ChangeListener {
 		intensitySlider.setPaintTicks(true);
 		intensitySlider.setSnapToTicks(true);
 		intensitySlider.addChangeListener(this);
-		try{
+		try {
 			intensitySlider.setValue((int)new HomogeneousFileHandler().load("options.conf").get(0));
-		}catch(ArrayIndexOutOfBoundsException e){
+		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
 			intensitySlider.setValue(2);
 		}

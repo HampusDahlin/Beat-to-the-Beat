@@ -52,9 +52,9 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private boolean paused;
 	
 	public GamePanel(){
-		try{
+		try {
 			bgIntensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
-		}catch(ArrayIndexOutOfBoundsException e){
+		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
 			bgIntensity = 2;
 		}
