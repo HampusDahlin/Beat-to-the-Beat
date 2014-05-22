@@ -50,9 +50,10 @@ public class MinimTools extends JPanel implements ActionListener { // NO_UCD (us
 		songs[0] = new Song("Eminem - Till I Collapse.mp3", "Till I Collapse", "Eminem", genres[2]);
 		songs[1] = new Song("Rotterdam Termination Source - Poing.mp3", "Poing", "Rotterdam Terminator Source", genres[0]);
 		songs[2] = new Song("Groove Armada - Edge Hill", "Groove Armada", "Edge Hill", genres[3]);
-		//your song here
+		//your song here, and choose genre
+		songs[3] = new Song("FILENAME", "SONGNAME", "ARTIST", genres[0]);
 		//and set this value to same as your song.
-		activeSong = songs[1];
+		activeSong = songs[3];
 		mode = false; 		//Set TRUE for sound-energy, FALSE for frequency-energy
 		visMode = false; 	//Set TRUE for frequency, FALSE for "ball"
 		BUFFERSIZE = 512;
@@ -156,10 +157,9 @@ public class MinimTools extends JPanel implements ActionListener { // NO_UCD (us
 
 		if (one) {
 			repaint();
-			one = false;
-		} else {
-			one = true;
 		}
+		one = !one;
+		
 		repaint();
 	}
 }
