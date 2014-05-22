@@ -16,17 +16,21 @@ public class ScorePanel extends ZoomablePanel {
 		disableEditable();
 	}
 
-	private void proccedButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+	private void proccedButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+		if(hsList.isEligible(score) != -1) {
+			hsList.add(nameField[hsList.isEligible(score)].getText(), score);
+		}
 		((CardPanel)this.getParent()).playSong();
 	}    
 
-	void presentScore(int score) {
+	void presentScore(int score, Song song) {
 		this.score = score;
-		scoreLabel.setText(score + "Points");
+		hsList = song.getHighScoreList();
+		scoreLabel.setText(score + " Points");
+		presentHighScoreList(song);
 	}
 
 	public void presentHighScoreList(Song song) {
-		HighScoreList hsList = song.getHighScoreList();
 		int possibleIndex = hsList.isEligible(score);
 		if(possibleIndex != -1) {
 			disableEditable();
@@ -210,6 +214,7 @@ public class ScorePanel extends ZoomablePanel {
 	private int score;
 	private JTextField[] nameField;
 	private JTextField[] scoreField;
+	private HighScoreList hsList;
 	
 	// End of variables declaration                   
 }

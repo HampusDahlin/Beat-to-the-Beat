@@ -20,14 +20,12 @@ public class HighScoreList {
 	 */
 	public void add(String name, int score) {
 		//moves places below the indexdown one step.
-		if(isEligible(score) != -1) {
-			for(int i = 4; i > isEligible(score); i--) {
-				names[i] = names[i - 1];
-				scores[i] = scores[i - 1];
-			}
-			names[isEligible(score)] = name;
-			scores[isEligible(score)] = score;
+		for(int i = 4; i > isEligible(score); i--) {
+			names[i] = names[i - 1];
+			scores[i] = scores[i - 1];
 		}
+		names[isEligible(score)] = name;
+		scores[isEligible(score)] = score;
 	}
 	/**
 	 * @param score
