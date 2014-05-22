@@ -86,6 +86,7 @@ class ActorControl {
 				player.incCombo();
 
 				//System.out.println(NPCList.get(0).getPosition().x);
+				
 				player.incScore((int) (((right ? 55 : 66) - Math.abs(NPCList.get(0).getPosition().x
 						- (right ? 515 : 375))) / (right ? 5.5 : 6.6 )));
 				int prevScore = player.getScore();
@@ -125,7 +126,7 @@ class ActorControl {
 
 		for(Powerup p : player.getPowerups()){
 			if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
-				p.effect();
+				p.effect(player);
 			}
 		}
 		

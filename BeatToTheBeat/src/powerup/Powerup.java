@@ -1,5 +1,6 @@
 package powerup;
 
+import actors.Actor;
 import actors.PC;
 
 /** 
@@ -14,7 +15,7 @@ public abstract class Powerup {
 	private final int DURATION;
 	private final int THRESHOLD;
 	
-	public Powerup(PC owner, String name, String description, int duration, int threshold) {
+	public Powerup(String name, String description, int duration, int threshold) {
 		this.owner = owner;
 		this.NAME = name;
 		this.DESCRIPTION = description;
@@ -53,7 +54,7 @@ public abstract class Powerup {
 		return DURATION;
 	}
 	
-	abstract public void effect();
+	abstract public void effect(Actor a);
 	
 	
 }
