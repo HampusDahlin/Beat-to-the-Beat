@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import powerup.Invincible;
 import powerup.Powerup;
 import powerup.Regen;
 import actors.Actor;
@@ -32,7 +33,7 @@ class ActorControl {
 	
 	private void addPowerups() {
 		powerups.add(new Regen());
-		
+		powerups.add(new Invincible());
 	}
 
 	void createActor(JPanel listener) {
@@ -71,12 +72,9 @@ class ActorControl {
 			NPCList.get(0).dealDmg(player);
 			player.resetCombo();
 			if (player.getHealth() <= 0) {
-				player.setLives(-1);
-				if(player.getLives() <= 0){
-					player.death();
-				}
-				player.setHealth(player.getMaxHealth());
-			} else {
+				player.death();
+			}
+			else {
 				player.resetCooldown();
 				removeActor();
 			}
@@ -93,9 +91,9 @@ class ActorControl {
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				player.incCombo();
+				int prevScore = player.getScore();
 				player.incScore((int) ((70 - Math.abs(NPCList.get(0).getPosition().x
 						- (right ? 515 : 400))) / 7));
-				int prevScore = player.getScore();
 				player.incMaxCombo();
 				
 				removeActor();
@@ -131,7 +129,7 @@ class ActorControl {
 	private void powerupCheck(int prevScore) {
 
 		for(Powerup p : powerups){
-			if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
+			if (player.getScore() % p.getThreshold() < prevScore % p.getThreshold()) {
 				p.effect(player);
 			}
 		}
@@ -192,8 +190,6 @@ class ActorControl {
 		NPCList.clear();
 	}
 	
-	void resetLives(){
-		player.resetLives();
-	}
+	
 	
 }
