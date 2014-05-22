@@ -21,7 +21,7 @@ public class PC extends Actor implements ActionListener {
 	private int maxCombo;
 	private Timer cooldown;
 	//test
-	private int lives;
+	private boolean isInvincible;
 	
 	public PC(Point position, ImageIcon sprite) {
 		super(sprite, new Point(0,0));
@@ -30,13 +30,14 @@ public class PC extends Actor implements ActionListener {
 		score = 0;
 		combo = 0;
 		maxCombo = 0;
-		lives = 1;
 		setPosition(position);
 		setDmg(1);
 		MISSTIME = 1000; //ms
 		cooldown = new Timer(MISSTIME, this);
 		cooldown.setInitialDelay(MISSTIME);
 		cooldown.setRepeats(false);
+		
+		isInvincible = false;
 	}
 
 	public void death() {
@@ -126,6 +127,14 @@ public class PC extends Actor implements ActionListener {
 	
 	public void attack(boolean hit, int direction) {
 		pcs.firePropertyChange("attack", direction, hit);
+	}
+
+	@Override
+	public void setInvincible() {
+		isInvincible = true;
+	}
+	public boolean isInvincible(){
+		return isInvincible;
 	}
 	
 }

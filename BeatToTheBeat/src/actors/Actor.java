@@ -93,5 +93,7 @@ public abstract class Actor {
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
+
+	public abstract void setInvincible();
 	
 } //end Actor

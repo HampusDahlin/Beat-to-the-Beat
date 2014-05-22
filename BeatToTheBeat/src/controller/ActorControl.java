@@ -37,7 +37,7 @@ class ActorControl {
 	}
 
 	void createActor(JPanel listener) {
-		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 900, 0), //random which side
+		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? -25 : 915, 0), //random which side
 			SPRITE, (PropertyChangeListener)listener));
 	}
 	
@@ -69,14 +69,19 @@ class ActorControl {
 	 */
 	private void NPCAttack() {
 		if (canHitClose(15, false) || canHitClose(15,true)) { //take damage and remove enemy
-			NPCList.get(0).dealDmg(player);
-			player.resetCombo();
-			if (player.getHealth() <= 0) {
-				player.death();
-			}
-			else {
-				player.resetCooldown();
-				removeActor();
+			if(player.isInvincible()){
+				
+			}else{
+
+				NPCList.get(0).dealDmg(player);
+				player.resetCombo();
+				if (player.getHealth() <= 0) {
+					player.death();
+				}
+				else {
+					player.resetCooldown();
+					removeActor();
+				}	
 			}
 		}
 	}
@@ -84,28 +89,31 @@ class ActorControl {
 	public List<NPC> getNPCList() {
 		return NPCList;
 	}
-	
+
 	void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
 			boolean hit = canHitClose(120, right);
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
-				player.incCombo();
 				int prevScore = player.getScore();
 				player.incScore((int) ((70 - Math.abs(NPCList.get(0).getPosition().x
-						- (right ? 515 : 400))) / 7));
+							- (right ? 515 : 400))) / 7));
+
+				player.incCombo();
 				player.incMaxCombo();
-				
-				removeActor();
-				
 				powerupCheck(prevScore);
+				removeActor();
+
 			} else {
 				player.startCooldown();
 				player.resetCombo();
-				
+
 			}
 		}
 	}
+
+	
+	
 	// Possibly to be used with powerups etc later.
 	/**
 	 * Checks which NPCs are within range of player.
