@@ -51,7 +51,7 @@ public abstract class ZoomablePanel extends JPanel {
     }
    
     private void loadImage() {  
-        String fileName = "speaker.png";  
+        String fileName = "images\\speaker.png";  
         try {  
             URL url = getClass().getResource(fileName);  
             image = ImageIO.read(url);  

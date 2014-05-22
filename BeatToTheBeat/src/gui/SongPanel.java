@@ -31,7 +31,8 @@ class SongPanel extends JPanel{
     * Creates new form SongPanel
     */
    SongPanel(String bgFileName) {
-	   this.bgFileName = bgFileName;
+	   this.bgFileName = "images//" + bgFileName;
+	   System.out.println(this.bgFileName);
 	   pcs = new PropertyChangeSupport(this);
        initComponents();
        addMouseListener(listener);
