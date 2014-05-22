@@ -58,14 +58,13 @@ public class PC extends Actor implements ActionListener {
 		return score;
 	}
 	
-	public void incScore(int distance){
-		System.out.println("Distance: " + distance);
+	public void incScore(int point){
 		
 		if(getCombo()>1){
 			//we want the player to recieve the combo points they currently have, and not the ones they will get.
-			score += (10 - distance) * getCombo()-1;
+			score += point * (getCombo()-1);
 		}else{
-			score += 10 - distance;
+			score += point;
 		}
 		pcs.firePropertyChange("score", score-1, score);
 		
