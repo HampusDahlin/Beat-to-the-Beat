@@ -1,5 +1,6 @@
 package powerup;
 
+import actors.Actor;
 import actors.PC;
 
 /** 
@@ -53,7 +54,7 @@ public abstract class Powerup {
 		return DURATION;
 	}
 	
-	abstract public void effect();
+	abstract public void effect(Actor a);
 	
 	
 }

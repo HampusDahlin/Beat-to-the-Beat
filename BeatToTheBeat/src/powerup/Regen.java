@@ -1,23 +1,20 @@
 package powerup;
 
-import actors.PC;
+import actors.Actor;
 
 public class Regen extends Powerup {
 	
-	public Regen(PC player) {
-		setOwner(player);
-		setName("Regen");
-		setDescription("Regenerate HP over time");
-		setThreshold(10000);
+	public Regen() {
+		super("Regen", "Regenerate HP", 0, 10000);
 	}
 		
 	@Override
 	//heals the player gradualy over time. Can´t increase the health above 100.
-	public void effect() {
-		if(getOwner().getHealth() < 45) {
-			getOwner().setHealth(getOwner().getHealth()+5);
+	public void effect(Actor a) {
+		if(a.getHealth() < 45) {
+			a.setHealth(a.getHealth()+5);
 		} else {
-			getOwner().setHealth(50);
+			a.setHealth(50);
 		}
 	}
 

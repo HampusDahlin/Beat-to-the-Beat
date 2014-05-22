@@ -84,7 +84,6 @@ class ActorControl {
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				player.incCombo();
-
 				player.incScore((int) ((70 - Math.abs(NPCList.get(0).getPosition().x
 						- (right ? 515 : 400))) / 7));
 				int prevScore = player.getScore();
@@ -124,7 +123,7 @@ class ActorControl {
 
 		for(Powerup p : player.getPowerups()){
 			if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
-				p.effect();
+				p.effect(player);
 			}
 		}
 		
