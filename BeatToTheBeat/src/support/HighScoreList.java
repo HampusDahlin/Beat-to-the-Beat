@@ -11,6 +11,7 @@ public class HighScoreList {
 	public HighScoreList() {
 		scores = new int[5];
 		names = new String[5];
+		initHighScoreList();
 	}
 	/**
 	 * @param name
@@ -37,6 +38,15 @@ public class HighScoreList {
 			}
 		}
 		return -1;
+	}
+	
+	/**
+	 * initializes the list to empty variables
+	 */
+	public void initHighScoreList() {
+		for(int i = 0; i < 5; i++) {
+			names[i] = "";
+		}
 	}
 	
 	public int[] getScores() {
