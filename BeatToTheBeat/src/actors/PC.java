@@ -19,6 +19,11 @@ public class PC extends Actor implements ActionListener {
 	private int score;
 	private int combo;
 	private int maxCombo;
+	
+	//test
+	private int lives;
+	//test
+	
 	private Timer cooldown;
 
 	
@@ -36,6 +41,10 @@ public class PC extends Actor implements ActionListener {
 		cooldown.setInitialDelay(MISSTIME);
 		cooldown.setRepeats(false);
 		setRange(120);
+		
+		//test
+		lives = 1;
+		//test
 	}
 
 	public void death() {
@@ -126,6 +135,23 @@ public class PC extends Actor implements ActionListener {
 	public void attack(boolean hit, int direction) {
 		pcs.firePropertyChange("attack", direction, hit);
 	}
+	
+	//testing
+
+	public void addToLives(int i) {
+		lives += i;
+		pcs.firePropertyChange("life",lives-1,lives);
+	}
+	
+	public void resetLives(){
+		lives = 1;
+	}
+	
+	public int getLives(){
+		return lives;
+	}
+	
+	//testing
 
 	
 }
