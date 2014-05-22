@@ -3,9 +3,13 @@ package actors;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+
+import powerup.Powerup;
+import powerup.Regen;
 
 public class PC extends Actor implements ActionListener {
 	private final int MISSTIME;
@@ -15,6 +19,7 @@ public class PC extends Actor implements ActionListener {
 	private int combo;
 	private int maxCombo;
 	private Timer cooldown;
+	private List<Powerup> powerups;
 	//test
 	private int lives;
 	
@@ -32,8 +37,17 @@ public class PC extends Actor implements ActionListener {
 		cooldown = new Timer(MISSTIME, this);
 		cooldown.setInitialDelay(MISSTIME);
 		cooldown.setRepeats(false);
+		setActivePowerups();
 	}
 	
+	private void setActivePowerups() {
+		powerups.add(new Regen(this));
+	}
+	
+	public List<Powerup> getPowerups(){
+		return this.powerups;
+	}
+
 	public void death() {
 		pcs.firePropertyChange("death", true, score);
 	}
