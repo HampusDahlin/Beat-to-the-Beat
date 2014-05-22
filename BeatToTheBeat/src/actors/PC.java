@@ -3,6 +3,7 @@ package actors;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -25,6 +26,7 @@ public class PC extends Actor implements ActionListener {
 	
 	public PC(Point position, ImageIcon sprite) {
 		super(sprite, new Point(0,0));
+		powerups = new ArrayList<Powerup>();
 		setPosition(position);
 		MAXHEALTH = 10;
 		score = 0;
