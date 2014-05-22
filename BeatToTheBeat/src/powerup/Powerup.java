@@ -51,7 +51,7 @@ public abstract class Powerup {
 		return DURATION;
 	}
 	
-	abstract public void effect(Actor a);
+	abstract public void effect(Actor a, boolean score);
 	
 	
 }

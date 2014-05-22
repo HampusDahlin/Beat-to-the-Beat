@@ -8,12 +8,8 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import powerup.Invincible;
-import powerup.Powerup;
-import powerup.Regen;
-import actors.Actor;
-import actors.NPC;
-import actors.PC;
+import powerup.*;
+import actors.*;
 
 class ActorControl {
 	private List<NPC> NPCList;
@@ -34,6 +30,7 @@ class ActorControl {
 	private void addPowerups() {
 		powerups.add(new Regen());
 		powerups.add(new Invincible());
+		powerups.add(new ExtraLife());
 	}
 
 	void createActor(JPanel listener) {
@@ -73,15 +70,19 @@ class ActorControl {
 			//instead of losing hp and/or dying
 			if(player.isInvincible()){
 				playerAttack((canHitClose(15,false) ? false : true));
-				
+
 			}else{
 
 				NPCList.get(0).dealDmg(player);
 				player.resetCombo();
+
 				if (player.getHealth() <= 0) {
-					player.death();
-				}
-				else {
+					player.addToLives(-1);
+					if(player.getLives() <= 0){
+						player.death();
+					}
+					player.setHealth(player.getMaxHealth());
+				}else {
 					player.resetCooldown();
 				}	
 			}
@@ -106,6 +107,10 @@ class ActorControl {
 				player.incCombo();
 				player.incMaxCombo();
 				powerupCheck(prevScore);
+				
+				//System.out.println("LIV:: "+ player.getLives());
+				
+				
 				removeActor();
 
 			} else {
@@ -139,11 +144,20 @@ class ActorControl {
 	*/
 	
 	private void powerupCheck(int prevScore) {
-
+		
 		for(Powerup p : powerups){
-			if (player.getScore() % p.getThreshold() < prevScore % p.getThreshold()) {
-				p.effect(player);
+			//testing
+
+			if(p.getThreshold() < 1000 && player.getCombo() % p.getThreshold() == 0){
+				System.out.println(player.getCombo()+ "%"+ p.getThreshold()+" = "+player.getCombo() % p.getThreshold() );
+				p.effect(player,false);
+			}else if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
+				//original code
+					p.effect(player,true);
+				//original code
 			}
+			//testing
+
 		}
 		
 	}

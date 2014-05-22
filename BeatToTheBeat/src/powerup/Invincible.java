@@ -19,10 +19,12 @@ public class Invincible extends Powerup implements ActionListener{
 	}
 
 	@Override
-	public void effect(Actor a) {
-		this.a = a;
-		this.a.setInvincible(true);
-		durationTimer.start();
+	public void effect(Actor a, boolean score) {
+		if(score){
+			this.a = a;
+			this.a.setInvincible(true);
+			durationTimer.start();	
+		}
 	}
 
 	@Override
