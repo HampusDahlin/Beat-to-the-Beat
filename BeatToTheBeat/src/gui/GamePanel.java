@@ -12,19 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import services.HomogeneousFileHandler;
 import enviroment.WaveBackground;
 
 /**
- * 
+ * Displays the Gamefield, where all the action happens.
  * @author Björn Hedström
  * @revisedBy Malin Thelin
  * @revisedBy Hampus Dahlin
- * @version 0.0.4
- *
+ * @revisedBy Pontus Eriksson
+ * @version 0.1.0
  */
 
 @SuppressWarnings("serial")
@@ -37,52 +36,53 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int maxCombo;
 	private int score;
 	private int lives;
-	
-	private ImageIcon[] walkImg;
-	private MirroredImageIcon[] leftWalkImg;
-	private PauseMenuPanel pauspanel;
-	
-	private int bgIntensity;
-	private int walkIndex;
-	private ImageIcon[] attackImg;
-	private JLabel pause;
-	
-	private MirroredImageIcon[]leftAttackImg;
+
 	private boolean right;
+	private int walkIndex;
 	private int attackIndex;
-	private boolean hit;
+	private final ImageIcon[] walkImg;
+	private final MirroredImageIcon[] leftWalkImg;
+	private final ImageIcon[] attackImg;
+	private final MirroredImageIcon[]leftAttackImg;
+
+	private PauseMenuPanel pauspanel;
+	private int bgIntensity;
 	private boolean paused;
 	
+	/**
+	 * Creates a GamePanel containing a player, NPC-list etc.
+	 */
 	public GamePanel(){
 		
 		bgIntensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
 			
 		pauspanel = new PauseMenuPanel();
-		this.attackImg = new ImageIcon[16];
-		//test
-		this.leftAttackImg = new MirroredImageIcon[16];
-		right = true;
+		pauspanel.setVisible(false);
+		this.add(pauspanel, CENTER_ALIGNMENT);
 		
-		
+		npcPosList = new ArrayList<Point>();
+
 		attackIndex = -1;
+		walkIndex = 0;
+		
+		this.attackImg = new ImageIcon[16];
+		this.leftAttackImg = new MirroredImageIcon[16];
+		
+		//initiates attackanimation
+		for (int i = 0; i < 16; i++) {
+			this.attackImg[i] = new ImageIcon("sprites\\attack" + (i+1) + ".gif");
+			this.leftAttackImg[i] = new MirroredImageIcon("sprites\\attack" + (i+1) + ".gif");
+		}
+		
 		this.walkImg = new ImageIcon[8];
 		this.leftWalkImg = new MirroredImageIcon[8];
-		walkIndex = 0;
-		npcPosList = new ArrayList<Point>();
+		
+		//initiates walkanimation
 		for (int i = 0; i < 8; i++) {
-			//this.walkImg[i-1] = new ImageIcon("sprites\\walk1.gif");
 			this.walkImg[i] = new ImageIcon("sprites\\walk" + (i+1) + ".gif");
 			this.leftWalkImg[i] = new MirroredImageIcon("sprites\\walk" + (i+1) + ".gif");
 		}
 		
-		for (int i = 0; i < 16; i++) {
-			this.attackImg[i] = new ImageIcon("sprites\\attack" + (i+1) + ".gif");
-			//test
-			this.leftAttackImg[i] = new MirroredImageIcon("sprites\\attack" + (i+1) + ".gif");
-		}
-		
-		pauspanel.setVisible(false);
-		this.add(pauspanel, CENTER_ALIGNMENT);
 		this.setBackground(new java.awt.Color(0,0,0));
 		this.setBackgroundWave(new WaveBackground());
 		setSize(914, 600);
@@ -112,7 +112,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			npcPosList.remove((int)pce.getNewValue());
 		} else if (pce.getPropertyName().equals("death")) {
 			npcPosList.clear();
-			//avsluta spel
 		} else if (pce.getPropertyName().equals("combo")) {
 			combo = (int) pce.getNewValue();
 		} else if (pce.getPropertyName().equals("hp")) {
@@ -127,10 +126,10 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 				maxCombo = combo;
 			}				
 		} else if (pce.getPropertyName().equals("attack")) {
-			hit = (boolean) pce.getNewValue();
-			//attackIndex = ((int) pce.getOldValue() == 1 ? 0 : 16);
 			attackIndex = 0;
-			right = ((int)pce.getOldValue() == 1 ? true : false);
+			right = (int)pce.getOldValue() == 1;
+		}else if (pce.getPropertyName().equals("life")) {
+			lives = (int)pce.getNewValue();
 		}
 	}
 	
@@ -150,7 +149,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
 		
 		if (walkIndex == 79) {
 			walkIndex = 0;
@@ -172,8 +170,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		//paint the hitbox, with the extrapoint zones
-		int boxWidth = 230;
-		int playerPos = 450;
+		final int boxWidth = 230;
+		final int playerPos = 450;
 		g.setColor(backgroundWave.getFirstCompCol());
 		g.drawRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
 		g.fillRect((playerPos-boxWidth/2)+40,331,boxWidth/10,20);
@@ -228,6 +226,12 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.drawString(""+combo, 780, 40);
 		g.drawString(""+maxCombo,780,80);
 		g.drawString(""+score,450 , 40);
+		
+		//draw extralives
+		for(int i = 1; i < lives; i++){
+			g.setColor(Color.PINK);
+			g.fillRect(10 + (i-1)*20, 50, 10, 10);
+		}
 		
 		if(this.paused){
 			this.pauspanel.setVisible(true);

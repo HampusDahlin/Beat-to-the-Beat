@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import powerup.Powerup;
+import powerup.Regen;
 import actors.Actor;
 import actors.NPC;
 import actors.PC;
@@ -17,15 +18,23 @@ class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
 	private final ImageIcon SPRITE;
+	private List<Powerup> powerups;
 	
 	ActorControl(PropertyChangeListener listener) {
 		this.SPRITE = new ImageIcon("sprites\\ninja.gif");
+		powerups = new ArrayList<Powerup>();
+		addPowerups();
 		NPCList = new ArrayList<NPC>();
 		player = new PC(new Point(450, 0), SPRITE);
 		player.addPropertyChangeListener((PropertyChangeListener)listener);
 		player.setHealth(player.getMaxHealth()); //setting health after so player fires event to gamepanel
 	}
 	
+	private void addPowerups() {
+		powerups.add(new Regen());
+		
+	}
+
 	void createActor(JPanel listener) {
 		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 900, 0), //random which side
 			SPRITE, (PropertyChangeListener)listener));
@@ -121,7 +130,7 @@ class ActorControl {
 	
 	private void powerupCheck(int prevScore) {
 
-		for(Powerup p : player.getPowerups()){
+		for(Powerup p : powerups){
 			if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
 				p.effect(player);
 			}
