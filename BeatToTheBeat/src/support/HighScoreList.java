@@ -7,7 +7,7 @@ package support;
 public class HighScoreList {
 	private String[] names;
 	private int[] scores;
-	
+
 	public HighScoreList() {
 		scores = new int[5];
 		names = new String[5];
@@ -18,14 +18,16 @@ public class HighScoreList {
 	 * @param score
 	 * @param index
 	 */
-	public void add(String name, int score, int index) {
+	public void add(String name, int score) {
 		//moves places below the indexdown one step.
-		for(int i = 4; i > index; i--) {
-			names[i] = names[i - 1];
-			scores[i] = scores[i - 1];
+		if(isEligible(score) != -1) {
+			for(int i = 4; i > isEligible(score); i--) {
+				names[i] = names[i - 1];
+				scores[i] = scores[i - 1];
+			}
+			names[isEligible(score)] = name;
+			scores[isEligible(score)] = score;
 		}
-		names[index] = name;
-		scores[index] = score;
 	}
 	/**
 	 * @param score
@@ -39,7 +41,7 @@ public class HighScoreList {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * initializes the list to empty variables
 	 */
@@ -48,11 +50,11 @@ public class HighScoreList {
 			names[i] = "";
 		}
 	}
-	
+
 	public int[] getScores() {
 		return scores.clone();
 	}
-	
+
 	public String[] getNames() {
 		return names.clone();
 	}
