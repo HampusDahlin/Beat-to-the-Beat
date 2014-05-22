@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import services.HomogeneousFileHandler;
 import enviroment.WaveBackground;
@@ -59,6 +60,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		pauspanel = new PauseMenuPanel();
 		pauspanel.setVisible(false);
 		this.add(pauspanel, CENTER_ALIGNMENT);
+		this.setBorder(new EmptyBorder(100, 0, 0, 0));
 		
 		npcPosList = new ArrayList<Point>();
 
