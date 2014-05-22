@@ -68,8 +68,8 @@ public class CardPanel extends JPanel {
 		activePanel = 3;
 	}
 	
-	public void goToScore(int score) {
-		scorePanel.presentScore(score);
+	public void goToScore(int score, Song song) {
+		scorePanel.presentScore(score, song);
 		activePanel = 4;
 		((CardLayout)this.getLayout()).show(this, SCOREPANEL);
 	}
