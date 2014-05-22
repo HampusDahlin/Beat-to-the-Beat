@@ -62,14 +62,6 @@ public class PC extends Actor implements ActionListener {
 	public void incCombo() {
 		combo++;
 		pcs.firePropertyChange("combo", combo-1, combo);
-		if(combo % 20 == 0){
-			setLives(1);
-		}
-	}
-	
-	public void setLives(int i) {
-		lives += i;
-		pcs.firePropertyChange("life",lives-1,lives);
 		
 	}
 
@@ -136,13 +128,4 @@ public class PC extends Actor implements ActionListener {
 		pcs.firePropertyChange("attack", direction, hit);
 	}
 	
-	public int getLives(){
-		return lives;
-	}
-
-
-	public void resetLives() {
-		lives = 1;
-	}
-
 }

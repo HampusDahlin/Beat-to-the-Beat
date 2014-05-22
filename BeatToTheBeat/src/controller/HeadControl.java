@@ -103,7 +103,6 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		actorControl.resetScore();
 		actorControl.resetCombo();
 		actorControl.resetMaxCombo();
-		actorControl.resetLives();
 		//empty out the npclist
 		actorControl.emptyNPCList();
 	}	
