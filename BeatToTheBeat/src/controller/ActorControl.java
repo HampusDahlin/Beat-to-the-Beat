@@ -69,7 +69,10 @@ class ActorControl {
 	 */
 	private void NPCAttack() {
 		if (canHitClose(15, false) || canHitClose(15,true)) { //take damage and remove enemy
+			//if player is invincible this code tells the player to attack the closest enemy by itself
+			//instead of losing hp and/or dying
 			if(player.isInvincible()){
+				playerAttack((canHitClose(15,false) ? false : true));
 				
 			}else{
 
@@ -80,9 +83,10 @@ class ActorControl {
 				}
 				else {
 					player.resetCooldown();
-					removeActor();
 				}	
 			}
+
+			removeActor();
 		}
 	}
 	

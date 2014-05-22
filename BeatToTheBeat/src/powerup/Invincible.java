@@ -1,19 +1,33 @@
 package powerup;
 
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
 import actors.Actor;
 
-public class Invincible extends Powerup{
+public class Invincible extends Powerup implements ActionListener{
 
+	private Timer durationTimer;
+	private Actor a;
+	
 	public Invincible() {
-		super("Invincible", "You are invincible for a short period of time", 10, 100);
-		// TODO change threshold, this is just for testing! 
+		super("Invincible", "Invincible", 6000, 20000);
+		durationTimer = new Timer(this.getDuration(),this);
 	}
 
 	@Override
 	public void effect(Actor a) {
-		System.out.println("Nu är du odödlig");
-		a.setInvincible();
+		this.a = a;
+		this.a.setInvincible(true);
+		durationTimer.start();
 	}
-	
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		a.setInvincible(false);
+		durationTimer.stop();
+	}
 }
