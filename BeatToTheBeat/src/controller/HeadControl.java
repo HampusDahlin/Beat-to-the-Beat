@@ -126,13 +126,13 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			}
 	}
 	
-	private void endGame(int score) {
+	private void endGame(int score, Song song) {
 		//stop the music and the gametime
 		musicControl.pause();
 		time.stop();
 		
 		//tells cardpanel to go to the scorescreen, and play background music again 
-		mainPanel.goToScore(score);
+		mainPanel.goToScore(score, song);
 
 		//trying out some code to make the music loop
 		menuTime.start();
