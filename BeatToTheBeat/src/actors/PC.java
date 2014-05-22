@@ -20,13 +20,11 @@ public class PC extends Actor implements ActionListener {
 	private int combo;
 	private int maxCombo;
 	private Timer cooldown;
-	private List<Powerup> powerups;
 	//test
 	private int lives;
 	
 	public PC(Point position, ImageIcon sprite) {
 		super(sprite, new Point(0,0));
-		powerups = new ArrayList<Powerup>();
 		setPosition(position);
 		MAXHEALTH = 10;
 		score = 0;
@@ -39,15 +37,6 @@ public class PC extends Actor implements ActionListener {
 		cooldown = new Timer(MISSTIME, this);
 		cooldown.setInitialDelay(MISSTIME);
 		cooldown.setRepeats(false);
-		setActivePowerups();
-	}
-	
-	private void setActivePowerups() {
-		powerups.add(new Regen());
-	}
-	
-	public List<Powerup> getPowerups(){
-		return this.powerups;
 	}
 
 	public void death() {
