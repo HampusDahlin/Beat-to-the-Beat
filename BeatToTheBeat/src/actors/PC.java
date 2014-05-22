@@ -43,7 +43,7 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	private void setActivePowerups() {
-		powerups.add(new Regen(this));
+		powerups.add(new Regen());
 	}
 	
 	public List<Powerup> getPowerups(){
