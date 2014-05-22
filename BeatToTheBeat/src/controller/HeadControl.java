@@ -103,6 +103,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		actorControl.resetScore();
 		actorControl.resetCombo();
 		actorControl.resetMaxCombo();
+		actorControl.resetLives();
 		//empty out the npclist
 		actorControl.emptyNPCList();
 	}	
@@ -172,7 +173,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			((GamePanel)(mainPanel.getGamePanel())).unPause();
 		} else if (evt.getPropertyName().equals("quitGame")){
 			((GamePanel)(mainPanel.getGamePanel())).unPause();
-			endGame(0);
+			endGame(0,null);
 		}
 	}
 	

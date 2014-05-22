@@ -49,6 +49,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private PauseMenuPanel pauspanel;
 	private int bgIntensity;
 	private boolean paused;
+	private boolean isInvincible;
 	
 	/**
 	 * Creates a GamePanel containing a player, NPC-list etc.
@@ -132,6 +133,12 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			right = (int)pce.getOldValue() == 1;
 		}else if (pce.getPropertyName().equals("life")) {
 			lives = (int)pce.getNewValue();
+		}else if (pce.getPropertyName().equals("invincible")) {
+			if((boolean)pce.getNewValue()){
+				isInvincible = true;
+			}else{
+				isInvincible = false;
+			}
 		}
 	}
 	
@@ -233,6 +240,12 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		for(int i = 1; i < lives; i++){
 			g.setColor(Color.PINK);
 			g.fillRect(10 + (i-1)*20, 50, 10, 10);
+		}
+		
+		//draw invincible text
+		if(isInvincible){
+			g.setColor(Color.WHITE);
+			g.drawString("You are INVINCIBLE", 350, 400);
 		}
 		
 		if(this.paused){

@@ -22,6 +22,7 @@ public class PC extends Actor implements ActionListener {
 	
 	//test
 	private int lives;
+	private boolean isInvincible;
 	//test
 	
 	private Timer cooldown;
@@ -144,11 +145,19 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void resetLives(){
-		lives = 1;
+		addToLives(-lives+1);
 	}
 	
 	public int getLives(){
 		return lives;
+	}
+	
+	public void setInvincible(boolean isTrue){
+		isInvincible = isTrue;
+		pcs.firePropertyChange("invincible", !isInvincible(), isInvincible());
+	}
+	public boolean isInvincible(){
+		return isInvincible;
 	}
 	
 	//testing

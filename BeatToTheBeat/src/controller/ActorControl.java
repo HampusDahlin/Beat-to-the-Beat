@@ -149,7 +149,6 @@ class ActorControl {
 			//testing
 
 			if(p.getThreshold() < 1000 && player.getCombo() % p.getThreshold() == 0){
-				System.out.println(player.getCombo()+ "%"+ p.getThreshold()+" = "+player.getCombo() % p.getThreshold() );
 				p.effect(player,false);
 			}else if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
 				//original code
@@ -216,6 +215,9 @@ class ActorControl {
 		NPCList.clear();
 	}
 	
+	void resetLives(){
+		player.resetLives();
+	}
 	
 	
 }

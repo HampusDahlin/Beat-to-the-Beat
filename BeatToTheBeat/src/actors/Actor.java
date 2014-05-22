@@ -96,11 +96,10 @@ public abstract class Actor {
 		pcs.addPropertyChangeListener(listener);
 	}
 
+	/**
 	public void setInvincible(boolean isTrue) {
 		isInvincible = isTrue;
-	}
-	public boolean isInvincible(){
-		return isInvincible;
-	}
+	}*/
+	
 	
 } //end Actor
