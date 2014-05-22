@@ -38,8 +38,8 @@ public class Analyzer {
 	 * @param song the song to be analyzed
 	 * @param sensitivity how sensitive the Analyzer will be
 	 */
-	public Analyzer(Song song, int sensitivity) {
-		DELAY = 4000; //delay in ms
+	public Analyzer(Song song, int sensitivity, int delay) {
+		this.DELAY = delay; //delay in ms
 		pcs = new PropertyChangeSupport(this);
 		genre = song.getGenre();
 		BUFFERSIZE = 512;
