@@ -14,7 +14,7 @@ public class Invincible extends Powerup implements ActionListener{
 	private Actor a;
 	
 	public Invincible() {
-		super("Invincible", "Invincible", 6000, 20000);
+		super("Invincible", "Invincible", 6000, 25000);
 		durationTimer = new Timer(this.getDuration(),this);
 	}
 

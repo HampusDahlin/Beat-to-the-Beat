@@ -96,7 +96,7 @@ class ActorControl {
 
 	void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
-			boolean hit = canHitClose(120, right);
+			boolean hit = canHitClose(player.getRange(), right);
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				int prevScore = player.getScore();

@@ -35,7 +35,7 @@ public class PC extends Actor implements ActionListener {
 		cooldown = new Timer(MISSTIME, this);
 		cooldown.setInitialDelay(MISSTIME);
 		cooldown.setRepeats(false);
-		
+		setRange(120);
 	}
 
 	public void death() {
