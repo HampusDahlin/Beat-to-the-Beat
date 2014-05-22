@@ -1,7 +1,6 @@
 package powerup;
 
 import actors.Actor;
-import actors.PC;
 
 /** 
 * Enables powerups, giving the player abilities.
@@ -9,14 +8,12 @@ import actors.PC;
 */ 
 
 public abstract class Powerup {
-	private PC owner;
 	private final String NAME;
 	private final String DESCRIPTION;
 	private final int DURATION;
 	private final int THRESHOLD;
 	
-	public Powerup(PC owner, String name, String description, int duration, int threshold) {
-		this.owner = owner;
+	public Powerup(String name, String description, int duration, int threshold) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
 		this.DURATION = duration;
