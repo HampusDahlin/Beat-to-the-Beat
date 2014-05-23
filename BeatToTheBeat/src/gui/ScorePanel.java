@@ -1,7 +1,8 @@
 package gui;
 
+import java.awt.Color;
+
 import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
 
 import musichandler.Song;
 import support.HighScoreList;
@@ -18,7 +19,7 @@ public class ScorePanel extends ZoomablePanel {
 
 	private void proccedButtonActionPerformed(java.awt.event.ActionEvent evt) { 
 		if(hsList.isEligible(score) != -1) {
-			hsList.add(nameField[hsList.isEligible(score)].getText(), score);
+			hsList.add(shortenString(nameField[hsList.isEligible(score)].getText(), 5), score);
 		}
 		((CardPanel)this.getParent()).playSong();
 	}    
@@ -31,11 +32,11 @@ public class ScorePanel extends ZoomablePanel {
 	}
 
 	public void presentHighScoreList(Song song) {
-		congratsLabel.setVisible(false);
+		congratsLabel.setForeground(Color.white);
 		disableEditable();
 		int possibleIndex = hsList.isEligible(score);
 		if(possibleIndex != -1) {
-			congratsLabel.setVisible(true);
+			congratsLabel.setForeground(Color.green);
 			nameField[possibleIndex].setEditable(true);
 			scoreField[possibleIndex].setText(score + "");
 			nameField[possibleIndex].setText("");
@@ -50,8 +51,15 @@ public class ScorePanel extends ZoomablePanel {
 				scoreField[j].setText(hsList.getScores()[j - 1] + "");
 			}
 		}
-		songLabel.setText(song.getSongName());
-		artistLabel.setText(song.getArtist());
+		songLabel.setText(shortenString(song.getSongName(), 15));
+		artistLabel.setText(shortenString(song.getArtist(), 15));
+	}
+	
+	public String shortenString(String stringToShorten, int maxLength) {
+		if(stringToShorten.length() >= maxLength) {
+			stringToShorten = stringToShorten.substring(0,maxLength - 4) + "...";
+		}
+		return stringToShorten;
 	}
 	
 	public void disableEditable() {
@@ -83,8 +91,7 @@ public class ScorePanel extends ZoomablePanel {
 			nameField[i] = new JTextField();
 			scoreField[i] = new JTextField();
 		}
-		congratsLabel.setVisible(false);
-
+		congratsLabel.setForeground(Color.white);
 		titleLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Downloads\\score.png")); // NOI18N
 
 		presentHighScorePanel.setBackground(new java.awt.Color(255, 255, 255));
