@@ -143,11 +143,14 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	
 	
 	public void propertyChange(PropertyChangeEvent evt) {
+		Song placeholder = musicControl.getSongList().get(1);
 		if (menuTime.isRunning()) {
 			mainPanel.repaint();
 		}
 		
 		if (evt.getPropertyName().equals("play")) {
+			placeholder = (Song)evt.getNewValue();
+			System.out.println(placeholder.getSongName());
 			startGame((Song) evt.getNewValue());
 		} else if(evt.getPropertyName().equals("beat")){
 			if((boolean) evt.getOldValue()) {
@@ -160,9 +163,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground(
 					(float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		} else if (evt.getPropertyName().equals("death")) {
-			endGame((int) evt.getNewValue());
+			endGame((int) evt.getNewValue(), placeholder);
 		} else if (evt.getPropertyName().equals("songEnd")) {
-			endGame(actorControl.getScore());
+			endGame(actorControl.getScore(), placeholder);
 		} else if (evt.getPropertyName().equals("volumeChange")) {
 			
 		} else if (evt.getPropertyName().equals("bgSlider")) {
