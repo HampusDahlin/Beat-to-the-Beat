@@ -34,7 +34,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	private MusicControl musicControl;
 	private Timer time;
 	private CardPanel mainPanel;
-	private Song placeholder;
+	private Song currentSong;
 	
 	private Timer menuTime;
 	
@@ -149,7 +149,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		}
 		
 		if (evt.getPropertyName().equals("play")) {
-			placeholder = (Song)evt.getNewValue();
+			currentSong = (Song)evt.getNewValue();
 			startGame((Song) evt.getNewValue());
 		} else if(evt.getPropertyName().equals("beat")){
 			if((boolean) evt.getOldValue()) {
@@ -162,9 +162,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground(
 					(float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		} else if (evt.getPropertyName().equals("death")) {
-			endGame((int) evt.getNewValue(), placeholder);
+			endGame((int) evt.getNewValue(), currentSong);
 		} else if (evt.getPropertyName().equals("songEnd")) {
-			endGame(actorControl.getScore(), placeholder);
+			endGame(actorControl.getScore(), currentSong);
 		} else if (evt.getPropertyName().equals("volumeChange")) {
 			
 		} else if (evt.getPropertyName().equals("bgSlider")) {
