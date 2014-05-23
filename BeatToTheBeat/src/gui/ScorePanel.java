@@ -19,7 +19,7 @@ public class ScorePanel extends ZoomablePanel {
 
 	private void proccedButtonActionPerformed(java.awt.event.ActionEvent evt) { 
 		if(hsList.isEligible(score) != -1) {
-			hsList.add(shortenString(nameField[hsList.isEligible(score)].getText(), 5), score);
+			hsList.add(shortenString(nameField[hsList.isEligible(score)].getText(), 10), score);
 		}
 		((CardPanel)this.getParent()).playSong();
 	}    
@@ -49,6 +49,11 @@ public class ScorePanel extends ZoomablePanel {
 			for(int j = possibleIndex + 1; j < 5; j++) {
 				nameField[j].setText(hsList.getNames()[j - 1]);
 				scoreField[j].setText(hsList.getScores()[j - 1] + "");
+			}
+		} else {
+			for(int i = 0; i < 5; i++) {
+				nameField[i].setText(hsList.getNames()[i]);
+				scoreField[i].setText(hsList.getScores()[i] + "");
 			}
 		}
 		songLabel.setText(shortenString(song.getSongName(), 15));
