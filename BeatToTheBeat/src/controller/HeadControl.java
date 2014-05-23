@@ -34,6 +34,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	private MusicControl musicControl;
 	private Timer time;
 	private CardPanel mainPanel;
+	private Song placeholder;
 	
 	private Timer menuTime;
 	
@@ -143,14 +144,12 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	
 	
 	public void propertyChange(PropertyChangeEvent evt) {
-		Song placeholder = musicControl.getSongList().get(1);
 		if (menuTime.isRunning()) {
 			mainPanel.repaint();
 		}
 		
 		if (evt.getPropertyName().equals("play")) {
 			placeholder = (Song)evt.getNewValue();
-			System.out.println(placeholder.getSongName());
 			startGame((Song) evt.getNewValue());
 		} else if(evt.getPropertyName().equals("beat")){
 			if((boolean) evt.getOldValue()) {
