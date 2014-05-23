@@ -31,9 +31,11 @@ public class ScorePanel extends ZoomablePanel {
 	}
 
 	public void presentHighScoreList(Song song) {
+		congratsLabel.setVisible(false);
+		disableEditable();
 		int possibleIndex = hsList.isEligible(score);
 		if(possibleIndex != -1) {
-			disableEditable();
+			congratsLabel.setVisible(true);
 			nameField[possibleIndex].setEditable(true);
 			scoreField[possibleIndex].setText(score + "");
 			nameField[possibleIndex].setText("");
@@ -48,6 +50,8 @@ public class ScorePanel extends ZoomablePanel {
 				scoreField[j].setText(hsList.getScores()[j - 1] + "");
 			}
 		}
+		songLabel.setText(song.getSongName());
+		artistLabel.setText(song.getArtist());
 	}
 	
 	public void disableEditable() {
@@ -79,6 +83,7 @@ public class ScorePanel extends ZoomablePanel {
 			nameField[i] = new JTextField();
 			scoreField[i] = new JTextField();
 		}
+		congratsLabel.setVisible(false);
 
 		titleLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Downloads\\score.png")); // NOI18N
 
