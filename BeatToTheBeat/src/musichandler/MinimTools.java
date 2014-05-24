@@ -13,6 +13,7 @@ import javax.swing.Timer;
 
 import ddf.minim.*;
 import ddf.minim.analysis.BeatDetect;
+import ddf.minim.analysis.FFT;
 
 /** 
 * MinimTools is used to test Minim and create genres.
@@ -33,7 +34,9 @@ public class MinimTools extends JPanel implements ActionListener { // NO_UCD (us
 	final int BUFFERSIZE;
 	boolean mode;
 	boolean visMode;
+	boolean wave;
 	double ballSize;
+	FFT fft;
 	Genre genres[];
 	Song songs[];
 	Song activeSong;
@@ -41,21 +44,22 @@ public class MinimTools extends JPanel implements ActionListener { // NO_UCD (us
 	public MinimTools() {
 		genres = new Genre[10];
 		genres[0] = new Genre("Happy Hardcore", 0, 0, 1, 330);
-		genres[1] = new Genre("Rap", 0, 5, 3, 1);
-		genres[2] = new Genre("Rock", 0, 5, 3, 1);
-		genres[3] = new Genre("Ballade", 0, 4, 2, 1);
+		genres[1] = new Genre("Rap", 2, 4, 2, 330);
+		genres[2] = new Genre("Rock", 0, 5, 3, 330);
+		genres[3] = new Genre("Ballade", 0, 4, 2, 330);
 		//Add your genre here,
 		
 		songs = new Song[10];
-		songs[0] = new Song("Eminem - Till I Collapse.mp3", "Till I Collapse", "Eminem", genres[2]);
+		songs[0] = new Song("Eminem - Till I Collapse.mp3", "Till I Collapse", "Eminem", genres[1]);
 		songs[1] = new Song("Rotterdam Termination Source - Poing.mp3", "Poing", "Rotterdam Terminator Source", genres[0]);
 		songs[2] = new Song("Groove Armada - Edge Hill", "Groove Armada", "Edge Hill", genres[3]);
 		//your song here, and choose genre
 		songs[3] = new Song("FILENAME", "SONGNAME", "ARTIST", genres[0]);
 		//and set this value to same as your song.
-		activeSong = songs[3];
+		activeSong = songs[0];
 		mode = false; 		//Set TRUE for sound-energy, FALSE for frequency-energy
-		visMode = false; 	//Set TRUE for frequency, FALSE for "ball"
+		visMode = true; 	//Set TRUE for frequency, FALSE for "ball"
+		wave = false;		//Set TRUE for waveform, FALSE for spectrum
 		BUFFERSIZE = 512;
 		one = false;
 		setup();
@@ -84,7 +88,9 @@ public class MinimTools extends JPanel implements ActionListener { // NO_UCD (us
 		minim = new Minim(this);
 		player = minim.loadFile(activeSong.getFilename(), BUFFERSIZE);
 		// this loads song from the data folder
-		player.play(5000);
+		player.play(10000);
+		
+		fft = new FFT(player.bufferSize(), player.sampleRate());
 		
 		input = minim.getLineIn();
 	}
@@ -99,15 +105,31 @@ public class MinimTools extends JPanel implements ActionListener { // NO_UCD (us
 		g.clearRect(0, 0, this.getWidth(), this.getHeight());
 		
 		if (visMode) {
-			// we draw the waveform by connecting neighbor values with a line
-			// we multiply each of the values by 50 
-			// because the values in the buffers are normalized
-			// this means that they have values between -1 and 1. 
-			// If we don't scale them up our waveform 
-			// will look more or less like a straight line.
-			for(int i = 0; i < player.bufferSize() - 1; i++) {
-				g.drawLine(i, (int) (50 + player.left.get(i)*50), i+1, (int) (50 + player.left.get(i+1)*50));
-				g.drawLine(i, (int) (150 + player.right.get(i)*50), i+1, (int) (150 + player.right.get(i+1)*50));
+			if (wave) {
+				// we draw the waveform by connecting neighbor values with a line
+				// we multiply each of the values by 50 
+				// because the values in the buffers are normalized
+				// this means that they have values between -1 and 1. 
+				// If we don't scale them up our waveform 
+				// will look more or less like a straight line.
+				for(int i = 0; i < player.bufferSize() - 1; i++) {
+					g.drawLine(i, (int) (50 + player.left.get(i)*50), i+1, (int) (50 + player.left.get(i+1)*50));
+					g.drawLine(i, (int) (150 + player.right.get(i)*50), i+1, (int) (150 + player.right.get(i+1)*50));
+				}
+			} else {
+				fft.forward(player.mix);
+				// draw the spectrum as a series of vertical lines
+				// I multiple the value of getBand by 4 
+				// so that we can see the lines better
+				g.setColor(Color.BLACK);
+				for(int i = 0; i < fft.specSize(); i+=10) {
+					int temp = 0;
+					for(int j = 0; j < 10; j++) {
+						temp += fft.getBand(i+j);
+					}
+					g.fillRect(i*2, this.getHeight()-10, 5, -temp);
+					g.drawString(""+(i/10), i*2, this.getHeight());
+				}
 			}
 		} else {
 			g.setColor(Color.BLACK);
