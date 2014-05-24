@@ -45,6 +45,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private final MirroredImageIcon[] leftWalkImg;
 	private final ImageIcon[] attackImg;
 	private final MirroredImageIcon[]leftAttackImg;
+	private final ImageIcon hat;
 
 	private PauseMenuPanel pauspanel;
 	private int bgIntensity;
@@ -55,6 +56,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	 * Creates a GamePanel containing a player, NPC-list etc.
 	 */
 	public GamePanel(){
+		
+		hat = new ImageIcon("sprites\\hatt.gif");
 		
 		bgIntensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
 			
@@ -196,6 +199,14 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			}
 		}
 		
+		//draw hat indicator on the first enemy
+		if(npcPosList.size()>0){
+			if(npcPosList.get(0).x > 450){
+				hat.paintIcon(this, g, npcPosList.get(0).x+5, npcPosList.get(0).y-13);
+			}else{
+				hat.paintIcon(this, g, npcPosList.get(0).x-23, npcPosList.get(0).y-13);
+			}
+		}
 		//draw the player
 		if (attackIndex < 0) {
 			walkImg[0].paintIcon(this, g,

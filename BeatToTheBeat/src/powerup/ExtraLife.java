@@ -15,10 +15,8 @@ public class ExtraLife extends Powerup{
 	 */
 	public void effect(Actor a, boolean score) {
 		if(!score){
-
 			PC p = (PC)a;
 			p.addToLives(1);
-			System.out.println("NU får du ett extraliv");
 
 		}	
 	}
