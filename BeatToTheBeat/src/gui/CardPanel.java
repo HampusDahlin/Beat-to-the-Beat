@@ -41,29 +41,29 @@ public class CardPanel extends JPanel {
 		this.add(songUpload, SONGUPLOADPANEL);
 	}
 	
-	void goToSongUpload() {
+	public void goToSongUpload() {
 		songUpload.clearFields();
 		((CardLayout)this.getLayout()).show(this, SONGUPLOADPANEL);
 		activePanel = 5;
 	}
 	
-	void back() {
+	public void back() {
 		((CardLayout)this.getLayout()).show(this, MENUPANEL);
 		activePanel = 0;
 	}
 	
-	void goToOptions() {
+	public void goToOptions() {
 		((CardLayout)this.getLayout()).show(this, OPTIONSPANEL);
 		activePanel = 1;
 	}
 	
-	void playSong() {
+	public void playSong() {
 		((CardLayout)this.getLayout()).show(this, SONGSELECTIONPANEL);
 		activePanel = 2;
 		songPresenter.presentSongList(0);
 	}
 	
-	void goToGame() {
+	public void goToGame() {
 		((CardLayout)this.getLayout()).show(this, GAMEPANEL);
 		activePanel = 3;
 	}
@@ -78,8 +78,24 @@ public class CardPanel extends JPanel {
 		return options;
 	}
 	
+	public JPanel getScorePanel() {
+		return scorePanel;
+	}
+	
+	public JPanel getMainMenu() {
+		return menu;
+	}
+	
 	public JPanel getGamePanel() {
 		return gamePanel;
+	}
+	
+	public JPanel getSongSelection() {
+		return songPresenter;
+	}
+	
+	public JPanel getSongUpload() {
+		return songUpload;
 	}
 	
 	public JPanel[] getSongPanels(){
