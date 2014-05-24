@@ -2,9 +2,12 @@ package controller;
 
 import gui.*;
 
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
 import java.util.List;
+
 
 import musichandler.Genre;
 import musichandler.Song;
@@ -34,6 +37,8 @@ public class GUIControl implements PropertyChangeListener {
 			mainPanel.goToOptions();
 		} else if(evt.getPropertyName().equals("selection")) {
 			mainPanel.playSong();
+		} else if(evt.getPropertyName().equals("browse")) {
+			
 		}
 	}
 	

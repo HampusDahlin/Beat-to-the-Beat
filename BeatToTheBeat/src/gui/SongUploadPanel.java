@@ -1,8 +1,8 @@
 package gui;
 
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -42,12 +43,32 @@ public class SongUploadPanel extends ZoomablePanel {
        loadToChoice();
    }
    
+   public JLabel getSuccesLabel() {
+	   return succesLabel;
+   }
+   
+   public JTextField getArtistField() {
+	   return artistField;
+   }
+   
+   public JTextField getSongNameField() {
+	   return songNameField;
+   }
+   
+   public JTextField getOriginalFilepathField() {
+	   return originalFilepathField;
+   }
+   
    public void setSource(String source) {
 	   this.source = source;
    }
    
    public String getSource() {
 	   return source;
+   }
+   
+   public Choice getGenreChoice() {
+	   return genreChoice;
    }
    
    private boolean checkIfFieldOk(JTextField textfield) {
