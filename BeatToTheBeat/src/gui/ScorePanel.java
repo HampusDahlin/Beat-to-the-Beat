@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.beans.PropertyChangeSupport;
 
 import javax.swing.JTextField;
 
@@ -13,6 +14,7 @@ import support.HighScoreList;
 public class ScorePanel extends ZoomablePanel {
 
 	public ScorePanel() {
+		pcs = new PropertyChangeSupport(this);
 		initComponents();
 		disableEditable();
 	}
@@ -232,6 +234,8 @@ public class ScorePanel extends ZoomablePanel {
 	private JTextField[] nameField;
 	private JTextField[] scoreField;
 	private HighScoreList hsList;
+	private PropertyChangeSupport pcs;
+
 	
 	// End of variables declaration                   
 }

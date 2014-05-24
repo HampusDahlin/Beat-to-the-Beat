@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Graphics;
+import java.beans.PropertyChangeSupport;
 
 /**
 *
@@ -8,12 +9,13 @@ import java.awt.Graphics;
 */
 
 @SuppressWarnings("serial")
-class MainMenu extends ZoomablePanel {
+public class MainMenu extends ZoomablePanel {
 
    /**
     * Creates new form MainMenu
     */
    public MainMenu() {
+	   pcs = new PropertyChangeSupport(this);
        initComponents();
        repaint(); 
    }
@@ -131,6 +133,7 @@ class MainMenu extends ZoomablePanel {
    private javax.swing.JLabel logo;
    private javax.swing.JButton optionsButton;
    private javax.swing.JButton songUploadButton;
+   public PropertyChangeSupport pcs;
    // End of variables declaration
    
 }

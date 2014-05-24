@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class SongUploadPanel extends ZoomablePanel {
     * Creates new form SongUploadPanel
     */
    SongUploadPanel(List<Song> songList, Genre[] genreList) {
+	   pcs = new PropertyChangeSupport(this);
        this.songList = songList;
        this.genreList = genreList;
        initComponents();
@@ -357,6 +359,7 @@ public class SongUploadPanel extends ZoomablePanel {
    private Genre[] genreList;
    private String source = "";
    private Minim minim;
+   private PropertyChangeSupport pcs;
    // End of variables declaration                   
 
 

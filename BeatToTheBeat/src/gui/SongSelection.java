@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 import musichandler.Song;
@@ -18,6 +19,7 @@ public class SongSelection extends ZoomablePanel {
     * Creates new form SongSelection
     */
    SongSelection(List<Song> songList) {
+	   pcs = new PropertyChangeSupport(this);
 	   this.songList = songList;
 	   presentedSongList = songList;
        initComponents();
@@ -237,6 +239,7 @@ public class SongSelection extends ZoomablePanel {
    private List<Song> presentedSongList;
    private int previousNewFirst;
    private javax.swing.JButton clearSearchButton;
+   private PropertyChangeSupport pcs;
 
    // End of variables declaration                   
 }

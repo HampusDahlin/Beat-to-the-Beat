@@ -33,7 +33,8 @@ public class Options extends ZoomablePanel implements ChangeListener {
 	}
 
 	private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-		((CardPanel)this.getParent()).back();
+		//((CardPanel)this.getParent()).back();
+		pcs.firePropertyChange("back", true, false);
 	}
 
 	@Override
@@ -187,6 +188,6 @@ public class Options extends ZoomablePanel implements ChangeListener {
 	private javax.swing.JLabel titleLabel;
 	private javax.swing.JLabel volumeLabel;
 	private javax.swing.JSlider volumeSlider;
-	public PropertyChangeSupport pcs;
+	private PropertyChangeSupport pcs;
 	// End of variables declaration                   
 }
