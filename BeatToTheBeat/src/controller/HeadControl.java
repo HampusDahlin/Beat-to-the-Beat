@@ -175,7 +175,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			((GamePanel)(mainPanel.getGamePanel())).unPause();
 		} else if (evt.getPropertyName().equals("quitGame")){
 			((GamePanel)(mainPanel.getGamePanel())).unPause();
-			endGame(0,null);
+			endGame(0,currentSong);
 		}
 	}
 	
