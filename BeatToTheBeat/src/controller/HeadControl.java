@@ -113,8 +113,6 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	 * {@inheritDoc}
 	 */
 	public void actionPerformed(ActionEvent e) {
-		
-		musicControl.analyzeSong();
 		if(e.getSource().equals(menuTime)){
 			musicControl.loopMusic(false);
 		}else{
@@ -126,6 +124,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 				}
 			mainPanel.update();
 			}
+		musicControl.analyzeSong();
 	}
 	
 	private void endGame(int score, Song song) {
