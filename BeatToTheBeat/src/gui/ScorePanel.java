@@ -104,7 +104,7 @@ public class ScorePanel extends ZoomablePanel {
 			scoreField[i] = new JTextField();
 		}
 		congratsLabel.setForeground(Color.white);
-		titleLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\edge\\Downloads\\score.png")); // NOI18N
+		titleLabel.setIcon(new javax.swing.ImageIcon("images\\score.png")); // NOI18N
 
 		presentHighScorePanel.setBackground(new java.awt.Color(255, 255, 255));
 
