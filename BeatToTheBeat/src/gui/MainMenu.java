@@ -26,11 +26,11 @@ public class MainMenu extends ZoomablePanel {
    }
    
    private void playSongButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	   ((CardPanel)this.getParent()).playSong();
+		pcs.firePropertyChange("selection", true, false);
    }  
    
    private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-	   ((CardPanel)this.getParent()).goToOptions();
+		pcs.firePropertyChange("options", true, false);
    }
 
    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -38,7 +38,7 @@ public class MainMenu extends ZoomablePanel {
    }  
    
    private void songUploadButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-	   ((CardPanel)this.getParent()).goToSongUpload();
+		pcs.firePropertyChange("upload", true, false);
    }  
    
 	public void addPropertyChangeListener(PropertyChangeListener listener) {

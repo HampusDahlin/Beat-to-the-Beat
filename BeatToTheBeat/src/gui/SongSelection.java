@@ -33,7 +33,7 @@ public class SongSelection extends ZoomablePanel {
    
    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) { 
 	   clearSearch();
-	   ((CardPanel)this.getParent()).back();
+	   pcs.firePropertyChange("back", true, false);
    }   
    
    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {  

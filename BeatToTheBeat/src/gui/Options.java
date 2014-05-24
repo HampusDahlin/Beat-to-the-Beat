@@ -33,7 +33,6 @@ public class Options extends ZoomablePanel implements ChangeListener {
 	}
 
 	private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-		//((CardPanel)this.getParent()).back();
 		pcs.firePropertyChange("back", true, false);
 	}
 
