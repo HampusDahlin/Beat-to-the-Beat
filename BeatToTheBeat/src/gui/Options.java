@@ -188,6 +188,6 @@ public class Options extends ZoomablePanel implements ChangeListener {
 	private javax.swing.JLabel titleLabel;
 	private javax.swing.JLabel volumeLabel;
 	private javax.swing.JSlider volumeSlider;
-	private PropertyChangeSupport pcs;
+	public PropertyChangeSupport pcs;
 	// End of variables declaration                   
 }

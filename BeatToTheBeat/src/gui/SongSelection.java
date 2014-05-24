@@ -239,7 +239,7 @@ public class SongSelection extends ZoomablePanel {
    private List<Song> presentedSongList;
    private int previousNewFirst;
    private javax.swing.JButton clearSearchButton;
-   private PropertyChangeSupport pcs;
+   public PropertyChangeSupport pcs;
 
    // End of variables declaration                   
 }

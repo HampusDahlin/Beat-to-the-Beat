@@ -359,7 +359,7 @@ public class SongUploadPanel extends ZoomablePanel {
    private Genre[] genreList;
    private String source = "";
    private Minim minim;
-   private PropertyChangeSupport pcs;
+   public PropertyChangeSupport pcs;
    // End of variables declaration                   
 
 

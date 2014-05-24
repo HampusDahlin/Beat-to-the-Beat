@@ -234,7 +234,7 @@ public class ScorePanel extends ZoomablePanel {
 	private JTextField[] nameField;
 	private JTextField[] scoreField;
 	private HighScoreList hsList;
-	private PropertyChangeSupport pcs;
+	public PropertyChangeSupport pcs;
 
 	
 	// End of variables declaration                   
