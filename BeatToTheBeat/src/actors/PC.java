@@ -49,7 +49,7 @@ public class PC extends Actor implements ActionListener {
 	}
 
 	public void death() {
-		pcs.firePropertyChange("death", true, score);
+		pcs.firePropertyChange("death", true, false);
 	}
 	
 	public int getScore() {
