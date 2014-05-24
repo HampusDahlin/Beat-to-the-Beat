@@ -34,6 +34,8 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	private MusicControl musicControl;
 	private Timer time;
 	private CardPanel mainPanel;
+	private Song currentSong;
+	private GUIControl guiControl;
 	
 	private Timer menuTime;
 	
@@ -47,8 +49,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		//this is for looping music in menu
 		menuTime = new Timer(10,this);
+		guiControl = new GUIControl(musicControl.getSongList(), musicControl.getGenres());
+		mainPanel = guiControl.getMainPanel();
 		
-		mainPanel = new CardPanel(musicControl.getSongList(), musicControl.getGenres());
 		
 		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(this);
 		((GamePanel)(mainPanel.getGamePanel())).getPausepanel().pcs.addPropertyChangeListener(this);
@@ -69,6 +72,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		mainFrame.setFocusable(true);
 		mainFrame.addKeyListener(this);
 		mainFrame.setVisible(true);
+		mainFrame.setSize(914, 630);
 		
 		//background music for the menu.
 		musicControl.playRandom();
@@ -112,8 +116,6 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	 * {@inheritDoc}
 	 */
 	public void actionPerformed(ActionEvent e) {
-		
-		musicControl.analyzeSong();
 		if(e.getSource().equals(menuTime)){
 			musicControl.loopMusic(false);
 		}else{
@@ -125,15 +127,16 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 				}
 			mainPanel.update();
 			}
+		musicControl.analyzeSong();
 	}
 	
-	private void endGame(int score) {
+	private void endGame(int score, Song song) {
 		//stop the music and the gametime
 		musicControl.pause();
 		time.stop();
 		
 		//tells cardpanel to go to the scorescreen, and play background music again 
-		mainPanel.goToScore(score);
+		mainPanel.goToScore(score, song);
 
 		//trying out some code to make the music loop
 		menuTime.start();
@@ -148,6 +151,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		}
 		
 		if (evt.getPropertyName().equals("play")) {
+			currentSong = (Song)evt.getNewValue();
 			startGame((Song) evt.getNewValue());
 		} else if(evt.getPropertyName().equals("beat")){
 			if((boolean) evt.getOldValue()) {
@@ -160,9 +164,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground(
 					(float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		} else if (evt.getPropertyName().equals("death")) {
-			endGame((int) evt.getNewValue());
+			endGame(0, currentSong);
 		} else if (evt.getPropertyName().equals("songEnd")) {
-			endGame(actorControl.getScore());
+			endGame(actorControl.getScore(), currentSong);
 		} else if (evt.getPropertyName().equals("volumeChange")) {
 			
 		} else if (evt.getPropertyName().equals("bgSlider")) {
@@ -173,7 +177,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			((GamePanel)(mainPanel.getGamePanel())).unPause();
 		} else if (evt.getPropertyName().equals("quitGame")){
 			((GamePanel)(mainPanel.getGamePanel())).unPause();
-			endGame(0);
+			endGame(0,currentSong);
 		}
 	}
 	

@@ -1,57 +1,57 @@
 package powerup;
 
-import actors.PC;
+import actors.Actor;
 
-
+/** 
+* Enables powerups, giving the player abilities.
+* <p> Powerups can increase different stats, abilities etc.
+*/ 
 
 public abstract class Powerup {
-	private String name;
-	private String description;
-	private Double duration;
-	private PC owner;
-	private int threshold;
+	private final String NAME;
+	private final String DESCRIPTION;
+	private final int DURATION;
+	private final int THRESHOLD;
 	
-	public void setThreshold(int threshold){
-		this.threshold = threshold;
+	public Powerup(String name, String description, int duration, int threshold) {
+		this.NAME = name;
+		this.DESCRIPTION = description;
+		this.DURATION = duration;
+		this.THRESHOLD = threshold;
 	}
 	
+	/**
+	 * Gets how much points needed to get powerup.
+	 * @return Amount of points.
+	 */
 	public int getThreshold(){
-		return this.threshold;
+		return THRESHOLD;
 	}
 	
-	public void setOwner(PC newOwner) {
-		owner = newOwner;
-	}
-	
-	public PC getOwner() {
-		return owner;
-	}
-	
+	/**
+	 * @return The name of the powerup.
+	 */
 	public String getName() {
-		return name;
+		return NAME;
 	}
 	
-	public void setName(String newName) {
-		name = newName;
-	}
-	
+	/**
+	 * Describes the powerup in a String.
+	 * @return Description.
+	 */
 	public String getDescription() {
-		return description;
+		return DESCRIPTION;
 	}
 	
-	public void setDescription(String newDescription) {
-		description = newDescription;
+	/**
+	 * Returns how long the powerup is active in ms.
+	 * @return Duration.
+	 */
+	public int getDuration() {
+		return DURATION;
 	}
 	
-	public Double getDuration() {
-		return duration;
-	}
-	
-	public void setDuration(double newDuration) {
-		duration = newDuration;
-	}
-	
-	abstract public void effect();
+	abstract public void effect(Actor a, boolean score);
 	
 	
 }

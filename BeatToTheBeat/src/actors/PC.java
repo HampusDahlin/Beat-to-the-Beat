@@ -3,9 +3,14 @@ package actors;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+
+import powerup.Powerup;
+import powerup.Regen;
 
 public class PC extends Actor implements ActionListener {
 	private final int MISSTIME;
@@ -14,9 +19,14 @@ public class PC extends Actor implements ActionListener {
 	private int score;
 	private int combo;
 	private int maxCombo;
-	private Timer cooldown;
+	
 	//test
 	private int lives;
+	private boolean isInvincible;
+	//test
+	
+	private Timer cooldown;
+
 	
 	public PC(Point position, ImageIcon sprite) {
 		super(sprite, new Point(0,0));
@@ -25,31 +35,34 @@ public class PC extends Actor implements ActionListener {
 		score = 0;
 		combo = 0;
 		maxCombo = 0;
-		lives = 1;
 		setPosition(position);
 		setDmg(1);
 		MISSTIME = 1000; //ms
 		cooldown = new Timer(MISSTIME, this);
 		cooldown.setInitialDelay(MISSTIME);
 		cooldown.setRepeats(false);
+		setRange(120);
+		
+		//test
+		lives = 1;
+		//test
 	}
-	
+
 	public void death() {
-		pcs.firePropertyChange("death", true, score);
+		pcs.firePropertyChange("death", true, false);
 	}
 	
 	public int getScore() {
 		return score;
 	}
 	
-	public void incScore(int distance){
-		System.out.println("Distance: " + distance);
+	public void incScore(int point){
 		
 		if(getCombo()>1){
 			//we want the player to recieve the combo points they currently have, and not the ones they will get.
-			score += (10 - distance) * getCombo()-1;
+			score += point * (getCombo()-1);
 		}else{
-			score += 10 - distance;
+			score += point;
 		}
 		pcs.firePropertyChange("score", score-1, score);
 		
@@ -58,14 +71,6 @@ public class PC extends Actor implements ActionListener {
 	public void incCombo() {
 		combo++;
 		pcs.firePropertyChange("combo", combo-1, combo);
-		if(combo % 20 == 0){
-			setLives(1);
-		}
-	}
-	
-	public void setLives(int i) {
-		lives += i;
-		pcs.firePropertyChange("life",lives-1,lives);
 		
 	}
 
@@ -132,13 +137,30 @@ public class PC extends Actor implements ActionListener {
 		pcs.firePropertyChange("attack", direction, hit);
 	}
 	
+	//testing
+
+	public void addToLives(int i) {
+		lives += i;
+		pcs.firePropertyChange("life",lives-1,lives);
+	}
+	
+	public void resetLives(){
+		addToLives(-lives+1);
+	}
+	
 	public int getLives(){
 		return lives;
 	}
-
-
-	public void resetLives() {
-		lives = 1;
+	
+	public void setInvincible(boolean isTrue){
+		isInvincible = isTrue;
+		pcs.firePropertyChange("invincible", !isInvincible(), isInvincible());
 	}
+	public boolean isInvincible(){
+		return isInvincible;
+	}
+	
+	//testing
 
+	
 }

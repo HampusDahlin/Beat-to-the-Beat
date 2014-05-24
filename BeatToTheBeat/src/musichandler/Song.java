@@ -2,6 +2,8 @@ package musichandler;
 
 import java.io.Serializable;
 
+import support.HighScoreList;
+
 @SuppressWarnings("serial")
 public final class Song implements Serializable {
 	
@@ -9,12 +11,14 @@ public final class Song implements Serializable {
 	private final String ARTIST;
 	private final String SONGNAME;
 	private final Genre GENRE;
+	private HighScoreList hsList;
 	
 	public Song(String fileName, String songName, String artist, Genre genre) {
 		this.FILENAME = (!fileName.contains("songs\\") ? "songs\\" : "") + fileName;
 		this.SONGNAME = songName;
 		this.ARTIST = artist;
 		this.GENRE = genre;
+		hsList = new HighScoreList();
 	}
 	
 	public String getFilename() {
@@ -43,6 +47,10 @@ public final class Song implements Serializable {
 	
 	public String getArtist() {
 		return ARTIST;
+	}
+	
+	public HighScoreList getHighScoreList() {
+		return hsList;
 	}
 	
 	public String toString(){

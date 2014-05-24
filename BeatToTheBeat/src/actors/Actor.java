@@ -20,6 +20,7 @@ public abstract class Actor {
 	private int dmg;
 	private final Point SPEED;
 	private int range;
+	private boolean isInvincible;
 
 	protected PropertyChangeSupport pcs;
 	
@@ -27,6 +28,7 @@ public abstract class Actor {
 		this.SPRITE = sprite;
 		this.SPEED = speed;
 		pcs = new PropertyChangeSupport(this);
+		isInvincible = false;
 	}
 	
 	public void setRange(int newRange){
@@ -93,5 +95,11 @@ public abstract class Actor {
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
+
+	/**
+	public void setInvincible(boolean isTrue) {
+		isInvincible = isTrue;
+	}*/
+	
 	
 } //end Actor

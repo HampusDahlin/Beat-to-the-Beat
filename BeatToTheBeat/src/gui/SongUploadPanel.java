@@ -1,8 +1,10 @@
 package gui;
 
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,6 +13,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -33,10 +36,27 @@ public class SongUploadPanel extends ZoomablePanel {
     * Creates new form SongUploadPanel
     */
    SongUploadPanel(List<Song> songList, Genre[] genreList) {
+	   pcs = new PropertyChangeSupport(this);
        this.songList = songList;
        this.genreList = genreList;
        initComponents();
        loadToChoice();
+   }
+   
+   public JLabel getSuccesLabel() {
+	   return succesLabel;
+   }
+   
+   public JTextField getArtistField() {
+	   return artistField;
+   }
+   
+   public JTextField getSongNameField() {
+	   return songNameField;
+   }
+   
+   public JTextField getOriginalFilepathField() {
+	   return originalFilepathField;
    }
    
    public void setSource(String source) {
@@ -45,6 +65,10 @@ public class SongUploadPanel extends ZoomablePanel {
    
    public String getSource() {
 	   return source;
+   }
+   
+   public Choice getGenreChoice() {
+	   return genreChoice;
    }
    
    private boolean checkIfFieldOk(JTextField textfield) {
@@ -183,6 +207,10 @@ public class SongUploadPanel extends ZoomablePanel {
 		   succesLabel.setForeground(Color.red);
 	   } 
    }
+   
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+	}
 
    /**
     * This method is called from within the constructor to initialize the form.
@@ -357,6 +385,7 @@ public class SongUploadPanel extends ZoomablePanel {
    private Genre[] genreList;
    private String source = "";
    private Minim minim;
+   public PropertyChangeSupport pcs;
    // End of variables declaration                   
 
 

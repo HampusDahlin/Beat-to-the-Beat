@@ -8,26 +8,33 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import powerup.Powerup;
-import actors.Actor;
-import actors.NPC;
-import actors.PC;
+import powerup.*;
+import actors.*;
 
 class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
 	private final ImageIcon SPRITE;
+	private List<Powerup> powerups;
 	
 	ActorControl(PropertyChangeListener listener) {
 		this.SPRITE = new ImageIcon("sprites\\ninja.gif");
+		powerups = new ArrayList<Powerup>();
+		addPowerups();
 		NPCList = new ArrayList<NPC>();
 		player = new PC(new Point(450, 0), SPRITE);
 		player.addPropertyChangeListener((PropertyChangeListener)listener);
 		player.setHealth(player.getMaxHealth()); //setting health after so player fires event to gamepanel
 	}
 	
+	private void addPowerups() {
+		powerups.add(new Regen());
+		powerups.add(new Invincible());
+		powerups.add(new ExtraLife());
+	}
+
 	void createActor(JPanel listener) {
-		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? 0 : 900, 0), //random which side
+		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? -25 : 915, 0), //random which side
 			SPRITE, (PropertyChangeListener)listener));
 	}
 	
@@ -59,48 +66,63 @@ class ActorControl {
 	 */
 	private void NPCAttack() {
 		if (canHitClose(15, false) || canHitClose(15,true)) { //take damage and remove enemy
-			NPCList.get(0).dealDmg(player);
-			player.resetCombo();
-			if (player.getHealth() <= 0) {
-				player.setLives(-1);
-				if(player.getLives() <= 0){
-					player.death();
-				}
-				player.setHealth(player.getMaxHealth());
-			} else {
-				player.resetCooldown();
-				removeActor();
+			//if player is invincible this code tells the player to attack the closest enemy by itself
+			//instead of losing hp and/or dying
+			if(player.isInvincible()){
+				playerAttack((canHitClose(15,false) ? false : true));
+
+			}else{
+
+				NPCList.get(0).dealDmg(player);
+				player.resetCombo();
+
+				if (player.getHealth() <= 0) {
+					player.addToLives(-1);
+					if(player.getLives() <= 0){
+						player.death();
+					}
+					player.setHealth(player.getMaxHealth());
+				}else {
+					player.resetCooldown();
+				}	
 			}
+
+			removeActor();
 		}
 	}
 	
 	public List<NPC> getNPCList() {
 		return NPCList;
 	}
-	
+
 	void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
-			boolean hit = canHitClose(120, right);
+			boolean hit = canHitClose(player.getRange(), right);
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
-				player.incCombo();
-
-				//System.out.println(NPCList.get(0).getPosition().x);
-				player.incScore((int) (((right ? 55 : 66) - Math.abs(NPCList.get(0).getPosition().x
-						- (right ? 515 : 375))) / (right ? 5.5 : 6.6 )));
 				int prevScore = player.getScore();
+				player.incScore((int) ((70 - Math.abs(NPCList.get(0).getPosition().x
+							- (right ? 515 : 400))) / 7));
+
+				player.incCombo();
 				player.incMaxCombo();
+				powerupCheck(prevScore);
+				
+				//System.out.println("LIV:: "+ player.getLives());
+				
 				
 				removeActor();
-				
-				powerupCheck(prevScore);
+
 			} else {
 				player.startCooldown();
 				player.resetCombo();
-				
+
 			}
 		}
 	}
+
+	
+	
 	// Possibly to be used with powerups etc later.
 	/**
 	 * Checks which NPCs are within range of player.
@@ -122,11 +144,19 @@ class ActorControl {
 	*/
 	
 	private void powerupCheck(int prevScore) {
+		
+		for(Powerup p : powerups){
+			//testing
 
-		for(Powerup p : player.getPowerups()){
-			if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
-				p.effect();
+			if(p.getThreshold() < 1000 && player.getCombo() % p.getThreshold() == 0){
+				p.effect(player,false);
+			}else if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
+				//original code
+					p.effect(player,true);
+				//original code
 			}
+			//testing
+
 		}
 		
 	}
@@ -188,5 +218,6 @@ class ActorControl {
 	void resetLives(){
 		player.resetLives();
 	}
+	
 	
 }
