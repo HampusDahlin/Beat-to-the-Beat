@@ -70,6 +70,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		mainFrame.setFocusable(true);
 		mainFrame.addKeyListener(this);
 		mainFrame.setVisible(true);
+		mainFrame.setSize(914, 630);
 		
 		//background music for the menu.
 		musicControl.playRandom();
