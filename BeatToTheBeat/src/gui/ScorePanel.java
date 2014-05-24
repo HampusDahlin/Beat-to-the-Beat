@@ -24,7 +24,7 @@ public class ScorePanel extends ZoomablePanel {
 		if(hsList.isEligible(score) != -1) {
 			hsList.add(shortenString(nameField[hsList.isEligible(score)].getText(), 10), score);
 		}
-		((CardPanel)this.getParent()).playSong();
+		pcs.firePropertyChange("selection", true, false);
 	}    
 
 	void presentScore(int score, Song song) {
