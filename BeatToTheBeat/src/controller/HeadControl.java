@@ -35,6 +35,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	private Timer time;
 	private CardPanel mainPanel;
 	private Song currentSong;
+	private GUIControl guiControl;
 	
 	private Timer menuTime;
 	
@@ -48,8 +49,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		//this is for looping music in menu
 		menuTime = new Timer(10,this);
+		guiControl = new GUIControl(musicControl.getSongList(), musicControl.getGenres());
+		mainPanel = guiControl.getMainPanel();
 		
-		mainPanel = new CardPanel(musicControl.getSongList(), musicControl.getGenres());
 		
 		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(this);
 		((GamePanel)(mainPanel.getGamePanel())).getPausepanel().pcs.addPropertyChangeListener(this);
