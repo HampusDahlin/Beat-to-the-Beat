@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import javax.swing.JTextField;
@@ -74,6 +75,10 @@ public class ScorePanel extends ZoomablePanel {
 			scoreField[i].setEditable(false);
 			nameField[i].setEditable(false);
 		}
+	}
+	
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
 	}
 
 	/**

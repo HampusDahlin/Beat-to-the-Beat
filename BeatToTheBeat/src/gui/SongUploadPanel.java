@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.FileInputStream;
@@ -185,6 +186,10 @@ public class SongUploadPanel extends ZoomablePanel {
 		   succesLabel.setForeground(Color.red);
 	   } 
    }
+   
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
+	}
 
    /**
     * This method is called from within the constructor to initialize the form.
