@@ -20,6 +20,34 @@ public class ScorePanel extends ZoomablePanel {
 		disableEditable();
 	}
 
+	public javax.swing.JLabel getArtistLabel() {
+		return artistLabel;
+	}
+
+	public javax.swing.JLabel getCongratsLabel() {
+		return congratsLabel;
+	}
+
+	public javax.swing.JLabel getScoreLabel() {
+		return scoreLabel;
+	}
+
+	public javax.swing.JLabel getSongLabel() {
+		return songLabel;
+	}
+
+	public javax.swing.JLabel getTitleLabel() {
+		return titleLabel;
+	}
+
+	public JTextField[] getNameField() {
+		return nameField;
+	}
+
+	public JTextField[] getScoreField() {
+		return scoreField;
+	}
+
 	private void proccedButtonActionPerformed(java.awt.event.ActionEvent evt) { 
 		if(hsList.isEligible(score) != -1) {
 			hsList.add(shortenString(nameField[hsList.isEligible(score)].getText(), 10), score);
