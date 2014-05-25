@@ -52,6 +52,7 @@ public class GUIControl implements PropertyChangeListener {
 			uploadFunc.load();
 		} else if(evt.getPropertyName().equals("procced")) {
 			scoreFunc.procced();
+			mainPanel.playSong();
 		}
 	}
 	

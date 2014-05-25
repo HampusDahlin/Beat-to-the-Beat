@@ -63,14 +63,14 @@ public class ScoreFunctionality {
 		scorePanel.getArtistLabel().setText(shortenString(song.getArtist(), 15));
 	}
 
-	public String shortenString(String stringToShorten, int maxLength) {
+	String shortenString(String stringToShorten, int maxLength) {
 		if(stringToShorten.length() >= maxLength) {
 			stringToShorten = stringToShorten.substring(0,maxLength - 4) + "...";
 		}
 		return stringToShorten;
 	}
 
-	public void disableEditable() {
+	void disableEditable() {
 		for(int i = 0; i < 5; i++) {
 			scorePanel.getScoreField()[i].setEditable(false);
 			scorePanel.getNameField()[i].setEditable(false);
