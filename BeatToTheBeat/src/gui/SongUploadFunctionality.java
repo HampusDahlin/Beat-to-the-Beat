@@ -40,18 +40,18 @@ public class SongUploadFunctionality {
 			uploadPanel.getSuccesLabel().setForeground(Color.red);
 		} 
 	}
+	
+	public Song songFromInput() {
+		File songFile = new File(uploadPanel.getOriginalFilepathField().getText());
+		return new Song("songs\\" + songFile.getName(), uploadPanel.getSongNameField().getText()
+				, uploadPanel.getArtistField().getText(), (genreList)[(uploadPanel.getGenreChoice().getSelectedIndex())]);
+	}
 
-	public void load() {
-		if(checkInputOk()) {
+	public void load(Song song) {
 			setResponse("File loaded successfully!", true);
 			File songFile = new File(uploadPanel.getOriginalFilepathField().getText());
 			copyFileToBTTB(songFile);
-			Song song = new Song("songs\\" + songFile.getName(), uploadPanel.getSongNameField().getText()
-					, uploadPanel.getArtistField().getText(), (genreList)[(uploadPanel.getGenreChoice().getSelectedIndex())]);
 			songList.add(song);
-		} else {
-			setResponse("Fields cannot be empty", false);	   
-		}
 	}
 
 	public void clearFields() {

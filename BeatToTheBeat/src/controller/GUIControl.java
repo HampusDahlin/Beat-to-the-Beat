@@ -58,7 +58,11 @@ public class GUIControl implements PropertyChangeListener {
 		} else if(evt.getPropertyName().equals("browse")) {
 			uploadFunc.browse();
 		} else if(evt.getPropertyName().equals("load")) {
-			uploadFunc.load();
+			if(uploadFunc.checkInputOk()) {
+				uploadFunc.load(uploadFunc.songFromInput());
+			} else {
+				uploadFunc.setResponse("Fields cannot be empty", false);	   
+			}
 		} else if(evt.getPropertyName().equals("procced")) {
 			scoreFunc.procced();
 			mainPanel.playSong();
