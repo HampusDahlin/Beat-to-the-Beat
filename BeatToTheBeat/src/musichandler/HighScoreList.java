@@ -61,26 +61,26 @@ public class HighScoreList {
 		return names.clone();
 	}
 	
-	
-	public void saveHighscoreList(Song song){
+
+	public void saveHighscoreList (Song song) {
 		try {
-	          BufferedWriter output = new BufferedWriter(new FileWriter(new File("songs\\"+song.getSongName()+"highscoreList.list")));
-	          for(String n : names){
-	        	  if(!n.equals("")){
-	        		  output.write("# "+n+"\n");  
-	        	  }
-	          }
-	          for(int i : scores){
-	        	  if(i>0){
-	        		  output.write(""+i+"\n");
-	        	  }
-	          }
-	          output.close();
+			BufferedWriter output = new BufferedWriter(new FileWriter(new File( "songs\\"+song.getSongName()+"highscoreList.list" )));
+			for ( String n : names ) {
+				if (!n.equals("")) {
+					output.write("# "+n+"\n");  
+				}
+			}
+			for (int i : scores){
+				if (i>0) {
+					output.write(""+i+"\n");
+				}
+			}
+			output.close();
 		} catch ( IOException e ) {
-	           e.printStackTrace();
-	        }
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void loadHighscorelist(Song song) {
 		Scanner in = null;
 		try {
