@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class BarBackground implements IBackground {
 
-	protected final int LISTSIZE = 20; //the amount of soundframes being displayed
-	protected final int YPOS = 600; //the positions of the two waveforms along the Y-axis
-	protected final int WAVEAMP = 200; //the amplitude of the waves
-	protected ArrayList<WaveForm> waveList;
+	private final int LISTSIZE = 20; //the amount of soundframes being displayed
+	private final int YPOS = 600; //the positions of the two waveforms along the Y-axis
+	private final int WAVEAMP = 200; //the amplitude of the waves
+	private ArrayList<WaveForm> waveList;
 	
 	public BarBackground(){
 		waveList = new ArrayList<WaveForm>();
@@ -28,7 +28,7 @@ public class BarBackground implements IBackground {
 	 * @param soundwave, the float-data of the soundwave.
 	 * @param beat, true if there is a beat, false otherwise.
 	 */
-	public void updateBackground(float[][] soundwave, boolean beat){
+	private void updateBackground(float[][] soundwave, boolean beat){
 		handleWaveList(soundwave, beat);
 		waveList.get(0).setColor(ColorHandler.calcColorChange(beat));
 	}
@@ -50,7 +50,7 @@ public class BarBackground implements IBackground {
 	 * Draws a bar representation of a soundwave using graphics g.
 	 * @param g
 	 */
-	public void drawWaves(Graphics2D g2d){
+	private void drawWaves(Graphics2D g2d){
 
 		for(WaveForm wave : waveList){
 			g2d.setColor(new Color(wave.getColor().getRGB()));//Cloning instead of giving reference
