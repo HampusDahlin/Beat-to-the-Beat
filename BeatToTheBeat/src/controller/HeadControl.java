@@ -55,6 +55,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		
 		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(this);
+		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave());
 		((GamePanel)(mainPanel.getGamePanel())).getPausepanel().pcs.addPropertyChangeListener(this);
 		
 		//make headcontrol observe all the songPanels. 
@@ -169,8 +170,6 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 			endGame(actorControl.getScore(), currentSong);
 		} else if (evt.getPropertyName().equals("volumeChange")) {
 			
-		} else if (evt.getPropertyName().equals("bgSlider")) {
-			((GamePanel)(mainPanel.getGamePanel())).setBgIntensity((int)evt.getNewValue());
 		} else if (evt.getPropertyName().equals("resumeGame")){
 			time.start();
 			musicControl.resume();

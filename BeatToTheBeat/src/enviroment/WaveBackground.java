@@ -180,6 +180,8 @@ public class WaveBackground implements IBackground{
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals("beat")){
 			updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
+		}else if (evt.getPropertyName().equals("bgSlider")){
+			System.out.println("bahs");
 		}
 	}
 }
