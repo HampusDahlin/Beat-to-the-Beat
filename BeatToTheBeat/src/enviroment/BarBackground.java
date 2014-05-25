@@ -6,18 +6,23 @@ import java.awt.Graphics2D;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Hampus Dahlin
+ *
+ */
 public class BarBackground implements IBackground {
 
-	private int colorChange; //the index of the currently increasing color value
 	protected final int LISTSIZE = 20; //the amount of soundframes being displayed
 	protected final int YPOS = 600; //the positions of the two waveforms along the Y-axis
 	protected final int WAVEAMP = 200; //the amplitude of the waves
 	protected ArrayList<WaveForm> waveList;
+	private ColorHandler ch;
 
 	public BarBackground(){
 		waveList = new ArrayList<WaveForm>();
 		waveList.add(new WaveForm(new float[2][512], false, new Color(252, 0, 0)));
-		colorChange = 1;
+		ch = new ColorHandler();
 	}
 
 	/**
@@ -27,7 +32,7 @@ public class BarBackground implements IBackground {
 	 */
 	public void updateBackground(float[][] soundwave, boolean beat){
 		handleWaveList(soundwave, beat);
-		waveList.get(0).setColor(calcColorChange());
+		waveList.get(0).setColor(ch.calcColorChange(beat));
 	}
 	
 	/**
@@ -41,52 +46,6 @@ public class BarBackground implements IBackground {
 		if(waveList.size() > LISTSIZE){
 			waveList.remove(LISTSIZE);
 		}
-	}
-	
-	/**
-	 * Returns the color of the next waveform.
-	 */
-	private Color calcColorChange(){
-		Color c = waveList.get(0).getColor();
-		if(waveList.get(0).getBeat()){
-			for(int i = 0; i < 150; i++){
-				c = gradientChange(c);
-			}
-		}else{
-			c = gradientChange(c);
-		}
-		return c;
-	}
-	
-	
-	/**
-	 * Simulates a gradient colorchange.
-	 * @param prevColor
-	 * @return nextColor
-	 */
-	private Color gradientChange(Color prevColor){
-		Color nextColor;
-	
-		int[] colorRGB = {prevColor.getRed(), prevColor.getGreen(), prevColor.getBlue()};
-	
-		if(colorRGB[((colorChange + 2) % 3)] == 0){
-			colorChange = ((colorChange + 1) % 3);
-		}
-	
-		colorRGB[(colorChange + 2) % 3]--;
-		colorRGB[colorChange]++;
-	
-		nextColor = new Color(colorRGB[0], colorRGB[1], colorRGB[2]);
-		return nextColor;
-	}
-
-	/**
-	 * 
-	 * @param c
-	 * @return complementary color of c
-	 */
-	private Color invertColor(Color c){
-		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
 
 	/**
@@ -109,7 +68,7 @@ public class BarBackground implements IBackground {
 	}
 
 	public Color getFirstCompCol(){
-		return(invertColor(getFirstColor()));
+		return(ch.invertColor(getFirstColor()));
 	}
 	
 	@Override
