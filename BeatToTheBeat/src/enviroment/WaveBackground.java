@@ -181,7 +181,7 @@ public class WaveBackground implements IBackground{
 		if(evt.getPropertyName().equals("beat")){
 			updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		}else if (evt.getPropertyName().equals("bgSlider")){
-			System.out.println("bahs");
+			this.intensity = (int)evt.getNewValue();
 		}
 	}
 }
