@@ -60,6 +60,11 @@ public class Analyzer {
 		player.mute();
 		player.play();	
 	}
+
+	//needed for minim
+	public String sketchPath(String fileName) { // NO_UCD (unused code)
+		return "sketchPath: " + fileName;
+	}
 	
 	/*
     * Creates an InputStream using the supplied filename fileName.
