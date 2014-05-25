@@ -8,6 +8,7 @@ import java.util.Scanner;
  * @revisedBy Malin "Nilhet" Thelin
  *
  */
+@SuppressWarnings("serial")
 public class HighScoreList implements Serializable{
 	private String[] names;
 	private int[] scores;

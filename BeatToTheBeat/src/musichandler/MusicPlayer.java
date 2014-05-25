@@ -22,6 +22,7 @@ public class MusicPlayer {
 		return song;
 	}
 	
+	@SuppressWarnings("ucd")
 	void stop() {
 		player.pause();
 		player.rewind();

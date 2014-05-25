@@ -80,13 +80,6 @@ public class MusicFacade {
 	}
 	
 	/**
-	 * Plays the current song and choose if to analyze it or not.
-	 */
-	public void playCurrent(boolean isDelay) {
-		play(songList.get(currentSong), isDelay);
-	}
-	
-	/**
 	 * Pauses the current song.
 	 */
 	public void pause(){
