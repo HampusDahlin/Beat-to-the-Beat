@@ -31,29 +31,51 @@ public class SongUploadFunctionality {
 		loadToChoice();
 	}
 
+	/**
+	 * @param songFile
+	 * copies songFile to the songs directory in Beat to the Beat
+	 */
 	private void copyFileToBTTB(File songFile) {
 		File dest = new File(System.getProperty("user.dir") + "\\songs\\" + songFile.getName());
 		try {
 			Files.copy(songFile.toPath(), dest.toPath());
 		} catch (IOException e) {
-			uploadPanel.getSuccesLabel().setText("An error occured, please try again");
-			uploadPanel.getSuccesLabel().setForeground(Color.red);
+			setResponse("An error has occured, please try again", false);
 		} 
 	}
-	
+
+
+	/**
+	 * @return a new Song created from the information in the fields in the SongUploadPanel
+	 */
 	public Song songFromInput() {
 		File songFile = new File(uploadPanel.getOriginalFilepathField().getText());
 		return new Song("songs\\" + songFile.getName(), uploadPanel.getSongNameField().getText()
 				, uploadPanel.getArtistField().getText(), (genreList)[(uploadPanel.getGenreChoice().getSelectedIndex())]);
 	}
 
-	public void load(Song song) {
-			setResponse("File loaded successfully!", true);
-			File songFile = new File(uploadPanel.getOriginalFilepathField().getText());
-			copyFileToBTTB(songFile);
-			songList.add(song);
+	void load(Song song, String filepath) {
+		setResponse("File loaded successfully!", true);
+		File songFile = new File(filepath);
+		copyFileToBTTB(songFile);
+		songList.add(song);
 	}
 
+	/**
+	 * Checks if loading can be performed
+	 */
+	public void loadingSequence() {
+		if(checkInputOk()) {
+			load(songFromInput(), uploadPanel.getOriginalFilepathField().getText());
+			new HomogeneousFileHandler().saveAs("songlist.list", songList);
+		} else {
+			setResponse("Fields cannot be empty", false);	   
+		}
+	}
+
+	/**
+	 * Resets all the fields in the SongUploadPanel
+	 */
 	public void clearFields() {
 		uploadPanel.getSuccesLabel().setVisible(false);
 		uploadPanel.getArtistField().setText("");
@@ -61,6 +83,9 @@ public class SongUploadFunctionality {
 		uploadPanel.getOriginalFilepathField().setText("");
 	}
 
+	/**
+	 * creates a filechooser and sends the selected file to presentInfo()
+	 */
 	public void browse() {
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -75,6 +100,10 @@ public class SongUploadFunctionality {
 		}
 	}
 
+	/**
+	 * Uses Minim to get the information from the songFile such as artist, name, etc
+	 * @param songFile
+	 */
 	public void presentInfo(File songFile) {
 		AudioPlayer player = null;
 		try {
@@ -97,6 +126,11 @@ public class SongUploadFunctionality {
 		}
 	}
 
+	/**
+	 * Used by minim
+	 * @param fileName
+	 * @return
+	 */
 	public InputStream createInput(String fileName) {
 		InputStream is;
 		try {
@@ -108,11 +142,18 @@ public class SongUploadFunctionality {
 		return is;
 	}
 
+	/**
+	 * @param filename
+	 * @return filename without extension such as .mp3
+	 */
 	public String returnFileName(String filename) {
 		String[] splited = filename.split("\\.");
 		return splited[splited.length - 2];
 	}
 
+	/**
+	 * @return true if all the fields in the uploadPanel contains information
+	 */
 	public boolean checkInputOk() {
 		if(!checkIfFieldOk(uploadPanel.getOriginalFilepathField())) {
 			return false;
@@ -124,6 +165,10 @@ public class SongUploadFunctionality {
 		return true;
 	}
 
+	/**
+	 * @param textfield
+	 * @return if textfield contains input
+	 */
 	public boolean checkIfFieldOk(JTextField textfield) {
 		if(!textfield.getText().equals("")) {
 			return true;
@@ -131,12 +176,20 @@ public class SongUploadFunctionality {
 		return false;
 	}
 
+	/**
+	 * loads uploadPanels genrechoicer with the genreList
+	 */
 	public void loadToChoice() {
 		for(Genre genre : genreList) {
 			uploadPanel.getGenreChoice().add(genre.getName());
 		}
 	}
 
+	/**
+	 * @param response
+	 * @param success
+	 * sets the message and color of the succeslabel based on params
+	 */
 	public void setResponse(String response, boolean success) {
 		uploadPanel.getSuccesLabel().setVisible(true);
 		uploadPanel.getSuccesLabel().setText(response);
@@ -146,19 +199,4 @@ public class SongUploadFunctionality {
 			uploadPanel.getSuccesLabel().setForeground(Color.red);
 		}
 	}
-
-	public void load(List<Song> songList, Genre[] genreList) {
-		if(checkInputOk()) {
-			setResponse("File loaded successfully!", true);
-			File songFile = new File(uploadPanel.getOriginalFilepathField().getText());
-			copyFileToBTTB(songFile);
-			Song song = new Song("songs\\" + songFile.getName(), uploadPanel.getSongNameField().getText()
-					, uploadPanel.getArtistField().getText(), genreList[(uploadPanel.getGenreChoice().getSelectedIndex())]);
-			songList.add(song);
-			new HomogeneousFileHandler().saveAs("songlist.list", songList);
-		} else {
-			setResponse("Fields cannot be empty", false);	   
-		}
-	}
-
 }
