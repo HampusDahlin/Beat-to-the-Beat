@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  * @date 2014-05-04
  *
  */
-public class WaveBackground implements PropertyChangeListener, IBackground{
+public class WaveBackground implements IBackground{
 	private int colorChange; //the index of the currently increasing color value
 	private final int LISTSIZE = 20; //the amount of soundframes being displayed
 	private final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
@@ -177,6 +176,7 @@ public class WaveBackground implements PropertyChangeListener, IBackground{
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
+		System.out.println("penys");
 		if(evt.getPropertyName().equals("beat")){
 			updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		}
