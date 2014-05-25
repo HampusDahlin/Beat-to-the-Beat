@@ -49,12 +49,12 @@ public class ScorePanel extends ZoomablePanel {
 			nameField[possibleIndex].setEditable(true);
 			scoreField[possibleIndex].setText(score + "");
 			nameField[possibleIndex].setText("");
-			
+
 			for(int i = 0; i < possibleIndex; i++) {
 				nameField[i].setText(hsList.getNames()[i]);
 				scoreField[i].setText(hsList.getScores()[i] + "");
 			}
-			
+
 			for(int j = possibleIndex + 1; j < 5; j++) {
 				nameField[j].setText(hsList.getNames()[j - 1]);
 				scoreField[j].setText(hsList.getScores()[j - 1] + "");
@@ -68,21 +68,21 @@ public class ScorePanel extends ZoomablePanel {
 		songLabel.setText(shortenString(song.getSongName(), 15));
 		artistLabel.setText(shortenString(song.getArtist(), 15));
 	}
-	
+
 	public String shortenString(String stringToShorten, int maxLength) {
 		if(stringToShorten.length() >= maxLength) {
 			stringToShorten = stringToShorten.substring(0,maxLength - 4) + "...";
 		}
 		return stringToShorten;
 	}
-	
+
 	public void disableEditable() {
 		for(int i = 0; i < 5; i++) {
 			scoreField[i].setEditable(false);
 			nameField[i].setEditable(false);
 		}
 	}
-	
+
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(listener);
 	}
@@ -248,6 +248,6 @@ public class ScorePanel extends ZoomablePanel {
 	public PropertyChangeSupport pcs;
 	private Song song;
 
-	
+
 	// End of variables declaration                   
 }
