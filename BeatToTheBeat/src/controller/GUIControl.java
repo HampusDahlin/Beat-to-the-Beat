@@ -3,6 +3,7 @@ package controller;
 import gui.CardPanel;
 import gui.MainMenu;
 import gui.Options;
+import gui.ScoreFunctionality;
 import gui.ScorePanel;
 import gui.SongSelection;
 import gui.SongUploadFunctionality;
@@ -18,11 +19,13 @@ import musichandler.Song;
 public class GUIControl implements PropertyChangeListener {
 	private CardPanel mainPanel;
 	private SongUploadFunctionality uploadFunc;
+	private ScoreFunctionality scoreFunc;
 	
 	public GUIControl(List<Song> songList, Genre[] genreList) {
 		mainPanel = new CardPanel(songList, genreList);
 		setPCL();
 		uploadFunc = new SongUploadFunctionality((SongUploadPanel)mainPanel.getSongUpload(), songList, genreList);
+		scoreFunc = new ScoreFunctionality((ScorePanel)mainPanel.getScorePanel());
 	}
 	
 	public void setPCL() {
@@ -47,7 +50,13 @@ public class GUIControl implements PropertyChangeListener {
 			uploadFunc.browse();
 		} else if(evt.getPropertyName().equals("load")) {
 			uploadFunc.load();
+		} else if(evt.getPropertyName().equals("procced")) {
+			scoreFunc.procced();
 		}
+	}
+	
+	public void goToScore(int score, Song song) {
+		mainPanel.goToScore(score, song);
 	}
 	
 	public CardPanel getMainPanel() {
