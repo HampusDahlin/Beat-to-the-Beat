@@ -77,29 +77,24 @@ public class GUIControl implements PropertyChangeListener {
 		switch(intensity){
 		case 0:
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
-			System.out.println("intensity: 0");
 		case 1:
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
 			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new WaveBackground());
-			System.out.println("intensity: 1");
 			break;
 		case 2:
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
 			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new SinWaveBackground());
-			System.out.println("intensity: 2");
 			break;
 		case 3:
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
 			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new WaveBackground());
 			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new SinWaveBackground());
-			System.out.println("intensity: 3");
 			break;
 		case 4:
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
 			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new MatrixBackground());
 			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new WaveBackground());
 			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new SinWaveBackground());
-			System.out.println("intensity: 4");
 			break;
 		}
 	}
