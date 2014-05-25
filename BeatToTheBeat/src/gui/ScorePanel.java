@@ -17,7 +17,6 @@ public class ScorePanel extends ZoomablePanel {
 	public ScorePanel() {
 		pcs = new PropertyChangeSupport(this);
 		initComponents();
-		disableEditable();
 	}
 
 	public javax.swing.JLabel getArtistLabel() {
@@ -49,13 +48,9 @@ public class ScorePanel extends ZoomablePanel {
 	}
 
 	private void proccedButtonActionPerformed(java.awt.event.ActionEvent evt) { 
-		if(hsList.isEligible(score) != -1) {
-			hsList.add(shortenString(nameField[hsList.isEligible(score)].getText(), 10), score);
-		}
-		hsList.saveHighscoreList(song);
-		pcs.firePropertyChange("selection", true, false);
+		pcs.firePropertyChange("procced", true, false);
 	}    
-
+	/*
 	void presentScore(int score, Song song) {
 		this.score = score;
 		this.song = song;

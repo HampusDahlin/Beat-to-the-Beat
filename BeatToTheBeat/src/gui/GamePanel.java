@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int maxCombo;
 	private int score;
 	private int lives;
+	private int range;
 
 	private boolean right;
 	private int walkIndex;
@@ -58,6 +59,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public GamePanel(){
 		
 		hat = new ImageIcon("sprites\\hatt.gif");
+		
+		
 			
 		pauspanel = new PauseMenuPanel();
 		pauspanel.setVisible(false);
@@ -68,6 +71,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 
 		attackIndex = -1;
 		walkIndex = 0;
+		range = 120;
 		
 		this.attackImg = new ImageIcon[16];
 		this.leftAttackImg = new MirroredImageIcon[16];
@@ -141,7 +145,10 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			}else{
 				isInvincible = false;
 			}
-		}
+		} else if (pce.getPropertyName().equals("range")) {
+			range = (int)pce.getNewValue();
+        }
+
 	}
 	
 	public void pause(){
@@ -163,7 +170,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			walkIndex++;
 		}
 		
-		background.paintBackground((Graphics2D)g);
+		background.paintBackground((Graphics2D)g,range);
 		
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
@@ -234,6 +241,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			g.setColor(Color.WHITE);
 			g.drawString("You are INVINCIBLE", 350, 400);
 		}
+		
 		
 		if(this.paused){
 			this.pauspanel.setVisible(true);

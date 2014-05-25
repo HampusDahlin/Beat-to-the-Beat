@@ -33,6 +33,7 @@ public abstract class Actor {
 	
 	public void setRange(int newRange){
 		range = newRange;
+		pcs.firePropertyChange("range",120,range);
 	}
 	
 	public int getRange(){

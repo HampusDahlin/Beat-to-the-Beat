@@ -11,7 +11,7 @@ public class ScoreFunctionality {
 	private Song song;
 	private HighScoreList hsList;
 
-	public void ScoreFunctionality(ScorePanel scorePanel) {
+	public ScoreFunctionality(ScorePanel scorePanel) {
 		this.scorePanel = scorePanel;
 	}
 
