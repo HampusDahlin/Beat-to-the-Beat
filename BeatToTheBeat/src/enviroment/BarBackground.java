@@ -6,20 +6,15 @@ import java.awt.Graphics2D;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 
-/**
- * 
- * @author Hampus Dahlin
- * @date 2014-05-04
- *
- */
-public class WaveBackground implements IBackground{
+public class BarBackground implements IBackground {
+
 	private int colorChange; //the index of the currently increasing color value
 	protected final int LISTSIZE = 20; //the amount of soundframes being displayed
-	protected final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
-	protected final int WAVEAMP = 100; //the amplitude of the waves
+	protected final int YPOS = 600; //the positions of the two waveforms along the Y-axis
+	protected final int WAVEAMP = 200; //the amplitude of the waves
 	protected ArrayList<WaveForm> waveList;
 
-	public WaveBackground(){
+	public BarBackground(){
 		waveList = new ArrayList<WaveForm>();
 		waveList.add(new WaveForm(new float[2][512], false, new Color(252, 0, 0)));
 		colorChange = 1;
@@ -31,12 +26,8 @@ public class WaveBackground implements IBackground{
 	 * @param beat, true if there is a beat, false otherwise.
 	 */
 	public void updateBackground(float[][] soundwave, boolean beat){
-		for(WaveForm wave : waveList){
-			wave.age();
-		}
 		handleWaveList(soundwave, beat);
 		waveList.get(0).setColor(calcColorChange());
-		
 	}
 	
 	/**
@@ -98,22 +89,8 @@ public class WaveBackground implements IBackground{
 		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
 
-	public void paintBackground(Graphics2D g2d, int range){
-		paintBackground(g2d);
-		paintHitBox(g2d,range);
-	}
-	
-	public void paintHitBox(Graphics2D g2d, int range){
-		final int boxWidth = range*2-10;
-		final int playerPos = 450;
-		g2d.setColor(invertColor(waveList.get(0).getColor()));
-		g2d.drawRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
-		g2d.fillRect((playerPos-boxWidth/2)+40,331,boxWidth/10,20);
-		g2d.fillRect((playerPos+boxWidth/2)-50,331,boxWidth/10,20);
-	}
-
 	/**
-	 * Draws a waveform using graphics g.
+	 * Draws a bar representation of a soundwave using graphics g.
 	 * @param g
 	 */
 	public void drawWaves(Graphics2D g2d){
@@ -121,9 +98,8 @@ public class WaveBackground implements IBackground{
 		for(WaveForm wave : waveList){
 			g2d.setColor(new Color(wave.getColor().getRGB()));//Cloning instead of giving reference
 			g2d.setStroke(new BasicStroke(wave.getWidth()));
-			for(int i = 0; i < 511; i++) {
-				g2d.drawLine(2 * i, (int) (YPOS[0] + wave.getSoundwave()[0][i]*WAVEAMP), 2 * (i+1), (int) (YPOS[0] + wave.getSoundwave()[0][i+1]*WAVEAMP));
-				g2d.drawLine(2 * i, (int) (YPOS[1] + wave.getSoundwave()[1][i]*WAVEAMP), 2 * (i+1), (int) (YPOS[1] + wave.getSoundwave()[1][i+1]*WAVEAMP));
+			for(int i = 0; i < 511; i += 5) {
+				g2d.drawLine(3*i, (int) (YPOS), 3*i, (int) Math.abs(YPOS + wave.getSoundwave()[0][i]*WAVEAMP));
 			}
 		}
 	}
@@ -135,7 +111,7 @@ public class WaveBackground implements IBackground{
 	public Color getFirstCompCol(){
 		return(invertColor(getFirstColor()));
 	}
-
+	
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals("beat")){
@@ -146,6 +122,13 @@ public class WaveBackground implements IBackground{
 	@Override
 	public void paintBackground(Graphics2D g2d) {
 		drawWaves(g2d);
-		
+
 	}
+
+	@Override
+	public void paintBackground(Graphics2D g, int range) {
+		paintBackground(g);
+
+	}
+
 }

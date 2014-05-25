@@ -103,9 +103,14 @@ class ActorControl {
 			player.attack(hit, (right ? -1 : 1));
 			if (hit) {
 				int prevScore = player.getScore();
-				player.incScore((int) ((70 - Math.abs(NPCList.get(0).getPosition().x
-							- (right ? 515 : 400))) / 7));
+				if(player.getRange() == 120){
 
+					player.incScore((int) ((70 - Math.abs(NPCList.get(0).getPosition().x
+									- (right ? 515 : 400))) / 7));
+						
+				}else {
+					player.incScore(5);
+				}
 				player.incCombo();
 				player.incMaxCombo();
 				powerupCheck(prevScore);

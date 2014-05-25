@@ -1,6 +1,11 @@
 package controller;
 
+import enviroment.BarBackground;
+import enviroment.MatrixBackground;
+import enviroment.SinWaveBackground;
+import enviroment.WaveBackground;
 import gui.CardPanel;
+import gui.GamePanel;
 import gui.MainMenu;
 import gui.Options;
 import gui.ScoreFunctionality;
@@ -15,14 +20,18 @@ import java.util.List;
 
 import musichandler.Genre;
 import musichandler.Song;
+import services.HomogeneousFileHandler;
 
 public class GUIControl implements PropertyChangeListener {
 	private CardPanel mainPanel;
 	private SongUploadFunctionality uploadFunc;
 	private ScoreFunctionality scoreFunc;
+	private int intensity;
 	
 	public GUIControl(List<Song> songList, Genre[] genreList) {
 		mainPanel = new CardPanel(songList, genreList);
+		this.intensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
+		setBackground();
 		setPCL();
 		uploadFunc = new SongUploadFunctionality((SongUploadPanel)mainPanel.getSongUpload(), songList, genreList);
 		scoreFunc = new ScoreFunctionality((ScorePanel)mainPanel.getScorePanel());
@@ -49,10 +58,52 @@ public class GUIControl implements PropertyChangeListener {
 		} else if(evt.getPropertyName().equals("browse")) {
 			uploadFunc.browse();
 		} else if(evt.getPropertyName().equals("load")) {
-			uploadFunc.load();
+			if(uploadFunc.checkInputOk()) {
+				uploadFunc.load(uploadFunc.songFromInput());
+			} else {
+				uploadFunc.setResponse("Fields cannot be empty", false);	   
+			}
 		} else if(evt.getPropertyName().equals("procced")) {
 			scoreFunc.procced();
 			mainPanel.playSong();
+		} else if (evt.getPropertyName().equals("bgSlider")){
+			this.intensity = (int)evt.getNewValue();
+			setBackground();
+		}
+	}
+	
+	
+	/**
+	 * Determines what to paint depending on the backgrounds intensity.
+	 * @param g2d
+	 * @param intensity
+	 */
+	public void setBackground(){
+		switch(intensity){
+		case 0:
+			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new BarBackground());
+			break;
+		case 1:
+			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new WaveBackground());
+			System.out.println("1");
+			break;
+		case 2:
+			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new SinWaveBackground());
+			break;
+		case 3:
+			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new WaveBackground());
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new SinWaveBackground());
+			break;
+		case 4:
+			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new MatrixBackground());
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new WaveBackground());
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new SinWaveBackground());
+			break;
 		}
 	}
 	

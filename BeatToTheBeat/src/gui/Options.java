@@ -89,7 +89,7 @@ public class Options extends ZoomablePanel implements ChangeListener {
 		miniVolume.setText("0");
 		miniVolume.setForeground(Color.white);
 
-		backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\back.png"))); // NOI18N
+		backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\back.png")));
 		backButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				backButtonActionPerformed(evt);
@@ -102,7 +102,7 @@ public class Options extends ZoomablePanel implements ChangeListener {
 
 		intensitySlider.setBackground(new java.awt.Color(255, 255, 255));
 		intensitySlider.setForeground(new java.awt.Color(255, 51, 102));
-		intensitySlider.setMaximum(3);
+		intensitySlider.setMaximum(4);
 		intensitySlider.setOpaque(false);
 		intensitySlider.setMinorTickSpacing(1);
 		intensitySlider.setPaintTicks(true);
@@ -114,7 +114,7 @@ public class Options extends ZoomablePanel implements ChangeListener {
 		backgroundIntensityLabel.setText("Background Intensity");
 		backgroundIntensityLabel.setForeground(Color.white);
 
-		maxIntensity.setText("3");
+		maxIntensity.setText("4");
 		maxIntensity.setForeground(Color.white);
 
 		miniIntensity.setText("0");

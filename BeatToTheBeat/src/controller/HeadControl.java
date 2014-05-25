@@ -1,4 +1,5 @@
 package controller;
+import enviroment.IBackground;
 import enviroment.WaveBackground;
 import gui.CardPanel;
 import gui.GamePanel;
@@ -55,7 +56,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		
 		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(this);
-		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave());
+		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(guiControl);
 		((GamePanel)(mainPanel.getGamePanel())).getPausepanel().pcs.addPropertyChangeListener(this);
 		
 		//make headcontrol observe all the songPanels. 
@@ -137,12 +138,12 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		musicControl.pause();
 		time.stop();
 		
-		//tells cardpanel to go to the scorescreen, and play background music again 
-		guiControl.goToScore(score, song);
-
-		//trying out some code to make the music loop
+		musicControl.playRandom();
+		musicControl.getAnalyzer().addPropertyChangeListener(this);
 		menuTime.start();
 		
+		//tells cardpanel to go to the scorescreen, and play background music again 
+		guiControl.goToScore(score, song);		
 		
 	}
 	
@@ -155,7 +156,9 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		if (evt.getPropertyName().equals("play")) {
 			currentSong = (Song)evt.getNewValue();
 			startGame((Song) evt.getNewValue());
-			musicControl.getAnalyzer().addPropertyChangeListener(((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave());
+			for(IBackground b : ((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves()){
+				musicControl.getAnalyzer().addPropertyChangeListener(b);
+			}
 		} else if(evt.getPropertyName().equals("beat")){
 			if((boolean) evt.getOldValue()) {
 				if (menuTime.isRunning()) {
