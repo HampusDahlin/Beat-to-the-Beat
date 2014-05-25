@@ -42,9 +42,11 @@ public class MusicFacade {
 	
 	private void setGenres() {
 		genres = new Genre[]{
-			new Genre("Happy Hardcore", 0, 0, 1, 330),
-			new Genre("Rap", 0, 5, 3, 200),
-			new Genre("Rock", 0, 5, 3, 200)
+			new Genre("Happy Hardcore", 1, 3, 2, 330),
+			new Genre("Rap", 2, 4, 2, 330),
+			new Genre("Rock", 2, 4, 2, 330),
+			new Genre("House", 1, 3, 2, 330),
+			new Genre("Ballade", 1, 4, 2, 400)
 		};
 	}
 	

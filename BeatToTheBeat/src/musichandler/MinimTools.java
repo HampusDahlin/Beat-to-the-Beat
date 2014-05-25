@@ -43,20 +43,23 @@ public class MinimTools extends JPanel implements ActionListener { // NO_UCD (us
 	
 	public MinimTools() {
 		genres = new Genre[10];
-		genres[0] = new Genre("Happy Hardcore", 0, 0, 1, 330);
+		genres[0] = new Genre("Happy Hardcore", 1, 3, 2, 330);
 		genres[1] = new Genre("Rap", 2, 4, 2, 330);
-		genres[2] = new Genre("Rock", 0, 5, 3, 330);
-		genres[3] = new Genre("Ballade", 0, 4, 2, 330);
+		genres[2] = new Genre("Rock", 2, 4, 2, 330);
+		genres[3] = new Genre("Ballade", 1, 4, 2, 400);
+		genres[4] = new Genre("House", 1, 3, 2, 330);
 		//Add your genre here,
 		
 		songs = new Song[10];
 		songs[0] = new Song("Eminem - Till I Collapse.mp3", "Till I Collapse", "Eminem", genres[1]);
 		songs[1] = new Song("Rotterdam Termination Source - Poing.mp3", "Poing", "Rotterdam Terminator Source", genres[0]);
-		songs[2] = new Song("Groove Armada - Edge Hill", "Groove Armada", "Edge Hill", genres[3]);
+		songs[2] = new Song("Groove Armada - Edge Hill.mp3", "Groove Armada", "Edge Hill", genres[3]);
+		songs[3] = new Song("Jubel.mp3", "Jubel", "Klingande", genres[4]);
+		songs[4] = new Song("Emma Marrone - La Mia Citta.mp3", "La Mia Citta", "Emmma Marrone", genres[2]);
 		//your song here, and choose genre
-		songs[3] = new Song("FILENAME", "SONGNAME", "ARTIST", genres[0]);
+		songs[5] = new Song("FILENAME", "SONGNAME", "ARTIST", genres[0]);
 		//and set this value to same as your song.
-		activeSong = songs[0];
+		activeSong = songs[4];
 		mode = false; 		//Set TRUE for sound-energy, FALSE for frequency-energy
 		visMode = true; 	//Set TRUE for frequency, FALSE for "ball"
 		wave = false;		//Set TRUE for waveform, FALSE for spectrum
@@ -88,7 +91,7 @@ public class MinimTools extends JPanel implements ActionListener { // NO_UCD (us
 		minim = new Minim(this);
 		player = minim.loadFile(activeSong.getFilename(), BUFFERSIZE);
 		// this loads song from the data folder
-		player.play(10000);
+		player.play();
 		
 		fft = new FFT(player.bufferSize(), player.sampleRate());
 		
