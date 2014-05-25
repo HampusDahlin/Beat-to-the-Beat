@@ -6,8 +6,6 @@ import java.awt.Graphics2D;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 
-import services.HomogeneousFileHandler;
-
 /**
  * 
  * @author Hampus Dahlin
@@ -20,10 +18,8 @@ public class WaveBackground implements IBackground{
 	protected final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
 	protected final int WAVEAMP = 100; //the amplitude of the waves
 	protected ArrayList<WaveForm> waveList;
-	private int intensity;
 
 	public WaveBackground(){
-		this.intensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
 		waveList = new ArrayList<WaveForm>();
 		waveList.add(new WaveForm(new float[2][512], false, new Color(252, 0, 0)));
 		colorChange = 1;

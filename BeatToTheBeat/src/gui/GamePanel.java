@@ -15,7 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import services.HomogeneousFileHandler;
 import enviroment.IBackground;
 import enviroment.WaveBackground;
 
@@ -111,7 +110,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		return this.pauspanel;
 	}
 
-	//TODO refactor this into GUIControl
 	public void propertyChange(PropertyChangeEvent pce) {
 		if (pce.getPropertyName().equals("move") && npcPosList.size() > 0) {
 			npcPosList.get(((IndexedPropertyChangeEvent) pce).getIndex()).setLocation(( (Point)pce.getNewValue() ));
