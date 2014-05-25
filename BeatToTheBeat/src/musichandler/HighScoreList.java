@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @revisedBy Malin "Nilhet" Thelin
  *
  */
-public class HighScoreList {
+public class HighScoreList implements Serializable{
 	private String[] names;
 	private int[] scores;
 

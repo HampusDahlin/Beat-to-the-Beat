@@ -1,5 +1,7 @@
 package musichandler;
 
+import java.io.Serializable;
+
 /** 
 * Describes a music genre.
 * <p> Contains the bands that should be used for a specific genre,
@@ -9,7 +11,11 @@ package musichandler;
 * @date 02-05-14
 */ 
 
-public final class Genre {
+public final class Genre implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String NAME;
 	private final int LOW;
 	private final int HIGH;
