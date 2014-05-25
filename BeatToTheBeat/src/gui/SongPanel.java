@@ -32,7 +32,6 @@ class SongPanel extends JPanel{
 	 */
 	SongPanel(String bgFileName) {
 		this.bgFileName = "images//" + bgFileName;
-		System.out.println(this.bgFileName);
 		pcs = new PropertyChangeSupport(this);
 		initComponents();
 		addMouseListener(listener);

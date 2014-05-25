@@ -113,10 +113,7 @@ class ActorControl {
 				}
 				player.incCombo();
 				player.incMaxCombo();
-				powerupCheck(prevScore);
-				
-				//System.out.println("LIV:: "+ player.getLives());
-				
+				powerupCheck(prevScore);				
 				
 				removeActor();
 
