@@ -9,18 +9,13 @@ import java.awt.Color;
  */
 public class ColorHandler {
 
-	int colorChange;
-	Color c;
-	
-	public ColorHandler(){
-		c = new Color(252,0,0);
-		colorChange = 1;
-	}
+	static int colorChange = 1;
+	static Color c = new Color(252,0,0);
 	
 	/**
 	 * Returns the color of the next waveform.
 	 */
-	public Color calcColorChange(boolean beat){
+	public static Color calcColorChange(boolean beat){
 		if(beat){
 			for(int i = 0; i < 150; i++){
 				c = gradientChange(c);
@@ -37,7 +32,7 @@ public class ColorHandler {
 	 * @param prevColor
 	 * @return nextColor
 	 */
-	private Color gradientChange(Color prevColor){
+	private static Color gradientChange(Color prevColor){
 		Color nextColor;
 	
 		int[] colorRGB = {prevColor.getRed(), prevColor.getGreen(), prevColor.getBlue()};
@@ -58,7 +53,7 @@ public class ColorHandler {
 	 * @param c
 	 * @return complementary color of c
 	 */
-	public Color invertColor(Color c){
+	public static Color invertColor(Color c){
 		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
 

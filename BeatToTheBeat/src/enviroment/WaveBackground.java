@@ -17,12 +17,10 @@ public class WaveBackground implements IBackground{
 	protected final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
 	protected final int WAVEAMP = 100; //the amplitude of the waves
 	protected ArrayList<WaveForm> waveList;
-	ColorHandler ch;
 
 	public WaveBackground(){
 		waveList = new ArrayList<WaveForm>();
 		waveList.add(new WaveForm(new float[2][512], false, new Color(252, 0, 0)));
-		ch = new ColorHandler();
 	}
 
 	/**
@@ -35,7 +33,7 @@ public class WaveBackground implements IBackground{
 			wave.age();
 		}
 		handleWaveList(soundwave, beat);
-		waveList.get(0).setColor(ch.calcColorChange(waveList.get(0).getBeat()));
+		waveList.get(0).setColor(ColorHandler.calcColorChange(waveList.get(0).getBeat()));
 		
 	}
 	
@@ -60,7 +58,7 @@ public class WaveBackground implements IBackground{
 	private void paintHitBox(Graphics2D g2d, int range){
 		final int boxWidth = range*2-10;
 		final int playerPos = 450;
-		g2d.setColor(ch.invertColor(waveList.get(0).getColor()));
+		g2d.setColor(ColorHandler.invertColor(waveList.get(0).getColor()));
 		g2d.drawRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
 		g2d.fillRect((playerPos-boxWidth/2)+40,331,boxWidth/10,20);
 		g2d.fillRect((playerPos+boxWidth/2)-50,331,boxWidth/10,20);
@@ -87,7 +85,7 @@ public class WaveBackground implements IBackground{
 	}
 
 	public Color getFirstCompCol(){
-		return(ch.invertColor(getFirstColor()));
+		return(ColorHandler.invertColor(getFirstColor()));
 	}
 
 	@Override

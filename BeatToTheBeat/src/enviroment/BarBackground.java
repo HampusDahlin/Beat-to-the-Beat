@@ -13,16 +13,14 @@ import java.util.ArrayList;
  */
 public class BarBackground implements IBackground {
 
-	private final int LISTSIZE = 20; //the amount of soundframes being displayed
-	private final int YPOS = 600; //the positions of the two waveforms along the Y-axis
-	private final int WAVEAMP = 200; //the amplitude of the waves
-	private ArrayList<WaveForm> waveList;
-	private ColorHandler ch;
-
+	protected final int LISTSIZE = 20; //the amount of soundframes being displayed
+	protected final int YPOS = 600; //the positions of the two waveforms along the Y-axis
+	protected final int WAVEAMP = 200; //the amplitude of the waves
+	protected ArrayList<WaveForm> waveList;
+	
 	public BarBackground(){
 		waveList = new ArrayList<WaveForm>();
 		waveList.add(new WaveForm(new float[2][512], false, new Color(252, 0, 0)));
-		ch = new ColorHandler();
 	}
 
 	/**
@@ -30,9 +28,9 @@ public class BarBackground implements IBackground {
 	 * @param soundwave, the float-data of the soundwave.
 	 * @param beat, true if there is a beat, false otherwise.
 	 */
-	private void updateBackground(float[][] soundwave, boolean beat){
+	public void updateBackground(float[][] soundwave, boolean beat){
 		handleWaveList(soundwave, beat);
-		waveList.get(0).setColor(ch.calcColorChange(beat));
+		waveList.get(0).setColor(ColorHandler.calcColorChange(beat));
 	}
 	
 	/**
@@ -52,7 +50,7 @@ public class BarBackground implements IBackground {
 	 * Draws a bar representation of a soundwave using graphics g.
 	 * @param g
 	 */
-	private void drawWaves(Graphics2D g2d){
+	public void drawWaves(Graphics2D g2d){
 
 		for(WaveForm wave : waveList){
 			g2d.setColor(new Color(wave.getColor().getRGB()));//Cloning instead of giving reference
@@ -68,7 +66,7 @@ public class BarBackground implements IBackground {
 	}
 
 	public Color getFirstCompCol(){
-		return(ch.invertColor(getFirstColor()));
+		return(ColorHandler.invertColor(getFirstColor()));
 	}
 	
 	@Override
