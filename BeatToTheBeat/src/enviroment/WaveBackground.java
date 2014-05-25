@@ -7,7 +7,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-public class WaveBackground implements PropertyChangeListener{
+/**
+ * 
+ * @author Hampus Dahlin
+ * @date 2014-05-04
+ *
+ */
+public class WaveBackground implements PropertyChangeListener, IBackground{
 	private int colorChange; //the index of the currently increasing color value
 	private final int LISTSIZE = 20; //the amount of soundframes being displayed
 	private final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
@@ -16,9 +22,6 @@ public class WaveBackground implements PropertyChangeListener{
 	private ArrayList<WaveForm> waveList;
 	private int intensity;
 
-	/**
-	 * 
-	 */
 	public WaveBackground(int intensity){
 		this.intensity = intensity;
 		waveList = new ArrayList<WaveForm>();
@@ -106,7 +109,7 @@ public class WaveBackground implements PropertyChangeListener{
 	 * @param g2d
 	 * @param intensity
 	 */
-	public void paintWaveBackground(Graphics2D g2d){
+	public void paintBackground(Graphics2D g2d){
 		switch(intensity){
 		case 1:
 			drawWaves(g2d);
@@ -119,6 +122,16 @@ public class WaveBackground implements PropertyChangeListener{
 			drawSinWaves(g2d);
 			break;
 		}
+		paintHitBox(g2d);
+	}
+	
+	public void paintHitBox(Graphics2D g2d){
+		final int boxWidth = 230;
+		final int playerPos = 450;
+		g2d.setColor(invertColor(waveList.get(0).getColor()));
+		g2d.drawRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
+		g2d.fillRect((playerPos-boxWidth/2)+40,331,boxWidth/10,20);
+		g2d.fillRect((playerPos+boxWidth/2)-50,331,boxWidth/10,20);
 	}
 
 	/**
@@ -164,7 +177,6 @@ public class WaveBackground implements PropertyChangeListener{
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("derp");
 		if(evt.getPropertyName().equals("beat")){
 			updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		}

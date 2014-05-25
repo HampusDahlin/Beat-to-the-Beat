@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import services.HomogeneousFileHandler;
+import enviroment.IBackground;
 import enviroment.WaveBackground;
 
 /**
@@ -30,7 +31,7 @@ import enviroment.WaveBackground;
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements PropertyChangeListener {
 	
-	private WaveBackground backgroundWave;
+	private IBackground background;
 	private List<Point> npcPosList;
 	private int health;
 	private int combo;
@@ -97,18 +98,19 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		this.setVisible(true);
 	}
 
-	private void setBackgroundWave(WaveBackground background) {
-		this.backgroundWave = background;
+	private void setBackgroundWave(IBackground background) {
+		this.background = background;
 	}
 	
-	public WaveBackground getBackgroundWave(){
-		return this.backgroundWave;
+	public IBackground getBackgroundWave(){
+		return this.background;
 	}
 	
 	public PauseMenuPanel getPausepanel(){
 		return this.pauspanel;
 	}
 
+	//TODO refactor this into GUIControl
 	public void propertyChange(PropertyChangeEvent pce) {
 		if (pce.getPropertyName().equals("move") && npcPosList.size() > 0) {
 			npcPosList.get(((IndexedPropertyChangeEvent) pce).getIndex()).setLocation(( (Point)pce.getNewValue() ));
@@ -168,16 +170,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			walkIndex++;
 		}
 		
-		backgroundWave.paintWaveBackground((Graphics2D)g);
-		
-		
-		//paint the hitbox, with the extrapoint zones
-		final int boxWidth = 230;
-		final int playerPos = 450;
-		g.setColor(backgroundWave.getFirstCompCol());
-		g.drawRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
-		g.fillRect((playerPos-boxWidth/2)+40,331,boxWidth/10,20);
-		g.fillRect((playerPos+boxWidth/2)-50,331,boxWidth/10,20);
+		background.paintBackground((Graphics2D)g);
 		
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);

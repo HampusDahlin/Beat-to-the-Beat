@@ -1,4 +1,5 @@
 package controller;
+import enviroment.WaveBackground;
 import gui.CardPanel;
 import gui.GamePanel;
 import gui.Options;
@@ -55,6 +56,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 		
 		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(this);
 		((GamePanel)(mainPanel.getGamePanel())).getPausepanel().pcs.addPropertyChangeListener(this);
+		musicControl.getAnalyzer().addPropertyChangeListener(((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave());
 		
 		//make headcontrol observe all the songPanels. 
 		for(JPanel p : mainPanel.getSongPanels()){
@@ -161,7 +163,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 					actorControl.createActor(mainPanel.getGamePanel());
 				}
 			}
-			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave().updateBackground(
+			((WaveBackground)((GamePanel)(mainPanel.getGamePanel())).getBackgroundWave()).updateBackground(
 					(float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		} else if (evt.getPropertyName().equals("death")) {
 			endGame(0, currentSong);
