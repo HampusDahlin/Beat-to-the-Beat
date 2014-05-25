@@ -12,13 +12,13 @@ import gui.SongSelection;
 import gui.SongUploadFunctionality;
 import gui.SongUploadPanel;
 
-import java.awt.Graphics2D;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import musichandler.Genre;
 import musichandler.Song;
+import services.HomogeneousFileHandler;
 
 public class GUIControl implements PropertyChangeListener {
 	private CardPanel mainPanel;
@@ -28,6 +28,8 @@ public class GUIControl implements PropertyChangeListener {
 	
 	public GUIControl(List<Song> songList, Genre[] genreList) {
 		mainPanel = new CardPanel(songList, genreList);
+		this.intensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
+		setBackground();
 		setPCL();
 		uploadFunc = new SongUploadFunctionality((SongUploadPanel)mainPanel.getSongUpload(), songList, genreList);
 		scoreFunc = new ScoreFunctionality((ScorePanel)mainPanel.getScorePanel());
