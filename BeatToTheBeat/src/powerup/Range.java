@@ -27,8 +27,8 @@ public class Range extends Powerup implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		a.setRange(a.getRange()/2);
-		durationTimer.start();
+		durationTimer.stop();
 	}	
 }

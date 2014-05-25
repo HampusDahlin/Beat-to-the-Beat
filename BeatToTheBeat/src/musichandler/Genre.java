@@ -24,7 +24,7 @@ public final class Genre {
 	 * @param th How many bands that need to register a beat in order to count.
 	 * @param sense How many ms the beat detector sleeps after a beat.
 	 */
-	Genre(String name, int low, int high, int th, int sense) {
+	public Genre(String name, int low, int high, int th, int sense) {
 		this.NAME = name;
 		this.LOW = low;
 		this.HIGH = high;

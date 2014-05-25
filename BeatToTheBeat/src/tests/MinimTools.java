@@ -1,4 +1,4 @@
-package musichandler;
+package tests;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import musichandler.Genre;
+import musichandler.Song;
 import ddf.minim.*;
 import ddf.minim.analysis.BeatDetect;
 import ddf.minim.analysis.FFT;

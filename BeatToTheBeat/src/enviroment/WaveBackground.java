@@ -120,11 +120,15 @@ public class WaveBackground implements IBackground{
 			drawSinWaves(g2d);
 			break;
 		}
-		paintHitBox(g2d);
+	}
+
+	public void paintBackground(Graphics2D g2d, int range){
+		paintBackground(g2d);
+		paintHitBox(g2d,range);
 	}
 	
-	public void paintHitBox(Graphics2D g2d){
-		final int boxWidth = 230;
+	public void paintHitBox(Graphics2D g2d, int range){
+		final int boxWidth = range*2-10;
 		final int playerPos = 450;
 		g2d.setColor(invertColor(waveList.get(0).getColor()));
 		g2d.drawRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
