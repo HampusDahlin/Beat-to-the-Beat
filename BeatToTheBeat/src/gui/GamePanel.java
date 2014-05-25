@@ -31,7 +31,7 @@ import enviroment.WaveBackground;
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements PropertyChangeListener {
 	
-	private IBackground background;
+	private List<IBackground> background;
 	private List<Point> npcPosList;
 	private int health;
 	private int combo;
@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		
 		hat = new ImageIcon("sprites\\hatt.gif");
 		
-		
+		background = new ArrayList<IBackground>();
 			
 		pauspanel = new PauseMenuPanel();
 		pauspanel.setVisible(false);
@@ -92,18 +92,18 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		this.setBackground(new java.awt.Color(0,0,0));
-		this.setBackgroundWave(new WaveBackground());
+		this.addBackgroundWave(new WaveBackground());
 		setSize(914, 600);
 		setMaximumSize(new java.awt.Dimension(914, 600));
 		setMinimumSize(new java.awt.Dimension(914, 600));
 		this.setVisible(true);
 	}
 
-	private void setBackgroundWave(IBackground background) {
-		this.background = background;
+	public void addBackgroundWave(IBackground background) {
+		this.background.add(background);
 	}
 	
-	public IBackground getBackgroundWave(){
+	public List<IBackground> getBackgroundWaves(){
 		return this.background;
 	}
 	
@@ -170,7 +170,9 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			walkIndex++;
 		}
 		
-		background.paintBackground((Graphics2D)g,range);
+		for(IBackground b : background){
+			b.paintBackground((Graphics2D)g,range);
+		}
 		
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
