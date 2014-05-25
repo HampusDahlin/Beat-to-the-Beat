@@ -14,6 +14,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import musichandler.Genre;
 import musichandler.Song;
+import services.HomogeneousFileHandler;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
@@ -154,6 +155,7 @@ public class SongUploadFunctionality {
 			Song song = new Song("songs\\" + songFile.getName(), uploadPanel.getSongNameField().getText()
 					, uploadPanel.getArtistField().getText(), genreList[(uploadPanel.getGenreChoice().getSelectedIndex())]);
 			songList.add(song);
+			new HomogeneousFileHandler().saveAs("songlist.list", songList);
 		} else {
 			setResponse("Fields cannot be empty", false);	   
 		}
