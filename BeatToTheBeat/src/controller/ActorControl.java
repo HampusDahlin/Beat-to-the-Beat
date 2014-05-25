@@ -31,6 +31,7 @@ class ActorControl {
 		powerups.add(new Regen());
 		powerups.add(new Invincible());
 		powerups.add(new ExtraLife());
+		powerups.add(new Range());
 	}
 
 	void createActor(JPanel listener) {
@@ -143,23 +144,16 @@ class ActorControl {
 		return hittable;
 	}
 	*/
-	
-	private void powerupCheck(int prevScore) {
-		
-		for(Powerup p : powerups){
-			//testing
 
+	private void powerupCheck(int prevScore) {
+		for(Powerup p : powerups){
 			if(p.getThreshold() < 1000 && player.getCombo() % p.getThreshold() == 0){
 				p.effect(player,false);
 			}else if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
-				//original code
-					p.effect(player,true);
-				//original code
+				p.effect(player,true);
 			}
-			//testing
-
 		}
-		
+
 	}
 
 	/**
