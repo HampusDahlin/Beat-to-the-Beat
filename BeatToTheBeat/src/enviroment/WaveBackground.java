@@ -16,18 +16,16 @@ import services.HomogeneousFileHandler;
  */
 public class WaveBackground implements IBackground{
 	private int colorChange; //the index of the currently increasing color value
-	private final int LISTSIZE = 20; //the amount of soundframes being displayed
-	private final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
-	private final int WAVEAMP = 100; //the amplitude of the waves
-	private int lifetime;
-	private ArrayList<WaveForm> waveList;
+	protected final int LISTSIZE = 20; //the amount of soundframes being displayed
+	protected final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
+	protected final int WAVEAMP = 100; //the amplitude of the waves
+	protected ArrayList<WaveForm> waveList;
 	private int intensity;
 
 	public WaveBackground(){
 		this.intensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
 		waveList = new ArrayList<WaveForm>();
 		waveList.add(new WaveForm(new float[2][512], false, new Color(252, 0, 0)));
-		lifetime = 0;
 		colorChange = 1;
 	}
 
@@ -40,7 +38,6 @@ public class WaveBackground implements IBackground{
 		for(WaveForm wave : waveList){
 			wave.age();
 		}
-		lifetime++;
 		handleWaveList(soundwave, beat);
 		waveList.get(0).setColor(calcColorChange());
 		
@@ -147,23 +144,6 @@ public class WaveBackground implements IBackground{
 			for(int i = 0; i < 511; i++) {
 				g2d.drawLine(2 * i, (int) (YPOS[0] + wave.getSoundwave()[0][i]*WAVEAMP), 2 * (i+1), (int) (YPOS[0] + wave.getSoundwave()[0][i+1]*WAVEAMP));
 				g2d.drawLine(2 * i, (int) (YPOS[1] + wave.getSoundwave()[1][i]*WAVEAMP), 2 * (i+1), (int) (YPOS[1] + wave.getSoundwave()[1][i+1]*WAVEAMP));
-			}
-		}
-	}
-	
-	/**
-	 * Draws a waveform following a sin curve using graphics g.
-	 * @param g2d
-	 */
-	public void drawSinWaves(Graphics2D g2d){
-		
-		for(WaveForm wave : waveList){
-			g2d.setColor(new Color(wave.getColor().getRGB()));//Cloning instead of giving reference
-			g2d.setStroke(new BasicStroke(wave.getWidth()));
-			for(int i = 0; i < 511; i++) {
-				double sinfactor = Math.sin((Math.PI * 2 * (i + lifetime)) / 511);
-				g2d.drawLine(2 * i, (int) (YPOS[0] + (50*sinfactor) + wave.getSoundwave()[0][i]*WAVEAMP), 2 * (i+1), (int) (YPOS[0] + (50*sinfactor) + wave.getSoundwave()[0][i+1]*WAVEAMP));
-				g2d.drawLine(2 * i, (int) (YPOS[1] + (50*sinfactor) + wave.getSoundwave()[1][i]*WAVEAMP), 2 * (i+1), (int) (YPOS[1] + (50*sinfactor) + wave.getSoundwave()[1][i+1]*WAVEAMP));
 			}
 		}
 	}
