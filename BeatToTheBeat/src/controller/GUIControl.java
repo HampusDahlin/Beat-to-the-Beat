@@ -56,7 +56,8 @@ public class GUIControl implements PropertyChangeListener {
 	}
 	
 	public void goToScore(int score, Song song) {
-		mainPanel.goToScore(score, song);
+		scoreFunc.presentScore(score, song);
+		mainPanel.goToScore();
 	}
 	
 	public CardPanel getMainPanel() {
