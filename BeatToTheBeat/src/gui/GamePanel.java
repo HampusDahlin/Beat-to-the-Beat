@@ -49,7 +49,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private final ImageIcon hat;
 
 	private PauseMenuPanel pauspanel;
-	private int bgIntensity;
 	private boolean paused;
 	private boolean isInvincible;
 	
@@ -59,8 +58,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public GamePanel(){
 		
 		hat = new ImageIcon("sprites\\hatt.gif");
-		
-		bgIntensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
 			
 		pauspanel = new PauseMenuPanel();
 		pauspanel.setVisible(false);
@@ -91,7 +88,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		this.setBackground(new java.awt.Color(0,0,0));
-		this.setBackgroundWave(new WaveBackground(bgIntensity));
+		this.setBackgroundWave(new WaveBackground());
 		setSize(914, 600);
 		setMaximumSize(new java.awt.Dimension(914, 600));
 		setMinimumSize(new java.awt.Dimension(914, 600));
@@ -155,10 +152,6 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	public void unPause(){
 		this.paused = false;
 		this.pauspanel.setVisible(false);
-	}
-	
-	public void setBgIntensity(int intensity){
-		this.bgIntensity = intensity;
 	}
 	
 	public void paintComponent(Graphics g) {

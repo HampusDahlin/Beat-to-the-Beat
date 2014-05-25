@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 
+import services.HomogeneousFileHandler;
+
 /**
  * 
  * @author Hampus Dahlin
@@ -21,8 +23,8 @@ public class WaveBackground implements IBackground{
 	private ArrayList<WaveForm> waveList;
 	private int intensity;
 
-	public WaveBackground(int intensity){
-		this.intensity = intensity;
+	public WaveBackground(){
+		this.intensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
 		waveList = new ArrayList<WaveForm>();
 		waveList.add(new WaveForm(new float[2][512], false, new Color(252, 0, 0)));
 		lifetime = 0;
@@ -176,7 +178,6 @@ public class WaveBackground implements IBackground{
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("penys");
 		if(evt.getPropertyName().equals("beat")){
 			updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
 		}
