@@ -102,7 +102,7 @@ public class Options extends ZoomablePanel implements ChangeListener {
 
 		intensitySlider.setBackground(new java.awt.Color(255, 255, 255));
 		intensitySlider.setForeground(new java.awt.Color(255, 51, 102));
-		intensitySlider.setMaximum(3);
+		intensitySlider.setMaximum(4);
 		intensitySlider.setOpaque(false);
 		intensitySlider.setMinorTickSpacing(1);
 		intensitySlider.setPaintTicks(true);

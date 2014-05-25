@@ -1,5 +1,6 @@
 package controller;
 
+import enviroment.MatrixBackground;
 import enviroment.SinWaveBackground;
 import enviroment.WaveBackground;
 import gui.CardPanel;
@@ -92,6 +93,13 @@ public class GUIControl implements PropertyChangeListener {
 			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new WaveBackground());
 			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new SinWaveBackground());
 			System.out.println("intensity: 3");
+			break;
+		case 4:
+			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new WaveBackground());
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new SinWaveBackground());
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new MatrixBackground());
+			System.out.println("intensity: 4");
 			break;
 		}
 	}
