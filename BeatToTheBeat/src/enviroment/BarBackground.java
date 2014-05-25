@@ -90,7 +90,7 @@ public class BarBackground implements IBackground {
 	}
 
 	/**
-	 * Draws a waveform using graphics g.
+	 * Draws a bar representation of a soundwave using graphics g.
 	 * @param g
 	 */
 	public void drawWaves(Graphics2D g2d){
