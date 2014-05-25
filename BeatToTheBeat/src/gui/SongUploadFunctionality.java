@@ -44,7 +44,6 @@ public class SongUploadFunctionality {
 		} 
 	}
 
-
 	/**
 	 * @return a new Song created from the information in the fields in the SongUploadPanel
 	 */
@@ -54,7 +53,7 @@ public class SongUploadFunctionality {
 				, uploadPanel.getArtistField().getText(), (genreList)[(uploadPanel.getGenreChoice().getSelectedIndex())]);
 	}
 
-	void load(Song song, String filepath) {
+	public void load(Song song, String filepath) {
 		setResponse("File loaded successfully!", true);
 		File songFile = new File(filepath);
 		copyFileToBTTB(songFile);
