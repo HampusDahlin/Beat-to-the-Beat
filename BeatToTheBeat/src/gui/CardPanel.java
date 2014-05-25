@@ -25,6 +25,11 @@ public class CardPanel extends JPanel {
 	private static final String SONGUPLOADPANEL = "Panel with Song upload";
 	private int activePanel;
 	
+	/**
+	 * @param songList
+	 * @param genreList
+	 * creates a panel holding all the other panels compromissing the Beat to the Beat GUI
+	 */
 	public CardPanel(List<Song> songList, Genre[] genreList) {
 		this.setLayout(new CardLayout());
 		options = new Options();
@@ -41,32 +46,50 @@ public class CardPanel extends JPanel {
 		this.add(songUpload, SONGUPLOADPANEL);
 	}
 	
+	/**
+	 * switches to the SongUploadPanel
+	 */
 	public void goToSongUpload() {
 		((CardLayout)this.getLayout()).show(this, SONGUPLOADPANEL);
 		activePanel = 5;
 	}
 	
+	/**
+	 * Goes back to the mainmenu
+	 */
 	public void back() {
 		((CardLayout)this.getLayout()).show(this, MENUPANEL);
 		activePanel = 0;
 	}
 	
+	/**
+	 * switches to options
+	 */
 	public void goToOptions() {
 		((CardLayout)this.getLayout()).show(this, OPTIONSPANEL);
 		activePanel = 1;
 	}
 	
+	/**
+	 * switches to SongSelection
+	 */
 	public void playSong() {
 		((CardLayout)this.getLayout()).show(this, SONGSELECTIONPANEL);
 		activePanel = 2;
 		songPresenter.presentSongList(0);
 	}
 	
+	/**
+	 * switches to GamePanel
+	 */
 	void goToGame() {
 		((CardLayout)this.getLayout()).show(this, GAMEPANEL);
 		activePanel = 3;
 	}
 	
+	/**
+	 * switches to scorepanel
+	 */
 	public void goToScore() {
 		activePanel = 4;
 		((CardLayout)this.getLayout()).show(this, SCOREPANEL);
@@ -100,6 +123,9 @@ public class CardPanel extends JPanel {
 		return songPresenter.getSongPanels();
 	}
 	
+	/**
+	 * uupdates the gamepanel
+	 */
 	public void update() {
 		gamePanel.update();
 	}
