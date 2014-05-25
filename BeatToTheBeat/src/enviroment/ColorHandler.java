@@ -7,15 +7,15 @@ import java.awt.Color;
  * @author Hampus Dahlin
  *
  */
-public class ColorHandler {
+class ColorHandler {
 
-	static int colorChange = 1;
-	static Color c = new Color(252,0,0);
+	private static int colorChange = 1;
+	private static Color c = new Color(252,0,0);
 	
 	/**
 	 * Returns the color of the next waveform.
 	 */
-	public static Color calcColorChange(boolean beat){
+	static Color calcColorChange(boolean beat){
 		if(beat){
 			for(int i = 0; i < 150; i++){
 				c = gradientChange(c);
@@ -53,7 +53,7 @@ public class ColorHandler {
 	 * @param c
 	 * @return complementary color of c
 	 */
-	public static Color invertColor(Color c){
+	static Color invertColor(Color c){
 		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
 
