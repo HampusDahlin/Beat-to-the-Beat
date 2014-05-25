@@ -31,7 +31,6 @@ class ActorControl {
 		powerups.add(new Regen());
 		powerups.add(new Invincible());
 		powerups.add(new ExtraLife());
-		powerups.add(new Range());
 	}
 
 	void createActor(JPanel listener) {
