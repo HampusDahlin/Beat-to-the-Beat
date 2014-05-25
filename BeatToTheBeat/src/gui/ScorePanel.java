@@ -50,65 +50,6 @@ public class ScorePanel extends ZoomablePanel {
 	private void proccedButtonActionPerformed(java.awt.event.ActionEvent evt) { 
 		pcs.firePropertyChange("procced", true, false);
 	}    
-	/*
-	void presentScore(int score, Song song) {
-		this.score = score;
-		this.song = song;
-		try{
-			hsList.loadHighscorelist(song);
-		}catch(NullPointerException exc){
-			hsList = song.getHighScoreList();
-		}
-		scoreLabel.setText(score + " Points");
-		presentHighScoreList(song);
-	}
-
-	public void presentHighScoreList(Song song) {
-		congratsLabel.setForeground(Color.white);
-		disableEditable();
-		int possibleIndex = hsList.isEligible(score);
-		if(possibleIndex != -1) {
-			congratsLabel.setForeground(Color.green);
-			nameField[possibleIndex].setEditable(true);
-			scoreField[possibleIndex].setText(score + "");
-			nameField[possibleIndex].setText("");
-
-			for(int i = 0; i < possibleIndex; i++) {
-				nameField[i].setText(hsList.getNames()[i]);
-				scoreField[i].setText(hsList.getScores()[i] + "");
-			}
-
-			for(int j = possibleIndex + 1; j < 5; j++) {
-				nameField[j].setText(hsList.getNames()[j - 1]);
-				scoreField[j].setText(hsList.getScores()[j - 1] + "");
-			}
-		} else {
-			for(int i = 0; i < 5; i++) {
-				nameField[i].setText(hsList.getNames()[i]);
-				scoreField[i].setText(hsList.getScores()[i] + "");
-			}
-		}
-		songLabel.setText(shortenString(song.getSongName(), 15));
-		artistLabel.setText(shortenString(song.getArtist(), 15));
-	}
-
-	public String shortenString(String stringToShorten, int maxLength) {
-		if(stringToShorten.length() >= maxLength) {
-			stringToShorten = stringToShorten.substring(0,maxLength - 4) + "...";
-		}
-		return stringToShorten;
-	}
-
-	public void disableEditable() {
-		for(int i = 0; i < 5; i++) {
-			scoreField[i].setEditable(false);
-			nameField[i].setEditable(false);
-		}
-	}
-
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
-	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.

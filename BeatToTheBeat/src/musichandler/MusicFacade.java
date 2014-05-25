@@ -59,15 +59,13 @@ public class MusicFacade {
 	}
 	
 	private void addSong(String fileName, String songName, String artist, String genre) {
-		System.out.println(genre);
 		for (Genre g : genres) {
-			System.out.println(genre.equals(g.getName()));
 			if (g.getName().equalsIgnoreCase(genre)) {
 				addSong(fileName, songName, artist, g);
 				return;
 			}
 		}
-		System.out.println("Hittade ingen genre som heter: \"" + genre + "\"");
+		System.out.println("Couldn't find any genre called: \"" + genre + "\"");
 	}
 	
 	/**
@@ -150,7 +148,6 @@ public class MusicFacade {
 	private void saveSonglist(){
 		try {
 	          BufferedWriter output = new BufferedWriter(new FileWriter(new File("songs\\songList.list")));
-	          System.out.println(songList.size());
 	          for(Song s: songList){
 	        	  //toString() in Song and Genre are overridden to guarantee satisfaction.
 		          output.write(s.toString());
