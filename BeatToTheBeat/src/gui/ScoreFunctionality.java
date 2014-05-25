@@ -13,6 +13,7 @@ public class ScoreFunctionality {
 
 	public ScoreFunctionality(ScorePanel scorePanel) {
 		this.scorePanel = scorePanel;
+		hsList = new HighScoreList();
 	}
 
 	/**
