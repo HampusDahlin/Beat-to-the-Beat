@@ -2,8 +2,6 @@ package musichandler;
 
 import java.io.Serializable;
 
-import support.HighScoreList;
-
 @SuppressWarnings("serial")
 public final class Song implements Serializable {
 	
