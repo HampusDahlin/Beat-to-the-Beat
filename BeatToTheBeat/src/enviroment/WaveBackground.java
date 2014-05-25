@@ -14,11 +14,13 @@ public class WaveBackground implements PropertyChangeListener{
 	private final int WAVEAMP = 100; //the amplitude of the waves
 	private int lifetime;
 	private ArrayList<WaveForm> waveList;
+	private int intensity;
 
 	/**
 	 * 
 	 */
-	public WaveBackground(){
+	public WaveBackground(int intensity){
+		this.intensity = intensity;
 		waveList = new ArrayList<WaveForm>();
 		waveList.add(new WaveForm(new float[2][512], false, new Color(252, 0, 0)));
 		lifetime = 0;
@@ -98,6 +100,26 @@ public class WaveBackground implements PropertyChangeListener{
 	private Color invertColor(Color c){
 		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
+	
+	/**
+	 * Determines what to paint depending on the backgrounds intensity.
+	 * @param g2d
+	 * @param intensity
+	 */
+	public void paintWaveBackground(Graphics2D g2d){
+		switch(intensity){
+		case 1:
+			drawWaves(g2d);
+			break;
+		case 2:
+			drawSinWaves(g2d);
+			break;
+		case 3:
+			drawWaves(g2d);
+			drawSinWaves(g2d);
+			break;
+		}
+	}
 
 	/**
 	 * Draws a waveform using graphics g.
@@ -115,6 +137,10 @@ public class WaveBackground implements PropertyChangeListener{
 		}
 	}
 	
+	/**
+	 * Draws a waveform following a sin curve using graphics g.
+	 * @param g2d
+	 */
 	public void drawSinWaves(Graphics2D g2d){
 		
 		for(WaveForm wave : waveList){
