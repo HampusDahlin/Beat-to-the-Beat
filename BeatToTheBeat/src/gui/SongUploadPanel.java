@@ -2,24 +2,13 @@ package gui;
 
 import java.awt.Choice;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.List;
-
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import musichandler.Genre;
 import musichandler.Song;
-import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
 /*import org.blinkenlights.jid3.ID3Exception;
@@ -35,10 +24,8 @@ public class SongUploadPanel extends ZoomablePanel {
 	/**
 	 * Creates new form SongUploadPanel
 	 */
-	SongUploadPanel(List<Song> songList, Genre[] genreList) {
+	SongUploadPanel() {
 		pcs = new PropertyChangeSupport(this);
-		this.songList = songList;
-		this.genreList = genreList;
 		initComponents();
 	}
 
@@ -255,10 +242,7 @@ public class SongUploadPanel extends ZoomablePanel {
 	private java.awt.Label songNameLabel;
 	private javax.swing.JLabel succesLabel;
 	private javax.swing.JLabel titleLabel;
-	private List<Song> songList;
-	private Genre[] genreList;
 	private String source = "";
-	private Minim minim;
 	public PropertyChangeSupport pcs;
 	// End of variables declaration                   
 
