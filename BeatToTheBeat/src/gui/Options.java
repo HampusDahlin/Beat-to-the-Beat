@@ -89,7 +89,7 @@ public class Options extends ZoomablePanel implements ChangeListener {
 		miniVolume.setText("0");
 		miniVolume.setForeground(Color.white);
 
-		backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\back.png"))); // NOI18N
+		backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("images\\back.png")));
 		backButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				backButtonActionPerformed(evt);

@@ -1,5 +1,6 @@
 package controller;
 
+import enviroment.BarBackground;
 import enviroment.MatrixBackground;
 import enviroment.SinWaveBackground;
 import enviroment.WaveBackground;
@@ -77,9 +78,12 @@ public class GUIControl implements PropertyChangeListener {
 		switch(intensity){
 		case 0:
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
+			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new BarBackground());
+			break;
 		case 1:
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
 			((GamePanel)(mainPanel.getGamePanel())).addBackgroundWave(new WaveBackground());
+			System.out.println("1");
 			break;
 		case 2:
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
