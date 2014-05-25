@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import musichandler.Genre;
+import musichandler.MusicFacade;
 import musichandler.Song;
 import services.HomogeneousFileHandler;
 import ddf.minim.AudioPlayer;
@@ -23,11 +24,13 @@ public class SongUploadFunctionality {
 	private Minim minim;
 	private List<Song> songList;
 	private Genre[] genreList;
+	private MusicFacade mf;
 
 	public SongUploadFunctionality(SongUploadPanel uploadPanel, List<Song> songList, Genre[] genreList) {
 		this.uploadPanel = uploadPanel;
 		this.songList = songList;
 		this.genreList = genreList;
+		mf = new MusicFacade();
 		loadToChoice();
 	}
 
@@ -58,6 +61,8 @@ public class SongUploadFunctionality {
 		File songFile = new File(filepath);
 		copyFileToBTTB(songFile);
 		songList.add(song);
+		mf.addSong(song.getFilename(),song.getSongName(),song.getArtist(),song.getGenre());
+		
 	}
 
 	/**

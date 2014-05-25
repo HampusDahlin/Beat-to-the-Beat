@@ -54,8 +54,9 @@ public class MusicFacade {
 	 * 
 	 * @param fileName
 	 */
-	private void addSong(String fileName, String songName, String artist, Genre genre) {
+	public void addSong(String fileName, String songName, String artist, Genre genre) {
 		songList.add(new Song(fileName, songName, artist, genre));
+		saveSonglist();
 	}
 	
 	private void addSong(String fileName, String songName, String artist, String genre) {
