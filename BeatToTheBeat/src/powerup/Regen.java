@@ -12,10 +12,10 @@ public class Regen extends Powerup {
 	//heals the player gradualy over time. Can´t increase the health above 50.
 	public void effect(Actor a, boolean score) {
 		if(score){
-			if(a.getHealth() < 45) {
-				a.setHealth(a.getHealth()+5);
+			if(a.getHealth() < 15) {
+				a.setHealth(a.getHealth()+1);
 			} else {
-				a.setHealth(50);
+				a.setHealth(15);
 			}	
 		}
 
