@@ -47,7 +47,7 @@ public class SongUploadFunctionality {
 	/**
 	 * @return a new Song created from the information in the fields in the SongUploadPanel
 	 */
-	public Song songFromInput() {
+	private Song songFromInput() {
 		File songFile = new File(uploadPanel.getOriginalFilepathField().getText());
 		return new Song("songs\\" + songFile.getName(), uploadPanel.getSongNameField().getText()
 				, uploadPanel.getArtistField().getText(), (genreList)[(uploadPanel.getGenreChoice().getSelectedIndex())]);
@@ -103,7 +103,7 @@ public class SongUploadFunctionality {
 	 * Uses Minim to get the information from the songFile such as artist, name, etc
 	 * @param songFile
 	 */
-	public void presentInfo(File songFile) {
+	private void presentInfo(File songFile) {
 		AudioPlayer player = null;
 		try {
 			minim = new Minim(this);
@@ -130,7 +130,7 @@ public class SongUploadFunctionality {
 	 * @param fileName
 	 * @return
 	 */
-	public InputStream createInput(String fileName) {
+	public InputStream createInput(String fileName) { // NO_UCD (unused code)
 		InputStream is;
 		try {
 			is = new FileInputStream(fileName);
@@ -145,7 +145,7 @@ public class SongUploadFunctionality {
 	 * @param filename
 	 * @return filename without extension such as .mp3
 	 */
-	public String returnFileName(String filename) {
+	private String returnFileName(String filename) {
 		String[] splited = filename.split("\\.");
 		return splited[splited.length - 2];
 	}
@@ -153,7 +153,7 @@ public class SongUploadFunctionality {
 	/**
 	 * @return true if all the fields in the uploadPanel contains information
 	 */
-	public boolean checkInputOk() {
+	private boolean checkInputOk() {
 		if(!checkIfFieldOk(uploadPanel.getOriginalFilepathField())) {
 			return false;
 		} else if (!checkIfFieldOk(uploadPanel.getSongNameField())) {
@@ -168,7 +168,7 @@ public class SongUploadFunctionality {
 	 * @param textfield
 	 * @return if textfield contains input
 	 */
-	public boolean checkIfFieldOk(JTextField textfield) {
+	private boolean checkIfFieldOk(JTextField textfield) {
 		if(!textfield.getText().equals("")) {
 			return true;
 		} 
@@ -178,7 +178,7 @@ public class SongUploadFunctionality {
 	/**
 	 * loads uploadPanels genrechoicer with the genreList
 	 */
-	public void loadToChoice() {
+	private void loadToChoice() {
 		for(Genre genre : genreList) {
 			uploadPanel.getGenreChoice().add(genre.getName());
 		}
@@ -189,7 +189,7 @@ public class SongUploadFunctionality {
 	 * @param success
 	 * sets the message and color of the succeslabel based on params
 	 */
-	public void setResponse(String response, boolean success) {
+	private void setResponse(String response, boolean success) {
 		uploadPanel.getSuccesLabel().setVisible(true);
 		uploadPanel.getSuccesLabel().setText(response);
 		if(success) {

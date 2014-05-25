@@ -46,7 +46,7 @@ public class ScoreFunctionality {
 	 * @param song
 	 * loads the current songs highscorelist to the panels in appropriate positions
 	 */
-	void presentHighScoreList(Song song) {
+	private void presentHighScoreList(Song song) {
 		scorePanel.getCongratsLabel().setForeground(Color.white);
 		disableEditable();
 		int possibleIndex = hsList.isEligible(score);
@@ -80,7 +80,7 @@ public class ScoreFunctionality {
 	 * @param maxLength
 	 * @return shortens the given string to be of the maximum value sent as a param. The three last letters are replaced with ...
 	 */
-	String shortenString(String stringToShorten, int maxLength) {
+	private String shortenString(String stringToShorten, int maxLength) {
 		if(stringToShorten.length() >= maxLength) {
 			stringToShorten = stringToShorten.substring(0,maxLength - 4) + "...";
 		}
@@ -90,7 +90,7 @@ public class ScoreFunctionality {
 	/**
 	 * disables editable on all fields
 	 */
-	void disableEditable() {
+	private void disableEditable() {
 		for(int i = 0; i < 5; i++) {
 			scorePanel.getScoreField()[i].setEditable(false);
 			scorePanel.getNameField()[i].setEditable(false);

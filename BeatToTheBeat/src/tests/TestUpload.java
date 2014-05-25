@@ -31,6 +31,7 @@ public class TestUpload{
 	}
 	
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		TestUpload test = new TestUpload();
 	}
 }

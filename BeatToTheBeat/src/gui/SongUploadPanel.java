@@ -4,12 +4,8 @@ import java.awt.Choice;
 import java.awt.Color;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import musichandler.Genre;
-import musichandler.Song;
-import ddf.minim.Minim;
 
 /*import org.blinkenlights.jid3.ID3Exception;
 import org.blinkenlights.jid3.MP3File;
@@ -24,7 +20,7 @@ public class SongUploadPanel extends ZoomablePanel {
 	/**
 	 * Creates new form SongUploadPanel
 	 */
-	SongUploadPanel() {
+	public SongUploadPanel() {
 		pcs = new PropertyChangeSupport(this);
 		initComponents();
 	}

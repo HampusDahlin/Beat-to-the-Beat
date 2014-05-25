@@ -38,7 +38,7 @@ public class Analyzer {
 	 * @param song the song to be analyzed
 	 * @param sensitivity how sensitive the Analyzer will be
 	 */
-	public Analyzer(Song song, int sensitivity, int delay) {
+	Analyzer(Song song, int sensitivity, int delay) {
 		this.DELAY = delay; //delay in ms
 		pcs = new PropertyChangeSupport(this);
 		genre = song.getGenre();
@@ -66,7 +66,7 @@ public class Analyzer {
     * @param fileName the files filename
     * @return an InputStream linked to the filename fileName.
     */
-   public InputStream createInput(String fileName) {
+   public InputStream createInput(String fileName) { // NO_UCD (unused code)
        System.out.println("creating inputStream from file: " + fileName);
        InputStream is;
        try {

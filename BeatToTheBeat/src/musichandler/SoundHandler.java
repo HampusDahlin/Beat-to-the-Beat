@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 
-public class SoundHandler implements ActionListener {
+class SoundHandler implements ActionListener {
 	private final int DELAY;
 	private MusicPlayer player;
 	private Analyzer analyzer;
@@ -38,7 +38,7 @@ public class SoundHandler implements ActionListener {
 		}
 	}
 	
-	public void start() {
+	void start() {
 		if (analyzer !=null) {
 			timer = new Timer(DELAY, this);
 			timer.setInitialDelay(DELAY);

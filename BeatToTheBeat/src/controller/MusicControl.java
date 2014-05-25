@@ -29,10 +29,6 @@ class MusicControl {
 		music.play(song, isDelay);
 	}
 	
-	void play(boolean isDelay) {
-		music.playCurrent(isDelay);
-	}
-	
 	void playRandom(){
 		Random r = new Random();
 		int rand = r.nextInt(getSongCount());

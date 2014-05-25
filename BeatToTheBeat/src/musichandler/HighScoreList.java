@@ -47,7 +47,7 @@ public class HighScoreList {
 	/**
 	 * initializes the list to empty variables
 	 */
-	public void initHighScoreList() {
+	private void initHighScoreList() {
 		for(int i = 0; i < 5; i++) {
 			names[i] = "";
 		}

@@ -62,7 +62,7 @@ public class CardPanel extends JPanel {
 		songPresenter.presentSongList(0);
 	}
 	
-	public void goToGame() {
+	void goToGame() {
 		((CardLayout)this.getLayout()).show(this, GAMEPANEL);
 		activePanel = 3;
 	}

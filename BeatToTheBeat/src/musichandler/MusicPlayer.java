@@ -49,12 +49,12 @@ public class MusicPlayer {
 	}
 	
 	//needed for minim
-	public String sketchPath(String fileName) {
+	public String sketchPath(String fileName) { // NO_UCD (unused code)
 		return "sketchPath: " + fileName;
 	}
 	
 	//needed for minim
-	public InputStream createInput(String fileName) {
+	public InputStream createInput(String fileName) { // NO_UCD (unused code)
 		//System.out.println("creating inputStream from file: " + fileName);
 		InputStream is;
 		try {

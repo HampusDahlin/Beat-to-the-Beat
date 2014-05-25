@@ -16,10 +16,8 @@ import java.util.List;
  *
  */
 public class HomogeneousFileHandler implements IFileHandler<Object>{
-	FileOutputStream fileOut;
-	ObjectOutputStream objectOut;
-	private String defaultSaveLocation;
-	
+	private FileOutputStream fileOut;
+	private ObjectOutputStream objectOut;
 	
 	/**
 	 * {@inheritDoc}
@@ -43,16 +41,7 @@ public class HomogeneousFileHandler implements IFileHandler<Object>{
 	 * {@inheritDoc}
 	 */
 	public void setDefaultSaveLocation(String saveLoc) {
-		this.defaultSaveLocation = saveLoc;
 		
-	}
-
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	public void save(Object toWrite) {
-		saveAs(defaultSaveLocation, toWrite);
 	}
 
 	

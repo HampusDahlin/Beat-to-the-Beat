@@ -13,13 +13,13 @@ import musichandler.Genre;
 import musichandler.Song;
 import services.HomogeneousFileHandler;
 
-public class GUIControl implements PropertyChangeListener {
+class GUIControl implements PropertyChangeListener {
 	private CardPanel mainPanel;
 	private SongUploadFunctionality uploadFunc;
 	private ScoreFunctionality scoreFunc;
 	private int intensity;
 	
-	public GUIControl(List<Song> songList, Genre[] genreList) {
+	GUIControl(List<Song> songList, Genre[] genreList) {
 		mainPanel = new CardPanel(songList, genreList);
 		this.intensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
 		setBackground();
@@ -28,7 +28,7 @@ public class GUIControl implements PropertyChangeListener {
 		scoreFunc = new ScoreFunctionality((ScorePanel)mainPanel.getScorePanel());
 	}
 	
-	public void setPCL() {
+	private void setPCL() {
 		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(this);
 		((ScorePanel)(mainPanel.getScorePanel())).pcs.addPropertyChangeListener(this);
 		((SongSelection)(mainPanel.getSongSelection())).pcs.addPropertyChangeListener(this);
@@ -65,7 +65,7 @@ public class GUIControl implements PropertyChangeListener {
 	 * @param g2d
 	 * @param intensity
 	 */
-	public void setBackground(){
+	private void setBackground(){
 		switch(intensity){
 		case 0:
 			((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves().clear();
@@ -93,7 +93,7 @@ public class GUIControl implements PropertyChangeListener {
 		}
 	}
 	
-	public void goToScore(int score, Song song) {
+	void goToScore(int score, Song song) {
 		scoreFunc.presentScore(score, song);
 		mainPanel.goToScore();
 	}

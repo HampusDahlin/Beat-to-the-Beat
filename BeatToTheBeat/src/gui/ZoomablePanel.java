@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public abstract class ZoomablePanel extends JPanel {
+abstract class ZoomablePanel extends JPanel {
     private BufferedImage image;  
     private final double STANDARDSCALE = 1.0;
     private final double ZOOMSCALE = 1.1;
@@ -46,7 +46,7 @@ public abstract class ZoomablePanel extends JPanel {
     	revalidate();
     }
     
-    public void zoom() {
+    void zoom() {
     	setScale(ZOOMSCALE);
     }
    

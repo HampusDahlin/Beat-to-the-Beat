@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  */
 public class WaveBackground implements IBackground{
-	protected final int LISTSIZE = 20; //the amount of soundframes being displayed
+	private final int LISTSIZE = 20; //the amount of soundframes being displayed
 	protected final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
 	protected final int WAVEAMP = 100; //the amplitude of the waves
 	protected ArrayList<WaveForm> waveList;
@@ -57,7 +57,7 @@ public class WaveBackground implements IBackground{
 		paintHitBox(g2d,range);
 	}
 	
-	public void paintHitBox(Graphics2D g2d, int range){
+	private void paintHitBox(Graphics2D g2d, int range){
 		final int boxWidth = range*2-10;
 		final int playerPos = 450;
 		g2d.setColor(ch.invertColor(waveList.get(0).getColor()));

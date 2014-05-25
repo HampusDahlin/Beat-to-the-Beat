@@ -1,6 +1,5 @@
 package controller;
 import enviroment.IBackground;
-import enviroment.WaveBackground;
 import gui.CardPanel;
 import gui.GamePanel;
 import gui.Options;
@@ -30,7 +29,7 @@ import support.RemoveActorException;
  * @version 0.0.6
  *
  */
-public class HeadControl implements ActionListener, PropertyChangeListener, KeyListener {
+class HeadControl implements ActionListener, PropertyChangeListener, KeyListener {
 	
 	private ActorControl actorControl;
 	private MusicControl musicControl;
@@ -41,7 +40,7 @@ public class HeadControl implements ActionListener, PropertyChangeListener, KeyL
 	
 	private Timer menuTime;
 	
-	public HeadControl(JFrame mainFrame) {
+	HeadControl(JFrame mainFrame) {
 		
 		fileCheck();
 		

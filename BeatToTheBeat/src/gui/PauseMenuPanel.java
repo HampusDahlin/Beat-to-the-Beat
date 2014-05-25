@@ -6,7 +6,8 @@ import java.beans.PropertyChangeSupport;
  *
  * @author Björn Hedström
  */
-public class PauseMenuPanel extends javax.swing.JPanel {
+@SuppressWarnings("serial")
+public class PauseMenuPanel extends javax.swing.JPanel { // NO_UCD (use default)
 	
 	public PropertyChangeSupport pcs;
 	/**

@@ -33,30 +33,14 @@ public class FileTest {
 			tests = false;
 		}
 		
-		if (homogenousSetDefaultSaveLocationSave()) {
-			System.out.println("SetDefaultSaveLocation + Save test successful");
-		} else {
-			System.out.println("SetDefaultSaveLocation + Save test failed");
-			tests = false;
-		}
-		
 		return tests;
-	}
-	
-	private boolean homogenousSetDefaultSaveLocationSave() {
-		Integer testObject = new Integer(2);
-		
-		filehandler.setDefaultSaveLocation("default.test");
-		filehandler.save(testObject);
-		
-		return filehandler.load("default.test").get(0).equals(testObject);
 	}
 
 
 	public boolean homogenousSaveAsLoad(){
 		Integer saveObject = new Integer(1);
 		
-		filehandler.saveAs("filetest.test", saveObject);
+		((HomogeneousFileHandler) filehandler).saveAs("filetest.test", saveObject);
 		
 		return filehandler.load("filetest.test").get(0).equals(saveObject);
 	}

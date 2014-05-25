@@ -13,7 +13,7 @@ public abstract class Powerup {
 	private final int DURATION;
 	private final int THRESHOLD;
 	
-	public Powerup(String name, String description, int duration, int threshold) {
+	Powerup(String name, String description, int duration, int threshold) {
 		this.NAME = name;
 		this.DESCRIPTION = description;
 		this.DURATION = duration;
