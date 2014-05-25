@@ -90,7 +90,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		this.setBackground(new java.awt.Color(0,0,0));
-		this.setBackgroundWave(new WaveBackground());
+		this.setBackgroundWave(new WaveBackground(bgIntensity));
 		setSize(914, 600);
 		setMaximumSize(new java.awt.Dimension(914, 600));
 		setMinimumSize(new java.awt.Dimension(914, 600));
@@ -168,18 +168,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			walkIndex++;
 		}
 		
-		switch(bgIntensity){
-		case 1:
-			backgroundWave.drawWaves((Graphics2D)g);
-			break;
-		case 2:
-			backgroundWave.drawSinWaves((Graphics2D)g);
-			break;
-		case 3:
-			backgroundWave.drawWaves((Graphics2D)g);
-			backgroundWave.drawSinWaves((Graphics2D)g);
-			break;
-		}
+		backgroundWave.paintWaveBackground((Graphics2D)g);
+		
 		
 		//paint the hitbox, with the extrapoint zones
 		final int boxWidth = 230;
