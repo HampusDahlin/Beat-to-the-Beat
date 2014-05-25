@@ -52,15 +52,7 @@ public class HomogeneousFileHandler implements IFileHandler<Object>{
 	 * {@inheritDoc}
 	 */
 	public void save(Object toWrite) {
-		try {
-			fileOut = new FileOutputStream(this.defaultSaveLocation);
-			objectOut = new ObjectOutputStream(fileOut);
-			objectOut.writeObject(toWrite);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e){
-			e.printStackTrace();
-		}
+		saveAs(defaultSaveLocation, toWrite);
 	}
 
 	
@@ -73,8 +65,6 @@ public class HomogeneousFileHandler implements IFileHandler<Object>{
 		File file = new File(filename);
 		FileInputStream in;
 		Object temp = null;
-		boolean empty = true;
-		
 		
 		try {
 			in = new FileInputStream(file);

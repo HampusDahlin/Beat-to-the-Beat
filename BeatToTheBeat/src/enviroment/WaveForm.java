@@ -8,7 +8,7 @@ import java.awt.Color;
  * @date 2014-05-18
  *
  */
-class WaveForm {
+public class WaveForm {
 	private final float[][] soundwave;
 	private final boolean beat;
 	private Color c;
@@ -20,7 +20,7 @@ class WaveForm {
 	 * @param beat
 	 * @param c
 	 */
-	WaveForm(float[][] soundwave, boolean beat, Color c){
+	public WaveForm(float[][] soundwave, boolean beat, Color c){
 		this.soundwave = soundwave;
 		this.beat = beat;
 		this.c = c;
@@ -30,7 +30,7 @@ class WaveForm {
 	/**
 	 * Aging the waveform, reducing its width and making it more transparent.
 	 */
-	void age(){
+	public void age(){
 		width = width > 1 ? width - 1 : 1;
 		setColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha() / 2));
 	}
