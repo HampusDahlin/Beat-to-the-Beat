@@ -40,7 +40,6 @@ public class SongUploadPanel extends ZoomablePanel {
        this.songList = songList;
        this.genreList = genreList;
        initComponents();
-       loadToChoice();
    }
    
    public JLabel getSuccesLabel() {
@@ -71,6 +70,18 @@ public class SongUploadPanel extends ZoomablePanel {
 	   return genreChoice;
    }
    
+   private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {       
+	   pcs.firePropertyChange("back", true, false);
+   }                                          
+
+   private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+	   pcs.firePropertyChange("load", true, false);
+   }          
+   
+   private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+		pcs.firePropertyChange("browse", true, false);
+   }   
+   /*
    private boolean checkIfFieldOk(JTextField textfield) {
 	   if(!textfield.getText().equals("")) {
 		   return true;
@@ -113,31 +124,6 @@ public class SongUploadPanel extends ZoomablePanel {
    public void paintComponent(Graphics g) {
 	   super.paintComponent(g);
    }
-   
-   private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {       
-	   if(source.equals("SongSelection")) {
-		   ((CardPanel)(this.getParent())).playSong();
-	   } else {
-		   ((CardPanel)(this.getParent())).back();
-	   }
-   }                                          
-
-   private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) { 
-	   if(checkInputOk()) {
-		   setResponse("File loaded successfully!", true);
-		   File songFile = new File(originalFilepathField.getText());
-		   copyFileToBTTB(songFile);
-		   Song song = new Song("songs\\" + songFile.getName(), songNameField.getText()
-				   , artistField.getText(), genreList[(genreChoice.getSelectedIndex())]);
-		   songList.add(song);
-	   } else {
-		   setResponse("Fields cannot be empty", false);	   
-	   }
-   }          
-   
-   private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-	   browse();
-   }   
    
    private void browse() {
 	   JFileChooser chooser = new JFileChooser();
@@ -189,13 +175,6 @@ public class SongUploadPanel extends ZoomablePanel {
 	    } catch (NullPointerException e) {
 	    	songNameField.setText(returnFileName(songFile.getName()));
 	    }
-   }
-   
-   public void clearFields() {
-	   succesLabel.setVisible(false);
-	   artistField.setText("");
-	   songNameField.setText("");
-	   originalFilepathField.setText("");
    }
    
    private void copyFileToBTTB(File songFile) {
