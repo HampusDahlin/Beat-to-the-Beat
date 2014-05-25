@@ -114,7 +114,7 @@ public class Options extends ZoomablePanel implements ChangeListener {
 		backgroundIntensityLabel.setText("Background Intensity");
 		backgroundIntensityLabel.setForeground(Color.white);
 
-		maxIntensity.setText("3");
+		maxIntensity.setText("4");
 		maxIntensity.setForeground(Color.white);
 
 		miniIntensity.setText("0");
