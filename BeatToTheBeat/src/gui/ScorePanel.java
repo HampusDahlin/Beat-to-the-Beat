@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.JTextField;
 
 import musichandler.Song;
-import support.HighScoreList;
+import musichandler.HighScoreList;
 /**
  *
  * @author Björn Hedström
