@@ -17,13 +17,18 @@ import musichandler.Song;
 import services.HomogeneousFileHandler;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
-//derp
+
 public class SongUploadFunctionality {
 	private SongUploadPanel uploadPanel;
 	private Minim minim;
+	private List<Song> songList;
+	private Genre[] genreList;
 
-	public SongUploadFunctionality(SongUploadPanel uploadPanel) {
+	public SongUploadFunctionality(SongUploadPanel uploadPanel, List<Song> songList, Genre[] genreList) {
 		this.uploadPanel = uploadPanel;
+		this.songList = songList;
+		this.genreList = genreList;
+		loadToChoice();
 	}
 
 	private void copyFileToBTTB(File songFile) {
@@ -34,6 +39,26 @@ public class SongUploadFunctionality {
 			uploadPanel.getSuccesLabel().setText("An error occured, please try again");
 			uploadPanel.getSuccesLabel().setForeground(Color.red);
 		} 
+	}
+
+	public void load() {
+		if(checkInputOk()) {
+			setResponse("File loaded successfully!", true);
+			File songFile = new File(uploadPanel.getOriginalFilepathField().getText());
+			copyFileToBTTB(songFile);
+			Song song = new Song("songs\\" + songFile.getName(), uploadPanel.getSongNameField().getText()
+					, uploadPanel.getArtistField().getText(), (genreList)[(uploadPanel.getGenreChoice().getSelectedIndex())]);
+			songList.add(song);
+		} else {
+			setResponse("Fields cannot be empty", false);	   
+		}
+	}
+
+	public void clearFields() {
+		uploadPanel.getSuccesLabel().setVisible(false);
+		uploadPanel.getArtistField().setText("");
+		uploadPanel.getSongNameField().setText("");
+		uploadPanel.getOriginalFilepathField().setText("");
 	}
 
 	public void browse() {
@@ -106,7 +131,7 @@ public class SongUploadFunctionality {
 		return false;
 	}
 
-	public void loadToChoice(Genre[] genreList) {
+	public void loadToChoice() {
 		for(Genre genre : genreList) {
 			uploadPanel.getGenreChoice().add(genre.getName());
 		}

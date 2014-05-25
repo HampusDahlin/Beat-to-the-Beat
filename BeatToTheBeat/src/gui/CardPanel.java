@@ -32,7 +32,7 @@ public class CardPanel extends JPanel {
 		gamePanel = new GamePanel();
 		scorePanel = new ScorePanel();
 		songPresenter = new SongSelection(songList);
-		songUpload = new SongUploadPanel(songList, genreList);
+		songUpload = new SongUploadPanel();
 		this.add(menu, MENUPANEL);
 		this.add(options, OPTIONSPANEL);
 		this.add(songPresenter, SONGSELECTIONPANEL);
@@ -42,7 +42,6 @@ public class CardPanel extends JPanel {
 	}
 	
 	public void goToSongUpload() {
-		songUpload.clearFields();
 		((CardLayout)this.getLayout()).show(this, SONGUPLOADPANEL);
 		activePanel = 5;
 	}
