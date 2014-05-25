@@ -15,6 +15,9 @@ public class ScoreFunctionality {
 		this.scorePanel = scorePanel;
 	}
 
+	/**
+	 *  adds the score to the correct place if eligible
+	 */
 	public void procced() {
 		if(hsList.isEligible(score) != -1) {
 			hsList.add(shortenString(scorePanel.getNameField()[hsList.isEligible(score)].getText(), 10), score);
@@ -22,6 +25,11 @@ public class ScoreFunctionality {
 		hsList.saveHighscoreList(song);
 	}
 
+	/**
+	 * @param score
+	 * @param song
+	 * presents information on the played song along with the players score in the scorePanel
+	 */
 	public void presentScore(int score, Song song) {
 		this.score = score;
 		this.song = song;
@@ -34,6 +42,10 @@ public class ScoreFunctionality {
 		presentHighScoreList(song);
 	}
 
+	/**
+	 * @param song
+	 * loads the current songs highscorelist to the panels in appropriate positions
+	 */
 	void presentHighScoreList(Song song) {
 		scorePanel.getCongratsLabel().setForeground(Color.white);
 		disableEditable();
@@ -63,6 +75,11 @@ public class ScoreFunctionality {
 		scorePanel.getArtistLabel().setText(shortenString(song.getArtist(), 15));
 	}
 
+	/**
+	 * @param stringToShorten
+	 * @param maxLength
+	 * @return shortens the given string to be of the maximum value sent as a param. The three last letters are replaced with ...
+	 */
 	String shortenString(String stringToShorten, int maxLength) {
 		if(stringToShorten.length() >= maxLength) {
 			stringToShorten = stringToShorten.substring(0,maxLength - 4) + "...";
@@ -70,6 +87,9 @@ public class ScoreFunctionality {
 		return stringToShorten;
 	}
 
+	/**
+	 * disables editable on all fields
+	 */
 	void disableEditable() {
 		for(int i = 0; i < 5; i++) {
 			scorePanel.getScoreField()[i].setEditable(false);

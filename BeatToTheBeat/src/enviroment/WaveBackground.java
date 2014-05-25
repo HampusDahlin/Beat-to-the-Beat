@@ -13,16 +13,16 @@ import java.util.ArrayList;
  *
  */
 public class WaveBackground implements IBackground{
-	private int colorChange; //the index of the currently increasing color value
 	protected final int LISTSIZE = 20; //the amount of soundframes being displayed
 	protected final int YPOS[] = {150, 350}; //the positions of the two waveforms along the Y-axis
 	protected final int WAVEAMP = 100; //the amplitude of the waves
 	protected ArrayList<WaveForm> waveList;
+	ColorHandler ch;
 
 	public WaveBackground(){
 		waveList = new ArrayList<WaveForm>();
 		waveList.add(new WaveForm(new float[2][512], false, new Color(252, 0, 0)));
-		colorChange = 1;
+		ch = new ColorHandler();
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class WaveBackground implements IBackground{
 			wave.age();
 		}
 		handleWaveList(soundwave, beat);
-		waveList.get(0).setColor(calcColorChange());
+		waveList.get(0).setColor(ch.calcColorChange(waveList.get(0).getBeat()));
 		
 	}
 	
@@ -52,52 +52,6 @@ public class WaveBackground implements IBackground{
 		}
 	}
 	
-	/**
-	 * Returns the color of the next waveform.
-	 */
-	private Color calcColorChange(){
-		Color c = waveList.get(0).getColor();
-		if(waveList.get(0).getBeat()){
-			for(int i = 0; i < 150; i++){
-				c = gradientChange(c);
-			}
-		}else{
-			c = gradientChange(c);
-		}
-		return c;
-	}
-	
-	
-	/**
-	 * Simulates a gradient colorchange.
-	 * @param prevColor
-	 * @return nextColor
-	 */
-	private Color gradientChange(Color prevColor){
-		Color nextColor;
-	
-		int[] colorRGB = {prevColor.getRed(), prevColor.getGreen(), prevColor.getBlue()};
-	
-		if(colorRGB[((colorChange + 2) % 3)] == 0){
-			colorChange = ((colorChange + 1) % 3);
-		}
-	
-		colorRGB[(colorChange + 2) % 3]--;
-		colorRGB[colorChange]++;
-	
-		nextColor = new Color(colorRGB[0], colorRGB[1], colorRGB[2]);
-		return nextColor;
-	}
-
-	/**
-	 * 
-	 * @param c
-	 * @return complementary color of c
-	 */
-	private Color invertColor(Color c){
-		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
-	}
-
 	public void paintBackground(Graphics2D g2d, int range){
 		paintBackground(g2d);
 		paintHitBox(g2d,range);
@@ -106,7 +60,7 @@ public class WaveBackground implements IBackground{
 	public void paintHitBox(Graphics2D g2d, int range){
 		final int boxWidth = range*2-10;
 		final int playerPos = 450;
-		g2d.setColor(invertColor(waveList.get(0).getColor()));
+		g2d.setColor(ch.invertColor(waveList.get(0).getColor()));
 		g2d.drawRect(playerPos-boxWidth/2+5, 270, boxWidth, 80);
 		g2d.fillRect((playerPos-boxWidth/2)+40,331,boxWidth/10,20);
 		g2d.fillRect((playerPos+boxWidth/2)-50,331,boxWidth/10,20);
@@ -133,7 +87,7 @@ public class WaveBackground implements IBackground{
 	}
 
 	public Color getFirstCompCol(){
-		return(invertColor(getFirstColor()));
+		return(ch.invertColor(getFirstColor()));
 	}
 
 	@Override

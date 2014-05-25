@@ -4,16 +4,7 @@ import enviroment.BarBackground;
 import enviroment.MatrixBackground;
 import enviroment.SinWaveBackground;
 import enviroment.WaveBackground;
-import gui.CardPanel;
-import gui.GamePanel;
-import gui.MainMenu;
-import gui.Options;
-import gui.ScoreFunctionality;
-import gui.ScorePanel;
-import gui.SongSelection;
-import gui.SongUploadFunctionality;
-import gui.SongUploadPanel;
-
+import gui.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
@@ -58,11 +49,7 @@ public class GUIControl implements PropertyChangeListener {
 		} else if(evt.getPropertyName().equals("browse")) {
 			uploadFunc.browse();
 		} else if(evt.getPropertyName().equals("load")) {
-			if(uploadFunc.checkInputOk()) {
-				uploadFunc.load(uploadFunc.songFromInput());
-			} else {
-				uploadFunc.setResponse("Fields cannot be empty", false);	   
-			}
+			uploadFunc.loadingSequence();
 		} else if(evt.getPropertyName().equals("procced")) {
 			scoreFunc.procced();
 			mainPanel.playSong();
