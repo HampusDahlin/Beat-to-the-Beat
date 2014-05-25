@@ -53,4 +53,10 @@ public class MatrixBackground implements IBackground{
 		}
 		
 	}
+
+	@Override
+	public void paintBackground(Graphics2D g2d, int range) {
+		paintBackground(g2d);
+		
+	}
 }

@@ -101,26 +101,6 @@ public class WaveBackground implements IBackground{
 	private Color invertColor(Color c){
 		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
-	
-	/**
-	 * Determines what to paint depending on the backgrounds intensity.
-	 * @param g2d
-	 * @param intensity
-	 */
-	public void paintBackground(Graphics2D g2d){
-		switch(intensity){
-		case 1:
-			drawWaves(g2d);
-			break;
-		case 2:
-			drawSinWaves(g2d);
-			break;
-		case 3:
-			drawWaves(g2d);
-			drawSinWaves(g2d);
-			break;
-		}
-	}
 
 	public void paintBackground(Graphics2D g2d, int range){
 		paintBackground(g2d);
@@ -164,8 +144,12 @@ public class WaveBackground implements IBackground{
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getPropertyName().equals("beat")){
 			updateBackground((float[][])evt.getNewValue(), (boolean)evt.getOldValue());
-		}else if (evt.getPropertyName().equals("bgSlider")){
-			this.intensity = (int)evt.getNewValue();
 		}
+	}
+
+	@Override
+	public void paintBackground(Graphics2D g2d) {
+		drawWaves(g2d);
+		
 	}
 }
