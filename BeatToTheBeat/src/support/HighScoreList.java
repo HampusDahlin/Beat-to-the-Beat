@@ -1,7 +1,13 @@
 package support;
 
+import java.io.*;
+import java.util.Scanner;
+
+import musichandler.Song;
+
 /**
  * @author Björn Hedström
+ * @revisedBy Malin "Nilhet" Thelin
  *
  */
 public class HighScoreList {
@@ -55,5 +61,47 @@ public class HighScoreList {
 
 	public String[] getNames() {
 		return names.clone();
+	}
+	
+	
+	public void saveHighscoreList(Song song){
+		try {
+	          BufferedWriter output = new BufferedWriter(new FileWriter(new File("songs\\"+song.getSongName()+"highscoreList.list")));
+	          for(String n : names){
+	        	  if(!n.equals("")){
+	        		  output.write("# "+n+"\n");  
+	        	  }
+	          }
+	          for(int i : scores){
+	        	  if(i>0){
+	        		  output.write(""+i+"\n");
+	        	  }
+	          }
+	          output.close();
+		} catch ( IOException e ) {
+	           e.printStackTrace();
+	        }
+	}
+	
+	public void loadHighscorelist(Song song) {
+		Scanner in = null;
+		try {
+			in = new Scanner(new FileReader("songs\\"+song.getSongName()+"highscoreList.list"));
+			int i =0;
+			while (in.hasNext("[#]")) {
+				names[i] = in.nextLine().substring(1);
+				i++;
+			}
+			i = 0;
+			while (in.hasNextInt()) {
+				scores[i] = in.nextInt();
+				i++;
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			in.close();
+		}
 	}
 }

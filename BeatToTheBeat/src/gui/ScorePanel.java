@@ -24,12 +24,18 @@ public class ScorePanel extends ZoomablePanel {
 		if(hsList.isEligible(score) != -1) {
 			hsList.add(shortenString(nameField[hsList.isEligible(score)].getText(), 10), score);
 		}
+		hsList.saveHighscoreList(song);
 		pcs.firePropertyChange("selection", true, false);
 	}    
 
 	void presentScore(int score, Song song) {
 		this.score = score;
-		hsList = song.getHighScoreList();
+		this.song = song;
+		try{
+			hsList.loadHighscorelist(song);
+		}catch(NullPointerException exc){
+			hsList = song.getHighScoreList();
+		}
 		scoreLabel.setText(score + " Points");
 		presentHighScoreList(song);
 	}
@@ -240,6 +246,7 @@ public class ScorePanel extends ZoomablePanel {
 	private JTextField[] scoreField;
 	private HighScoreList hsList;
 	public PropertyChangeSupport pcs;
+	private Song song;
 
 	
 	// End of variables declaration                   

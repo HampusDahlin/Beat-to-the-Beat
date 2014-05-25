@@ -65,7 +65,7 @@ class ActorControl {
 	 * Tries to attack with the closest NPC.
 	 */
 	private void NPCAttack() {
-		if (canHitClose(15, false) || canHitClose(15,true)) { //take damage and remove enemy
+		if (canHitClose(15, false) || canHitClose(15,true) && NPCList.size()>0) { //take damage and remove enemy
 			//if player is invincible this code tells the player to attack the closest enemy by itself
 			//instead of losing hp and/or dying
 			if(player.isInvincible()){
@@ -80,14 +80,15 @@ class ActorControl {
 					player.addToLives(-1);
 					if(player.getLives() <= 0){
 						player.death();
+					}else {
+						player.setHealth(player.getMaxHealth());
 					}
-					player.setHealth(player.getMaxHealth());
 				}else {
 					player.resetCooldown();
-				}	
-			}
+				}
 
-			removeActor();
+				removeActor();
+			}
 		}
 	}
 	
