@@ -45,14 +45,14 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 		fileCheck();
 		
 		musicControl = new MusicControl();
+		actorControl = new ActorControl();
 		
 		time = new Timer(10, this);
 		
 		//this is for looping music in menu
 		menuTime = new Timer(10,this);
-		guiControl = new GUIControl(musicControl.getSongList(), musicControl.getGenres());
+		guiControl = new GUIControl(musicControl.getSongList(), musicControl.getGenres(), actorControl.getPlayer(), actorControl.getNPCList());
 		mainPanel = guiControl.getMainPanel();
-		
 		
 		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(this);
 		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(guiControl);
@@ -64,11 +64,6 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 		}
 		
 		mainFrame.add(mainPanel);	
-		
-		//creates an actorcontrol. the gamepanel is sent to listen to a PC *player*
-		//also this headcontrol will listen to the PC *player*
-		actorControl = new ActorControl((PropertyChangeListener) mainPanel.getGamePanel());
-		actorControl.getPlayer().addPropertyChangeListener(this);
 		
 		//adds keylistener to the game
 		mainFrame.setFocusable(true);

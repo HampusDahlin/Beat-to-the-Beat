@@ -1,5 +1,8 @@
 package actors;
 
+import gui.MirroredImageIcon;
+
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +15,11 @@ public class PC extends Actor implements ActionListener {
 	private final int MISSTIME;
 	private final int MAXHEALTH;
 	
+	private boolean right;
+	private int attackIndex;
+	private final ImageIcon[] attackImg;
+	private final gui.MirroredImageIcon[] leftAttackImg;
+	private final ImageIcon idleImg;
 	private int score;
 	private int combo;
 	private int maxCombo;
@@ -24,8 +32,8 @@ public class PC extends Actor implements ActionListener {
 	private Timer cooldown;
 
 	
-	public PC(Point position, ImageIcon sprite) {
-		super(sprite, new Point(0,0));
+	public PC(Point position) {
+		super(new Point(0,0));
 		setPosition(position);
 		MAXHEALTH = 10;
 		score = 0;
@@ -39,11 +47,18 @@ public class PC extends Actor implements ActionListener {
 		cooldown.setRepeats(false);
 		setRange(120);
 		
-		lives = 1;	
-	}
+		attackIndex = -1;
+		this.attackImg = new ImageIcon[16];
+		this.leftAttackImg = new MirroredImageIcon[16];
 
-	public void death() {
-		pcs.firePropertyChange("death", true, false);
+		//initiates attackanimation
+		for (int i = 0; i < 16; i++) {
+			this.attackImg[i] = new ImageIcon("sprites\\attack" + (i+1) + ".gif");
+			this.leftAttackImg[i] = new MirroredImageIcon("sprites\\attack" + (i+1) + ".gif");
+		}
+		idleImg = new ImageIcon("sprites\\walk1.gif");
+		
+		lives = 1;	
 	}
 	
 	public int getScore() {
@@ -51,25 +66,19 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void incScore(int point){
-		
 		if(getCombo()>1){
 			//we want the player to recieve the combo points they currently have, and not the ones they will get.
 			score += point * (getCombo()-1);
 		}else{
 			score += point;
-		}
-		pcs.firePropertyChange("score", score-1, score);
-		
+		}		
 	}
 	
 	public void incCombo() {
-		combo++;
-		pcs.firePropertyChange("combo", combo-1, combo);
-		
+		combo++;		
 	}
 
 	public void resetCombo() {
-		pcs.firePropertyChange("combo", combo, 0);
 		combo = 0;
 	}
 	
@@ -93,8 +102,13 @@ public class PC extends Actor implements ActionListener {
 	public boolean onCooldown() {
 		return cooldown.isRunning();
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		//noRepeat so cooldown stops 
+	}
+	
+	public int getHealth() {
+		return health;
 	}
 	
 	public int getMaxHealth(){
@@ -102,13 +116,11 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void resetScore(){
-		pcs.firePropertyChange("score",score,0);
 		score = 0;
 	}
 	
 	public void incMaxCombo(){
 		maxCombo++;
-		pcs.firePropertyChange("max", maxCombo-1, maxCombo);
 	}
 	
 	public int getMaxCombo(){
@@ -116,20 +128,14 @@ public class PC extends Actor implements ActionListener {
 	}
 	
 	public void resetMaxCombo(){
-		pcs.firePropertyChange("max",maxCombo,0);
 		maxCombo = 0;
 		
-	}
-	
-	public void attack(boolean hit, int direction) {
-		pcs.firePropertyChange("attack", direction, hit);
 	}
 	
 	//testing
 
 	public void addToLives(int i) {
 		lives += i;
-		pcs.firePropertyChange("life",lives-1,lives);
 	}
 	
 	public void resetLives(){
@@ -142,7 +148,6 @@ public class PC extends Actor implements ActionListener {
 	
 	public void setInvincible(boolean isTrue){
 		isInvincible = isTrue;
-		pcs.firePropertyChange("invincible", !isInvincible(), isInvincible());
 	}
 	public boolean isInvincible(){
 		return isInvincible;
@@ -150,5 +155,34 @@ public class PC extends Actor implements ActionListener {
 	
 	//testing
 
+	public void paintComponent(Graphics g, javax.swing.JPanel panel) {
+		if (attackIndex < 0) {
+			idleImg.paintIcon(panel, g,
+					(457-idleImg.getIconWidth()/2), 300);
+		} else {
+			if (!right) {
+				attackImg[attackIndex/2].paintIcon(panel, g,
+						(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
+				if (attackIndex < 30) {
+					attackIndex++;
+				} else {
+					attackIndex = -1;
+				}
+
+			} else {
+				leftAttackImg[attackIndex/2].paintIcon(panel, g, 480, 150, false);
+				if (attackIndex < 30) {
+					attackIndex++;
+				} else {
+					attackIndex = -1;
+				}
+			}
+		}
+	}
+
+	public void attack(boolean right) {
+		attackIndex = 0;
+		this.right = right;
+	}
 	
 }

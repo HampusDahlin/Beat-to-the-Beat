@@ -13,12 +13,12 @@ import javax.swing.ImageIcon;
 * @group 14
 */ 
 @SuppressWarnings("serial")
-class MirroredImageIcon extends ImageIcon {
+public class MirroredImageIcon extends ImageIcon {
 
 	/**
 	 * Creates a mirrored ImageIcon from the specified path.
 	 */
-	MirroredImageIcon(String imagePath) {
+	public MirroredImageIcon(String imagePath) {
 		super(imagePath);
 	}
 

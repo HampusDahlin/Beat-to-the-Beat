@@ -1,10 +1,6 @@
 package actors;
 
 import java.awt.Point;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-
-import javax.swing.ImageIcon;
 
 /**
  * @author Björn Hedström
@@ -14,23 +10,17 @@ import javax.swing.ImageIcon;
  *
  */
 public abstract class Actor {
-	private final ImageIcon SPRITE;
-	private int health;
+	protected int health;
 	private Point position;
 	private int dmg;
 	private final Point SPEED;
 	private int range;
-
-	protected PropertyChangeSupport pcs;
 	
-	Actor(ImageIcon sprite, Point speed) {
-		this.SPRITE = sprite;
+	Actor(Point speed) {
 		this.SPEED = speed;
-		pcs = new PropertyChangeSupport(this);
 	}
 	
 	public void setRange(int newRange){
-		pcs.firePropertyChange("range",range,newRange);
 		range = newRange;
 	}
 	
@@ -50,12 +40,7 @@ public abstract class Actor {
 		return dmg;
 	}
 	
-	public ImageIcon getSprite(){
-		return SPRITE;
-	}
-	
 	public void setHealth(int newHealth){
-		pcs.firePropertyChange("hp", health, newHealth);
 		health = newHealth;
 	}
 	
@@ -72,8 +57,6 @@ public abstract class Actor {
 	}
 	
 	public void setPosition(Point newPosition, int yourIndex){
-		//är det bra att ha en pc här? eftersom actorcontrol använder sig av denna för att flytta på skiten..
-		pcs.fireIndexedPropertyChange("move", yourIndex, position, newPosition);
 		position = newPosition;
 	}
 	
@@ -82,17 +65,11 @@ public abstract class Actor {
 	}
 	
 	public boolean isDead(){
-		pcs.firePropertyChange("death", null, this);
 		return getHealth() <= 0;
 	}
 	
 	public void dealDmg(Actor defender){
 		defender.setHealth(defender.getHealth() - this.getDmg());
-	}
-	
-	
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
 	}
 
 	/**

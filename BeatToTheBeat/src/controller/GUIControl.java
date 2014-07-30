@@ -19,8 +19,8 @@ class GUIControl implements PropertyChangeListener {
 	private ScoreFunctionality scoreFunc;
 	private int intensity;
 	
-	GUIControl(List<Song> songList, Genre[] genreList) {
-		mainPanel = new CardPanel(songList, genreList);
+	GUIControl(List<Song> songList, Genre[] genreList, actors.PC player, List<actors.NPC> NPCList) {
+		mainPanel = new CardPanel(songList, genreList, player, NPCList);
 		this.intensity = (int)new HomogeneousFileHandler().load("options.conf").get(0);
 		setBackground();
 		setPCL();

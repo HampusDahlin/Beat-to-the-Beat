@@ -5,7 +5,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import powerup.*;
@@ -14,16 +13,13 @@ import actors.*;
 class ActorControl {
 	private List<NPC> NPCList;
 	private PC player;
-	private final ImageIcon SPRITE;
 	private List<Powerup> powerups;
 	
-	ActorControl(PropertyChangeListener listener) {
-		this.SPRITE = new ImageIcon("sprites\\ninja.gif");
+	ActorControl() {
 		powerups = new ArrayList<Powerup>();
 		addPowerups();
 		NPCList = new ArrayList<NPC>();
-		player = new PC(new Point(450, 0), SPRITE);
-		player.addPropertyChangeListener((PropertyChangeListener)listener);
+		player = new PC(new Point(450, 0));
 		player.setHealth(player.getMaxHealth()); //setting health after so player fires event to gamepanel
 	}
 	
@@ -35,18 +31,17 @@ class ActorControl {
 
 	void createActor(JPanel listener) {
 		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? -25 : 915, 0), //random which side
-			SPRITE, (PropertyChangeListener)listener));
+			(PropertyChangeListener)listener));
 	}
 	
 	private void removeActor(Actor actor) {
 		NPCList.remove(actor);
-		}
+	}
 	
 	/**
 	 * Removes first actor in actorList.
 	 */
 	void removeActor() {
-		NPCList.get(0).removeYourself(0);
 		removeActor(NPCList.get(0));
 	}
 	
@@ -79,7 +74,7 @@ class ActorControl {
 				if (player.getHealth() <= 0) {
 					player.addToLives(-1);
 					if(player.getLives() <= 0){
-						player.death();
+						NPCList.clear();
 					}else {
 						player.setHealth(player.getMaxHealth());
 					}
@@ -99,9 +94,11 @@ class ActorControl {
 	void playerAttack(boolean right) {
 		if (!player.onCooldown()) {
 			boolean hit = canHitClose(player.getRange(), right);
-			player.attack(hit, (right ? -1 : 1));
+			player.attack(right);
+			
 			if (hit) {
 				int prevScore = player.getScore();
+				
 				if(player.getRange() == 120){
 
 					player.incScore((int) ((70 - Math.abs(NPCList.get(0).getPosition().x
@@ -110,16 +107,15 @@ class ActorControl {
 				}else {
 					player.incScore(5);
 				}
+				
 				player.incCombo();
 				player.incMaxCombo();
 				powerupCheck(prevScore);				
 				
 				removeActor();
-
 			} else {
 				player.startCooldown();
 				player.resetCombo();
-
 			}
 		}
 	}
@@ -166,7 +162,8 @@ class ActorControl {
 		return !NPCList.isEmpty() && (NPCList.get(0).getSpeed().x < 0 == right) &&
 				((right ? NPCList.get(0) : player).getPosition().x) -
 				((right ? player : NPCList.get(0)).getPosition().x +
-						(right ? player : NPCList.get(0)).getSprite().getIconWidth()) <
+						//(right ? player : NPCList.get(0)).getSprite().getIconWidth()) <
+						30 ) <
 				range;
 	}
 	
@@ -186,7 +183,6 @@ class ActorControl {
 		return player.getScore();
 	}
 	
-	//gjgj
 	public PC getPlayer(){
 		return player;
 	}
@@ -213,7 +209,6 @@ class ActorControl {
 	
 	void resetLives(){
 		player.resetLives();
-	}
-	
+	}	
 	
 }
