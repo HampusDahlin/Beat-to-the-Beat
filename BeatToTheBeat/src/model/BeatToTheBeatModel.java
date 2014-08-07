@@ -1,3 +1,4 @@
+package model;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,4 +38,7 @@ public class BeatToTheBeatModel {
 		return npcList;
 	}
 	
+	public List<Powerup> getPowerups() {
+		return powerups;
+	}
 }
