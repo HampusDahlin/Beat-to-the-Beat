@@ -20,7 +20,7 @@ import javax.swing.Timer;
 
 import musichandler.Song;
 import services.HomogeneousFileHandler;
-import support.RemoveActorException;
+
 /**
  * 
  * @author Hampus Dahlin
@@ -117,13 +117,10 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 			musicControl.loopMusic(false);
 		}else{
 			//Moves the actors along their path.
-			try {
-					actorControl.moveActors();
-				} catch (RemoveActorException exc) {
-					actorControl.removeActor();
-				}
+			actorControl.moveActors();
+			
 			mainPanel.update();
-			}
+		}
 		musicControl.analyzeSong();
 	}
 	
