@@ -3,8 +3,6 @@ package actors;
 import java.awt.Point;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.ImageIcon;
-
 public class NPC extends Actor implements support.Movable{
 
 	public NPC(Point position, PropertyChangeListener listener) {
