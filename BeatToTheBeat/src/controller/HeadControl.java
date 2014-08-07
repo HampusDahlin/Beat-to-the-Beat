@@ -117,7 +117,11 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 			musicControl.loopMusic(false);
 		}else{
 			//Moves the actors along their path.
-			actorControl.moveActors();
+			try {
+				actorControl.moveActors();
+			} catch (IndexOutOfBoundsException ie) { //when npclist gets cleared an exception will be thrown, ending the game.
+				endGame(0, currentSong);
+			}
 			
 			mainPanel.update();
 		}
