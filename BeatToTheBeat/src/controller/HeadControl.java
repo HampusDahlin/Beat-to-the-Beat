@@ -51,7 +51,7 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 		
 		//this is for looping music in menu
 		menuTime = new Timer(10,this);
-		guiControl = new GUIControl(musicControl.getSongList(), musicControl.getGenres(), actorControl.getPlayer(), actorControl.getNpcList());
+		guiControl = new GUIControl(musicControl.getSongList(), musicControl.getGenres(), actorControl.getModel());
 		mainPanel = guiControl.getMainPanel();
 		
 		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(this);

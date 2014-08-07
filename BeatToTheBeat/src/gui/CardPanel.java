@@ -30,11 +30,11 @@ public class CardPanel extends JPanel {
 	 * @param genreList
 	 * creates a panel holding all the other panels compromissing the Beat to the Beat GUI
 	 */
-	public CardPanel(List<Song> songList, Genre[] genreList, actors.PC player, List<actors.NPC> NPCList) {
+	public CardPanel(List<Song> songList, Genre[] genreList, model.BeatToTheBeatModel model) {
 		this.setLayout(new CardLayout());
 		options = new Options();
 		menu = new MainMenu();
-		gamePanel = new GamePanel(player, NPCList);
+		gamePanel = new GamePanel(model);
 		scorePanel = new ScorePanel();
 		songPresenter = new SongSelection(songList);
 		songUpload = new SongUploadPanel();

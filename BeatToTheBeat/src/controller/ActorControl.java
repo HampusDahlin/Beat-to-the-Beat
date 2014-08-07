@@ -197,6 +197,10 @@ class ActorControl {
 	
 	void resetLives(){
 		model.getPlayer().resetLives();
+	}
+
+	public BeatToTheBeatModel getModel() {
+		return model;
 	}	
 	
 }

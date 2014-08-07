@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.BeatToTheBeatModel;
 import actors.NPC;
 import actors.PC;
 import enviroment.IBackground;
@@ -29,8 +30,7 @@ import enviroment.WaveBackground;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements PropertyChangeListener {
-	private PC player;
-	private List<NPC> NPCList;
+	private BeatToTheBeatModel model;
 	
 	private List<IBackground> background;
 
@@ -46,9 +46,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	/**
 	 * Creates a GamePanel containing a player, NPC-list etc.
 	 */
-	public GamePanel(PC player, List<NPC> NPCList){
-		this.player = player;
-		this.NPCList = NPCList;
+	public GamePanel(BeatToTheBeatModel model){
+		this.model = model;
 		
 		hat = new ImageIcon("sprites\\hatt.gif");
 		
@@ -117,12 +116,12 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		for(IBackground b : background){
-			b.paintBackground((Graphics2D)g, player.getRange());
+			b.paintBackground((Graphics2D)g, model.getPlayer().getRange());
 		}
 		
 		//loops through NPCList and draws them
 		g.setColor(Color.BLACK);
-		for (NPC npc : NPCList) {
+		for (NPC npc : model.getNpcList()) {
 			if (npc.getPosition().x > 450) {
 				walkImg[walkIndex/10].paintIcon(this, g, npc.getPosition().x, npc.getPosition().y);
 			}else{
@@ -131,21 +130,21 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		//draw hat indicator on the first enemy
-		if (NPCList.size()>0) {
-			if (NPCList.get(0).getPosition().x > 450) {
-				hat.paintIcon(this, g, NPCList.get(0).getPosition().x+5, NPCList.get(0).getPosition().y-13);
+		if (model.getNpcList().size()>0) {
+			if (model.getNpcList().get(0).getPosition().x > 450) {
+				hat.paintIcon(this, g, model.getNpcList().get(0).getPosition().x+5, model.getNpcList().get(0).getPosition().y-13);
 			}else{
-				hat.paintIcon(this, g, NPCList.get(0).getPosition().x-23, NPCList.get(0).getPosition().y-13);
+				hat.paintIcon(this, g, model.getNpcList().get(0).getPosition().x-23, model.getNpcList().get(0).getPosition().y-13);
 			}
 		}
 		
 		//draw the player
-		player.paintComponent(g, this);
+		model.getPlayer().paintComponent(g, this);
 
 		//draw the healthbar
 		g.drawRect(4, 16, 100, 11);
 		g.setColor(Color.RED);
-		g.fillRect(4, 16, player.getHealth()*10, 11);
+		g.fillRect(4, 16, model.getPlayer().getHealth()*10, 11);
 		
 		//drawing combo,maxcombo and score on screen
 		g.setColor(Color.WHITE);
@@ -154,12 +153,12 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		g.drawString("Max:",750,60);
 		g.drawString("Score:", 420, 20);
 		g.setColor(Color.RED);
-		g.drawString(""+player.getCombo(), 780, 40);
-		g.drawString(""+player.getMaxCombo(),780,80);
-		g.drawString(""+player.getScore(),450 , 40);
+		g.drawString(""+model.getPlayer().getCombo(), 780, 40);
+		g.drawString(""+model.getPlayer().getMaxCombo(),780,80);
+		g.drawString(""+model.getPlayer().getScore(),450 , 40);
 		
 		//draw extralives
-		for(int i = 1; i < player.getLives(); i++){
+		for(int i = 1; i < model.getPlayer().getLives(); i++){
 			g.setColor(Color.PINK);
 			g.fillRect(10 + (i-1)*20, 50, 10, 10);
 		}
