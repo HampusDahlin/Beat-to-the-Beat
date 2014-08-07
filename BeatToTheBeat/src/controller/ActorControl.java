@@ -11,14 +11,14 @@ import powerup.*;
 import actors.*;
 
 class ActorControl {
-	private List<NPC> NPCList;
+	private List<NPC> npcList;
 	private PC player;
 	private List<Powerup> powerups;
 	
 	ActorControl() {
 		powerups = new ArrayList<Powerup>();
 		addPowerups();
-		NPCList = new ArrayList<NPC>();
+		npcList = new ArrayList<NPC>();
 		player = new PC(new Point(450, 0));
 		player.setHealth(player.getMaxHealth()); //setting health after so player fires event to gamepanel
 	}
@@ -30,12 +30,12 @@ class ActorControl {
 	}
 
 	void createActor(JPanel listener) {
-		NPCList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? -25 : 915, 0), //random which side
+		npcList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? -25 : 915, 0), //random which side
 			(PropertyChangeListener)listener));
 	}
 	
 	private void removeActor(Actor actor) {
-		NPCList.remove(actor);
+		npcList.remove(actor);
 	}
 	
 	/**
@@ -46,11 +46,11 @@ class ActorControl {
 	}
 	
 	/**
-	 * Returns the first enemy in NPCList.
+	 * Returns the first enemy in npcList.
 	 */
 	public NPC getFirstEnemy() {
 		try {
-			return NPCList.get(0);
+			return npcList.get(0);
 		} catch (IndexOutOfBoundsException e) {
 			return null;
 		}
@@ -60,7 +60,7 @@ class ActorControl {
 	 * Tries to attack with the closest NPC.
 	 */
 	private void NPCAttack() {
-		if (canHitClose(15, false) || canHitClose(15,true) && NPCList.size()>0) { //take damage and remove enemy
+		if (canHitClose(15, false) || canHitClose(15,true) && npcList.size()>0) { //take damage and remove enemy
 			//if player is invincible this code tells the player to attack the closest enemy by itself
 			//instead of losing hp and/or dying
 			if(player.isInvincible()){
@@ -68,13 +68,13 @@ class ActorControl {
 
 			}else{
 
-				NPCList.get(0).dealDmg(player);
+				npcList.get(0).dealDmg(player);
 				player.resetCombo();
 
 				if (player.getHealth() <= 0) {
 					player.addToLives(-1);
 					if(player.getLives() <= 0){
-						NPCList.clear();
+						npcList.clear();
 					}else {
 						player.setHealth(player.getMaxHealth());
 					}
@@ -88,7 +88,7 @@ class ActorControl {
 	}
 	
 	public List<NPC> getNPCList() {
-		return NPCList;
+		return npcList;
 	}
 
 	void playerAttack(boolean right) {
@@ -101,7 +101,7 @@ class ActorControl {
 				
 				if(player.getRange() == 120){
 
-					player.incScore((int) ((70 - Math.abs(NPCList.get(0).getPosition().x
+					player.incScore((int) ((70 - Math.abs(npcList.get(0).getPosition().x
 									- (right ? 515 : 400))) / 7));
 						
 				}else {
@@ -159,9 +159,9 @@ class ActorControl {
 	 * @param right If attack is directed to the right.
 	 */
 	private boolean canHitClose(int range, boolean right) {
-		return !NPCList.isEmpty() && (NPCList.get(0).getSpeed().x < 0 == right) &&
-				((right ? NPCList.get(0) : player).getPosition().x) -
-				((right ? player : NPCList.get(0)).getPosition().x +
+		return !npcList.isEmpty() && (npcList.get(0).getSpeed().x < 0 == right) &&
+				((right ? npcList.get(0) : player).getPosition().x) -
+				((right ? player : npcList.get(0)).getPosition().x +
 						//(right ? player : NPCList.get(0)).getSprite().getIconWidth()) <
 						30 ) <
 				range;
@@ -169,9 +169,9 @@ class ActorControl {
 	
 	// Move all NPCs and then try to attack.
 	void moveActors() {
-		for (int i = 0; i < NPCList.size() && !NPCList.isEmpty(); i++) {
-			NPCList.get(i).setPosition(new Point(
-					(NPCList.get(i).getPosition().x + NPCList.get(i).getSpeed().x), 300), i);
+		for (int i = 0; i < npcList.size() && !npcList.isEmpty(); i++) {
+			npcList.get(i).setPosition(new Point(
+					(npcList.get(i).getPosition().x + npcList.get(i).getSpeed().x), 300), i);
 		}
 		NPCAttack();
 	}
@@ -204,7 +204,7 @@ class ActorControl {
 	}
 	
 	void emptyNPCList(){
-		NPCList.clear();
+		npcList.clear();
 	}
 	
 	void resetLives(){
