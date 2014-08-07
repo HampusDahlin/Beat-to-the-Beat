@@ -2,55 +2,43 @@ package controller;
 
 import java.awt.Point;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
 
+import model.BeatToTheBeatModel;
 import powerup.*;
 import actors.*;
 
 class ActorControl {
-	private List<NPC> npcList;
-	private PC player;
-	private List<Powerup> powerups;
+	private BeatToTheBeatModel model;
 	
 	ActorControl() {
-		powerups = new ArrayList<Powerup>();
-		addPowerups();
-		npcList = new ArrayList<NPC>();
-		player = new PC(new Point(450, 0));
-		player.setHealth(player.getMaxHealth()); //setting health after so player fires event to gamepanel
-	}
-	
-	private void addPowerups() {
-		powerups.add(new Regen());
-		powerups.add(new Invincible());
-		powerups.add(new ExtraLife());
+		model = new BeatToTheBeatModel();
 	}
 
 	void createActor(JPanel listener) {
-		npcList.add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? -25 : 915, 0), //random which side
+		model.getNpcList().add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? -25 : 915, 0), //random which side
 			(PropertyChangeListener)listener));
 	}
 	
 	private void removeActor(Actor actor) {
-		npcList.remove(actor);
+		model.getNpcList().remove(actor);
 	}
 	
 	/**
 	 * Removes first actor in actorList.
 	 */
 	void removeActor() {
-		removeActor(NPCList.get(0));
+		removeActor(model.getNpcList().get(0));
 	}
 	
 	/**
-	 * Returns the first enemy in npcList.
+	 * Returns the first enemy in model.getNpcList().
 	 */
 	public NPC getFirstEnemy() {
 		try {
-			return npcList.get(0);
+			return model.getNpcList().get(0);
 		} catch (IndexOutOfBoundsException e) {
 			return null;
 		}
@@ -60,26 +48,26 @@ class ActorControl {
 	 * Tries to attack with the closest NPC.
 	 */
 	private void NPCAttack() {
-		if (canHitClose(15, false) || canHitClose(15,true) && npcList.size()>0) { //take damage and remove enemy
-			//if player is invincible this code tells the player to attack the closest enemy by itself
+		if (canHitClose(15, false) || canHitClose(15,true) && model.getNpcList().size()>0) { //take damage and remove enemy
+			//if model.getPlayer() is invincible this code tells the model.getPlayer() to attack the closest enemy by itself
 			//instead of losing hp and/or dying
-			if(player.isInvincible()){
+			if(model.getPlayer().isInvincible()){
 				playerAttack((canHitClose(15,false) ? false : true));
 
 			}else{
 
-				npcList.get(0).dealDmg(player);
-				player.resetCombo();
+				model.getNpcList().get(0).dealDmg(model.getPlayer());
+				model.getPlayer().resetCombo();
 
-				if (player.getHealth() <= 0) {
-					player.addToLives(-1);
-					if(player.getLives() <= 0){
-						npcList.clear();
+				if (model.getPlayer().getHealth() <= 0) {
+					model.getPlayer().addToLives(-1);
+					if(model.getPlayer().getLives() <= 0){
+						model.getNpcList().clear();
 					}else {
-						player.setHealth(player.getMaxHealth());
+						model.getPlayer().setHealth(model.getPlayer().getMaxHealth());
 					}
 				}else {
-					player.resetCooldown();
+					model.getPlayer().resetCooldown();
 				}
 
 				removeActor();
@@ -87,35 +75,35 @@ class ActorControl {
 		}
 	}
 	
-	public List<NPC> getNPCList() {
-		return npcList;
+	public List<NPC> getNpcList() {
+		return model.getNpcList();
 	}
 
 	void playerAttack(boolean right) {
-		if (!player.onCooldown()) {
-			boolean hit = canHitClose(player.getRange(), right);
-			player.attack(right);
+		if (!model.getPlayer().onCooldown()) {
+			boolean hit = canHitClose(model.getPlayer().getRange(), right);
+			model.getPlayer().attack(right);
 			
 			if (hit) {
-				int prevScore = player.getScore();
+				int prevScore = model.getPlayer().getScore();
 				
-				if(player.getRange() == 120){
+				if(model.getPlayer().getRange() == 120){
 
-					player.incScore((int) ((70 - Math.abs(npcList.get(0).getPosition().x
+					model.getPlayer().incScore((int) ((70 - Math.abs(model.getNpcList().get(0).getPosition().x
 									- (right ? 515 : 400))) / 7));
 						
 				}else {
-					player.incScore(5);
+					model.getPlayer().incScore(5);
 				}
 				
-				player.incCombo();
-				player.incMaxCombo();
+				model.getPlayer().incCombo();
+				model.getPlayer().incMaxCombo();
 				powerupCheck(prevScore);				
 				
 				removeActor();
 			} else {
-				player.startCooldown();
-				player.resetCombo();
+				model.getPlayer().startCooldown();
+				model.getPlayer().resetCombo();
 			}
 		}
 	}
@@ -124,16 +112,16 @@ class ActorControl {
 	
 	// Possibly to be used with powerups etc later.
 	/**
-	 * Checks which NPCs are within range of player.
-	 * @param range How close NPC can be to player.
+	 * Checks which NPCs are within range of model.getPlayer().
+	 * @param range How close NPC can be to model.getPlayer().
 	 * @return List<NPC> with close enemies.
 	 */
 	/*
 	public List<NPC> canHit(int range) {
 		List<NPC> hittable = new ArrayList<NPC>();
-		for (NPC enemy : NPCList) {
-			if ((player.getPosition().getX() +
-					player.getSprite().getIconWidth()/2) -
+		for (NPC enemy : model.getNpcList()) {
+			if ((model.getPlayer().getPosition().getX() +
+					model.getPlayer().getSprite().getIconWidth()/2) -
 					enemy.getPosition().getX() < range) {
 				hittable.add(enemy);
 			}
@@ -143,11 +131,11 @@ class ActorControl {
 	*/
 
 	private void powerupCheck(int prevScore) {
-		for(Powerup p : powerups){
-			if(p.getThreshold() < 1000 && player.getCombo() % p.getThreshold() == 0){
-				p.effect(player,false);
-			}else if(player.getScore() % p.getThreshold() < prevScore % p.getThreshold()){
-				p.effect(player,true);
+		for(Powerup p : model.getPowerups()){
+			if(p.getThreshold() < 1000 && model.getPlayer().getCombo() % p.getThreshold() == 0){
+				p.effect(model.getPlayer(),false);
+			}else if(model.getPlayer().getScore() % p.getThreshold() < prevScore % p.getThreshold()){
+				p.effect(model.getPlayer(),true);
 			}
 		}
 
@@ -155,23 +143,23 @@ class ActorControl {
 
 	/**
 	 * Checks if first NPC in list is within range.
-	 * @param range How close NPC can be to player.
+	 * @param range How close NPC can be to model.getPlayer().
 	 * @param right If attack is directed to the right.
 	 */
 	private boolean canHitClose(int range, boolean right) {
-		return !npcList.isEmpty() && (npcList.get(0).getSpeed().x < 0 == right) &&
-				((right ? npcList.get(0) : player).getPosition().x) -
-				((right ? player : npcList.get(0)).getPosition().x +
-						//(right ? player : NPCList.get(0)).getSprite().getIconWidth()) <
+		return !model.getNpcList().isEmpty() && (model.getNpcList().get(0).getSpeed().x < 0 == right) &&
+				((right ? model.getNpcList().get(0) : model.getPlayer()).getPosition().x) -
+				((right ? model.getPlayer() : model.getNpcList().get(0)).getPosition().x +
+						//(right ? model.getPlayer() : model.getNpcList().get(0)).getSprite().getIconWidth()) <
 						30 ) <
 				range;
 	}
 	
 	// Move all NPCs and then try to attack.
 	void moveActors() {
-		for (int i = 0; i < npcList.size() && !npcList.isEmpty(); i++) {
-			npcList.get(i).setPosition(new Point(
-					(npcList.get(i).getPosition().x + npcList.get(i).getSpeed().x), 300), i);
+		for (int i = 0; i < model.getNpcList().size() && !model.getNpcList().isEmpty(); i++) {
+			model.getNpcList().get(i).setPosition(new Point(
+					(model.getNpcList().get(i).getPosition().x + model.getNpcList().get(i).getSpeed().x), 300), i);
 		}
 		NPCAttack();
 	}
@@ -180,35 +168,35 @@ class ActorControl {
 	//BTW! ALL GETTERS AND SETTER AND METHODS BELOW HAVE BEEN CREATED TO BE USED; ERGO THEY ARE NECESSARY
 	
 	public int getScore() {
-		return player.getScore();
+		return model.getPlayer().getScore();
 	}
 	
 	public PC getPlayer(){
-		return player;
+		return model.getPlayer();
 	}
 	
 	void resetHealth(){
-		player.setHealth(player.getMaxHealth());
+		model.getPlayer().setHealth(model.getPlayer().getMaxHealth());
 	}
 	
 	void resetScore(){
-		player.resetScore();
+		model.getPlayer().resetScore();
 	}
 	
 	void resetCombo(){
-		player.resetCombo();
+		model.getPlayer().resetCombo();
 	}
 	
 	void resetMaxCombo(){
-		player.resetMaxCombo();
+		model.getPlayer().resetMaxCombo();
 	}
 	
-	void emptyNPCList(){
-		npcList.clear();
+	void emptyNpcList(){
+		model.getNpcList().clear();
 	}
 	
 	void resetLives(){
-		player.resetLives();
+		model.getPlayer().resetLives();
 	}	
 	
 }
