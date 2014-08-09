@@ -2,27 +2,36 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 public class TutorialPanel extends JPanel {
 	private BufferedImage image;
-	private JButton b;
+	private JButton procced;
+
 	
 	
 	public TutorialPanel() {
-		loadImage();
+		//loadImage();
 		this.setVisible(true);
 		this.setPreferredSize(new Dimension(914,600));
-		b = new JButton("Test");
-		this.add(b);
+		procced = new JButton("Procced");
+		procced.setSize(100,30);
+		procced.setLocation(790,525);
+		JCheckBox show = new JCheckBox("Don't show this again");
+		
+
+		this.setLayout(null);
+		this.add(procced);
+		this.add(show);
 		repaint();
 		revalidate();
 	}
