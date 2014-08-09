@@ -48,20 +48,12 @@ public abstract class Actor {
 		return health;
 	}
 	
-	/**
-	 * Only used for constructor.
-	 * Please use setPosition(newPosition, yourIndex) instead.
-	 */
 	public void setPosition(Point newPosition) {
 		position = newPosition;
 	}
 	
-	public void setPosition(Point newPosition, int yourIndex){
-		position = newPosition;
-	}
-	
 	public Point getPosition(){
-		return position;
+		return (Point) position.clone();
 	}
 	
 	public boolean isDead(){
@@ -77,5 +69,8 @@ public abstract class Actor {
 		isInvincible = isTrue;
 	}*/
 	
+	public void move() {
+		setPosition(new Point(getPosition().x + getSpeed().x, 300));
+	}
 	
 } //end Actor

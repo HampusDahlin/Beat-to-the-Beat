@@ -81,10 +81,9 @@ class ActorControl {
 
 	void playerAttack(boolean right) {
 		if (!model.getPlayer().onCooldown()) {
-			boolean hit = canHitClose(model.getPlayer().getRange(), right);
 			model.getPlayer().attack(right);
 			
-			if (hit) {
+			if (canHitClose(model.getPlayer().getRange(), right)) {
 				int prevScore = model.getPlayer().getScore();
 				
 				if(model.getPlayer().getRange() == 120){
@@ -158,8 +157,7 @@ class ActorControl {
 	// Move all NPCs and then try to attack.
 	void moveActors() {
 		for (int i = 0; i < model.getNpcList().size() && !model.getNpcList().isEmpty(); i++) {
-			model.getNpcList().get(i).setPosition(new Point(
-					(model.getNpcList().get(i).getPosition().x + model.getNpcList().get(i).getSpeed().x), 300), i);
+			model.getNpcList().get(i).move();
 		}
 		NPCAttack();
 	}
