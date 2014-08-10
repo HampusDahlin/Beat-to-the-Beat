@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -15,9 +17,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class TutorialPanel extends JPanel {
+public class TutorialPanel extends JPanel implements ActionListener{
 	private BufferedImage image;
 	private JButton procced;
+	private JCheckBox show;
 
 	
 	
@@ -26,9 +29,10 @@ public class TutorialPanel extends JPanel {
 		this.setVisible(true);
 		this.setPreferredSize(new Dimension(914,600));
 		procced = new JButton("Procced");
+		procced.addActionListener(this);
 		procced.setSize(100,30);
 		procced.setLocation(790,525);
-		JCheckBox show = new JCheckBox("Don't show this again");
+		show = new JCheckBox("Don't show this again");
 		show.setBackground(new Color(24,24,24));
 		show.setForeground(Color.WHITE);
 
@@ -37,6 +41,14 @@ public class TutorialPanel extends JPanel {
 		this.add(show, BorderLayout.SOUTH);
 		repaint();
 		revalidate();
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==procced) {
+			if(show.isSelected()) {
+				System.out.println("HEJ");
+			}
+		} 
 	}
 	
     private void loadImage() {  

@@ -17,12 +17,14 @@ public class CardPanel extends JPanel {
 	private GamePanel gamePanel;
 	private ScorePanel scorePanel;
 	private SongUploadPanel songUpload;
+	private TutorialPanel tutorialPanel;
 	private static final String OPTIONSPANEL = "Panel with Options";
 	private static final String MENUPANEL = "Panel with MainMenu";
 	private static final String SONGSELECTIONPANEL = "Panel with Song selection";
 	private static final String GAMEPANEL = "Panel with the game";
 	private static final String SCOREPANEL = "Panel with Score";
 	private static final String SONGUPLOADPANEL = "Panel with Song upload";
+	private static final String TUTORIALPANEL = "Panel with tutorial";
 	private int activePanel;
 	
 	/**
@@ -38,12 +40,14 @@ public class CardPanel extends JPanel {
 		scorePanel = new ScorePanel();
 		songPresenter = new SongSelection(songList);
 		songUpload = new SongUploadPanel();
+		tutorialPanel = new TutorialPanel();
 		this.add(menu, MENUPANEL);
 		this.add(options, OPTIONSPANEL);
 		this.add(songPresenter, SONGSELECTIONPANEL);
 		this.add(gamePanel, GAMEPANEL);
 		this.add(scorePanel, SCOREPANEL);
 		this.add(songUpload, SONGUPLOADPANEL);
+		this.add(tutorialPanel, TUTORIALPANEL);
 	}
 	
 	/**
@@ -60,6 +64,11 @@ public class CardPanel extends JPanel {
 	public void back() {
 		((CardLayout)this.getLayout()).show(this, MENUPANEL);
 		activePanel = 0;
+	}
+	
+	public void goToTutorial() {
+		((CardLayout)this.getLayout()).show(this, TUTORIALPANEL);
+		activePanel = 6;
 	}
 	
 	/**
@@ -107,6 +116,10 @@ public class CardPanel extends JPanel {
 		return menu;
 	}
 	
+	public JPanel getTutorialPanel() {
+		return tutorialPanel;
+	}
+	
 	public JPanel getGamePanel() {
 		return gamePanel;
 	}
@@ -131,7 +144,7 @@ public class CardPanel extends JPanel {
 	}
 	
 	public void beat() {
-		if (activePanel != 3) {
+		if (activePanel != 3 && activePanel != 6) {
 			((ZoomablePanel) this.getComponent(activePanel)).zoom();
 		}
 	}
