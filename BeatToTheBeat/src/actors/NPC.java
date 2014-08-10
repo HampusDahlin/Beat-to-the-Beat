@@ -1,11 +1,10 @@
 package actors;
 
 import java.awt.Point;
-import java.beans.PropertyChangeListener;
 
 public class NPC extends Actor implements support.Movable{
 
-	public NPC(Point position, PropertyChangeListener listener) {
+	public NPC(Point position) {
 		super(new Point((position.x < 450 ? 1 : -1), 0)); //speed sideways, up
 		setHealth(1);
 		setPosition(position);

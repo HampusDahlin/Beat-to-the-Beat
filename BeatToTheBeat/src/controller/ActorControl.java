@@ -1,10 +1,6 @@
 package controller;
 
-import java.awt.Point;
-import java.beans.PropertyChangeListener;
 import java.util.List;
-
-import javax.swing.JPanel;
 
 import model.BeatToTheBeatModel;
 import powerup.*;
@@ -17,9 +13,8 @@ class ActorControl {
 		model = new BeatToTheBeatModel();
 	}
 
-	void createActor(JPanel listener) {
-		model.getNpcList().add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? -25 : 915, 0), //random which side
-			(PropertyChangeListener)listener));
+	void createActor() {
+		model.createNpc();
 	}
 	
 	private void removeActor(Actor actor) {

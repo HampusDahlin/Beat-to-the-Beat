@@ -41,4 +41,8 @@ public class BeatToTheBeatModel {
 	public List<Powerup> getPowerups() {
 		return powerups;
 	}
+	
+	public void createNpc() {
+		getNpcList().add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? -25 : 915, 0))); //random which side
+	}
 }
