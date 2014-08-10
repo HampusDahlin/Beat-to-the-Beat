@@ -11,6 +11,7 @@ import musichandler.Song;
 @SuppressWarnings("serial")
 public class CardPanel extends JPanel {
 	
+	private boolean tutorialEnabled = true;
 	private Options options;
 	private MainMenu menu;
 	private SongSelection songPresenter;
@@ -56,6 +57,14 @@ public class CardPanel extends JPanel {
 	public void goToSongUpload() {
 		((CardLayout)this.getLayout()).show(this, SONGUPLOADPANEL);
 		activePanel = 5;
+	}
+	
+	public boolean tutorialEnabled() {
+		return tutorialEnabled;
+	}
+	
+	public void setTutorialEnabled(boolean enabled) {
+		tutorialEnabled = enabled;
 	}
 	
 	/**
