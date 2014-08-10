@@ -45,7 +45,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	/**
 	 * Creates a GamePanel containing a player, NPC-list etc.
 	 */
-	public GamePanel(BeatToTheBeatModel model){
+	GamePanel(BeatToTheBeatModel model) {
 		this.model = model;
 		
 		hat = new ImageIcon("sprites\\hatt.gif");

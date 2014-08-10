@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class TutorialPanel extends JPanel {
 	private BufferedImage image;
 	private JButton procced;

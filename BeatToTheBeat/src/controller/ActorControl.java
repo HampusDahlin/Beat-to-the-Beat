@@ -24,7 +24,7 @@ class ActorControl {
 	/**
 	 * Removes first actor in actorList.
 	 */
-	void removeActor() {
+	private void removeActor() {
 		removeActor(model.getNpcList().get(0));
 	}
 	
