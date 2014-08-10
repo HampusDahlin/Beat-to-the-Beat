@@ -15,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 
 import model.BeatToTheBeatModel;
 import actors.NPC;
-import actors.PC;
 import enviroment.IBackground;
 import enviroment.WaveBackground;
 

@@ -2,7 +2,7 @@ package actors;
 
 import java.awt.Point;
 
-public class NPC extends Actor implements support.Movable{
+public class NPC extends Actor {
 
 	public NPC(Point position) {
 		super(new Point((position.x < 450 ? 1 : -1), 0)); //speed sideways, up
