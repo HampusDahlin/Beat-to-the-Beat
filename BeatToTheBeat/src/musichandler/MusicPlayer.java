@@ -6,7 +6,7 @@ import java.io.InputStream;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
-public class MusicPlayer {
+public class MusicPlayer { //needs to be public for minim
 	private Song song;
 	private AudioPlayer player;
 	private Minim minim;
