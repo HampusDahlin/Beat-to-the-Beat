@@ -154,13 +154,11 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 			for(IBackground b : ((GamePanel)(mainPanel.getGamePanel())).getBackgroundWaves()){
 				musicControl.getAnalyzer().addPropertyChangeListener(b);
 			}
-		} else if(evt.getPropertyName().equals("beat")){
-			if((boolean) evt.getOldValue()) {
-				if (menuTime.isRunning()) {
-					mainPanel.beat();
-				} else {
-					actorControl.createActor();
-				}
+		} else if (evt.getPropertyName().equals("beat") && (boolean) evt.getOldValue()) {
+			if (menuTime.isRunning()) {
+				mainPanel.beat();
+			} else {
+				actorControl.createActor();
 			}
 		} else if (evt.getPropertyName().equals("death")) {
 			endGame(0, currentSong);
