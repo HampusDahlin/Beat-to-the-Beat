@@ -34,8 +34,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private List<IBackground> background;
 
 	private int walkIndex;
-	private final ImageIcon[] walkImg;
-	private final MirroredImageIcon[] leftWalkImg;
+	private final MirrorableImageIcon[] walkImg;
 	private final ImageIcon hat;
 
 	private PauseMenuPanel pauspanel;
@@ -59,13 +58,11 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 
 		walkIndex = 0;
 		
-		this.walkImg = new ImageIcon[8];
-		this.leftWalkImg = new MirroredImageIcon[8];
+		this.walkImg = new MirrorableImageIcon[8];
 		
 		//initiates walkanimation
 		for (int i = 0; i < 8; i++) {
-			this.walkImg[i] = new ImageIcon("sprites\\walk" + (i+1) + ".gif");
-			this.leftWalkImg[i] = new MirroredImageIcon("sprites\\walk" + (i+1) + ".gif");
+			this.walkImg[i] = new MirrorableImageIcon("sprites\\walk" + (i+1) + ".gif");
 		}
 		
 		this.setBackground(new java.awt.Color(0,0,0));
@@ -124,7 +121,7 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 			if (npc.getPosition().x > 450) {
 				walkImg[walkIndex/10].paintIcon(this, g, npc.getPosition().x, npc.getPosition().y);
 			}else{
-				leftWalkImg[walkIndex/10].paintIcon(this, g, npc.getPosition().x, npc.getPosition().y,true);
+				walkImg[walkIndex/10].paintMirroredIcon(this, g, npc.getPosition().x, npc.getPosition().y,true);
 			}
 		}
 		

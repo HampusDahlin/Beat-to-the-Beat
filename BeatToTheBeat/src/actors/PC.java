@@ -1,6 +1,6 @@
 package actors;
 
-import gui.MirroredImageIcon;
+import gui.MirrorableImageIcon;
 
 import java.awt.Graphics;
 import java.awt.Point;
@@ -17,8 +17,7 @@ public class PC extends Actor implements ActionListener {
 	
 	private boolean right;
 	private int attackIndex;
-	private final ImageIcon[] attackImg;
-	private final gui.MirroredImageIcon[] leftAttackImg;
+	private final gui.MirrorableImageIcon[] attackImg;
 	private final ImageIcon idleImg;
 	private int score;
 	private int combo;
@@ -48,13 +47,11 @@ public class PC extends Actor implements ActionListener {
 		setRange(120);
 		
 		attackIndex = -1;
-		this.attackImg = new ImageIcon[16];
-		this.leftAttackImg = new MirroredImageIcon[16];
+		this.attackImg = new MirrorableImageIcon[16];
 
 		//initiates attackanimation
 		for (int i = 0; i < 16; i++) {
-			this.attackImg[i] = new ImageIcon("sprites\\attack" + (i+1) + ".gif");
-			this.leftAttackImg[i] = new MirroredImageIcon("sprites\\attack" + (i+1) + ".gif");
+			this.attackImg[i] = new MirrorableImageIcon("sprites\\attack" + (i+1) + ".gif");
 		}
 		idleImg = new ImageIcon("sprites\\walk1.gif");
 		
@@ -164,7 +161,7 @@ public class PC extends Actor implements ActionListener {
 				attackImg[attackIndex/2].paintIcon(panel, g,
 						(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
 			} else {
-				leftAttackImg[attackIndex/2].paintIcon(panel, g, 480, 150, false);
+				attackImg[attackIndex/2].paintMirroredIcon(panel, g, 480, 150, false);
 			}
 			
 			if (attackIndex < 30) {

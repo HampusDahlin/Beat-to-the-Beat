@@ -13,23 +13,25 @@ import javax.swing.ImageIcon;
 * @group 14
 */ 
 @SuppressWarnings("serial")
-public class MirroredImageIcon extends ImageIcon {
+public class MirrorableImageIcon extends ImageIcon {
 
 	/**
 	 * Creates a mirrored ImageIcon from the specified path.
 	 */
-	public MirroredImageIcon(String imagePath) {
+	public MirrorableImageIcon(String imagePath) {
 		super(imagePath);
 	}
 
-	
-	public synchronized void paintIcon(Component c, Graphics g, int x, int y, boolean isMoving) {
+	public synchronized void paintMirroredIcon(Component c, Graphics g, int x, int y, boolean isMoving) {
 		Graphics2D g2d = (Graphics2D)g.create();
 		g2d.translate(x*2,y - (isMoving ? 300 : 0));
 		g2d.scale(-1, 1);
 		super.paintIcon(c, g2d, x, y);
 	}
 	
+	public synchronized void paintIcon(Component c, Graphics g, int x, int y, boolean isMoving) {
+		super.paintIcon(c, g, x, y);
+	}
 
 
 } //end MirroredImageIcon
