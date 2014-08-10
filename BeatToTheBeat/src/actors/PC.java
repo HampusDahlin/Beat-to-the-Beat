@@ -163,19 +163,14 @@ public class PC extends Actor implements ActionListener {
 			if (!right) {
 				attackImg[attackIndex/2].paintIcon(panel, g,
 						(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
-				if (attackIndex < 30) {
-					attackIndex++;
-				} else {
-					attackIndex = -1;
-				}
-
 			} else {
 				leftAttackImg[attackIndex/2].paintIcon(panel, g, 480, 150, false);
-				if (attackIndex < 30) {
-					attackIndex++;
-				} else {
-					attackIndex = -1;
-				}
+			}
+			
+			if (attackIndex < 30) {
+				attackIndex++;
+			} else {
+				attackIndex = -1;
 			}
 		}
 	}
