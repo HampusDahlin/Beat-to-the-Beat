@@ -159,7 +159,7 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 				if (menuTime.isRunning()) {
 					mainPanel.beat();
 				} else {
-					actorControl.createActor(mainPanel.getGamePanel());
+					actorControl.createActor();
 				}
 			}
 		} else if (evt.getPropertyName().equals("death")) {
