@@ -1,8 +1,9 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -21,18 +22,19 @@ public class TutorialPanel extends JPanel {
 	
 	
 	public TutorialPanel() {
-		//loadImage();
+		loadImage();
 		this.setVisible(true);
 		this.setPreferredSize(new Dimension(914,600));
 		procced = new JButton("Procced");
 		procced.setSize(100,30);
 		procced.setLocation(790,525);
 		JCheckBox show = new JCheckBox("Don't show this again");
-		
+		show.setBackground(new Color(24,24,24));
+		show.setForeground(Color.WHITE);
 
-		this.setLayout(null);
-		this.add(procced);
-		this.add(show);
+		this.setLayout(new BorderLayout());
+		this.add(procced, BorderLayout.SOUTH);
+		this.add(show, BorderLayout.SOUTH);
 		repaint();
 		revalidate();
 	}
