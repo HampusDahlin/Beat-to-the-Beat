@@ -2,8 +2,8 @@ package gui;
 
 import java.awt.Color;
 
-import musichandler.HighScoreList;
-import musichandler.Song;
+import model.Song;
+import services.musichandler.HighScoreList;
 
 public class ScoreFunctionality {
 	private ScorePanel scorePanel;

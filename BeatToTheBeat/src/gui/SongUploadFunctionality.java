@@ -12,9 +12,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import musichandler.Genre;
-import musichandler.MusicFacade;
-import musichandler.Song;
+import model.Genre;
+import model.Song;
+import services.musichandler.MusicFacade;
 import services.HomogeneousFileHandler;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;

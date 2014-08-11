@@ -3,10 +3,10 @@ package controller;
 import java.util.List;
 import java.util.Random;
 
-import musichandler.Analyzer;
-import musichandler.Genre;
-import musichandler.MusicFacade;
-import musichandler.Song;
+import model.Genre;
+import model.Song;
+import services.musichandler.Analyzer;
+import services.musichandler.MusicFacade;
 
 /**
  * 

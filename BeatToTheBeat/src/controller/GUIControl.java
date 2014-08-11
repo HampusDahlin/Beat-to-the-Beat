@@ -1,16 +1,17 @@
 package controller;
 
+import model.Genre;
+import model.Song;
 import model.enviroment.BarBackground;
 import model.enviroment.MatrixBackground;
 import model.enviroment.SinWaveBackground;
 import model.enviroment.WaveBackground;
 import gui.*;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-import musichandler.Genre;
-import musichandler.Song;
 import services.HomogeneousFileHandler;
 
 class GUIControl implements PropertyChangeListener {

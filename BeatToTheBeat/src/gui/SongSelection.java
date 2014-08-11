@@ -6,8 +6,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
 
-import musichandler.Song;
-import musichandler.SongListSearcher;
+import model.Song;
+import services.musichandler.SongListSearcher;
 
 /**
  *

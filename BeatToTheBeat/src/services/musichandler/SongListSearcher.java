@@ -1,7 +1,9 @@
-package musichandler;
+package services.musichandler;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Song;
 
 
 public class SongListSearcher {

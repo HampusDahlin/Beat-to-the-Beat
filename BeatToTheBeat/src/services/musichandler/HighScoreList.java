@@ -1,7 +1,9 @@
-package musichandler;
+package services.musichandler;
 
 import java.io.*;
 import java.util.Scanner;
+
+import model.Song;
 
 /**
  * @author Björn Hedström

@@ -1,4 +1,5 @@
 package controller;
+import model.Song;
 import model.enviroment.IBackground;
 import gui.CardPanel;
 import gui.GamePanel;
@@ -18,7 +19,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import musichandler.Song;
 import services.HomogeneousFileHandler;
 
 /**

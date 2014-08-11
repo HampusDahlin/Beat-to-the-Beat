@@ -1,9 +1,11 @@
-package musichandler;
+package services.musichandler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
+
+import model.Song;
 
 
 class SoundHandler implements ActionListener {
