@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import actors.Actor;
-import actors.PC;
+import model.Actor;
+import model.PC;
 
 public class Invincible extends Powerup implements ActionListener{
 

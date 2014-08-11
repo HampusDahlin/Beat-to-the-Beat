@@ -1,6 +1,6 @@
 package powerup;
 
-import actors.Actor;
+import model.Actor;
 
 public class Regen extends Powerup {
 	

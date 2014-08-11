@@ -7,8 +7,6 @@ import powerup.ExtraLife;
 import powerup.Invincible;
 import powerup.Powerup;
 import powerup.Regen;
-import actors.NPC;
-import actors.PC;
 
 
 public class BeatToTheBeatModel {
