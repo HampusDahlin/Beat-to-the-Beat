@@ -1,13 +1,10 @@
 package services.musichandler;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-
 import model.music.Song;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
-public class MusicPlayer { //needs to be public for minim
+public class MusicPlayer extends Analyzable implements IMusicPlayer { //needs to be public for minim
 	private Song song;
 	private AudioPlayer player;
 	private Minim minim;
@@ -24,16 +21,16 @@ public class MusicPlayer { //needs to be public for minim
 	}
 	
 	@SuppressWarnings("ucd")
-	void stop() {
+	public void stop() {
 		player.pause();
 		player.rewind();
 	}
 	
-	void pause() {
+	public void pause() {
 		player.pause();
 	}
 	
-	void start() {
+	public void start() {
 		player.play();
 	}
 	
@@ -48,27 +45,6 @@ public class MusicPlayer { //needs to be public for minim
 	 */
 	public void setVolume(int vol) {
 		setVolume((float)vol/100);
-	}
-	
-	//needed for minim
-	public String sketchPath(String fileName) { // NO_UCD (unused code)
-		return "sketchPath: " + fileName;
-	}
-	
-	//needed for minim
-	public InputStream createInput(String fileName) { // NO_UCD (unused code)
-		//System.out.println("creating inputStream from file: " + fileName);
-		InputStream is;
-		try {
-			is = new FileInputStream(fileName);
-			//System.out.println("Success!");
-			return is;
-		} catch (Exception e) {
-			//System.out.println("Failed! Exception: " + e);
-			is = null;
-		}
-		return is;
-	}
-	
+	}	
 	
 }
