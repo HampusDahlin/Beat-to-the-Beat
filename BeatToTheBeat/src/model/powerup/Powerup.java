@@ -1,6 +1,6 @@
 package model.powerup;
 
-import model.Actor;
+import model.actors.Actor;
 
 /** 
 * Enables powerups, giving the player abilities.

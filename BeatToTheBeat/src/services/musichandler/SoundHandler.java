@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import model.Song;
+import model.music.Song;
 
 
 class SoundHandler implements ActionListener {

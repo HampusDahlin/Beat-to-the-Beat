@@ -3,7 +3,7 @@ package services.musichandler;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import model.Song;
+import model.music.Song;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 

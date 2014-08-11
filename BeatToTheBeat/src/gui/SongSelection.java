@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
 
-import model.Song;
+import model.music.Song;
 import services.musichandler.SongListSearcher;
 
 /**

@@ -1,11 +1,11 @@
 package controller;
 
-import model.Genre;
-import model.Song;
 import model.enviroment.BarBackground;
 import model.enviroment.MatrixBackground;
 import model.enviroment.SinWaveBackground;
 import model.enviroment.WaveBackground;
+import model.music.Genre;
+import model.music.Song;
 import gui.*;
 
 import java.beans.PropertyChangeEvent;

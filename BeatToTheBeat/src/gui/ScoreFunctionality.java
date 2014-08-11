@@ -2,7 +2,7 @@ package gui;
 
 import java.awt.Color;
 
-import model.Song;
+import model.music.Song;
 import services.musichandler.HighScoreList;
 
 public class ScoreFunctionality {

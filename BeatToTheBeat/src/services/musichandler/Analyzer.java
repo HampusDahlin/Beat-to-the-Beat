@@ -9,8 +9,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Genre;
-import model.Song;
+import model.music.Genre;
+import model.music.Song;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.analysis.BeatDetect;

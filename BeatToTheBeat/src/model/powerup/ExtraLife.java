@@ -1,7 +1,7 @@
 package model.powerup;
 
-import model.Actor;
-import model.PC;
+import model.actors.Actor;
+import model.actors.PC;
 
 public class ExtraLife extends Powerup{
 

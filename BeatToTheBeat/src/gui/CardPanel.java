@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import model.Genre;
-import model.Song;
+import model.music.Genre;
+import model.music.Song;
 
 @SuppressWarnings("serial")
 public class CardPanel extends JPanel {

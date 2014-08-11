@@ -1,6 +1,6 @@
 package controller;
-import model.Song;
 import model.enviroment.IBackground;
+import model.music.Song;
 import gui.CardPanel;
 import gui.GamePanel;
 import gui.Options;

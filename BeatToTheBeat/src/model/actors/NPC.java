@@ -1,4 +1,4 @@
-package model;
+package model.actors;
 
 import java.awt.Point;
 

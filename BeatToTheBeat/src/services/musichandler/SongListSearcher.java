@@ -3,7 +3,7 @@ package services.musichandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Song;
+import model.music.Song;
 
 
 public class SongListSearcher {

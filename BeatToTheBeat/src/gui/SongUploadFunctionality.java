@@ -12,8 +12,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import model.Genre;
-import model.Song;
+import model.music.Genre;
+import model.music.Song;
 import services.musichandler.MusicFacade;
 import services.HomogeneousFileHandler;
 import ddf.minim.AudioPlayer;

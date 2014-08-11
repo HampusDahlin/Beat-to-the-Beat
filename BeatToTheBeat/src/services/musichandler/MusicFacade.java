@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import model.Genre;
-import model.Song;
+import model.music.Genre;
+import model.music.Song;
 
 /**
  * A class handling a list of songs.

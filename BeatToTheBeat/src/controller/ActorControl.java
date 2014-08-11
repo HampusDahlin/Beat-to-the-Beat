@@ -2,10 +2,10 @@ package controller;
 
 import java.util.List;
 
-import model.Actor;
 import model.BeatToTheBeatModel;
-import model.NPC;
-import model.PC;
+import model.actors.Actor;
+import model.actors.NPC;
+import model.actors.PC;
 import model.powerup.*;
 
 class ActorControl {

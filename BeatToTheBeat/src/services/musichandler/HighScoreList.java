@@ -3,7 +3,7 @@ package services.musichandler;
 import java.io.*;
 import java.util.Scanner;
 
-import model.Song;
+import model.music.Song;
 
 /**
  * @author Björn Hedström

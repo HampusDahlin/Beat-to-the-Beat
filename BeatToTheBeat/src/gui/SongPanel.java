@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.Song;
+import model.music.Song;
 
 /**
  *

@@ -3,6 +3,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.actors.NPC;
+import model.actors.PC;
 import model.powerup.*;
 
 
