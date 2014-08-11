@@ -1,4 +1,4 @@
-package powerup;
+package model.powerup;
 
 import model.Actor;
 import model.PC;

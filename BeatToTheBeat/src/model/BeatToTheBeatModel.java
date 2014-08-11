@@ -3,10 +3,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import powerup.ExtraLife;
-import powerup.Invincible;
-import powerup.Powerup;
-import powerup.Regen;
+import model.powerup.*;
 
 
 public class BeatToTheBeatModel {
