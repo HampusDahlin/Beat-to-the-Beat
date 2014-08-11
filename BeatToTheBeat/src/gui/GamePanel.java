@@ -15,8 +15,8 @@ import javax.swing.border.EmptyBorder;
 
 import model.BeatToTheBeatModel;
 import model.NPC;
-import enviroment.IBackground;
-import enviroment.WaveBackground;
+import model.enviroment.IBackground;
+import model.enviroment.WaveBackground;
 
 /**
  * Displays the Gamefield, where all the action happens.

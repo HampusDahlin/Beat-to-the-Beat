@@ -1,4 +1,4 @@
-package enviroment;
+package model.enviroment;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

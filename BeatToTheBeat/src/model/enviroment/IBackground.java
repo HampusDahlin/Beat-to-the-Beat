@@ -1,4 +1,4 @@
-package enviroment;
+package model.enviroment;
 
 import java.awt.Graphics2D;
 import java.beans.PropertyChangeListener;
