@@ -182,7 +182,7 @@ public class BeatToTheBeatModel {
 	}
 	
 	public PC getPlayer(){
-		return getPlayer();
+		return player;
 	}
 	
 	public void resetHealth(){
