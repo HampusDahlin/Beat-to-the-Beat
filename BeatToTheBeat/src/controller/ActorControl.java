@@ -7,7 +7,6 @@ import model.BeatToTheBeatModel;
 import model.NPC;
 import model.PC;
 import powerup.*;
-import actors.*;
 
 class ActorControl {
 	private BeatToTheBeatModel model;
