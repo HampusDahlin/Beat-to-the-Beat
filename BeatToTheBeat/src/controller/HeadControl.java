@@ -1,4 +1,5 @@
 package controller;
+import model.BeatToTheBeatModel;
 import model.enviroment.IBackground;
 import model.music.Song;
 import gui.CardPanel;
@@ -31,7 +32,7 @@ import services.HomogeneousFileHandler;
  */
 class HeadControl implements ActionListener, PropertyChangeListener, KeyListener {
 	
-	private ActorControl actorControl;
+	private BeatToTheBeatModel bttbModel;
 	private MusicControl musicControl;
 	private Timer time;
 	private CardPanel mainPanel;
@@ -45,13 +46,13 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 		fileCheck();
 		
 		musicControl = new MusicControl();
-		actorControl = new ActorControl();
+		bttbModel = new BeatToTheBeatModel();
 		
 		time = new Timer(10, this);
 		
 		//this is for looping music in menu
 		menuTime = new Timer(10,this);
-		guiControl = new GUIControl(musicControl.getSongList(), musicControl.getGenres(), actorControl.getModel());
+		guiControl = new GUIControl(musicControl.getSongList(), musicControl.getGenres(), bttbModel);
 		mainPanel = guiControl.getMainPanel();
 		
 		((Options)(mainPanel.getOptionsPanel())).pcs.addPropertyChangeListener(this);
@@ -100,13 +101,13 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 		//gives the GamePanel information about the song
 		
 		//reset the PC values
-		actorControl.resetHealth();
-		actorControl.resetScore();
-		actorControl.resetCombo();
-		actorControl.resetMaxCombo();
-		actorControl.resetLives();
+		bttbModel.resetHealth();
+		bttbModel.resetScore();
+		bttbModel.resetCombo();
+		bttbModel.resetMaxCombo();
+		bttbModel.resetLives();
 		//empty out the npclist
-		actorControl.emptyNpcList();
+		bttbModel.emptyNpcList();
 	}	
 	
 	/**
@@ -118,7 +119,7 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 		}else{
 			//Moves the actors along their path.
 			try {
-				actorControl.moveActors();
+				bttbModel.moveActors();
 			} catch (IndexOutOfBoundsException ie) { //when npclist gets cleared an exception will be thrown, ending the game.
 				endGame(0, currentSong);
 			}
@@ -158,12 +159,12 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 			if (menuTime.isRunning()) {
 				mainPanel.beat();
 			} else {
-				actorControl.createActor();
+				bttbModel.createNpc();
 			}
 		} else if (evt.getPropertyName().equals("death")) {
 			endGame(0, currentSong);
 		} else if (evt.getPropertyName().equals("songEnd")) {
-			endGame(actorControl.getScore(), currentSong);
+			endGame(bttbModel.getScore(), currentSong);
 		} else if (evt.getPropertyName().equals("volumeChange")) {
 			
 		} else if (evt.getPropertyName().equals("resumeGame")){
@@ -180,9 +181,9 @@ class HeadControl implements ActionListener, PropertyChangeListener, KeyListener
 	public void keyPressed(KeyEvent evt) {
 		if(time.isRunning()){
 			if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
-				actorControl.playerAttack(false);
+				bttbModel.playerAttack(false);
 			} else if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
-				actorControl.playerAttack(true);
+				bttbModel.playerAttack(true);
 			} else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				time.stop();
 				musicControl.pause();
