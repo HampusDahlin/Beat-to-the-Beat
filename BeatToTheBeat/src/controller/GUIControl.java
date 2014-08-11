@@ -1,9 +1,9 @@
 package controller;
 
-import enviroment.BarBackground;
-import enviroment.MatrixBackground;
-import enviroment.SinWaveBackground;
-import enviroment.WaveBackground;
+import model.enviroment.BarBackground;
+import model.enviroment.MatrixBackground;
+import model.enviroment.SinWaveBackground;
+import model.enviroment.WaveBackground;
 import gui.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

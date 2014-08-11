@@ -1,5 +1,5 @@
 package controller;
-import enviroment.IBackground;
+import model.enviroment.IBackground;
 import gui.CardPanel;
 import gui.GamePanel;
 import gui.Options;
