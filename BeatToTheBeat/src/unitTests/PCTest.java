@@ -21,6 +21,8 @@ public class PCTest {
 		}
 		
 		testIncScore();
+		
+		testCooldown();
 	}
 	
 	@Before
@@ -46,6 +48,13 @@ public class PCTest {
 	@Test
 	public void testCooldown(){
 		
+		assertFalse("onCooldown should be false, returned true", test.onCooldown());
+		
+		test.startCooldown();
+		assertTrue("PC.startCooldown failed!\n Expected result: onCooldown returns true\n Actual result: onCooldown returns false", test.onCooldown());
+		
+		test.resetCooldown();
+		assertFalse("PC.resetCooldown failed!\n Expected result: onCooldown returns false\n Actual result: onCooldown returns true", test.onCooldown());
 	}
 
 }
