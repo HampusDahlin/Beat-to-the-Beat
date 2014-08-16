@@ -40,7 +40,7 @@ public class PCTest {
 		newScore = test.getScore();
 		
 		assertEquals("PC.incScore failed!\n Expected result: " + (prevScore + INCAMOUNT) + 
-				"\n Actual result: " + newScore,prevScore + INCAMOUNT, newScore);
+				"\n Actual result: " + newScore,prevScore + INCAMOUNT*test.getCombo(), newScore);
 	}
 	
 	@Test
