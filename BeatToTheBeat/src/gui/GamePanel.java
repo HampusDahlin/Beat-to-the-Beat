@@ -36,6 +36,8 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 	private int walkIndex;
 	private final MirrorableImageIcon[] walkImg;
 	private final ImageIcon hat;
+	
+	private final gui.MirrorableImageIcon[] attackImg;
 
 	private PauseMenuPanel pauspanel;
 	private boolean paused;
@@ -63,6 +65,13 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		//initiates walkanimation
 		for (int i = 0; i < 8; i++) {
 			this.walkImg[i] = new MirrorableImageIcon("sprites\\walk" + (i+1) + ".gif");
+		}
+
+		this.attackImg = new MirrorableImageIcon[16];
+		
+		//initiates attackanimation
+		for (int i = 0; i < 16; i++) {
+			this.attackImg[i] = new MirrorableImageIcon("sprites\\attack" + (i+1) + ".gif");
 		}
 		
 		this.setBackground(new java.awt.Color(0,0,0));
@@ -135,7 +144,22 @@ public class GamePanel extends JPanel implements PropertyChangeListener {
 		}
 		
 		//draw the player
-		model.getPlayer().paintComponent(g, this);
+		int attackIndex = model.getPlayer().getAttackIndex();
+		
+		if (attackIndex < 0) {
+			walkImg[0].paintIcon(this, g,
+					(457-walkImg[0].getIconWidth()/2), 300);
+		} else {
+			if (!model.getPlayer().hitsRight()) {
+				attackImg[attackIndex/2].paintIcon(this, g,
+						(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
+			} else {
+				attackImg[attackIndex/2].paintMirroredIcon(this, g, 480, 150, false);
+			}
+			
+			//if animation complete, reset it, otherwise increment attackIndex.
+			model.getPlayer().setAttackIndex(attackIndex < 30 ? attackIndex+1 : -1);
+		}
 
 		//draw the healthbar
 		g.drawRect(4, 16, 100, 11);

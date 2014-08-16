@@ -17,8 +17,6 @@ public class PC extends Actor implements ActionListener {
 	
 	private boolean right;
 	private int attackIndex;
-	private final gui.MirrorableImageIcon[] attackImg;
-	private final ImageIcon idleImg;
 	private int score;
 	private int combo;
 	private int maxCombo;
@@ -47,13 +45,6 @@ public class PC extends Actor implements ActionListener {
 		setRange(120);
 		
 		attackIndex = -1;
-		this.attackImg = new MirrorableImageIcon[16];
-
-		//initiates attackanimation
-		for (int i = 0; i < 16; i++) {
-			this.attackImg[i] = new MirrorableImageIcon("sprites\\attack" + (i+1) + ".gif");
-		}
-		idleImg = new ImageIcon("sprites\\walk1.gif");
 		
 		lives = 1;	
 	}
@@ -128,8 +119,6 @@ public class PC extends Actor implements ActionListener {
 		maxCombo = 0;
 		
 	}
-	
-	//testing
 
 	public void addToLives(int i) {
 		lives += i;
@@ -149,32 +138,25 @@ public class PC extends Actor implements ActionListener {
 	public boolean isInvincible(){
 		return isInvincible;
 	}
-	
-	//testing
 
-	public void paintComponent(Graphics g, javax.swing.JPanel panel) {
-		if (attackIndex < 0) {
-			idleImg.paintIcon(panel, g,
-					(457-idleImg.getIconWidth()/2), 300);
-		} else {
-			if (!right) {
-				attackImg[attackIndex/2].paintIcon(panel, g,
-						(457-attackImg[attackIndex/5].getIconWidth()/2), 300);
-			} else {
-				attackImg[attackIndex/2].paintMirroredIcon(panel, g, 480, 150, false);
-			}
-			
-			if (attackIndex < 30) {
-				attackIndex++;
-			} else {
-				attackIndex = -1;
-			}
-		}
+	public int getAttackIndex() {
+		return attackIndex;
+	}
+	
+	public void setAttackIndex(int newIndex) {
+		attackIndex = newIndex;
 	}
 
 	public void attack(boolean right) {
 		attackIndex = 0;
 		this.right = right;
+	}
+
+	/**
+	 * Returns true if hitting right, otherwise false.
+	 */
+	public boolean hitsRight() {
+		return right;
 	}
 	
 }
