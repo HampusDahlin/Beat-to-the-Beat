@@ -76,10 +76,10 @@ public class PC extends Actor implements ActionListener {
 	
 	public void startCooldown() {
 		cooldown.start();
-		cooldown.restart();
 	}
 	
 	public void resetCooldown() {
+		cooldown.restart();
 		cooldown.stop();
 	}
 	
