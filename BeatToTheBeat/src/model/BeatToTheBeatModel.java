@@ -34,14 +34,14 @@ public class BeatToTheBeatModel {
 		getNpcList().add(new NPC( new Point(System.currentTimeMillis() % 2 == 0 ? -25 : 915, 0))); //random which side
 	}
 	
-	private void removeActor(Actor actor) {
+	public void removeActor(Actor actor) {
 		getNpcList().remove(actor);
 	}
 	
 	/**
 	 * Removes first actor in actorList.
 	 */
-	private void removeActor() {
+	public void removeActor() {
 		removeActor(getNpcList().get(0));
 	}
 	
