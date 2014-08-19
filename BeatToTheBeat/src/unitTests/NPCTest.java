@@ -22,7 +22,7 @@ public class NPCTest {
 		}catch(Exception e){
 			System.out.println("PC-class could not be instantiated");
 		}
-
+		testIsDead();
 	}
 	
 	public void setUp() throws Exception {
