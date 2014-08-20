@@ -51,7 +51,18 @@ public class BeatToTheBeatModelTest {
 		} else {
 			assertTrue("Usecase move!\n Expected result: NPCs position should have changed\n Actual result: position remained the same", test.getFirstEnemy().getPosition().x > oldX);	
 		}
-
+		test.removeActor();
+	}
+	
+	public void testPlayerAttack() {
+		test.createNpc();
+		if(test.getFirstEnemy().getPosition().x > 0) {
+			test.playerAttack(true);
+		} else {
+			test.playerAttack(false);
+		}
+		assertTrue("PlayerAttack failed!\n Expected result: Enemy should remain due to distance in range\n Actual result: Enemy removed", test.getNpcList().size() != 0);
+		assertTrue("PlayerAttack failed!\n Expected result: npclist should be empty due to succesful hit\n Actual result: Enemy still remaining", test.getNpcList().size() == 0);
 	}
 	
 	public void testNPCAttack() {
