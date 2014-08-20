@@ -42,12 +42,16 @@ public class BeatToTheBeatModelTest {
 	
 	public void testMove() {
 		test.createNpc();
-		test.getFirstEnemy().setPosition(new Point(0, 0));
-		System.out.println(test.getFirstEnemy().getPosition());
+		int oldX = test.getFirstEnemy().getPosition().x;
 		test.moveActors();
-		test.moveActors();
-		System.out.println(test.getPlayer().getPosition());
-		System.out.println(test.getFirstEnemy().getPosition());
+		//Tests from both spawnpoints as the move in different directions
+		//depending on this point
+		if(oldX > 0) {
+			assertTrue("Usecase move!\n Expected result: NPCs position should have changed\n Actual result: position remained the same", test.getFirstEnemy().getPosition().x < oldX);	
+		} else {
+			assertTrue("Usecase move!\n Expected result: NPCs position should have changed\n Actual result: position remained the same", test.getFirstEnemy().getPosition().x > oldX);	
+		}
+
 	}
 	
 	public void testNPCAttack() {
