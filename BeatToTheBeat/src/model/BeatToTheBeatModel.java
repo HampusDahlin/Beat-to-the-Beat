@@ -100,7 +100,7 @@ public class BeatToTheBeatModel {
 				
 				if(getPlayer().getRange() == 120){
 
-					getPlayer().incScore((int) ((70 - Math.abs(getNpcList().get(0).getPosition().x
+					getPlayer().incScore((int) ((70 - Math.abs(getFirstEnemy().getPosition().x
 									- (right ? 515 : 400))) / 7));
 						
 				}else {
