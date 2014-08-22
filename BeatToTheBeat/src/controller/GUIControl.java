@@ -41,7 +41,7 @@ class GUIControl implements PropertyChangeListener {
 		if (evt.getPropertyName().equals("back")) {
 			mainPanel.back();
 		} else if(evt.getPropertyName().equals("upload")) {
-			uploadFunc.clearFields();
+			((SongUploadPanel)mainPanel.getSongUpload()).clearFields();
 			mainPanel.goToSongUpload();
 		} else if(evt.getPropertyName().equals("options")) {
 			mainPanel.goToOptions();
