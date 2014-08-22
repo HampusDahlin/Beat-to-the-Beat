@@ -36,13 +36,14 @@ public class PCTest {
 		final int INCAMOUNT = 1;
 		int prevScore = test.getScore();
 		int newScore;
+		//combo isn't used if below one
+		int combo = ((test.getCombo() < 1) ? 1 : test.getCombo());
 		
 		test.incScore(INCAMOUNT);
 		
 		newScore = test.getScore();
 		
-		assertEquals("PC.incScore failed!\n Expected result: " + (prevScore + INCAMOUNT) + 
-				"\n Actual result: " + newScore,prevScore + INCAMOUNT*test.getCombo(), newScore);
+		assertEquals("\nPC.incScore failed!\n",prevScore + INCAMOUNT*combo, newScore);
 	}
 	
 	@Test
