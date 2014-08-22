@@ -50,7 +50,7 @@ class GUIControl implements PropertyChangeListener {
 		} else if(evt.getPropertyName().equals("browse")) {
 			uploadFunc.browse();
 		} else if(evt.getPropertyName().equals("load")) {
-			uploadFunc.loadingSequence();
+			uploadFunc.loadingSequence(((SongUploadPanel)mainPanel.getSongUpload()).getOriginalFilepathField().getText());
 		} else if(evt.getPropertyName().equals("procced")) {
 			scoreFunc.procced();
 			mainPanel.playSong();

@@ -68,9 +68,9 @@ public class SongUploadFunctionality {
 	/**
 	 * Checks if loading can be performed
 	 */
-	public void loadingSequence() {
+	public void loadingSequence(String filepath) {
 		if(checkInputOk()) {
-			load(songFromInput(), uploadPanel.getOriginalFilepathField().getText());
+			load(songFromInput(), filepath);
 			new HomogeneousFileHandler().saveAs("songlist.list", songList);
 		} else {
 			uploadPanel.setResponse("Fields cannot be empty", false);	   
