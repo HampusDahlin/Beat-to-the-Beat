@@ -20,6 +20,14 @@ public class SongUploadPanel extends ZoomablePanel {
 	/**
 	 * Creates new form SongUploadPanel
 	 */
+	
+	public void clearFields() {
+		getSuccesLabel().setVisible(false);
+		getArtistField().setText("");
+		getSongNameField().setText("");
+		getOriginalFilepathField().setText("");
+	}
+	
 	public SongUploadPanel() {
 		pcs = new PropertyChangeSupport(this);
 		initComponents();

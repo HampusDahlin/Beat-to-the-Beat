@@ -76,17 +76,6 @@ public class SongUploadFunctionality {
 			setResponse("Fields cannot be empty", false);	   
 		}
 	}
-
-	/**
-	 * Resets all the fields in the SongUploadPanel
-	 */
-	public void clearFields() {
-		uploadPanel.getSuccesLabel().setVisible(false);
-		uploadPanel.getArtistField().setText("");
-		uploadPanel.getSongNameField().setText("");
-		uploadPanel.getOriginalFilepathField().setText("");
-	}
-
 	/**
 	 * creates a filechooser and sends the selected file to presentInfo()
 	 */
