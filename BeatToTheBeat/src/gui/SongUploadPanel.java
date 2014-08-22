@@ -4,6 +4,7 @@ import java.awt.Choice;
 import java.awt.Color;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -31,6 +32,16 @@ public class SongUploadPanel extends ZoomablePanel {
 	public SongUploadPanel() {
 		pcs = new PropertyChangeSupport(this);
 		initComponents();
+	}
+	
+	public void setResponse(String response, boolean success) {
+		getSuccesLabel().setVisible(true);
+		getSuccesLabel().setText(response);
+		if(success) {
+			getSuccesLabel().setForeground(Color.green);
+		} else {
+			getSuccesLabel().setForeground(Color.red);
+		}
 	}
 
 	public JLabel getSuccesLabel() {
