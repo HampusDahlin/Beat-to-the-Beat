@@ -43,7 +43,7 @@ public class SongUploadFunctionality {
 		try {
 			Files.copy(songFile.toPath(), dest.toPath());
 		} catch (IOException e) {
-			setResponse("An error has occured, please try again", false);
+			uploadPanel.setResponse("An error has occured, please try again", false);
 		} 
 	}
 
@@ -57,7 +57,7 @@ public class SongUploadFunctionality {
 	}
 
 	public void load(Song song, String filepath) {
-		setResponse("File loaded successfully!", true);
+		uploadPanel.setResponse("File loaded successfully!", true);
 		File songFile = new File(filepath);
 		copyFileToBTTB(songFile);
 		songList.add(song);
@@ -73,7 +73,7 @@ public class SongUploadFunctionality {
 			load(songFromInput(), uploadPanel.getOriginalFilepathField().getText());
 			new HomogeneousFileHandler().saveAs("songlist.list", songList);
 		} else {
-			setResponse("Fields cannot be empty", false);	   
+			uploadPanel.setResponse("Fields cannot be empty", false);	   
 		}
 	}
 	/**
@@ -175,21 +175,6 @@ public class SongUploadFunctionality {
 	private void loadToChoice() {
 		for(Genre genre : genreList) {
 			uploadPanel.getGenreChoice().add(genre.getName());
-		}
-	}
-
-	/**
-	 * @param response
-	 * @param success
-	 * sets the message and color of the succeslabel based on params
-	 */
-	private void setResponse(String response, boolean success) {
-		uploadPanel.getSuccesLabel().setVisible(true);
-		uploadPanel.getSuccesLabel().setText(response);
-		if(success) {
-			uploadPanel.getSuccesLabel().setForeground(Color.green);
-		} else {
-			uploadPanel.getSuccesLabel().setForeground(Color.red);
 		}
 	}
 }
